@@ -1,0 +1,246 @@
+--- a/index.html	2026-10-06 20:06:29.000000000 +0000
++++ b/index.html	2026-10-18 03:25:45.095856799 +0000
+@@ -1088,7 +1088,7 @@
+  const id=currentSession?recordKey(i,j,mode):'',saved=readJSON('pa_hist',[]).find(x=>x.id===id);
+  const sm=strengthEligible(active,i)?todayStrength(i,n):null;let intro=final?`<div class="intinfo final-info"><b class="gold">FINAL SET • ${esc(mode)}</b><p>${IP[mode].scheme}</p><small>${mode==='DC Rest-Pause'?'10–15 deep breaths; 25-second timer is a guide.':`Specialized rest: ${fmt(IP[mode].rest??e.rest)}`}</small><p class="tiny">Previous: ${esc(prevMode(n,mode))}</p><p class="tiny">Next: ${stages?'Compare each effort with the same method at similar quality; total cluster reps are not a continuous-set rep record.':esc(targetMode(n,mode,sl[3]))}</p><button class="secondary" onclick="startTimer(${IP[mode].rest??e.rest})">START ${esc(mode.toUpperCase())} TIMER</button></div>`:`<div class="set-caption muted">${sm?esc(strengthSetLabel(sm,j,workSetCount(i))):'SET '+j} • ${sm?esc(sm):'Straight Sets'} • Rest ${fmt(e.rest)}</div>`;
+  if(stages){
+-  const count=currentSession?.clusters[prefix]||stages.length;while(stages.length<count)stages.push('Mini-set '+stages.length);
++  const count=currentSession?.clusters?.[prefix]||stages.length;while(stages.length<count)stages.push('Mini-set '+stages.length);
+   const stageHTML=stages.map((name,k)=>`<div class="method-stage"><b>${name}</b><div class="stage-fields">${inputField(prefix+'w'+k,'Weight '+(k+1),'lb')}${inputField(prefix+'r'+k,'Reps '+(k+1),mode==='Myo-Reps'&&k>0?'~4':'reps')}<button class="check" data-record="stage" onclick="completeStage(this,${i},${j},${k})" aria-label="Complete ${name}">${currentSession?.checks[prefix+'stage'+k]?'✓':'○'}</button></div></div>`).join('');
+   return `<div class="final-set-block" data-cluster="${esc(prefix)}">${intro}<p class="tiny method-help">Log each effort below. Completing an effort starts its rest timer; SAVE FINAL BLOCK stores one aggregate record with the individual efforts.</p>${stageHTML}${mode==='Myo-Reps'?`<button class="secondary" onclick="addMiniSet(${i},${j})">ADD MINI-SET</button>`:''}<p class="tiny method-help">${mode==='Myo-Reps'?'Stop mini-sets when quality drops. Unused trailing mini-sets may stay blank.':''}</p><button class="secondary" data-record="cluster" onclick="saveCluster(${i},${j})">${saved?'UPDATE':'SAVE'} FINAL BLOCK</button>${saved?`<button class="secondary" onclick="undoRecord(${i},${j})">UNLOG BLOCK</button><small class="gold">Saved • ${saved.reps} total reps</small>`:''}</div>`;
+  }
+@@ -1111,10 +1111,10 @@
+  const check=key+'stage'+k;currentSession.checks[check]=!currentSession.checks[check];persistSessions();
+  if(currentSession.checks[check])startTimer(IP[mode].rest);render();
+ }
+-function addMiniSet(i,j){saveDraft();const key=formKey(i,j,'Myo-Reps','');currentSession.clusters[key]=Math.min(20,(currentSession.clusters[key]||4)+1);persistSessions();render()}
++function addMiniSet(i,j){saveDraft();const key=formKey(i,j,'Myo-Reps','');currentSession.clusters??={};currentSession.clusters[key]=Math.min(20,(currentSession.clusters[key]||4)+1);persistSessions();render()}
+ function saveCluster(i,j){
+  saveDraft();const mode=setMode(i,j,selected(active,i)),key=formKey(i,j,mode,''),labels=methodStages(mode);if(!labels)return;
+- const count=currentSession.clusters[key]||labels.length,efforts=[];let foundBlank=false;
++ const count=currentSession.clusters?.[key]||labels.length,efforts=[];let foundBlank=false;
+  for(let k=0;k<count;k++){
+   const raw=currentSession.forms[key+'r'+k]||'',w=valueNumber(currentSession.forms[key+'w'+k]);
+   if(!raw&&mode==='Myo-Reps'&&k>0){foundBlank=true;continue}
+@@ -1152,65 +1152,155 @@
+  $('finishPanel').classList.add('hidden');$('finishNotes').value='';stopTimer();currentSession=null;renderedSession=null;localStorage.removeItem('pa_current_session');renderPlan();show('home');notice('Workout saved. Logged work and unfinished entries are retained in your session record.');
+ }
+ function resumeBanner(){const drafts=sessions.filter(x=>x.status==='draft');return drafts.length?`<div class="note"><b>Unfinished workouts</b>${drafts.map(s=>`<button class="secondary" onclick="resumeSession('${s.id}')">RESUME ${esc(T[s.template]?.[0]||s.template)}</button>`).join('')}</div>`:''}
+-function backupPayload(){saveDraft();const data={};Object.keys(localStorage).filter(k=>k.startsWith('pa_')&&k!=='pa_restore_rollback').sort().forEach(k=>data[k]=localStorage.getItem(k));return {format:'project-america-full-backup',version:1,appVersion:'2.3',createdAt:new Date().toISOString(),data}}
++// Only keys this version can validate are exported or replaced; other localStorage keys are left untouched.
++const BACKUP_KEY=/^pa_(os_v2|hist|ls_hist|cardio_hist|strength_hist|activator_hist|cardio_machine|plan_v1|sessions_v2|current_session|week_mode|reviews_v1|phase_entered|sel_.+|int_.+|todayint_.+|strength_.+)$/;
++// Newest pre-restore snapshot first. Never exported, imported or replaced by a restore.
++const ROLLBACK_KEYS=['pa_restore_rollback','pa_restore_rollback_2'];
++function isStrengthPreference(k){return k.startsWith('pa_strength_')&&k!=='pa_strength_hist'}
++function backupKeys(){return Object.keys(localStorage).filter(k=>BACKUP_KEY.test(k)).sort()}
++function fullBackup(data,createdAt=new Date().toISOString()){return {format:'project-america-full-backup',version:1,appVersion:'2.3',createdAt,data}}
++function backupPayload(){saveDraft();const data={};backupKeys().forEach(k=>data[k]=localStorage.getItem(k));return fullBackup(data)}
+ function downloadJSON(payload,name){const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+-exportData=function(){downloadJSON(backupPayload(),'Project_America_FULL_Backup_'+new Date().toISOString().slice(0,10)+'.json')};
++// Always hand the user their data, but say so if this version could not restore the file.
++function downloadChecked(payload,name){let problem='';try{validateBackup(payload)}catch(e){problem=e.message}downloadJSON(payload,name);if(problem)notice('File downloaded, but this version cannot restore it as-is: '+problem+' Keep the file; it still contains your data.')}
++exportData=function(){downloadChecked(backupPayload(),'Project_America_FULL_Backup_'+new Date().toISOString().slice(0,10)+'.json')};
+ let pendingImport=null;
++function parseBackupEntry(k,v){try{return JSON.parse(v)}catch{throw Error('Backup entry '+k+' is not valid JSON.')}}
++function validateOSState(raw){
++ const fail=why=>{throw Error('Invalid Project America OS state: '+why+'.')};
++ let d;try{d=JSON.parse(raw)}catch{fail('not valid JSON')}
++ const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
++ const text=x=>typeof x==='string'&&x.length<=100000&&!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(x);
++ const number=x=>typeof x==='number'&&Number.isFinite(x);
++ const name=k=>String(k).slice(0,40);
++ const walk=(x,depth)=>{
++  if(depth>12)fail('nested too deeply');
++  if(typeof x==='string'&&!text(x))fail('text is too long or contains control characters');
++  if(typeof x==='number'&&!number(x))fail('number out of range');
++  if(x&&typeof x==='object')for(const [k,v] of Object.entries(x)){if(['__proto__','constructor','prototype'].includes(k)||!text(k)||k.length>200)fail('unsafe field name');walk(v,depth+1)}
++ };
++ walk(d,0);
++ const fields=(x,label,allowed,required=[])=>{
++  if(!object(x))fail(label+' must be an object');
++  const extra=Object.keys(x).find(k=>!allowed.includes(k));if(extra!==undefined)fail('unsupported field '+label+'.'+name(extra));
++  const missing=required.find(k=>!Object.hasOwn(x,k));if(missing)fail('missing '+label+'.'+missing);
++ };
++ const records=(key,allowed,check)=>{
++  if(!Object.hasOwn(d,key))return;
++  if(!Array.isArray(d[key]))fail(key+' must be a list');
++  for(const x of d[key]){fields(x,key,allowed,allowed);for(const k of allowed)if(!text(x[k]))fail(key+'.'+k+' must be text');check?.(x)}
++ };
++ // readiness, tests and skill are read unconditionally by the OS screens; the rest are optional so older OS states restore.
++ fields(d,'OS state',['bodyweight','mode','readiness','tests','fuel','skill','experiments','combine','notes','gymProfiles','activeGym','friction','lifeWins','technique','availability'],['readiness','tests','skill']);
++ if(Object.hasOwn(d,'bodyweight')&&!number(d.bodyweight))fail('bodyweight must be a number');
++ if(Object.hasOwn(d,'mode')&&!['standard','expansion','survival'].includes(d.mode))fail('unknown operating mode');
++ fields(d.readiness,'readiness',['sleep','energy','soreness','joints','motivation','date']);
++ for(const k of ['sleep','energy','soreness','joints','motivation'])if(Object.hasOwn(d.readiness,k)&&(!Number.isInteger(d.readiness[k])||d.readiness[k]<1||d.readiness[k]>5))fail('readiness.'+k+' must be 1–5');
++ if(Object.hasOwn(d.readiness,'date')&&d.readiness.date!==null&&!text(d.readiness.date))fail('readiness.date must be text');
++ fields(d.tests,'tests',['forty','vertical','rope','pullup','hang','zone2']);
++ for(const [k,t] of Object.entries(d.tests)){fields(t,'tests.'+k,['value','date'],['value','date']);if(!text(t.value)||(t.date!==null&&!text(t.date)))fail('tests.'+k+' must be text')}
++ if(Object.hasOwn(d,'fuel')&&!object(d.fuel))fail('fuel must be an object');
++ if(Object.hasOwn(d,'notes')&&!Array.isArray(d.notes))fail('notes must be a list');
++ fields(d.skill,'skill',Object.keys(SKILLS));
++ for(const [k,v] of Object.entries(d.skill))if(!Number.isInteger(v)||v<0||v>=SKILLS[k].length)fail('skill.'+k+' out of range');
++ records('experiments',['q','a','b','date','status'],x=>{if(x.status!=='OBSERVE')fail('unknown experiment status')});
++ records('combine',['date','forty','vertical','hang','carry','zone2','mobility','notes']);
++ if(Object.hasOwn(d,'gymProfiles')){
++  if(!Array.isArray(d.gymProfiles))fail('gymProfiles must be a list');
++  for(const g of d.gymProfiles){fields(g,'gymProfiles',['name','equipment'],['name','equipment']);if(!text(g.name)||!Array.isArray(g.equipment)||g.equipment.some(x=>!PA21_EQUIP.includes(x)))fail('invalid gym profile')}
++ }
++ if(Object.hasOwn(d,'activeGym')&&d.activeGym!==null&&(!Number.isInteger(d.activeGym)||d.activeGym<0||d.activeGym>Math.max(0,(d.gymProfiles?.length||0)-1)))fail('activeGym out of range');
++ records('friction',['session','outcome','reason','note','date'],x=>{if(!Object.hasOwn(T,x.session)||!['Missed','Shortened','Moved','Completed with substitutions'].includes(x.outcome)||!['Time','Work','School','Sleep / fatigue','Equipment','Joint discomfort','Travel','Motivation','Other'].includes(x.reason))fail('invalid friction entry')});
++ records('lifeWins',['text','date']);
++ records('technique',['exercise','cue','angle','note','date'],x=>{if(!L.some(e=>e.name===x.exercise)||!['Self-observation only','Front angle','Side angle','Rear / 45° angle'].includes(x.angle))fail('invalid technique entry')});
++ if(Object.hasOwn(d,'availability')){fields(d.availability,'availability',['0','1','2','3','4','5','6']);if(Object.values(d.availability).some(v=>!number(v)))fail('availability must be minutes')}
++ return d;
++}
+ function validateBackup(obj){
+  if(!obj||obj.format!=='project-america-full-backup'||obj.version!==1||!obj.data||typeof obj.data!=='object'||Array.isArray(obj.data))throw Error('Choose a full Project America backup. Old lifting-only exports cannot restore the full app.');
+- const allowed=/^pa_(hist|ls_hist|cardio_hist|strength_hist|activator_hist|cardio_machine|plan_v1|sessions_v2|current_session|week_mode|reviews_v1|phase_entered|sel_.+|int_.+|todayint_.+|strength_.+)$/;
+- for(const [k,v] of Object.entries(obj.data)){if(!allowed.test(k)||typeof v!=='string'||v.length>10000000)throw Error('Unrecognized or oversized backup entry: '+k);}
++ for(const [k,v] of Object.entries(obj.data)){if(!BACKUP_KEY.test(k)||typeof v!=='string'||v.length>10000000)throw Error('Unrecognized or oversized backup entry: '+k);}
+  const arrays=['pa_hist','pa_ls_hist','pa_cardio_hist','pa_strength_hist','pa_activator_hist','pa_sessions_v2','pa_reviews_v1'];
+- for(const k of arrays)if(obj.data[k]){const a=JSON.parse(obj.data[k]);if(!Array.isArray(a)||a.some(x=>!x||typeof x!=='object'||Array.isArray(x)))throw Error('Invalid list: '+k)}
+- if(obj.data.pa_plan_v1){const p=JSON.parse(obj.data.pa_plan_v1);if(!BLOCKS.some(b=>b.id===p.active)||!Array.isArray(p.visited))throw Error('Invalid active block');}
++ for(const k of arrays)if(obj.data[k]){const a=parseBackupEntry(k,obj.data[k]);if(!Array.isArray(a)||a.some(x=>!x||typeof x!=='object'||Array.isArray(x)))throw Error('Invalid list: '+k)}
++ if(obj.data.pa_plan_v1){const p=parseBackupEntry('pa_plan_v1',obj.data.pa_plan_v1);if(!p||!BLOCKS.some(b=>b.id===p.active)||!Array.isArray(p.visited))throw Error('Invalid active block');}
+  if(obj.data.pa_week_mode&&!['busy','normal','extra'].includes(obj.data.pa_week_mode))throw Error('Invalid week mode');
+  if(obj.data.pa_cardio_machine&&!CARDIO_MACHINES[obj.data.pa_cardio_machine])throw Error('Unknown cardio machine');
++ // Sessions saved before mini-set counts existed have no clusters field; it is optional here and at render time.
+  if(obj.data.pa_sessions_v2)for(const s of JSON.parse(obj.data.pa_sessions_v2)){
+-  if(typeof s.id!=='string'||!/^[a-zA-Z0-9-]{1,100}$/.test(s.id)||!Object.hasOwn(T,s.template)||!['draft','complete'].includes(s.status)||!['busy','normal','extra'].includes(s.weekMode)||!s.forms||!s.checks||!s.choices||!s.modes||!s.clusters)throw Error('Invalid session record');
++  if(typeof s.id!=='string'||!/^[a-zA-Z0-9-]{1,100}$/.test(s.id)||!Object.hasOwn(T,s.template)||!['draft','complete'].includes(s.status)||!['busy','normal','extra'].includes(s.weekMode)||!s.forms||!s.checks||!s.choices||!s.modes)throw Error('Invalid session record');
+   if(!BLOCKS.some(b=>b.id===s.phase))throw Error('Invalid session block');
+  }
+  const safeString=x=>typeof x==='string'&&x.length<2000&&!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(x);
+  for(const [k,v] of Object.entries(obj.data)){
+   if(k.startsWith('pa_sel_')&&!L.some(e=>e.name===v))throw Error('Unknown movement preference');
+   if((k.startsWith('pa_int_')||k.startsWith('pa_todayint_'))&&!INTENSIFIERS.includes(v))throw Error('Unknown intensifier');
+-  if(k.startsWith('pa_strength_')&&!STRENGTH_METHODS.includes(v))throw Error('Unknown strength method');
++  if(isStrengthPreference(k)&&!STRENGTH_METHODS.includes(v))throw Error('Unknown strength method');
+  }
+  for(const k of arrays)for(const record of JSON.parse(obj.data[k]||'[]')){
+-  const check=(value,depth=0)=>{if(depth>12)throw Error('Backup nesting too deep');if(typeof value==='string'&&(!safeString(value)||(['pa_hist','pa_ls_hist','pa_cardio_hist','pa_strength_hist','pa_activator_hist'].includes(k)&&/[<>]/.test(value))))throw Error('Invalid text in '+k);if(typeof value==='number'&&!Number.isFinite(value))throw Error('Invalid number');if(value&&typeof value==='object')for(const [key,val] of Object.entries(value)){if(['__proto__','constructor','prototype'].includes(key)||!safeString(key))throw Error('Invalid field');check(val,depth+1)}};check(record);
++  // A lifting record's clusterSplit is a free-text note (e.g. "3+3 <20s>"); it is only ever rendered escaped.
++  const check=(value,depth=0,field)=>{if(depth>12)throw Error('Backup nesting too deep');if(typeof value==='string'&&(!safeString(value)||(['pa_hist','pa_ls_hist','pa_cardio_hist','pa_strength_hist','pa_activator_hist'].includes(k)&&!(k==='pa_hist'&&depth===1&&field==='clusterSplit')&&/[<>]/.test(value))))throw Error('Invalid text in '+k);if(typeof value==='number'&&!Number.isFinite(value))throw Error('Invalid number');if(value&&typeof value==='object')for(const [key,val] of Object.entries(value)){if(['__proto__','constructor','prototype'].includes(key)||!safeString(key))throw Error('Invalid field');check(val,depth+1,key)}};check(record);
+   if(k==='pa_hist'){
+    if(!safeString(record.name)||!INTENSIFIERS.includes(record.intensifier||'Straight Sets'))throw Error('Invalid lifting record');
+    for(const f of ['w','reps','rir','volume'])if(record[f]!=null&&(typeof record[f]!=='number'||record[f]<0))throw Error('Invalid lifting value');
++   if(record.clusterSplit!=null&&typeof record.clusterSplit!=='string')throw Error('Invalid cluster split note');
+   }
+   if(k==='pa_sessions_v2'){
+-   for(const f of ['forms','checks','choices','modes','clusters'])if(typeof record[f]!=='object'||Array.isArray(record[f]))throw Error('Invalid session fields');
++   for(const f of ['forms','checks','choices','modes'])if(typeof record[f]!=='object'||Array.isArray(record[f]))throw Error('Invalid session fields');
++   if(record.clusters!=null&&(typeof record.clusters!=='object'||Array.isArray(record.clusters)))throw Error('Invalid session fields');
+    for(const [i,n] of Object.entries(record.choices))if(!baseSlots[record.template]?.[i]?.[1].includes(n))throw Error('Invalid session movement');
+    if(Object.values(record.modes).some(m=>!INTENSIFIERS.includes(m)))throw Error('Invalid session mode');
+    if(record.strengthModes&&(typeof record.strengthModes!=='object'||Array.isArray(record.strengthModes)||Object.values(record.strengthModes).some(m=>!STRENGTH_METHODS.includes(m))))throw Error('Invalid strength method');
+    if(record.activators&&(typeof record.activators!=='object'||Array.isArray(record.activators)||Object.values(record.activators).some(n=>!L.some(e=>e.name===n))))throw Error('Invalid activator');
+    if(record.compact!=null&&typeof record.compact!=='boolean')throw Error('Invalid compact state');
+-   if(Object.values(record.clusters).some(n=>!Number.isInteger(n)||n<2||n>20))throw Error('Invalid effort count');
++   if(Object.values(record.clusters||{}).some(n=>!Number.isInteger(n)||n<2||n>20))throw Error('Invalid effort count');
+    if(Object.values(record.checks).some(v=>typeof v!=='boolean'))throw Error('Invalid completion state');
+    if(Object.values(record.forms).some(v=>!['string','boolean'].includes(typeof v)))throw Error('Invalid form value');
+   }
+  }
++ if(Object.hasOwn(obj.data,'pa_os_v2'))validateOSState(obj.data.pa_os_v2);
+  return obj;
+ }
+ async function previewImport(file){
+  pendingImport=null;if(!file)return;
+- try{if(file.size>15000000)throw Error('Backup is larger than 15 MB.');pendingImport=validateBackup(JSON.parse(await file.text()));const d=pendingImport.data;
+- $('importPreview').innerHTML=`<p>Backup from ${esc(pendingImport.createdAt||'unknown date')}. ${JSON.parse(d.pa_hist||'[]').length} lifting records; ${JSON.parse(d.pa_sessions_v2||'[]').length} sessions.</p><p>Restore replaces this browser’s Project America data. Download your current full backup first. A local rollback snapshot is also retained.</p><button class="secondary" onclick="exportData()">DOWNLOAD CURRENT BACKUP</button><button class="primary" onclick="restoreBackup()">RESTORE THIS BACKUP</button>`;
++ try{if(file.size>15000000)throw Error('Backup is larger than 15 MB.');let parsed;try{parsed=JSON.parse(await file.text())}catch{throw Error('This file is not valid JSON. Choose a Project America full backup (.json).')}pendingImport=validateBackup(parsed);const d=pendingImport.data;
++ $('importPreview').innerHTML=`<p>Backup from ${esc(pendingImport.createdAt||'unknown date')}. ${JSON.parse(d.pa_hist||'[]').length} lifting records; ${JSON.parse(d.pa_sessions_v2||'[]').length} sessions.</p><p>Restore replaces this browser’s Project America data. Download your current full backup first. Local rollback snapshots of the two most recent restores are also kept when storage allows.</p><button class="secondary" onclick="exportData()">DOWNLOAD CURRENT BACKUP</button><button class="primary" onclick="restoreBackup()">RESTORE THIS BACKUP</button>`;
+  }catch(e){$('importPreview').textContent=e.message;}
+ }
++function readSnapshot(gen){
++ const raw=localStorage.getItem(ROLLBACK_KEYS[gen-1]);if(raw==null)return null;
++ // Snapshots written by HQ 2.3 are a bare {key: value} map rather than a full backup.
++ try{const x=JSON.parse(raw);return x&&x.format?x:fullBackup(x,null)}catch{return null}
++}
++function setOrRemove(k,v){if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,v)}
++function restoreSnapshots(prev){localStorage.removeItem(ROLLBACK_KEYS[1]);setOrRemove(ROLLBACK_KEYS[0],prev[0]);setOrRemove(ROLLBACK_KEYS[1],prev[1])}
++// Rotate newest → older and store the new snapshot. The older generation is dropped only if both cannot fit.
++function writeRollbackSnapshot(snapshot){
++ const prev=ROLLBACK_KEYS.map(k=>localStorage.getItem(k));
++ try{
++  if(prev[0]!=null){try{localStorage.setItem(ROLLBACK_KEYS[1],prev[0])}catch{localStorage.removeItem(ROLLBACK_KEYS[1])}}
++  try{localStorage.setItem(ROLLBACK_KEYS[0],snapshot)}catch{localStorage.removeItem(ROLLBACK_KEYS[1]);localStorage.setItem(ROLLBACK_KEYS[0],snapshot)}
++ }catch{
++  try{restoreSnapshots(prev)}catch{}
++  throw Error('There is not enough browser storage to keep a rollback snapshot of your current data, so nothing was changed. Download your current backup first; then free space or restore on another device.');
++ }
++ return prev;
++}
+ function replacePAData(data){
+- const old={};Object.keys(localStorage).filter(k=>k.startsWith('pa_')&&k!=='pa_restore_rollback').forEach(k=>old[k]=localStorage.getItem(k));
++ const keys=backupKeys(),old={};keys.forEach(k=>old[k]=localStorage.getItem(k));
++ const prev=writeRollbackSnapshot(JSON.stringify(fullBackup(old)));
+  try{
+-  localStorage.setItem('pa_restore_rollback',JSON.stringify(old));
+-  Object.keys(old).forEach(k=>localStorage.removeItem(k));Object.entries(data).forEach(([k,v])=>localStorage.setItem(k,v));
+- }catch(e){Object.keys(localStorage).filter(k=>k.startsWith('pa_')&&k!=='pa_restore_rollback').forEach(k=>localStorage.removeItem(k));Object.entries(old).forEach(([k,v])=>localStorage.setItem(k,v));throw e;}
++  keys.forEach(k=>localStorage.removeItem(k));
++  for(const [k,v] of Object.entries(data)){
++   try{localStorage.setItem(k,v)}catch(e){if(localStorage.getItem(ROLLBACK_KEYS[1])==null)throw e;localStorage.removeItem(ROLLBACK_KEYS[1]);localStorage.setItem(k,v)}
++  }
++ }catch(e){
++  backupKeys().forEach(k=>localStorage.removeItem(k));Object.entries(old).forEach(([k,v])=>localStorage.setItem(k,v));restoreSnapshots(prev);
++  throw Error(e&&e.name==='QuotaExceededError'?'The backup does not fit in this browser’s storage.':'Storage could not save the backup ('+(e&&e.message||e)+').');
++ }
+ }
+ function restoreBackup(){if(!pendingImport)return;try{validateBackup(pendingImport);replacePAData(pendingImport.data);currentSession=null;renderedSession=null;location.reload()}catch(e){notice('Restore failed; original data was retained. '+e.message)}}
+-function downloadRollback(){const data=readJSON('pa_restore_rollback',null);if(!data){notice('No rollback backup exists yet.');return}downloadJSON({format:'project-america-full-backup',version:1,createdAt:new Date().toISOString(),data},'Project_America_Before_Restore.json')}
+-function showData(){mpTitle.textContent='Full Backup & Restore';mpBody.innerHTML=`<div class="card"><p>Includes lifting, cardio, stretches, sessions, unfinished workouts, exercise preferences, block choice, week mode and reviews.</p><button class="primary" onclick="exportData()">EXPORT FULL BACKUP</button><label class="import-label">Import full backup<input type="file" accept="application/json,.json" onchange="previewImport(this.files[0])"></label><div id="importPreview"></div><button class="secondary" onclick="downloadRollback()">DOWNLOAD PRE-RESTORE SNAPSHOT</button></div>`;show('morepage')}
++function downloadRollback(gen=1){const snap=readSnapshot(gen);if(!snap){notice('No rollback backup exists yet.');return}downloadChecked(snap,gen===1?'Project_America_Before_Restore.json':'Project_America_Before_Earlier_Restore.json')}
++function snapshotSummary(){const when=s=>s?.createdAt?new Date(s.createdAt).toLocaleString():'date not recorded',a=readSnapshot(1),b=readSnapshot(2);return a?'Pre-restore snapshots on this device: latest '+when(a)+(b?'; older '+when(b):'')+'.':'No pre-restore snapshot yet.'}
++function showData(){mpTitle.textContent='Full Backup & Restore';mpBody.innerHTML=`<div class="card"><p>Includes lifting, cardio, stretches, sessions, unfinished workouts, exercise preferences, block choice, week mode and reviews.</p><button class="primary" onclick="exportData()">EXPORT FULL BACKUP</button><label class="import-label">Import full backup<input type="file" accept="application/json,.json" onchange="previewImport(this.files[0])"></label><div id="importPreview"></div><button class="secondary" onclick="downloadRollback()">DOWNLOAD PRE-RESTORE SNAPSHOT</button>${localStorage.getItem(ROLLBACK_KEYS[1])!=null?'<button class="secondary" onclick="downloadRollback(2)">DOWNLOAD OLDER PRE-RESTORE SNAPSHOT</button>':''}<p class="tiny muted">${esc(snapshotSummary())}</p></div>`;show('morepage')}
+ const legacyMorePage=morePage;morePage=function(k){if(k==='data'){showData();return}legacyMorePage(k)};
+ $('exs').addEventListener('input',()=>saveDraft());
+ $('exs').addEventListener('change',()=>saveDraft());
+@@ -1345,13 +1435,13 @@
+ }
+ function todayMission(){let x=PA20.schedule[new Date().getDay()];return {template:x[0],name:x[1],purpose:x[2]}}
+ function athleteSnapshot(){let d=osData(),h=readJSON('pa_hist',[]),bw=+d.bodyweight||189;let bench=best(h,'Bench Press (BB)','w')||0;let pull=d.tests.pullup||null;let speed=d.tests.forty||null;return {bw,bench,pull,speed}}
+-function updateOSHome(){let root=document.getElementById('osCommand');if(!root)return;let d=osData(),r=readinessDecision(d.readiness),m=todayMission(),block=activeBlock(),ev=evidenceDecision(),snap=athleteSnapshot();let mode=(d.mode||'standard').toUpperCase();root.innerHTML=`<div class="os-card"><div class="os-section-title"><small class="gold">MISSION STATUS</small><span class="os-badge gold">${mode}</span></div><div class="row"><div><div class="os-kpi ${r.cls}">${r.label}</div><small class="muted">Check-in ${readinessScore(d.readiness)} / 100 • self-reported readiness, not a medical metric</small></div><div style="text-align:right"><small class="gold">BLOCK ${block.id}</small><br><b>${esc(block.name)}</b></div></div><div class="decision-banner ${ev.state==='OBSERVE'?'nochange':''}"><small class="tinycaps">SYSTEM DECISION • ${ev.state}</small><strong>${ev.state==='OBSERVE'?'Stay the course':ev.state==='INVESTIGATE'?'Watch the pattern':'Review before changing'}</strong><span class="tiny muted">${esc(ev.why)}</span></div></div>`;
++function updateOSHome(){let root=document.getElementById('osCommand');if(!root)return;let d=osData(),r=readinessDecision(d.readiness),m=todayMission(),block=activeBlock(),ev=evidenceDecision(),snap=athleteSnapshot();let mode=(d.mode||'standard').toUpperCase();root.innerHTML=`<div class="os-card"><div class="os-section-title"><small class="gold">MISSION STATUS</small><span class="os-badge gold">${esc(mode)}</span></div><div class="row"><div><div class="os-kpi ${r.cls}">${r.label}</div><small class="muted">Check-in ${readinessScore(d.readiness)} / 100 • self-reported readiness, not a medical metric</small></div><div style="text-align:right"><small class="gold">BLOCK ${block.id}</small><br><b>${esc(block.name)}</b></div></div><div class="decision-banner ${ev.state==='OBSERVE'?'nochange':''}"><small class="tinycaps">SYSTEM DECISION • ${ev.state}</small><strong>${ev.state==='OBSERVE'?'Stay the course':ev.state==='INVESTIGATE'?'Watch the pattern':'Review before changing'}</strong><span class="tiny muted">${esc(ev.why)}</span></div></div>`;
+  let dir=document.getElementById('osDirective');dir.innerHTML=`<small class="gold">TODAY'S MISSION</small><div class="next-action">${esc(m.name)}</div><p><b>${esc(m.purpose)}</b></p><p class="tiny muted">${esc(r.text)}</p><div class="os-actions"><button class="primary" onclick="start('${m.template}')">START MISSION</button><button class="secondary" onclick="osPage('readiness')">CHECK READINESS</button></div>`;
+- let speedC=confidence(d.tests.forty?.date),combine=d.combine?.at(-1);document.getElementById('osHomeGrid').innerHTML=`<div class="os-card"><small class="gold">ATHLETE MODEL</small><div class="os-kpi">${snap.bw.toFixed(1)} <small>lb</small></div><small class="muted">Bodyweight profile</small></div><div class="os-card"><small class="gold">40-YARD DATA</small><div class="os-kpi">${d.tests.forty?.value?d.tests.forty.value+'s':'—'}</div><small class="${speedC[1]}">${speedC[0]}</small></div><div class="os-card"><small class="gold">LAST COMBINE</small><div class="os-kpi">${combine?new Date(combine.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}):'—'}</div><small class="muted">${combine?'Performance snapshot saved':'No standardized snapshot yet'}</small></div>`;
++ let speedC=confidence(d.tests.forty?.date),combine=d.combine?.at(-1);document.getElementById('osHomeGrid').innerHTML=`<div class="os-card"><small class="gold">ATHLETE MODEL</small><div class="os-kpi">${snap.bw.toFixed(1)} <small>lb</small></div><small class="muted">Bodyweight profile</small></div><div class="os-card"><small class="gold">40-YARD DATA</small><div class="os-kpi">${d.tests.forty?.value?esc(d.tests.forty.value)+'s':'—'}</div><small class="${speedC[1]}">${speedC[0]}</small></div><div class="os-card"><small class="gold">LAST COMBINE</small><div class="os-kpi">${combine?new Date(combine.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}):'—'}</div><small class="muted">${combine?'Performance snapshot saved':'No standardized snapshot yet'}</small></div>`;
+  document.getElementById('osDecision').innerHTML=`<small class="gold">EVIDENCE THRESHOLD</small><h3>${esc(ev.name)} • ${ev.state}</h3><p>${esc(ev.why)}</p><small class="muted">Doctrine: one bad workout = noise. Repeated pattern = investigate. Enough evidence = act.</small>`;
+ }
+ function osPage(k){const pages={athlete:renderAthletePage,readiness:renderReadinessPage,capability:renderCapabilityPage,combine:renderCombinePage,budget:renderBudgetPage,lab:renderLabPage,simulator:renderSimulatorPage,aar:renderAARPage,adaptive:renderAdaptivePage,schedule:renderSchedulePage,gyms:renderGymsPage,friction:renderFrictionPage,story:renderStoryPage,technique:renderTechniquePage,coach:renderCoachPage};if(!pages[k])return;pages[k]();show('morepage')}
+-function renderAthletePage(){let d=osData(),tests=[['forty','40-Yard Dash','sec'],['vertical','Vertical Jump','in'],['rope','Rope Climb','ft'],['pullup','Pull-Up System Weight','lb × reps'],['hang','Dead Hang','sec'],['zone2','Zone 2 Benchmark','output']];mpTitle.textContent='Digital Athlete';mpBody.innerHTML=`<div class="card"><small class="gold">KNOWN ≠ ESTIMATED ≠ UNKNOWN</small><h2>Living Athlete Model</h2><p>Project America stores what is actually measured and labels old data as stale instead of inventing capability scores.</p><label>BODYWEIGHT <input id="osBW" inputmode="decimal" value="${d.bodyweight||189}"></label><button class="primary" onclick="saveBodyweight()">SAVE BODYWEIGHT</button></div><div class="card"><h3>Verified performance tests</h3>${tests.map(([key,label,unit])=>{let t=d.tests[key]||{},c=confidence(t.date);return `<div class="domain-row"><div><b>${label}</b><br><small class="${c[1]}">${c[0]}${t.date?' • '+daysOld(t.date)+'d old':''}</small></div><input id="test_${key}" placeholder="${unit}" value="${t.value??''}"><button class="secondary" onclick="saveTest('${key}')">SAVE</button></div>`}).join('')}</div>`}
++function renderAthletePage(){let d=osData(),tests=[['forty','40-Yard Dash','sec'],['vertical','Vertical Jump','in'],['rope','Rope Climb','ft'],['pullup','Pull-Up System Weight','lb × reps'],['hang','Dead Hang','sec'],['zone2','Zone 2 Benchmark','output']];mpTitle.textContent='Digital Athlete';mpBody.innerHTML=`<div class="card"><small class="gold">KNOWN ≠ ESTIMATED ≠ UNKNOWN</small><h2>Living Athlete Model</h2><p>Project America stores what is actually measured and labels old data as stale instead of inventing capability scores.</p><label>BODYWEIGHT <input id="osBW" inputmode="decimal" value="${esc(d.bodyweight||189)}"></label><button class="primary" onclick="saveBodyweight()">SAVE BODYWEIGHT</button></div><div class="card"><h3>Verified performance tests</h3>${tests.map(([key,label,unit])=>{let t=d.tests[key]||{},c=confidence(t.date);return `<div class="domain-row"><div><b>${label}</b><br><small class="${c[1]}">${c[0]}${t.date?' • '+daysOld(t.date)+'d old':''}</small></div><input id="test_${key}" placeholder="${unit}" value="${esc(t.value??'')}"><button class="secondary" onclick="saveTest('${key}')">SAVE</button></div>`}).join('')}</div>`}
+ function saveBodyweight(){let d=osData();d.bodyweight=+document.getElementById('osBW').value||d.bodyweight;saveOS(d);renderAthletePage();notice('Athlete model updated.')}
+ function saveTest(key){let el=document.getElementById('test_'+key),d=osData();if(!el.value)return;d.tests[key]={value:el.value,date:new Date().toISOString()};saveOS(d);renderAthletePage();notice('Verified test saved.')}
+ function renderReadinessPage(){let d=osData(),r=d.readiness||{},dec=readinessDecision(r);mpTitle.textContent='Mission Readiness';mpBody.innerHTML=`<div class="card"><small class="gold">GOVERNOR • NOT AUTOPILOT</small><h2 class="${dec.cls}">${dec.label} • ${readinessScore(r)} / 100</h2><p>${dec.text}</p><p class="tiny muted">This is a simple self-report check-in. It does not diagnose recovery, injury, or health.</p></div><div class="card"><div class="checkin-grid">${[['sleep','Sleep'],['energy','Energy'],['soreness','Low soreness / freshness'],['joints','Joint status'],['motivation','Motivation']].map(([k,l])=>`<label>${l}<select id="r_${k}">${[1,2,3,4,5].map(v=>`<option value="${v}" ${+r[k]===v?'selected':''}>${v} / 5</option>`).join('')}</select></label>`).join('')}</div><button class="primary" onclick="saveReadiness()">SAVE CHECK-IN</button></div><div class="card"><h3>Operating Mode</h3><p class="muted">Expansion adds room for capability. Standard runs the normal architecture. Survival protects minimum effective dose.</p><div class="os-actions">${['expansion','standard','survival'].map(x=>`<button class="secondary ${d.mode===x?'compact-on':''}" onclick="setOSMode('${x}')">${x.toUpperCase()}</button>`).join('')}</div></div>`}
+@@ -1361,10 +1451,10 @@
+ const SKILLS={SPEED:['Establish verified 40','Sub-6.00','5.50','5.25','Sub-5.00'],DUNK:['Landing mechanics','Jump tolerance','Touch rim','Grab rim','Wrist over rim','Controlled dunk'],ROPE:['30s dead hang','Towel hang','Strict pull-ups','5-ft rope','10-ft rope','15-ft arms-only'],PULL:['10 strict BW','+25 lb','+45 lb','+70 lb','+90 lb','300-lb system ×10']};
+ function renderCapabilityPage(){let d=osData();mpTitle.textContent='Capability // Skill Trees';mpBody.innerHTML=`<div class="card"><small class="gold">FOUR FLAGSHIP GOALS</small><h2>YOU ARE HERE → NEXT</h2><p class="muted">Manual advancement records demonstrated prerequisites. It never fabricates performance.</p></div><div class="skill-grid">${Object.entries(SKILLS).map(([k,n])=>skillTree(k,n,d.skill[k]||0)).join('')}</div>`}
+ function shiftSkill(k,delta){let d=osData(),max=SKILLS[k].length-1;d.skill[k]=Math.max(0,Math.min(max,(d.skill[k]||0)+delta));saveOS(d);renderCapabilityPage()}
+-function renderCombinePage(){let d=osData(),last=d.combine?.at(-1);mpTitle.textContent='Project America Combine';mpBody.innerHTML=`<div class="card"><small class="gold">STANDARDIZED SNAPSHOT</small><h2>Prove it. Don't estimate it.</h2><p>Run under repeatable conditions. The four North Stars remain the flagship goals; these are supporting diagnostics.</p>${last?`<p class="tiny muted">Last Combine: ${new Date(last.date).toLocaleDateString()}</p>`:''}</div><div class="card"><div class="combine-grid">${[['forty','40-yard (sec)'],['vertical','Vertical (in)'],['hang','Dead hang (sec)'],['carry','Carry benchmark'],['zone2','Aerobic benchmark'],['mobility','Mobility benchmark']].map(([k,l])=>`<label>${l}<input id="c_${k}" value="${last?.[k]??''}"></label>`).join('')}</div><label>NOTES<textarea id="c_notes" placeholder="Conditions, surface, equipment, anything that matters">${last?.notes??''}</textarea></label><button class="primary" onclick="saveCombine()">SAVE COMBINE</button></div>`}
++function renderCombinePage(){let d=osData(),last=d.combine?.at(-1);mpTitle.textContent='Project America Combine';mpBody.innerHTML=`<div class="card"><small class="gold">STANDARDIZED SNAPSHOT</small><h2>Prove it. Don't estimate it.</h2><p>Run under repeatable conditions. The four North Stars remain the flagship goals; these are supporting diagnostics.</p>${last?`<p class="tiny muted">Last Combine: ${new Date(last.date).toLocaleDateString()}</p>`:''}</div><div class="card"><div class="combine-grid">${[['forty','40-yard (sec)'],['vertical','Vertical (in)'],['hang','Dead hang (sec)'],['carry','Carry benchmark'],['zone2','Aerobic benchmark'],['mobility','Mobility benchmark']].map(([k,l])=>`<label>${l}<input id="c_${k}" value="${esc(last?.[k]??'')}"></label>`).join('')}</div><label>NOTES<textarea id="c_notes" placeholder="Conditions, surface, equipment, anything that matters">${esc(last?.notes??'')}</textarea></label><button class="primary" onclick="saveCombine()">SAVE COMBINE</button></div>`}
+ function saveCombine(){let d=osData(),x={date:new Date().toISOString()};['forty','vertical','hang','carry','zone2','mobility'].forEach(k=>x[k]=document.getElementById('c_'+k).value);x.notes=document.getElementById('c_notes').value;d.combine??=[];d.combine.push(x);if(x.forty)d.tests.forty={value:x.forty,date:x.date};if(x.vertical)d.tests.vertical={value:x.vertical,date:x.date};if(x.hang)d.tests.hang={value:x.hang,date:x.date};saveOS(d);renderCombinePage();notice('Combine snapshot saved.')}
+ function renderBudgetPage(){let b=budgetData(),d=osData();mpTitle.textContent='Training Budget';mpBody.innerHTML=`<div class="card"><small class="gold">RECENT EXPOSURE • LAST 7 DAYS</small><h2>Adding training is not free.</h2><p class="tiny muted">These bars count recent completed exposure categories. They are not claimed to be physiological MRV.</p>${Object.entries(b).map(([k,v])=>`<div class="budget-row"><div class="budget-head"><b>${k}</b><span>${v} exposure${v===1?'':'s'}</span></div><div class="meter"><i style="width:${Math.min(100,v*25)}%"></i></div></div>`).join('')}</div><div class="card"><h3>Opportunity-cost doctrine</h3><p><b>${d.mode==='survival'?'SURVIVAL: protect floors.':d.mode==='expansion'?'EXPANSION: introduce only 1–2 capabilities at a time.':'STANDARD: preserve Giant A/B and cardio/abs before adding optional work.'}</b></p><p class="muted">If a new demand conflicts with high-intensity lower-body work, move or reduce the optional exposure before touching the anchors.</p></div>`}
+-function renderLabPage(){let d=osData();mpTitle.textContent='Experiment Lab';mpBody.innerHTML=`<div class="card"><small class="gold">N=1 SPORTS SCIENCE</small><h2>Test before adopting.</h2><input id="expQ" class="search" placeholder="Question: Does a heavy primer improve bench work sets?"><textarea id="expA" placeholder="Condition A"></textarea><textarea id="expB" placeholder="Condition B"></textarea><button class="primary" onclick="addExperiment()">CREATE EXPERIMENT</button></div>${(d.experiments||[]).slice().reverse().map((x,i)=>`<div class="card"><small class="gold">${x.status||'OBSERVE'}</small><h3>${esc(x.q)}</h3><p><b>A:</b> ${esc(x.a)}</p><p><b>B:</b> ${esc(x.b)}</p><p class="tiny muted">Created ${new Date(x.date).toLocaleDateString()} • No automatic program change.</p></div>`).join('')}`}
++function renderLabPage(){let d=osData();mpTitle.textContent='Experiment Lab';mpBody.innerHTML=`<div class="card"><small class="gold">N=1 SPORTS SCIENCE</small><h2>Test before adopting.</h2><input id="expQ" class="search" placeholder="Question: Does a heavy primer improve bench work sets?"><textarea id="expA" placeholder="Condition A"></textarea><textarea id="expB" placeholder="Condition B"></textarea><button class="primary" onclick="addExperiment()">CREATE EXPERIMENT</button></div>${(d.experiments||[]).slice().reverse().map((x,i)=>`<div class="card"><small class="gold">${esc(x.status||'OBSERVE')}</small><h3>${esc(x.q)}</h3><p><b>A:</b> ${esc(x.a)}</p><p><b>B:</b> ${esc(x.b)}</p><p class="tiny muted">Created ${new Date(x.date).toLocaleDateString()} • No automatic program change.</p></div>`).join('')}`}
+ function addExperiment(){let d=osData(),q=document.getElementById('expQ').value.trim();if(!q)return;d.experiments??=[];d.experiments.push({q,a:document.getElementById('expA').value,b:document.getElementById('expB').value,date:new Date().toISOString(),status:'OBSERVE'});saveOS(d);renderLabPage()}
+ function simText(goal){let d=osData(),base='Protect Giant A and Giant B. Do not convert optional work into mandatory adherence.';let map={swim:'Introduce 1 technical swim/week first. Best initial placement: a recovery/optional-capability day. Reassess after 3 exposures before adding a second.',run:'Start with one low-volume running or speed exposure. Avoid stacking maximal running next to heavy lower-body work. Preserve Saturday/Zone 2 by trading, not simply adding, high-intensity volume.',arms:'Use weak-link insertion: add a small biceps/triceps dose to an existing session before creating another full training day.',dunk:'Raise jump/speed work from maintenance toward development while preserving strength. Reduce optional lower-body fatigue before adding more jump contacts.',time:'Use SURVIVAL + COMPACT/MED. Preserve primary strength work, essential pulling/lower-body work, and minimum conditioning/mobility floors.',swim2:'Only add a second swim after the first exposure is tolerable and does not degrade Giant A/B or sleep/recovery.'};return `${map[goal]||'Make the smallest change that directly serves the new goal.'}\n\n${base}\n\nWHY: Project America changes one variable at a time so the result can be interpreted.`}
+ function renderSimulatorPage(){mpTitle.textContent='Program Simulator';mpBody.innerHTML=`<div class="card"><small class="gold">WHAT HAPPENS IF…</small><h2>Model the trade before changing the plan.</h2><select id="simGoal" class="chooser"><option value="swim">I add swimming</option><option value="run">I add more running / speed</option><option value="arms">I prioritize bigger arms</option><option value="dunk">I prioritize my dunk</option><option value="time">I only have ~4 training days</option><option value="swim2">I want to swim twice weekly</option></select><button class="primary" onclick="runSim()">SIMULATE</button></div><div class="card"><div id="simOut" class="sim-result muted">Choose a scenario. This is a transparent planning rule-set, not a physiological prediction.</div></div>`}
+@@ -1384,7 +1474,7 @@
+ function addGymProfile(){let d=ensurePA21(osData()),name=document.getElementById('gymName').value.trim();if(!name)return;let equipment=[...document.querySelectorAll('.gymEq:checked')].map(x=>x.value);d.gymProfiles.push({name,equipment});d.activeGym=d.gymProfiles.length-1;saveOS(d);renderGymsPage();notice('Gym profile saved and activated.')}
+ function setActiveGym(i){let d=ensurePA21(osData());d.activeGym=i;saveOS(d);renderGymsPage()}
+ const DAYN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+-function renderSchedulePage(){let d=ensurePA21(osData());mpTitle.textContent='Schedule Negotiator';mpBody.innerHTML=`<div class="card"><small class="gold">CALENDAR THAT NEGOTIATES WITH LIFE</small><h2>Protect anchors. Fit the rest.</h2><p class="muted">Enter realistic available minutes. The planner protects Giant A/B first, then engine/abs, then optional capability.</p><div class="combine-grid">${DAYN.map((x,i)=>`<label>${x}<input id="av_${i}" inputmode="numeric" value="${d.availability[i]??(i===0||i===2?90:i===1||i===6?40:i===4?30:10)}"></label>`).join('')}</div><button class="primary" onclick="runSchedule()">NEGOTIATE WEEK</button></div><div class="card"><div id="scheduleOut" class="adaptive-result muted">No master template will be changed automatically.</div></div>`}
++function renderSchedulePage(){let d=ensurePA21(osData());mpTitle.textContent='Schedule Negotiator';mpBody.innerHTML=`<div class="card"><small class="gold">CALENDAR THAT NEGOTIATES WITH LIFE</small><h2>Protect anchors. Fit the rest.</h2><p class="muted">Enter realistic available minutes. The planner protects Giant A/B first, then engine/abs, then optional capability.</p><div class="combine-grid">${DAYN.map((x,i)=>`<label>${x}<input id="av_${i}" inputmode="numeric" value="${esc(d.availability[i]??(i===0||i===2?90:i===1||i===6?40:i===4?30:10))}"></label>`).join('')}</div><button class="primary" onclick="runSchedule()">NEGOTIATE WEEK</button></div><div class="card"><div id="scheduleOut" class="adaptive-result muted">No master template will be changed automatically.</div></div>`}
+ function runSchedule(){let d=ensurePA21(osData()),mins=DAYN.map((_,i)=>+document.getElementById('av_'+i).value||0);mins.forEach((v,i)=>d.availability[i]=v);saveOS(d);let used=new Set(),pick=(need,prefer)=>{for(let i of prefer){if(!used.has(i)&&mins[i]>=need){used.add(i);return i}}let best=mins.map((v,i)=>({v,i})).filter(x=>!used.has(x.i)&&x.v>=need).sort((a,b)=>b.v-a.v)[0];if(best){used.add(best.i);return best.i}return -1};let a=pick(50,[0,1,2]),b=pick(50,[2,4,3]),z=pick(25,[1,3,5]),iv=pick(25,[6,4,5]),ath=pick(20,[4,3,5]);let rows=[['GIANT A',a,'ANCHOR'],['GIANT B',b,'ANCHOR'],['ZONE 2 + ABS',z,'PRIORITY'],['INTERVALS + ABS',iv,'PRIORITY'],['ATHLETIC',ath,'OPTIONAL']];document.getElementById('scheduleOut').innerHTML=rows.map(([n,i,p])=>`<div class="plan-step ${i>=0?'keep':'cut'}"><b>${p}</b> • ${n} → ${i>=0?DAYN[i]+' ('+mins[i]+' min available)':'NO CLEAN SLOT — use COMPACT/MED or skip optional work'}</div>`).join('')+`<p class="tiny muted"><b>WHY:</b> Giant A/B are protected first. Optional Athletic work never becomes adherence debt. This is a planning suggestion, not an automatic calendar edit.</p>`}
+ function renderFrictionPage(){let d=ensurePA21(osData()),recent=d.friction.slice().reverse().slice(0,8),counts={};d.friction.forEach(x=>counts[x.reason]=(counts[x.reason]||0)+1);let top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];mpTitle.textContent='Friction Log';mpBody.innerHTML=`<div class="card"><small class="gold">MISSED WORK = INFORMATION</small><h2>Why did the plan break?</h2><div class="friction-grid"><label>SESSION<select id="frSession">${Object.entries(T).map(([k,v])=>`<option value="${k}">${esc(v[0])}</option>`).join('')}</select></label><label>OUTCOME<select id="frOutcome"><option>Missed</option><option>Shortened</option><option>Moved</option><option>Completed with substitutions</option></select></label><label>PRIMARY REASON<select id="frReason"><option>Time</option><option>Work</option><option>School</option><option>Sleep / fatigue</option><option>Equipment</option><option>Joint discomfort</option><option>Travel</option><option>Motivation</option><option>Other</option></select></label></div><textarea id="frNote" placeholder="What actually happened? Optional."></textarea><button class="primary" onclick="saveFriction()">LOG FRICTION</button></div><div class="card"><h3>${top?'Most common friction: '+esc(top[0]):'No pattern yet'}</h3><p class="muted">${top?frictionAdvice(top[0]):'Log interruptions without guilt. Repeated misses are evidence about plan fit.'}</p>${recent.map(x=>`<div class="story-win"><b>${esc(x.outcome)} • ${esc(T[x.session]?.[0]||x.session)}</b><br><small>${esc(x.reason)} • ${new Date(x.date).toLocaleDateString()}</small>${x.note?`<p>${esc(x.note)}</p>`:''}</div>`).join('')}</div>`}
+ function frictionAdvice(r){return ({Time:'Use Adaptive Session or COMPACT/MED before creating make-up debt.',Work:'Move optional work first; protect the two anchor lifting sessions.',School:'Use SURVIVAL mode during academic crunch weeks and protect training floors.',Equipment:'Use Gym Profiles and preserve slot purpose with substitutions.',Travel:'Create a travel equipment profile and run minimum useful sessions.',Motivation:'Reduce activation energy: start with the first anchor movement or a 10-minute floor.', 'Sleep / fatigue':'Keep architecture stable; lower optional intensity and reassess repeated patterns.', 'Joint discomfort':'Do not push through sharp or unusual pain. Substitute or stop the affected movement and reassess.'})[r]||'Look for a repeated constraint before changing the program.'}
+--- a/sw.js	2026-10-06 20:06:04.000000000 +0000
++++ b/sw.js	2026-10-18 03:25:45.099856738 +0000
+@@ -1,4 +1,4 @@
+-const CACHE='project-america-shell-v2-3-training-20261006';
++const CACHE='project-america-shell-v2-3-backup-repair-20261018';
+ const FILES=['/','/index.html','/install.js','/manifest.webmanifest','/icons/icon-192.png','/icons/icon-512.png','/icons/maskable-512.png','/icons/apple-touch-icon.png'];
+ self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
+ // Do not take over a running workout until the user saves and updates.

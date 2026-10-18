@@ -1,0 +1,496 @@
+{
+ "app": "/workspace/app",
+ "date": "2026-10-18T03:38:56.220Z",
+ "passed": 30,
+ "failed": 0,
+ "results": [
+  {
+   "id": "D1.1",
+   "group": "Defect 1: pa_os_v2",
+   "title": "Full backup containing saved OS state (pa_os_v2) exported from the UI is accepted and restored byte-identically",
+   "pass": true,
+   "error": null,
+   "ms": 569
+  },
+  {
+   "id": "D1.2",
+   "group": "Defect 1: pa_os_v2",
+   "title": "Older full backup without pa_os_v2 still restores and leaves no OS key behind",
+   "pass": true,
+   "error": null,
+   "ms": 428
+  },
+  {
+   "id": "D2.1",
+   "group": "Defect 2: pa_strength_hist",
+   "title": "Heavy primer logged through the real Giant A UI produces a backup that validates and restores",
+   "pass": true,
+   "error": null,
+   "ms": 690
+  },
+  {
+   "id": "D2.2",
+   "group": "Defect 2: pa_strength_hist",
+   "title": "Strength-method preference keys are still validated (unknown method rejected)",
+   "pass": true,
+   "error": null,
+   "ms": 228
+  },
+  {
+   "id": "D2.3",
+   "group": "Defect 2: pa_strength_hist",
+   "title": "pa_strength_hist records still receive history-record validation (non-list rejected)",
+   "pass": true,
+   "error": null,
+   "ms": 230
+  },
+  {
+   "id": "D3.1",
+   "group": "Defect 3: cluster-split notes",
+   "title": "Cluster-split note with < and > logged through the real workout UI backs up and restores",
+   "pass": true,
+   "error": null,
+   "ms": 733
+  },
+  {
+   "id": "D3.2",
+   "group": "Defect 3: cluster-split notes",
+   "title": "Markup typed as a cluster-split note is shown as text and never rendered as HTML after reload/resume",
+   "pass": true,
+   "error": null,
+   "ms": 650
+  },
+  {
+   "id": "D3.3",
+   "group": "Defect 3: cluster-split notes",
+   "title": "Markup in other history text (exercise name) is still rejected",
+   "pass": true,
+   "error": null,
+   "ms": 228
+  },
+  {
+   "id": "D3.4",
+   "group": "Defect 3: cluster-split notes",
+   "title": "Cluster-split notes must be text without control characters",
+   "pass": true,
+   "error": null,
+   "ms": 358
+  },
+  {
+   "id": "D4.1",
+   "group": "Defect 4: rollback snapshots",
+   "title": "Pre-restore snapshot downloaded from the UI is itself a restorable backup that recovers the original data exactly",
+   "pass": true,
+   "error": null,
+   "ms": 603
+  },
+  {
+   "id": "D4.2",
+   "group": "Defect 4: rollback snapshots",
+   "title": "Two consecutive restores keep two recovery generations; the older one is downloadable from the UI",
+   "pass": true,
+   "error": null,
+   "ms": 598
+  },
+  {
+   "id": "D4.3",
+   "group": "Defect 4: rollback snapshots",
+   "title": "Restore that fails mid-write (real browser storage quota) leaves data AND existing snapshots unchanged, with a clear error",
+   "pass": true,
+   "error": null,
+   "ms": 786
+  },
+  {
+   "id": "D4.4",
+   "group": "Defect 4: rollback snapshots",
+   "title": "When no rollback snapshot can be stored, restore is refused before anything changes, with a clear error",
+   "pass": true,
+   "error": null,
+   "ms": 774
+  },
+  {
+   "id": "D4.5",
+   "group": "Defect 4: rollback snapshots",
+   "title": "When space allows only one generation, the older generation is dropped (not the newest) and restore proceeds",
+   "pass": true,
+   "error": null,
+   "ms": 541
+  },
+  {
+   "id": "D4.6",
+   "group": "Defect 4: rollback snapshots",
+   "title": "A snapshot left by HQ 2.3 (bare key map) is still downloadable as a restorable backup and is kept as the older generation",
+   "pass": true,
+   "error": null,
+   "ms": 533
+  },
+  {
+   "id": "D5.1",
+   "group": "Defect 5: legacy drafts",
+   "title": "Backup containing a legacy draft without clusters validates and restores byte-identically",
+   "pass": true,
+   "error": null,
+   "ms": 323
+  },
+  {
+   "id": "D5.2",
+   "group": "Defect 5: legacy drafts",
+   "title": "Legacy draft without clusters resumes in the real UI; Myo-Reps stages render and ADD MINI-SET works without errors",
+   "pass": true,
+   "error": null,
+   "ms": 630
+  },
+  {
+   "id": "D5.3",
+   "group": "Defect 5: legacy drafts",
+   "title": "Sessions with malformed clusters are still rejected",
+   "pass": true,
+   "error": null,
+   "ms": 373
+  },
+  {
+   "id": "D6.1",
+   "group": "Defect 6: OS escaping",
+   "title": "OS text already in storage (including values the validator would reject) is escaped on Home and all 15 OS screens",
+   "pass": true,
+   "error": null,
+   "ms": 4604
+  },
+  {
+   "id": "D6.2",
+   "group": "Defect 6: OS escaping",
+   "title": "Imported OS backup with markup in every text field restores, displays literally, and never executes",
+   "pass": true,
+   "error": null,
+   "ms": 4818
+  },
+  {
+   "id": "N1",
+   "group": "Normal data",
+   "title": "Full realistic dataset (all storage keys) round-trips byte-identically via UI export → import → restore; unrelated keys preserved",
+   "pass": true,
+   "error": null,
+   "ms": 536
+  },
+  {
+   "id": "N2",
+   "group": "Normal data",
+   "title": "Specialized methods (Myo-Reps, DC Rest-Pause efforts, cluster sets, primer, activator, strength/intensifier preferences) survive restore and render",
+   "pass": true,
+   "error": null,
+   "ms": 466
+  },
+  {
+   "id": "N3",
+   "group": "Normal data",
+   "title": "OS data: defaults, fully populated, and older/partial OS shapes all validate; OS screens render",
+   "pass": true,
+   "error": null,
+   "ms": 5394
+  },
+  {
+   "id": "N4",
+   "group": "Normal data",
+   "title": "Unfinished session restores and resumes in the real UI with its entered values",
+   "pass": true,
+   "error": null,
+   "ms": 419
+  },
+  {
+   "id": "N5",
+   "group": "Normal data",
+   "title": "Unknown pa_ key in storage does not make the exported backup unrestorable, and restore leaves it untouched",
+   "pass": true,
+   "error": null,
+   "ms": 467
+  },
+  {
+   "id": "N6",
+   "group": "Normal data",
+   "title": "Export warns clearly when stored data cannot pass this version's restore validation (file is still downloaded)",
+   "pass": true,
+   "error": null,
+   "ms": 340
+  },
+  {
+   "id": "N7",
+   "group": "Normal data",
+   "title": "After restore, the app reloads offline from the service worker with restored data intact",
+   "pass": true,
+   "error": null,
+   "ms": 408
+  },
+  {
+   "id": "N8",
+   "group": "Normal data",
+   "title": "App starts without script errors and makes no external network requests",
+   "pass": true,
+   "error": null,
+   "ms": 4637
+  },
+  {
+   "id": "M",
+   "group": "Malicious imports",
+   "title": "Every malicious or malformed import is rejected in the UI (no RESTORE button) and storage stays byte-identical",
+   "pass": true,
+   "error": null,
+   "ms": 5124,
+   "cases": [
+    {
+     "id": "M01",
+     "label": "__proto__ storage key at data root",
+     "ok": true,
+     "message": "Unrecognized or oversized backup entry: __proto__"
+    },
+    {
+     "id": "M02",
+     "label": "__proto__ key inside a lifting record",
+     "ok": true,
+     "message": "Invalid field"
+    },
+    {
+     "id": "M03",
+     "label": "constructor key nested in OS state",
+     "ok": true,
+     "message": "Invalid Project America OS state: unsafe field name."
+    },
+    {
+     "id": "M04",
+     "label": "prototype key inside session forms",
+     "ok": true,
+     "message": "Invalid field"
+    },
+    {
+     "id": "M05",
+     "label": "unknown pa_ storage key",
+     "ok": true,
+     "message": "Unrecognized or oversized backup entry: pa_evil"
+    },
+    {
+     "id": "M06",
+     "label": "non-Project-America storage key",
+     "ok": true,
+     "message": "Unrecognized or oversized backup entry: evil"
+    },
+    {
+     "id": "M07",
+     "label": "rollback key smuggled into backup",
+     "ok": true,
+     "message": "Unrecognized or oversized backup entry: pa_restore_rollback"
+    },
+    {
+     "id": "M08",
+     "label": "non-string storage value",
+     "ok": true,
+     "message": "Unrecognized or oversized backup entry: pa_week_mode"
+    },
+    {
+     "id": "M09",
+     "label": "oversized entry (>10M chars)",
+     "ok": true,
+     "message": "Unrecognized or oversized backup entry: pa_current_session"
+    },
+    {
+     "id": "M10",
+     "label": "excessive nesting in a record",
+     "ok": true,
+     "message": "Backup nesting too deep"
+    },
+    {
+     "id": "M11",
+     "label": "invalid JSON in history list",
+     "ok": true,
+     "message": "Backup entry pa_hist is not valid JSON."
+    },
+    {
+     "id": "M12",
+     "label": "script markup in exercise name",
+     "ok": true,
+     "message": "Invalid text in pa_hist"
+    },
+    {
+     "id": "M13",
+     "label": "session id crafted to break out of onclick",
+     "ok": true,
+     "message": "Invalid session record"
+    },
+    {
+     "id": "M14",
+     "label": "session with unknown template",
+     "ok": true,
+     "message": "Invalid session record"
+    },
+    {
+     "id": "M15",
+     "label": "session clusters count out of range",
+     "ok": true,
+     "message": "Invalid effort count"
+    },
+    {
+     "id": "M16",
+     "label": "OS invalid operating mode",
+     "ok": true,
+     "message": "Invalid Project America OS state: unknown operating mode."
+    },
+    {
+     "id": "M17",
+     "label": "OS readiness out of range",
+     "ok": true,
+     "message": "Invalid Project America OS state: readiness.sleep must be 1–5."
+    },
+    {
+     "id": "M18",
+     "label": "OS unknown top-level field",
+     "ok": true,
+     "message": "Invalid Project America OS state: unsupported field OS state.injected."
+    },
+    {
+     "id": "M19",
+     "label": "OS unknown test key",
+     "ok": true,
+     "message": "Invalid Project America OS state: unsupported field tests.evil."
+    },
+    {
+     "id": "M20",
+     "label": "OS gym equipment not in catalog",
+     "ok": true,
+     "message": "Invalid Project America OS state: invalid gym profile."
+    },
+    {
+     "id": "M21",
+     "label": "OS activeGym out of range",
+     "ok": true,
+     "message": "Invalid Project America OS state: activeGym out of range."
+    },
+    {
+     "id": "M22",
+     "label": "OS control characters in text",
+     "ok": true,
+     "message": "Invalid Project America OS state: text is too long or contains control characters."
+    },
+    {
+     "id": "M23",
+     "label": "OS non-finite number (1e999)",
+     "ok": true,
+     "message": "Invalid Project America OS state: number out of range."
+    },
+    {
+     "id": "M24a",
+     "label": "OS root is an array",
+     "ok": true,
+     "message": "Invalid Project America OS state: OS state must be an object."
+    },
+    {
+     "id": "M24b",
+     "label": "OS root is null",
+     "ok": true,
+     "message": "Invalid Project America OS state: OS state must be an object."
+    },
+    {
+     "id": "M24c",
+     "label": "OS root is a string",
+     "ok": true,
+     "message": "Invalid Project America OS state: OS state must be an object."
+    },
+    {
+     "id": "M25",
+     "label": "OS invalid JSON",
+     "ok": true,
+     "message": "Invalid Project America OS state: not valid JSON."
+    },
+    {
+     "id": "M26",
+     "label": "OS experiment status not OBSERVE",
+     "ok": true,
+     "message": "Invalid Project America OS state: unknown experiment status."
+    },
+    {
+     "id": "M27",
+     "label": "OS skill progress out of range",
+     "ok": true,
+     "message": "Invalid Project America OS state: skill.SPEED out of range."
+    },
+    {
+     "id": "M28",
+     "label": "OS friction with unknown session",
+     "ok": true,
+     "message": "Invalid Project America OS state: invalid friction entry."
+    },
+    {
+     "id": "M29a",
+     "label": "wrong backup format",
+     "ok": true,
+     "message": "Choose a full Project America backup. Old lifting-only exports cannot restore the full app."
+    },
+    {
+     "id": "M29b",
+     "label": "unsupported backup version",
+     "ok": true,
+     "message": "Choose a full Project America backup. Old lifting-only exports cannot restore the full app."
+    },
+    {
+     "id": "M29c",
+     "label": "old lifting-only export (array)",
+     "ok": true,
+     "message": "Choose a full Project America backup. Old lifting-only exports cannot restore the full app."
+    },
+    {
+     "id": "M29d",
+     "label": "not JSON at all",
+     "ok": true,
+     "message": "This file is not valid JSON. Choose a Project America full backup (.json)."
+    },
+    {
+     "id": "M30",
+     "label": "strength preference with unknown method",
+     "ok": true,
+     "message": "Unknown strength method"
+    },
+    {
+     "id": "M31",
+     "label": "movement preference not in exercise catalog",
+     "ok": true,
+     "message": "Unknown movement preference"
+    },
+    {
+     "id": "M32",
+     "label": "OS string beyond per-field limit",
+     "ok": true,
+     "message": "Invalid Project America OS state: text is too long or contains control characters."
+    },
+    {
+     "id": "M33",
+     "label": "OS excessive nesting",
+     "ok": true,
+     "message": "Invalid Project America OS state: nested too deeply."
+    },
+    {
+     "id": "M34",
+     "label": "invalid active block",
+     "ok": true,
+     "message": "Invalid active block"
+    },
+    {
+     "id": "M35",
+     "label": "OS technique for unknown exercise",
+     "ok": true,
+     "message": "Invalid Project America OS state: invalid technique entry."
+    },
+    {
+     "id": "M36",
+     "label": "unsafe key name with control characters in OS",
+     "ok": true,
+     "message": "Invalid Project America OS state: unsafe field name."
+    }
+   ]
+  },
+  {
+   "id": "M37",
+   "group": "Malicious imports",
+   "title": "A previewed backup that is modified before RESTORE is re-validated and refused; storage unchanged",
+   "pass": true,
+   "error": null,
+   "ms": 338
+  }
+ ]
+}
