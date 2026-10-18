@@ -180,6 +180,16 @@ test('D4.5','Defect 4: rollback snapshots','When space allows only one generatio
  assert(!(ROLLBACK2 in s),'scenario did not exercise the one-generation fallback: '+JSON.stringify(sizes));
 });
 
+test('D4.6','Defect 4: rollback snapshots','A snapshot left by HQ 2.3 (bare key map) is still downloadable as a restorable backup and is kept as the older generation',async p=>{
+ const A=await isolatedDataset(p),B={pa_hist:'[]',pa_week_mode:'busy'};
+ await seed(p,{...B,[ROLLBACK1]:JSON.stringify(A)});
+ await openBackupPage(p);const snap=await p.download(()=>p.click('button','DOWNLOAD PRE-RESTORE SNAPSHOT'));
+ const file=JSON.parse(fs.readFileSync(snap.file,'utf8'));assert.strictEqual(file.format,'project-america-full-backup');assert.deepStrictEqual(file.data,A);
+ assert((await importViaUI(p,snap.file)).canRestore,'legacy snapshot not restorable');
+ await restoreFile(p,payload({pa_hist:'[]',pa_week_mode:'extra'}));const s=await storage(p);
+ assert.deepStrictEqual(await snapshotJSON(s[ROLLBACK1]),B);assert.deepStrictEqual(await snapshotJSON(s[ROLLBACK2]),A);
+});
+
 // =====================================================================
 // DEFECT 5 — legacy drafts missing clusters
 // =====================================================================

@@ -76,9 +76,13 @@ class Page{
  async type(selector,value){await this.eval(sel=>{const el=document.querySelector(sel);el.scrollIntoView({block:'center'});el.focus();el.select?.()},selector);await this.send('Input.insertText',{text:value})}
  async setFile(selector,file){const {root}=await this.send('DOM.getDocument',{depth:-1,pierce:true});const {nodeId}=await this.send('DOM.querySelector',{nodeId:root.nodeId,selector});if(!nodeId)throw Error('No file input '+selector);await this.send('DOM.setFileInputFiles',{nodeId,files:[file]})}
  async download(trigger){
-  const begin=this.b.waitFor(m=>m.method==='Browser.downloadWillBegin',15000,'download start');await trigger();const {params:{guid,suggestedFilename}}=await begin;
-  await this.b.waitFor(m=>m.method==='Browser.downloadProgress'&&m.params.guid===guid&&m.params.state==='completed',15000,'download complete');
-  return {file:path.join(this.downloadDir,guid),name:suggestedFilename};
+  // Completion can arrive before trigger() resolves for small files, so record it from the start.
+  const done=new Set();const off=this.b.on(m=>{if(m.method==='Browser.downloadProgress'&&m.params.state==='completed')done.add(m.params.guid)});
+  try{
+   const begin=this.b.waitFor(m=>m.method==='Browser.downloadWillBegin',15000,'download start');await trigger();const {params:{guid,suggestedFilename}}=await begin;
+   const end=Date.now()+15000;while(!done.has(guid)){if(Date.now()>end)throw Error('Timed out waiting for download complete');await new Promise(r=>setTimeout(r,25))}
+   return {file:path.join(this.downloadDir,guid),name:suggestedFilename};
+  }finally{off()}
  }
  async offline(on){await this.send('Network.emulateNetworkConditions',{offline:on,latency:0,downloadThroughput:-1,uploadThroughput:-1})}
  async close(){try{await this.b.send('Target.disposeBrowserContext',{browserContextId:this.contextId})}catch{}}
