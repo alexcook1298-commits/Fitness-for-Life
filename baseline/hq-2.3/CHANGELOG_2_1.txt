@@ -1,0 +1,18 @@
+PROJECT AMERICA HQ 2.1 — ADAPTIVE LIFE LAYER
+
+Built directly on 2.0.
+
+ADDED
+- Adaptive Session: time/equipment/intensity constraint handling with KEEP / TRADE / CUT transparency.
+- Schedule Negotiator: realistic weekly availability planning that protects Giant A/B first.
+- Gym Profiles for primary, home, hotel, and travel equipment contexts.
+- Friction Log + repeated-constraint guidance.
+- Progress Story for real-life capability wins.
+- Technique Journal for movement-specific cues and observations.
+- Coach Handoff copy/export summary.
+
+PRESERVED
+- Mission Command, Digital Athlete, readiness governor, Training Budget, North Star skill trees, Combine, Experiment Lab, Program Simulator, AAR, Giant A/B/C, Methods Arsenal, activators, final-set intensifiers, loaded stretches, COMPACT/MED, cardio, mobility, data backup and offline/PWA behavior.
+
+DESIGN RULE
+The app does the bookkeeping. You do the training. No mystery AI; recommendations remain traceable to rules and stored inputs.

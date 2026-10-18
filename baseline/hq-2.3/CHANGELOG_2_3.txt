@@ -1,0 +1,14 @@
+PROJECT AMERICA HQ 2.3 — TRAINING ARCHITECTURE UPDATE
+
+- Giant A method defaults updated:
+  - Bench Press: heavy primer single + paused top set/back-offs
+  - Chest-supported row: clusters
+  - Hack/leg press: top set + back-offs
+  - Leg curl: Myo-Reps
+  - Laterals: Myo by default, FST-7 selectable
+  - Pull-ups: clusters
+  - Farmer carry: load/distance progression; density remains optional
+- Added permanent optional Giant B — Upper and Giant B — Lower templates for extra-time weeks.
+- Extra-time B split is intensifier-forward with movement-matched defaults.
+- Normal Giant B remains intact.
+- Offline cache and backup metadata updated to 2.3.
