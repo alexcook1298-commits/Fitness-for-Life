@@ -1,0 +1,21 @@
+Project America HQ 2.3 — authoritative baseline
+Source archive: Project_America_HQ_2_3.zip (uploaded as Project_America_HQ_2_3_61a8.zip)
+Archive SHA-256: b42ac938d99e7d6f74a14a2108606386a4a3999ddab01a7a76534eadd72394f4
+Reference-only candidate archive SHA-256: 05a5cbf95ad61be0d31da783400c59b37e5244a7ea95d192d8d1e6f0b7dfb34f
+
+Per-file SHA-256 of the extracted baseline (baseline/hq-2.3, read-only):
+949d183c075b80b5269e5461596d98b84cf1a9a2b71f6941c9b0d7e7491a653c  ./CHANGELOG_2_0.txt
+47080335ac87f18789485e3c9ad6022f3d58a4a0cee0ed9f5d6719393bf1b489  ./CHANGELOG_2_1.txt
+41b312ed00b0e4adfb6e6762a06f804049ccad4efff7f55085eed981584b6bc4  ./CHANGELOG_2_2.txt
+298fb8b0cdf34af686fdefd258b9b86663aae77c6c8d20f1278005c9c4761a30  ./CHANGELOG_2_3.txt
+b1ee26e926f6dd7b4b1b33c9a4d3e0b89c04d15a69d9dd14add6aad59a385534  ./CHANGELOG_V1_18.txt
+199e69a136f12e7a756e4b5292316369bb56c9a7ae796110419dc1aca4590ba9  ./_headers
+f19d332c200bd2941738472771d77b88f1887c30cc6d367846a3727f301a59d9  ./icons/apple-touch-icon.png
+953e25634120078a6f43b94950853bf14f9bbea62a3186aadd4547fc9d27a9f4  ./icons/icon-192.png
+d03c0f9f7116dc642caae9e00618feb2366cb538f181e43cb9b5f3f1f4be7893  ./icons/icon-512.png
+d03c0f9f7116dc642caae9e00618feb2366cb538f181e43cb9b5f3f1f4be7893  ./icons/maskable-512.png
+93fc2f462bd2b78b999935765f5eea5d3a021a5e031c9414ebb961285c1455ec  ./index.html
+73abce60a5ef7d137102b8013bcef1f7bb5d2131c0b2e64fdda72c5680435863  ./install.js
+3fb0615f953ec1ff4569f5204aff52b443ccfcac23ae461b769078ebbc5d3f5a  ./manifest.webmanifest
+142f5790a78da87794da19dd30dc73dcc15c688126fc65039246d814988b7315  ./README.txt
+da225cdbb03a5eb7aa34060fbcb1369e2d6749b7436cc97ebdace81fe1e2a8f4  ./sw.js

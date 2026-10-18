@@ -1,0 +1,14 @@
+PROJECT AMERICA HQ 2.2 — METHOD OPTIMIZATION
+
+- Giant A strength methods are now movement/variant specific.
+- Bench Press defaults to paused strength work; chest-supported rows to top-set + back-offs; pull-up variants to clusters; carries to density progression.
+- Giant B hypertrophy methods are now movement/variant specific.
+- Incline DB press defaults to straight work; machine/Smith incline press can use Myo-Reps.
+- Pulldown / assisted pull-up prefer Rest-Pause. RDL remains straight sets only.
+- Rear delts prefer Myo-Reps; biceps DC Rest-Pause; triceps Myo-Reps.
+- Widowmaker is rotated rather than prescribed every week.
+- Giant B now automatically rotates a 1–2 movement serious-intensifier budget across sessions unless the user saved a custom default.
+- Lateral raises default to Myo-Reps; FST-7 remains available as an occasional specialization option.
+- The workout card now shows OPTIMAL MATCH and explains when a compatible intensifier is intentionally rotated off today.
+- Existing user-saved method defaults remain authoritative.
+- Offline cache and backup metadata updated to 2.2.

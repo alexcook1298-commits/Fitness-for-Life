@@ -1,0 +1,99 @@
+Project America backup/restore regression suite
+App under test: Project_America_Backup_Repair_Candidate.zip → candidate/ (reference only)
+Browser: headless Chrome via DevTools protocol
+
+FAIL D1.1  Full backup containing saved OS state (pa_os_v2) exported from the UI is accepted and restored byte-identically
+      → Backup rejected: Unknown strength method
+FAIL D1.2  Older full backup without pa_os_v2 still restores and leaves no OS key behind
+      → Valid backup was not accepted: Unknown strength method
+FAIL D2.1  Heavy primer logged through the real Giant A UI produces a backup that validates and restores
+      → Backup rejected: Unknown strength method
+PASS D2.2  Strength-method preference keys are still validated (unknown method rejected)
+PASS D2.3  pa_strength_hist records still receive history-record validation (non-list rejected)
+FAIL D3.1  Cluster-split note with < and > logged through the real workout UI backs up and restores
+      → Backup rejected: Invalid text in pa_hist
+PASS D3.2  Markup typed as a cluster-split note is shown as text and never rendered as HTML after reload/resume
+PASS D3.3  Markup in other history text (exercise name) is still rejected
+PASS D3.4  Cluster-split notes must be text without control characters
+FAIL D4.1  Pre-restore snapshot downloaded from the UI is itself a restorable backup that recovers the original data exactly
+      → Snapshot rejected: Unknown strength method
+FAIL D4.2  Two consecutive restores keep two recovery generations; the older one is downloadable from the UI
+      → older generation was overwritten/lost
+FAIL D4.3  Restore that fails mid-write (real browser storage quota) leaves data AND existing snapshots unchanged, with a clear error
+      → storage changed after failed restore | + actual - expected |  |   { |     pa_hist: '[]', | +   pa_restore_rollback: '{"pa_hist":"[]","pa_week_mode":"busy"}',
+FAIL D4.4  When no rollback snapshot can be stored, restore is refused before anything changes, with a clear error
+      → unclear error: Restore failed; original data was retained. Failed to execute 'setItem' on 'Storage': Setting the value of 'pa_restore_rollback' exceeded the quota.
+FAIL D4.5  When space allows only one generation, the older generation is dropped (not the newest) and restore proceeds
+      → Restore did not complete: Restore failed; original data was retained. Failed to execute 'setItem' on 'Storage': Setting the value of 'pa_restore_rollback' exceeded the quota.
+FAIL D4.6  A snapshot left by HQ 2.3 (bare key map) is still downloadable as a restorable backup and is kept as the older generation
+      → "undefined" is not valid JSON
+FAIL D5.1  Backup containing a legacy draft without clusters validates and restores byte-identically
+      → Rejected: Invalid session record
+FAIL D5.2  Legacy draft without clusters resumes in the real UI; Myo-Reps stages render and ADD MINI-SET works without errors
+      → page errors on resume | + actual - expected |  | + [ | +   "TypeError: Cannot read properties of undefined (reading 'lift:3:Rear-Delt Fly (DB):2:Myo-Reps:')\n" + | +     '    at renderWorkSet (http://127.0.0.1:44747/:1091:39)\n' +
+PASS D5.3  Sessions with malformed clusters are still rejected
+FAIL D6.1  OS text already in storage (including values the validator would reject) is escaped on Home and all 15 OS screens
+      → markup executed/injected: {"home":{"pwned":["tests.forty","tests.forty"],"injected":2},"athlete":{"pwned":["tests.pullup","tests.zone2","tests.rope","tests.vertical","tests.hang","tests.forty","bodyweight"],"injected":9},"readiness":{"pwned":[],"injected":2},"capability":{"pwned":[],"injected":2},"combine":{"pwned":["combine.vertical","combine.notes","combine.mobility","combine.hang","combine.carry","combine.zone2","combine.forty"],"injected":9},"budget":{"pwned":[],"injected":2},"lab":{"pwned":["experiments.status"],"injected":3},"simulator":{"pwned":[],"injected":2},"aar":{"pwned":[],"injected":2},"adaptive":{"pwned":[],"injected":2},"schedule":{"pwned":["availability.0","tests.forty"],"injected":3},"gyms":{"pwned":[],"injected":2},"friction":{"pwned":[],"injected":2},"story":{"pwned":[],"injected":2},"technique":{"pwned":[],"injected":2},"coach":{"pwned":[],"injected":2}} | + actual - expected |  | + { | +   aar: { | +     injected: 2,
+FAIL D6.2  Imported OS backup with markup in every text field restores, displays literally, and never executes
+      → markup executed/injected: {"home":{"pwned":["tests.forty","tests.forty"],"injected":1},"athlete":{"pwned":["tests.forty","tests.rope","tests.hang","tests.zone2","tests.pullup","tests.vertical"],"injected":7},"readiness":{"pwned":[],"injected":1},"capability":{"pwned":[],"injected":1},"combine":{"pwned":["combine.notes","combine.carry","combine.mobility","combine.forty","combine.zone2","combine.hang","combine.vertical"],"injected":8},"budget":{"pwned":[],"injected":1},"lab":{"pwned":[],"injected":1},"simulator":{"pwned":[],"injected":1},"aar":{"pwned":[],"injected":1},"adaptive":{"pwned":[],"injected":1},"schedule":{"pwned":["tests.forty"],"injected":1},"gyms":{"pwned":[],"injected":1},"friction":{"pwned":[],"injected":1},"story":{"pwned":[],"injected":1},"technique":{"pwned":[],"injected":1},"coach":{"pwned":[],"injected":1}} | + actual - expected |  | + { | +   aar: { | +     injected: 1,
+FAIL N1    Full realistic dataset (all storage keys) round-trips byte-identically via UI export → import → restore; unrelated keys preserved
+      → Rejected: Unknown strength method
+FAIL N2    Specialized methods (Myo-Reps, DC Rest-Pause efforts, cluster sets, primer, activator, strength/intensifier preferences) survive restore and render
+      → Valid backup was not accepted: Unknown strength method
+FAIL N3    OS data: defaults, fully populated, and older/partial OS shapes all validate; OS screens render
+      → minimal OS shape rejected: Invalid Project America OS state
+FAIL N4    Unfinished session restores and resumes in the real UI with its entered values
+      → Valid backup was not accepted: Unknown strength method
+FAIL N5    Unknown pa_ key in storage does not make the exported backup unrestorable, and restore leaves it untouched
+      → Own export rejected: Unrecognized or oversized backup entry: pa_future_feature
+FAIL N6    Export warns clearly when stored data cannot pass this version's restore validation (file is still downloaded)
+      → no warning shown: 
+FAIL N7    After restore, the app reloads offline from the service worker with restored data intact
+      → Valid backup was not accepted: Unknown strength method
+PASS N8    App starts without script errors and makes no external network requests
+FAIL M     Every malicious or malformed import is rejected in the UI (no RESTORE button) and storage stays byte-identical
+      → Expected values to be strictly deep-equal: | + actual - expected |  | + [ | +   'M32 OS string beyond per-field limit (ACCEPTED)', | +   'M36 unsafe key name with control characters in OS (ACCEPTED)'
+        ok   M01   __proto__ storage key at data root — Unrecognized or oversized backup entry: __proto__
+        ok   M02   __proto__ key inside a lifting record — Invalid field
+        ok   M03   constructor key nested in OS state — Invalid Project America OS state
+        ok   M04   prototype key inside session forms — Invalid field
+        ok   M05   unknown pa_ storage key — Unrecognized or oversized backup entry: pa_evil
+        ok   M06   non-Project-America storage key — Unrecognized or oversized backup entry: evil
+        ok   M07   rollback key smuggled into backup — Unrecognized or oversized backup entry: pa_restore_rollback
+        ok   M08   non-string storage value — Unrecognized or oversized backup entry: pa_week_mode
+        ok   M09   oversized entry (>10M chars) — Unrecognized or oversized backup entry: pa_current_session
+        ok   M10   excessive nesting in a record — Backup nesting too deep
+        ok   M11   invalid JSON in history list — Unexpected end of JSON input
+        ok   M12   script markup in exercise name — Invalid text in pa_hist
+        ok   M13   session id crafted to break out of onclick — Invalid session record
+        ok   M14   session with unknown template — Invalid session record
+        ok   M15   session clusters count out of range — Invalid effort count
+        ok   M16   OS invalid operating mode — Invalid Project America OS state
+        ok   M17   OS readiness out of range — Invalid Project America OS state
+        ok   M18   OS unknown top-level field — Invalid Project America OS state
+        ok   M19   OS unknown test key — Invalid Project America OS state
+        ok   M20   OS gym equipment not in catalog — Invalid Project America OS state
+        ok   M21   OS activeGym out of range — Invalid Project America OS state
+        ok   M22   OS control characters in text — Invalid Project America OS state
+        ok   M23   OS non-finite number (1e999) — Invalid Project America OS state
+        ok   M24a  OS root is an array — Invalid Project America OS state
+        ok   M24b  OS root is null — Invalid Project America OS state
+        ok   M24c  OS root is a string — Invalid Project America OS state
+        ok   M25   OS invalid JSON — Unexpected end of JSON input
+        ok   M26   OS experiment status not OBSERVE — Invalid Project America OS state
+        ok   M27   OS skill progress out of range — Invalid Project America OS state
+        ok   M28   OS friction with unknown session — Invalid Project America OS state
+        ok   M29a  wrong backup format — Choose a full Project America backup. Old lifting-only exports cannot restore the full app.
+        ok   M29b  unsupported backup version — Choose a full Project America backup. Old lifting-only exports cannot restore the full app.
+        ok   M29c  old lifting-only export (array) — Choose a full Project America backup. Old lifting-only exports cannot restore the full app.
+        ok   M29d  not JSON at all — Unexpected token '<', "<html><scr"... is not valid JSON
+        ok   M30   strength preference with unknown method — Unknown strength method
+        ok   M31   movement preference not in exercise catalog — Unknown movement preference
+        FAIL M32   OS string beyond per-field limit — Backup from 2026-10-12T09:00:00.000Z. 6 lifting records; 2 sessions.Restore replaces this browser’s Project America data. Download your curr
+        ok   M33   OS excessive nesting — Invalid Project America OS state
+        ok   M34   invalid active block — Invalid active block
+        ok   M35   OS technique for unknown exercise — Invalid Project America OS state
+        FAIL M36   unsafe key name with control characters in OS — Backup from 2026-10-12T09:00:00.000Z. 6 lifting records; 2 sessions.Restore replaces this browser’s Project America data. Download your curr
+PASS M37   A previewed backup that is modified before RESTORE is re-validated and refused; storage unchanged
+
+8 passed, 22 failed, 30 total

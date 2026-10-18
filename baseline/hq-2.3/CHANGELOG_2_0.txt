@@ -1,0 +1,6 @@
+PROJECT AMERICA HQ 2.0
+Architecture shift: workout tracker → closed-loop Human Performance Operating System.
+
+Added Mission Command 2.0, Digital Athlete, Readiness Governor, operating modes, Evidence Threshold, Training Budget, North Star skill trees, Combine, Experiment Lab, Program Simulator, and After Action Review.
+
+No automatic master-template rewrites were introduced. V1.18 workout execution and stored-data architecture remain preserved.
