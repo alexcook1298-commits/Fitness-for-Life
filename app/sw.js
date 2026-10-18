@@ -1,4 +1,4 @@
-const CACHE='project-america-shell-v2-3-training-20261006';
+const CACHE='project-america-shell-v2-3-backup-repair-20261018';
 const FILES=['/','/index.html','/install.js','/manifest.webmanifest','/icons/icon-192.png','/icons/icon-512.png','/icons/maskable-512.png','/icons/apple-touch-icon.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
 // Do not take over a running workout until the user saves and updates.

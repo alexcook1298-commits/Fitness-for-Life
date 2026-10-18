@@ -169,7 +169,8 @@ test('D4.5','Defect 4: rollback snapshots','When space allows only one generatio
  const sizes=await p.eval(()=>{
   const n=baseSlots.a[0][1][0],mk=(tag,count)=>{const h=[];for(let i=0;i<count;i++)h.push({id:tag+i,sessionId:tag,name:n,intensifier:'Straight Sets',w:100,reps:5,rir:2,date:'2026-10-01T12:00:00.000Z',pad:'z'.repeat(80)});return JSON.stringify(h)};
   const wrap=data=>JSON.stringify({format:'project-america-full-backup',version:1,appVersion:'2.3',createdAt:'2026-10-01T00:00:00.000Z',data});
-  localStorage.clear();localStorage.setItem('pa_hist',mk('cur',11000));localStorage.setItem('pa_restore_rollback',wrap({pa_hist:mk('g1',4000)}));localStorage.setItem('pa_restore_rollback_2',wrap({pa_hist:mk('g2',5000)}));
+  // ~238 chars/record; quota ~5.24M chars. current+snapshot (~4.55M) fits only once the older generation (~1.07M) is dropped.
+  localStorage.clear();localStorage.setItem('pa_hist',mk('cur',9000));localStorage.setItem('pa_restore_rollback',wrap({pa_hist:mk('g1',3500)}));localStorage.setItem('pa_restore_rollback_2',wrap({pa_hist:mk('g2',4000)}));
   return Object.keys(localStorage).map(k=>[k,localStorage.getItem(k).length]);
  });
  await p.reload();const current=(await storage(p)).pa_hist;
