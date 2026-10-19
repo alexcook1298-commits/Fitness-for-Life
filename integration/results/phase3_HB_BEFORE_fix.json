@@ -1,0 +1,80 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T19:50:25.240Z",
+ "passed": 5,
+ "failed": 4,
+ "results": [
+  {
+   "id": "HB1",
+   "group": "HB",
+   "title": "Tag-lookalike text that no HTML element could be built from (<Z2>, <easy>, \"HR <Z2> and <Z3>\") is accepted by backup validation in every cardio field, exactly as stored",
+   "pass": false,
+   "error": "\"<Z2>\": Cardio entry 1, field \"pace\" looks like HTML. Use < and > only as comparison signs, for example <10:00. | + actual - expected |  | + 'Cardio entry 1, field \"pace\" looks like HTML. Use < and > only as comparison signs, for example <10:00.'",
+   "ms": 275
+  },
+  {
+   "id": "HB2",
+   "group": "HB",
+   "title": "The same text can be logged through the cardio form and is stored exactly as typed (logging and import judge text identically)",
+   "pass": false,
+   "error": "\"<Z2>\" not saved: Cardio field \"pace\" looks like HTML. Use < and > only as comparison signs, for example <10:00. |  | 0 !== 1 | ",
+   "ms": 276
+  },
+  {
+   "id": "HB3",
+   "group": "HB",
+   "title": "A historical cardio record containing such text restores from a backup file byte-for-byte, through the real preview and restore buttons",
+   "pass": false,
+   "error": "restore refused: Cardio entry 1, field \"pace\" looks like HTML. Use < and > only as comparison signs, for example <10:00.",
+   "ms": 308
+  },
+  {
+   "id": "HB4",
+   "group": "HB",
+   "title": "Real HTML is still refused at import AND at logging: every real element name, comments, processing instructions, doctype, CDATA, and lookalikes that nest a real element",
+   "pass": true,
+   "error": null,
+   "ms": 395
+  },
+  {
+   "id": "HB5",
+   "group": "HB",
+   "title": "A lookalike carrying ANY attribute or tag-syntax trick (event handlers, bare attributes, slash tricks, tab-separated attributes, custom-element names) is refused",
+   "pass": true,
+   "error": null,
+   "ms": 191
+  },
+  {
+   "id": "HB6",
+   "group": "HB",
+   "title": "Stored lookalike text is inert wherever the app can show it: literal text in the cardio PREVIOUS line and no element anywhere in the document is ever created from it",
+   "pass": false,
+   "error": "PREVIOUS • OUTDOOR • CONDITIONINGNo previous session on this machine for this mode.",
+   "ms": 474
+  },
+  {
+   "id": "HB7",
+   "group": "HB",
+   "title": "Judging text never executes or loads it: validating real-HTML payloads sets no flag and makes no network request",
+   "pass": true,
+   "error": null,
+   "ms": 545
+  },
+  {
+   "id": "HB8",
+   "group": "HB",
+   "title": "Nothing else about import validation is relaxed: control characters, over-long text, bad keys and non-text values are still refused, and < or > is still refused in every other record type",
+   "pass": true,
+   "error": null,
+   "ms": 165
+  },
+  {
+   "id": "HB9",
+   "group": "HB",
+   "title": "Original data is preserved: refusing a file with real HTML changes nothing; restoring a lookalike file does not rewrite or escape any value; existing cardio history is untouched by validation",
+   "pass": true,
+   "error": null,
+   "ms": 256
+  }
+ ]
+}

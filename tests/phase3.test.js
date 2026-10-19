@@ -292,6 +292,73 @@ test('BX8','Reporting is read-only and does not alter any record',async p=>{
  await p.eval(()=>{budgetExposure();renderBudgetPage();coachSummary()});assert.deepStrictEqual(await storage(p),before);
 });
 
+// =====================================================================
+// HB — historical cardio records containing tag-like text (Priority 5)
+// =====================================================================
+async function openCardio(p,machine='Outdoor'){await p.eval(()=>start('conditioning'));await p.click('#exs .machine-btn',machine);return p.eval(()=>document.querySelector('#exs [data-cardio]').dataset.cardio)}
+async function typeCardio(p,field,value){await p.eval(f=>{const i=document.querySelector(`#exs [data-cardio] input[data-field="${f}"]`);i.scrollIntoView({block:'center'});i.focus();i.select()},field);await p.send('Input.insertText',{text:value})}
+async function saveCardioUI(p){await clearNotice(p);await p.click('#exs button.save-cardio')}
+const cardioHist=p=>p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'));
+async function openBackupPage(p){await p.click('#n-more');await p.click('button.moreitem[onclick="morePage(\'data\')"]');await p.waitForFunction('!!document.querySelector("#morepage input[type=file]")')}
+async function importFile(p,file){await openBackupPage(p);await p.eval('document.getElementById("importPreview").textContent=""');await p.setFile('#morepage input[type=file]',file);await p.waitForFunction('document.getElementById("importPreview").textContent.trim().length>0',20000);return p.eval(()=>({text:document.getElementById('importPreview').textContent,can:[...document.querySelectorAll('#importPreview button')].some(b=>/RESTORE THIS BACKUP/i.test(b.textContent))}))}
+async function restoreUI(p){const re=p.waitForLoad(30000).then(()=>true,()=>false);await p.click('button','RESTORE THIS BACKUP');const ok=await re;if(ok)await p.waitForFunction('typeof validateBackup==="function"&&document.readyState==="complete"');return ok}
+const bkWrap=data=>({format:'project-america-full-backup',version:1,appVersion:'2.3',createdAt:'2026-10-12T09:00:00.000Z',data});
+const cardioRec=(data,extra={})=>({id:'s1|Outdoor|conditioning',sessionId:'s1',date:'2026-10-10T12:00:00.000Z',machine:'Outdoor',mode:'conditioning',data,...extra});
+const backupWith=records=>bkWrap({pa_cardio_hist:JSON.stringify(records)});
+const validates=(p,records)=>p.eval(b=>{try{validateBackup(b);return 'ok'}catch(e){return e.message}},backupWith(records));
+const LOOKALIKE=['<Z2>','<easy>','</easy>','HR <Z2> and <Z3>','<x1>','<Z2/>','pace <fast> then <slow>','<Zone2>','a<b>c','<Z2><Z3>x</Z3></Z2>'];
+const REAL_HTML=['<b>','<B>x','<i>x</i>','<u>','<img src=x onerror=window.__pwn=1>','<a href="javascript:window.__pwn=1">x</a>','<script>window.__pwn=1</script>','<style>*{}</style>','<svg onload=window.__pwn=1>','<math>','<iframe src=x>','<form>','<input>','<button>','<video src=x>','<details open ontoggle=window.__pwn=1>','<template>','<noscript>','<font>','<center>','<marquee>','<textarea>','<select>','<table>','<p>','<div>','<span>','<br>','<h1>','<!-- c -->','<?php x ?>','<!DOCTYPE html>','<![CDATA[x]]>','<Z2><b>','<easy><img src=x>'];
+const SYNTAX_TRICKS=['<Z2 onclick=window.__pwn=1>','<Z2 a>','<Z2/onload=window.__pwn=1>','<Z2 x="1">','<zone-2>','<x-foo>','<easy\tclass=x>','<Z2 onmouseover="window.__pwn=1">'];
+
+test('HB1','Tag-lookalike text that no HTML element could be built from (<Z2>, <easy>, "HR <Z2> and <Z3>") is accepted by backup validation in every cardio field, exactly as stored',async p=>{
+ for(const v of LOOKALIKE){const r=await validates(p,[cardioRec({pace:v,hr:v,notes:v})]);assert.strictEqual(r,'ok',JSON.stringify(v)+': '+r)}
+});
+test('HB2','The same text can be logged through the cardio form and is stored exactly as typed (logging and import judge text identically)',async p=>{
+ await openCardio(p,'Outdoor');
+ for(const v of ['<Z2>','HR <Z2> and <Z3>','<easy>']){await p.eval(()=>{localStorage.pa_cardio_hist='[]'});await clearNotice(p);await typeCardio(p,'pace',v);await saveCardioUI(p);
+  const h=await cardioHist(p);assert.strictEqual(h.length,1,JSON.stringify(v)+' not saved: '+await notice(p));assert.strictEqual(h[0].data.pace,v)}
+});
+test('HB3','A historical cardio record containing such text restores from a backup file byte-for-byte, through the real preview and restore buttons',async p=>{
+ const recs=[cardioRec({pace:'<Z2> steady',hr:'HR <Z2> and <Z3>',notes:'<easy>'},{id:'h1'}),cardioRec({pace:'<10:00'},{id:'h2'})];const file=writeFile(backupWith(recs));
+ const r=await importFile(p,file);assert(r.can,'restore refused: '+r.text);assert(await restoreUI(p));
+ assert.strictEqual(await p.eval(()=>localStorage.pa_cardio_hist),JSON.stringify(recs));
+});
+test('HB4','Real HTML is still refused at import AND at logging: every real element name, comments, processing instructions, doctype, CDATA, and lookalikes that nest a real element',async p=>{
+ for(const v of REAL_HTML){const r=await validates(p,[cardioRec({pace:v})]);assert(r!=='ok'&&/cardio/i.test(r)&&/pace/i.test(r),JSON.stringify(v)+' -> '+r)}
+ await openCardio(p,'Outdoor');
+ for(const v of ['<b>','<img src=x onerror=window.__pwn=1>','<!-- x -->','<Z2><b>']){await p.eval(()=>{localStorage.pa_cardio_hist='[]'});await clearNotice(p);await typeCardio(p,'pace',v);await saveCardioUI(p);
+  assert.strictEqual((await cardioHist(p)).length,0,JSON.stringify(v)+' was stored')}
+ assert.strictEqual(await p.eval(()=>window.__pwn),undefined);
+});
+test('HB5','A lookalike carrying ANY attribute or tag-syntax trick (event handlers, bare attributes, slash tricks, tab-separated attributes, custom-element names) is refused',async p=>{
+ for(const v of SYNTAX_TRICKS){const r=await validates(p,[cardioRec({pace:v})]);assert(r!=='ok',JSON.stringify(v)+' accepted')}
+});
+test('HB6','Stored lookalike text is inert wherever the app can show it: literal text in the cardio PREVIOUS line and no element anywhere in the document is ever created from it',async p=>{
+ const mode=await openCardio(p,'Outdoor');await typeCardio(p,'pace','<Z2><easy>x');await saveCardioUI(p);
+ await p.eval(()=>render());await sleep(200);
+ const r=await p.eval(()=>{const t=document.querySelector('#exs .cardio-prev').textContent;const pages=[];
+  for(const f of [()=>show('home'),()=>show('train'),()=>show('progress'),()=>show('more'),()=>renderBudgetPage(),()=>renderAARPage(),()=>coachSummary()]){try{f()}catch(e){}pages.push(document.querySelectorAll('z2,easy,x1').length)}
+  return {t,els:pages,pwn:window.__pwn}});
+ assert(r.t.includes('<Z2><easy>x'),r.t);assert.deepStrictEqual(r.els,[0,0,0,0,0,0,0]);assert.strictEqual(r.pwn,undefined);
+});
+test('HB7','Judging text never executes or loads it: validating real-HTML payloads sets no flag and makes no network request',async p=>{
+ const before=p.requests.length;
+ for(const v of REAL_HTML)await validates(p,[cardioRec({pace:v})]);await sleep(300);
+ assert.strictEqual(await p.eval(()=>window.__pwn),undefined);
+ assert.deepStrictEqual(p.requests.slice(before).filter(u=>/\/x(\?|$)/.test(String(u.url||u))),[]);
+});
+test('HB8','Nothing else about import validation is relaxed: control characters, over-long text, bad keys and non-text values are still refused, and < or > is still refused in every other record type',async p=>{
+ for(const [why,rec] of Object.entries({control:cardioRec({pace:'a\u0001b'}),long:cardioRec({pace:'x'.repeat(2000)}),'bad key':cardioRec({'<b>':'1'}),proto:JSON.parse('{"id":"s1|O|c","date":"2026-10-10T12:00:00.000Z","machine":"Outdoor","mode":"conditioning","data":{"constructor":"1"}}'),object:cardioRec({pace:{a:1}}),bool:cardioRec({pace:true})})){
+  const r=await validates(p,[rec]);assert(r!=='ok',why+' accepted')}
+ const other=await p.eval(b=>{try{validateBackup(b);return 'ok'}catch(e){return e.message}},bkWrap({pa_ls_hist:JSON.stringify([{id:'x',sessionId:'s',exercise:'a<Z2>b',seconds:30,date:'2026-10-10T12:00:00.000Z'}])}));
+ assert(other!=='ok',"a lookalike was accepted in another record type's text: "+other);
+});
+test('HB9','Original data is preserved: refusing a file with real HTML changes nothing; restoring a lookalike file does not rewrite or escape any value; existing cardio history is untouched by validation',async p=>{
+ await p.eval(()=>{localStorage.pa_cardio_hist='[{"id":"keep","sessionId":"k","date":"2026-10-01T00:00:00.000Z","machine":"Outdoor","mode":"conditioning","data":{"hr":"<Z2>"}}]'});const before=await storage(p);
+ const r=await importFile(p,writeFile(backupWith([cardioRec({pace:'<b>'})])));assert(!r.can);assert.deepStrictEqual(PA(await storage(p)),PA(before));
+ assert.strictEqual(JSON.parse(await p.eval(()=>localStorage.pa_cardio_hist))[0].data.hr,'<Z2>');
+});
+
 // ---------- runner ----------
 (async()=>{
  const server=await serve(appDir),browser=await launch();ctx={browser,origin:server.origin};
