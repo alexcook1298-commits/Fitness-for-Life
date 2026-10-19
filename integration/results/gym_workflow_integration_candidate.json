@@ -1,0 +1,448 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T17:06:33.393Z",
+ "passed": 55,
+ "failed": 0,
+ "results": [
+  {
+   "id": "G1.1",
+   "group": "G1: selection & display",
+   "title": "Home lists the Block 1 core workouts and Train lists conditioning, athletic and mobility; starting Giant A from Home opens it",
+   "pass": true,
+   "error": null,
+   "ms": 462
+  },
+  {
+   "id": "G1.2",
+   "group": "G1: selection & display",
+   "title": "Giant A: exercise order, default exercises, set counts and final-set methods match the baseline effective prescription (7 slots)",
+   "pass": true,
+   "error": null,
+   "ms": 183
+  },
+  {
+   "id": "G1.3",
+   "group": "G1: selection & display",
+   "title": "Giant B rotation cycle 0: order, exercises, sets and final-set methods match the baseline effective prescription (8 slots)",
+   "pass": true,
+   "error": null,
+   "ms": 190
+  },
+  {
+   "id": "G1.4",
+   "group": "G1: selection & display",
+   "title": "Giant B rotation cycle 1: order, exercises, sets and final-set methods match the baseline effective prescription (8 slots)",
+   "pass": true,
+   "error": null,
+   "ms": 217
+  },
+  {
+   "id": "G1.5",
+   "group": "G1: selection & display",
+   "title": "Giant B rotation cycle 2: order, exercises, sets and final-set methods match the baseline effective prescription (8 slots)",
+   "pass": true,
+   "error": null,
+   "ms": 239
+  },
+  {
+   "id": "G1.6",
+   "group": "G1: selection & display",
+   "title": "Every one of the 29 templates opens without page errors and renders content",
+   "pass": true,
+   "error": null,
+   "ms": 1708
+  },
+  {
+   "id": "G1.7",
+   "group": "G1: selection & display",
+   "title": "Changing a movement from the dropdown persists to the session and survives a reload and resume",
+   "pass": true,
+   "error": null,
+   "ms": 410
+  },
+  {
+   "id": "G1.8",
+   "group": "G1: selection & display",
+   "title": "Warm-up and cool-down content is shown around the Giant A exercises",
+   "pass": true,
+   "error": null,
+   "ms": 179
+  },
+  {
+   "id": "G2.1",
+   "group": "G2: straight sets",
+   "title": "Logging a straight set through the UI writes one correctly shaped history record, marks it done and starts the rest timer",
+   "pass": true,
+   "error": null,
+   "ms": 415
+  },
+  {
+   "id": "G2.2",
+   "group": "G2: straight sets",
+   "title": "Invalid entries are refused with a message and write nothing (no reps, zero reps, negative weight, non-numeric)",
+   "pass": true,
+   "error": null,
+   "ms": 860
+  },
+  {
+   "id": "G2.3",
+   "group": "G2: straight sets",
+   "title": "Tapping a logged set again removes its record (undo), and logging again after edit stores the new values",
+   "pass": true,
+   "error": null,
+   "ms": 496
+  },
+  {
+   "id": "G2.4",
+   "group": "G2: straight sets",
+   "title": "A bodyweight movement can be logged with a blank weight (stored as null)",
+   "pass": true,
+   "error": null,
+   "ms": 476
+  },
+  {
+   "id": "G2.5",
+   "group": "G2: straight sets",
+   "title": "Every straight set of an entire Giant A can be logged through the UI; one record per set, unique ids, correct set numbers",
+   "pass": true,
+   "error": null,
+   "ms": 1831
+  },
+  {
+   "id": "G3.1",
+   "group": "G3: methods",
+   "title": "Myo-Reps: activation + mini-set logged and saved as ONE structured record with efforts, totals and volume",
+   "pass": true,
+   "error": null,
+   "ms": 488
+  },
+  {
+   "id": "G3.2",
+   "group": "G3: methods",
+   "title": "Myo-Reps with only an activation effort is refused with guidance and nothing is stored",
+   "pass": true,
+   "error": null,
+   "ms": 454
+  },
+  {
+   "id": "G3.3",
+   "group": "G3: methods",
+   "title": "Myo-Reps with a gap between efforts is refused",
+   "pass": true,
+   "error": null,
+   "ms": 509
+  },
+  {
+   "id": "G3.4",
+   "group": "G3: methods",
+   "title": "ADD MINI-SET adds an effort row and the count survives a reload/resume",
+   "pass": true,
+   "error": null,
+   "ms": 451
+  },
+  {
+   "id": "G3.5",
+   "group": "G3: methods",
+   "title": "DC Rest-Pause needs all 3 efforts: 2 efforts refused, 3 efforts saved as one structured record",
+   "pass": true,
+   "error": null,
+   "ms": 668
+  },
+  {
+   "id": "G3.6",
+   "group": "G3: methods",
+   "title": "Rest-Pause (Giant B rotation group 1, Vertical Pull) saves a 3-effort structured record",
+   "pass": true,
+   "error": null,
+   "ms": 603
+  },
+  {
+   "id": "G3.7",
+   "group": "G3: methods",
+   "title": "FST-7 (Giant B-Upper Lateral Raise): all 7 sets required; a partial block is refused; the full block saves",
+   "pass": true,
+   "error": null,
+   "ms": 732
+  },
+  {
+   "id": "G3.8",
+   "group": "G3: methods",
+   "title": "Lengthened Partials (2 stages) and Mechanical Drop Set (3 stages) save structured records in Giant B-Upper",
+   "pass": true,
+   "error": null,
+   "ms": 648
+  },
+  {
+   "id": "G3.9",
+   "group": "G3: methods",
+   "title": "Widowmaker (Giant B rotation group 2, Leg Press) logs one set record in Widowmaker mode",
+   "pass": true,
+   "error": null,
+   "ms": 432
+  },
+  {
+   "id": "G3.10",
+   "group": "G3: methods",
+   "title": "BFR can be chosen from the intensifier selector and requires all 4 sets",
+   "pass": true,
+   "error": null,
+   "ms": 596
+  },
+  {
+   "id": "G3.11",
+   "group": "G3: methods",
+   "title": "Cluster Sets (Giant A Horizontal Row) store the cluster split note and strength method on the record",
+   "pass": true,
+   "error": null,
+   "ms": 397
+  },
+  {
+   "id": "G3.12",
+   "group": "G3: methods",
+   "title": "Heavy primer (Giant A press) is stored in the strength history, separate from work sets",
+   "pass": true,
+   "error": null,
+   "ms": 338
+  },
+  {
+   "id": "G3.13",
+   "group": "G3: methods",
+   "title": "Loaded stretch hold: needs a positive time; a valid hold is stored in the stretch history",
+   "pass": true,
+   "error": null,
+   "ms": 414
+  },
+  {
+   "id": "G3.14",
+   "group": "G3: methods",
+   "title": "Activator (Giant B first slot): logged to the activator history, not to work-set history",
+   "pass": true,
+   "error": null,
+   "ms": 316
+  },
+  {
+   "id": "G3.15",
+   "group": "G3: methods",
+   "title": "Conditioning cardio entry saves one cardio record for the session",
+   "pass": true,
+   "error": null,
+   "ms": 211
+  },
+  {
+   "id": "G4.1",
+   "group": "G4: drafts & recovery",
+   "title": "Interrupted mid-workout: logged sets, typed-but-unlogged values and the chosen exercise all come back after a reload, in the SAME session (no duplicate)",
+   "pass": true,
+   "error": null,
+   "ms": 573
+  },
+  {
+   "id": "G4.2",
+   "group": "G4: drafts & recovery",
+   "title": "EXIT keeps the draft; starting the same template again resumes it instead of creating another",
+   "pass": true,
+   "error": null,
+   "ms": 624
+  },
+  {
+   "id": "G4.3",
+   "group": "G4: drafts & recovery",
+   "title": "Two different drafts (A and B) coexist; each resumes with its own data",
+   "pass": true,
+   "error": null,
+   "ms": 772
+  },
+  {
+   "id": "G4.4",
+   "group": "G4: drafts & recovery",
+   "title": "An interrupted Myo-Reps block keeps its typed efforts and effort check marks across a reload",
+   "pass": true,
+   "error": null,
+   "ms": 587
+  },
+  {
+   "id": "G4.5",
+   "group": "G4: drafts & recovery",
+   "title": "The rest timer end time is saved with the draft and resumes after a reload",
+   "pass": true,
+   "error": null,
+   "ms": 482
+  },
+  {
+   "id": "G4.6",
+   "group": "G4: drafts & recovery",
+   "title": "Session is autosaved on every input (no explicit save): typed values reach storage immediately",
+   "pass": true,
+   "error": null,
+   "ms": 209
+  },
+  {
+   "id": "G5.1",
+   "group": "G5: completion",
+   "title": "Finishing with nothing logged is refused and the session stays a draft",
+   "pass": true,
+   "error": null,
+   "ms": 362
+  },
+  {
+   "id": "G5.2",
+   "group": "G5: completion",
+   "title": "Finishing a workout marks it complete with finish time, set count, recovery and notes; the draft banner and current-session pointer are gone",
+   "pass": true,
+   "error": null,
+   "ms": 584
+  },
+  {
+   "id": "G5.3",
+   "group": "G5: completion",
+   "title": "A completed session is not resumable: starting the same template afterwards creates a new draft",
+   "pass": true,
+   "error": null,
+   "ms": 518
+  },
+  {
+   "id": "G5.4",
+   "group": "G5: completion",
+   "title": "History records carry the session id, template, block, set number, final-set flag and a valid timestamp; ids are unique",
+   "pass": true,
+   "error": null,
+   "ms": 548
+  },
+  {
+   "id": "G5.5",
+   "group": "G5: summaries",
+   "title": "After finishing A, B and Athletic through the UI, Training Budget and Coach Handoff count each exactly once with the corrected categories",
+   "pass": true,
+   "error": null,
+   "ms": 968
+  },
+  {
+   "id": "G5.6",
+   "group": "G5: summaries",
+   "title": "Progress page set count and \"Recent performance\" reflect the logged work after a reload",
+   "pass": true,
+   "error": null,
+   "ms": 626
+  },
+  {
+   "id": "G5.7",
+   "group": "G5: persistence",
+   "title": "A finished session, its records and the Home state survive refresh and reopen",
+   "pass": true,
+   "error": null,
+   "ms": 586
+  },
+  {
+   "id": "G6.1",
+   "group": "G6: distinguishing work (gap)",
+   "title": "RECORDED vs NOT RECORDED is visible while training: a logged set shows a check mark, an unlogged set shows an open circle",
+   "pass": true,
+   "error": null,
+   "ms": 365
+  },
+  {
+   "id": "G6.2",
+   "group": "G6: distinguishing work (gap)",
+   "title": "KNOWN GAP: a workout finished with ONE logged set out of ~20 is counted exactly like a full workout in Training Budget, Coach Handoff and Home",
+   "pass": true,
+   "error": null,
+   "ms": 592
+  },
+  {
+   "id": "G6.3",
+   "group": "G6: distinguishing work (gap)",
+   "title": "KNOWN GAP: there is no per-session history view; skipped exercises leave no visible trace after finishing (no record, no label)",
+   "pass": true,
+   "error": null,
+   "ms": 578
+  },
+  {
+   "id": "G6.4",
+   "group": "G6: distinguishing work (gap)",
+   "title": "INCOMPLETE is visible only as a draft: an unfinished workout is listed under \"Unfinished workouts\" with RESUME, never as a completed session",
+   "pass": true,
+   "error": null,
+   "ms": 461
+  },
+  {
+   "id": "G7.1",
+   "group": "G7: backup & restore",
+   "title": "Export after a real workflow (finished session + draft with a saved Myo block + typed value) restores in a clean profile with every stored value identical (draft updatedAt aside), and the draft resumes with its inputs",
+   "pass": true,
+   "error": null,
+   "ms": 1444
+  },
+  {
+   "id": "G7.2",
+   "group": "G7: backup & restore",
+   "title": "Malformed or hostile imports (16 cases) are rejected, the restore button never appears, and storage and the draft are unchanged afterwards (draft updatedAt aside)",
+   "pass": true,
+   "error": null,
+   "ms": 3221
+  },
+  {
+   "id": "G7.3",
+   "group": "G7: backup & restore",
+   "title": "A tampered file changed after preview is re-validated at restore time and refused with storage unchanged",
+   "pass": true,
+   "error": null,
+   "ms": 1377
+  },
+  {
+   "id": "G8.1",
+   "group": "G8: storage failure",
+   "title": "When browser storage is full, logging a set shows a clear message, writes no partial record, does not mark the set done, and works again once space is freed",
+   "pass": true,
+   "error": null,
+   "ms": 877
+  },
+  {
+   "id": "G8.2",
+   "group": "G8: storage failure",
+   "title": "If saving the finished session fails, the workout stays an unfinished draft with its records intact, and finishing succeeds after space is freed",
+   "pass": true,
+   "error": null,
+   "ms": 507
+  },
+  {
+   "id": "G8.3",
+   "group": "G8: storage failure",
+   "title": "A restore that cannot fit in storage is refused with a plain message and leaves every byte of existing data (including the draft) unchanged",
+   "pass": true,
+   "error": null,
+   "ms": 1359
+  },
+  {
+   "id": "G9.1",
+   "group": "G9: PWA / offline",
+   "title": "The service worker installs, takes control after a reload, and caches the shell under the integration cache name",
+   "pass": true,
+   "error": null,
+   "ms": 722
+  },
+  {
+   "id": "G9.2",
+   "group": "G9: PWA / offline",
+   "title": "Offline: the app reloads from cache, a workout can be started, a set logged, saved and finished with the network disabled",
+   "pass": true,
+   "error": null,
+   "ms": 1418
+  },
+  {
+   "id": "G9.3",
+   "group": "G9: PWA / offline",
+   "title": "Cache update path: an installed OLD version shows an update prompt when the new version is deployed, does NOT replace itself mid-workout, keeps the draft, and after the tap runs the new code under the new cache name with the old cache deleted",
+   "pass": true,
+   "error": null,
+   "ms": 2771
+  },
+  {
+   "id": "G9.4",
+   "group": "G9: PWA / offline",
+   "title": "Every file the service worker pre-caches exists on the server and the cached index.html is the served one (no stale shell)",
+   "pass": true,
+   "error": null,
+   "ms": 721
+  }
+ ]
+}
