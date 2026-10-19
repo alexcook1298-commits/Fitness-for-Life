@@ -1,0 +1,512 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T18:09:34.855Z",
+ "passed": 63,
+ "failed": 0,
+ "results": [
+  {
+   "id": "RD1",
+   "group": "RD",
+   "title": "The provisional 48-hour threshold is gone: READINESS_STALE_HOURS no longer exists",
+   "pass": true,
+   "error": null,
+   "ms": 206
+  },
+  {
+   "id": "RD2",
+   "group": "RD",
+   "title": "A check-in from 00:00:00 today is fresh at 23:59:59 the same local day (almost 24 h old)",
+   "pass": true,
+   "error": null,
+   "ms": 173
+  },
+  {
+   "id": "RD3",
+   "group": "RD",
+   "title": "Midnight: a check-in from 23:59 is stale at 00:01 the next local day, although only two minutes old",
+   "pass": true,
+   "error": null,
+   "ms": 131
+  },
+  {
+   "id": "RD4",
+   "group": "RD",
+   "title": "A check-in 30 hours old is stale (the old 48-hour rule called it fresh); one from the previous evening is stale the next morning",
+   "pass": true,
+   "error": null,
+   "ms": 134
+  },
+  {
+   "id": "RD5",
+   "group": "RD",
+   "title": "Earlier today is fresh at any time of day (checked at every hour for a morning check-in)",
+   "pass": true,
+   "error": null,
+   "ms": 182
+  },
+  {
+   "id": "RD6",
+   "group": "RD",
+   "title": "Live midnight transition in the app: Home is GREEN at 23:59:50, and STALE after midnight when the app is brought back to the foreground, with no user action",
+   "pass": true,
+   "error": null,
+   "ms": 193
+  },
+  {
+   "id": "RD7",
+   "group": "RD",
+   "title": "Left open across midnight with no focus event: the app schedules its own refresh for the next local midnight",
+   "pass": true,
+   "error": null,
+   "ms": 167
+  },
+  {
+   "id": "RD8",
+   "group": "RD",
+   "title": "Missing, null, empty, invalid, NaN or non-text timestamps are \"never checked in\" and never throw",
+   "pass": true,
+   "error": null,
+   "ms": 183
+  },
+  {
+   "id": "RD9",
+   "group": "RD",
+   "title": "Legacy date shapes: date-only strings are LOCAL calendar days (not UTC), zone-less ISO strings are local, epoch milliseconds work",
+   "pass": true,
+   "error": null,
+   "ms": 134
+  },
+  {
+   "id": "RD10",
+   "group": "RD",
+   "title": "Time-zone change: the calendar day is judged in the device's CURRENT zone (same saved instant, different verdicts)",
+   "pass": true,
+   "error": null,
+   "ms": 125
+  },
+  {
+   "id": "RD11",
+   "group": "RD",
+   "title": "A saved check-in on a LATER local day than now (clock or time-zone change) is flagged \"future\", never fresh and never \"never\"",
+   "pass": true,
+   "error": null,
+   "ms": 124
+  },
+  {
+   "id": "RD12",
+   "group": "RD",
+   "title": "Small clock skew: up to five minutes ahead the same day is accepted; two hours ahead is \"future\"",
+   "pass": true,
+   "error": null,
+   "ms": 121
+  },
+  {
+   "id": "RD13",
+   "group": "RD",
+   "title": "Daylight-saving changes: the 25-hour fall-back day and the 23-hour spring-forward day are still one calendar day each",
+   "pass": true,
+   "error": null,
+   "ms": 137
+  },
+  {
+   "id": "RD14",
+   "group": "RD",
+   "title": "Age is counted in calendar days, not 24-hour blocks: yesterday evening is \"1 day\", three days ago is \"3 days\" even across DST",
+   "pass": true,
+   "error": null,
+   "ms": 127
+  },
+  {
+   "id": "RD15",
+   "group": "RD",
+   "title": "A historical check-in stays visible but labelled: Home, Readiness page and Coach Handoff all say STALE and give the age; none presents it as today's status",
+   "pass": true,
+   "error": null,
+   "ms": 189
+  },
+  {
+   "id": "RD16",
+   "group": "RD",
+   "title": "A restrictive joint flag from an earlier day is still shown (restrict-only), labelled stale, until the check-in is updated",
+   "pass": true,
+   "error": null,
+   "ms": 183
+  },
+  {
+   "id": "RD17",
+   "group": "RD",
+   "title": "Saving a check-in today makes it current immediately; it becomes stale at the next local midnight",
+   "pass": true,
+   "error": null,
+   "ms": 177
+  },
+  {
+   "id": "RD18",
+   "group": "RD",
+   "title": "The readiness scoring formula and the GREEN/YELLOW/RED thresholds are unchanged for all 3,125 possible check-ins",
+   "pass": true,
+   "error": null,
+   "ms": 166
+  },
+  {
+   "id": "RD19",
+   "group": "RD",
+   "title": "Readiness is only ever presented through the freshness gate: readinessDecision has exactly one caller (readinessStatus)",
+   "pass": true,
+   "error": null,
+   "ms": 134
+  },
+  {
+   "id": "RD20",
+   "group": "RD",
+   "title": "Freshness evaluation never writes or alters stored readiness data",
+   "pass": true,
+   "error": null,
+   "ms": 177
+  },
+  {
+   "id": "CB1",
+   "group": "CB",
+   "title": "Legitimate comparison text (\"<10:00\", \">8:30/mi\", \"HR <140 bpm\", ...) typed into cardio fields through the UI is saved exactly as typed",
+   "pass": true,
+   "error": null,
+   "ms": 647
+  },
+  {
+   "id": "CB2",
+   "group": "CB",
+   "title": "Round trip: a cardio entry containing < and > exports, previews, restores into a clean profile and is byte-identical",
+   "pass": true,
+   "error": null,
+   "ms": 601
+  },
+  {
+   "id": "CB3",
+   "group": "CB",
+   "title": "Every LEGIT string passes backup validation as a cardio value, in every cardio field",
+   "pass": true,
+   "error": null,
+   "ms": 139
+  },
+  {
+   "id": "CB4",
+   "group": "CB",
+   "title": "HTML-like cardio text is refused when logging, with a message explaining that < and > are allowed as comparison signs, and nothing is stored",
+   "pass": true,
+   "error": null,
+   "ms": 495
+  },
+  {
+   "id": "CB5",
+   "group": "CB",
+   "title": "Malicious cardio text in a backup file is refused at preview: restore is never offered, the reason names the cardio entry and field, and storage is untouched",
+   "pass": true,
+   "error": null,
+   "ms": 1240
+  },
+  {
+   "id": "CB6",
+   "group": "CB",
+   "title": "Stored markup that predates this fix is never executed or turned into elements: the cardio \"PREVIOUS\" line shows it as literal text",
+   "pass": true,
+   "error": null,
+   "ms": 491
+  },
+  {
+   "id": "CB7",
+   "group": "CB",
+   "title": "Data keys in a cardio record must be plain identifiers: markup, control characters, __proto__ and over-long keys are refused on import",
+   "pass": true,
+   "error": null,
+   "ms": 139
+  },
+  {
+   "id": "CB8",
+   "group": "CB",
+   "title": "Cardio values must be text or numbers: nested objects, arrays, booleans and non-finite numbers are refused; data must be an object",
+   "pass": true,
+   "error": null,
+   "ms": 154
+  },
+  {
+   "id": "CB9",
+   "group": "CB",
+   "title": "Control characters and over-long text in cardio values are still refused",
+   "pass": true,
+   "error": null,
+   "ms": 122
+  },
+  {
+   "id": "CB10",
+   "group": "CB",
+   "title": "Import protection elsewhere is NOT weakened: < or > is still refused in work-set, stretch, strength and activator history and in record ids/names/machine fields",
+   "pass": true,
+   "error": null,
+   "ms": 153
+  },
+  {
+   "id": "CB11",
+   "group": "CB",
+   "title": "Historical cardio records (old shapes without id or sessionId, numeric-looking text, empty values, unknown keys) still import and round-trip byte-identically",
+   "pass": true,
+   "error": null,
+   "ms": 300
+  },
+  {
+   "id": "CB12",
+   "group": "CB",
+   "title": "Existing cardio records are never altered: loading, rendering, exporting and a refused import leave pa_cardio_hist byte-identical",
+   "pass": true,
+   "error": null,
+   "ms": 302
+  },
+  {
+   "id": "CB13",
+   "group": "CB",
+   "title": "A draft with a typed-but-unsaved cardio value containing < resumes with it after reload, and survives backup/restore",
+   "pass": true,
+   "error": null,
+   "ms": 421
+  },
+  {
+   "id": "CB14",
+   "group": "CB",
+   "title": "Every place that renders cardio history is escaped: static check that no cardio value reaches innerHTML unescaped",
+   "pass": true,
+   "error": null,
+   "ms": 127
+  },
+  {
+   "id": "CB16",
+   "group": "CB",
+   "title": "Unfinished markup with no closing \">\" is plain text: accepted, stored as typed and rendered literally and inertly",
+   "pass": true,
+   "error": null,
+   "ms": 532
+  },
+  {
+   "id": "CB15",
+   "group": "CB",
+   "title": "A full real workflow with cardio containing < and > still passes every other backup property: draft, finished session, history all restore identically",
+   "pass": true,
+   "error": null,
+   "ms": 596
+  },
+  {
+   "id": "BU1",
+   "group": "BU",
+   "title": "Every one of the 29 templates has an explicit, reviewed classification: the model table matches the app exactly",
+   "pass": true,
+   "error": null,
+   "ms": 166
+  },
+  {
+   "id": "BU2",
+   "group": "BU",
+   "title": "Giant C (\"OPTIONAL • CAPABILITY\") counts as Capability only, and not as Strength or Hypertrophy",
+   "pass": true,
+   "error": null,
+   "ms": 124
+  },
+  {
+   "id": "BU3",
+   "group": "BU",
+   "title": "The six templates whose purpose the source does not settle are not forced into any category: they add nothing to the six bars",
+   "pass": true,
+   "error": null,
+   "ms": 136
+  },
+  {
+   "id": "BU4",
+   "group": "BU",
+   "title": "Completed sessions that have no category are reported, not silently dropped: budgetUnclassified() lists them by template",
+   "pass": true,
+   "error": null,
+   "ms": 120
+  },
+  {
+   "id": "BU5",
+   "group": "BU",
+   "title": "Unclassified reporting follows the same rules as the budget: drafts, sessions older than 7 days and unknown templates are handled, legacy \"completed\" status counts",
+   "pass": true,
+   "error": null,
+   "ms": 130
+  },
+  {
+   "id": "BU6",
+   "group": "BU",
+   "title": "Training Budget page tells the athlete when sessions are not counted: it names them and says the bars exclude them; with none, no extra line appears",
+   "pass": true,
+   "error": null,
+   "ms": 167
+  },
+  {
+   "id": "BU7",
+   "group": "BU",
+   "title": "Coach Handoff carries the same disclosure so an exported summary never implies the bars are the whole week",
+   "pass": true,
+   "error": null,
+   "ms": 163
+  },
+  {
+   "id": "BU8",
+   "group": "BU",
+   "title": "Classification is read-only and budgetData still returns exactly the six existing keys (no consumer sees a changed shape)",
+   "pass": true,
+   "error": null,
+   "ms": 175
+  },
+  {
+   "id": "BU9",
+   "group": "BU",
+   "title": "Source grounding is checkable: each reviewed template's own title/purpose line and block membership are what the model table was derived from",
+   "pass": true,
+   "error": null,
+   "ms": 162
+  },
+  {
+   "id": "CS1",
+   "group": "CS",
+   "title": "Legacy sessions (no completion field) read as \"unknown: finished before completion was recorded\"; reading never writes or back-fills",
+   "pass": true,
+   "error": null,
+   "ms": 137
+  },
+  {
+   "id": "CS2",
+   "group": "CS",
+   "title": "Full Giant A (normal week): every shown set logged -> prescription full, all exercises performed, prescribed equals the unchanged Full Session set total",
+   "pass": true,
+   "error": null,
+   "ms": 424
+  },
+  {
+   "id": "CS3",
+   "group": "CS",
+   "title": "ONE logged set out of a full Giant A is partial, never full; earlier unlogged movements are skipped, later ones not reached; performed counts only the real record",
+   "pass": true,
+   "error": null,
+   "ms": 220
+  },
+  {
+   "id": "CS4",
+   "group": "CS",
+   "title": "Finished with a checked item but no lifting records: prescription none, session still completes and still counts",
+   "pass": true,
+   "error": null,
+   "ms": 196
+  },
+  {
+   "id": "CS5",
+   "group": "CS",
+   "title": "Deliberate gap vs interruption: movement 1 skipped between logged movements; movements after the last logged one are not reached",
+   "pass": true,
+   "error": null,
+   "ms": 328
+  },
+  {
+   "id": "CS6",
+   "group": "CS",
+   "title": "A one-set prescription is never full (synthetic: Giant B reduced to the single-set Widowmaker, its only set logged)",
+   "pass": true,
+   "error": null,
+   "ms": 267
+  },
+  {
+   "id": "CS7",
+   "group": "CS",
+   "title": "Busy week: scope \"busy\", prescription measured against the busy cap (<=2 sets per movement), full when all shown sets are logged",
+   "pass": true,
+   "error": null,
+   "ms": 428
+  },
+  {
+   "id": "CS8",
+   "group": "CS",
+   "title": "Compact: scope \"compact\", only the shown movements are judged, and a complete compact session is full-in-scope, labelled compact (never presented as a Full Session)",
+   "pass": true,
+   "error": null,
+   "ms": 281
+  },
+  {
+   "id": "CS9",
+   "group": "CS",
+   "title": "Sets logged outside the shown scope (movement hidden by switching to compact afterwards) are recorded as extra and never counted as performed",
+   "pass": true,
+   "error": null,
+   "ms": 230
+  },
+  {
+   "id": "CS10",
+   "group": "CS",
+   "title": "Checklist template (Mobility): units are the items shown at Finish, not every key ever rendered; 1 item = partial, all items = full",
+   "pass": true,
+   "error": null,
+   "ms": 234
+  },
+  {
+   "id": "CS11",
+   "group": "CS",
+   "title": "Backup round trip: completion survives export, validation and restore byte-for-byte; sessions without it still validate",
+   "pass": true,
+   "error": null,
+   "ms": 296
+  },
+  {
+   "id": "CS12",
+   "group": "CS",
+   "title": "Validator bounds: malformed, oversized, contradictory or markup-bearing completion is refused with a specific message",
+   "pass": true,
+   "error": null,
+   "ms": 165
+  },
+  {
+   "id": "CS13",
+   "group": "CS",
+   "title": "Labels: the Finish panel previews the result before saving, and the saved notice repeats it with the not-logged movements; nothing else on screen is redesigned",
+   "pass": true,
+   "error": null,
+   "ms": 204
+  },
+  {
+   "id": "CS14",
+   "group": "CS",
+   "title": "Coach Handoff: \"Completed sessions: N\" is unchanged; a completion line separates full / partial / none / not recorded (legacy)",
+   "pass": true,
+   "error": null,
+   "ms": 268
+  },
+  {
+   "id": "CS15",
+   "group": "CS",
+   "title": "Session counts, Giant B rotation and budget exposure are unchanged by completion (characterization; rotation/exposure gating awaits approval D1/D5)",
+   "pass": true,
+   "error": null,
+   "ms": 212
+  },
+  {
+   "id": "CS16",
+   "group": "CS",
+   "title": "Evidence engine unchanged: a one-set partial session still contributes to the exercise series (characterization; gating awaits approval D4)",
+   "pass": true,
+   "error": null,
+   "ms": 142
+  },
+  {
+   "id": "CS17",
+   "group": "CS",
+   "title": "Historical data is never altered: legacy sessions and all prior records are byte-identical after a new session is finished",
+   "pass": true,
+   "error": null,
+   "ms": 258
+  },
+  {
+   "id": "CS18",
+   "group": "CS",
+   "title": "Lifecycle stays two-valued: only draft and complete are ever written; \"abandoned\" is refused on restore (not supported)",
+   "pass": true,
+   "error": null,
+   "ms": 177
+  }
+ ]
+}

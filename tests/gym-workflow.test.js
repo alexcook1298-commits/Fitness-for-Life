@@ -369,15 +369,15 @@ test('G6.1','G6: distinguishing work (gap)','RECORDED vs NOT RECORDED is visible
  await p.eval(()=>start('a'));await logStraight(p,0,1,{w:'95',r:'12',rir:'2'});
  const marks=await p.eval(()=>[...document.querySelectorAll('#exs .exercise')[0].querySelectorAll('.set button.check')].map(b=>b.textContent.trim()));assert.deepStrictEqual(marks,['✓','○','○']);
 });
-test('G6.2','G6: distinguishing work (gap)','KNOWN GAP: a workout finished with ONE logged set out of ~20 is counted exactly like a full workout in Training Budget, Coach Handoff and Home',async p=>{
+test('G6.2','G6: distinguishing work','FIXED IN PHASE 2 (labels only): a workout finished with ONE logged set out of ~20 still counts as one completed session and one budget exposure, but Coach Handoff and the Finish notice now label it Partial',async p=>{
  await seedBSessions(p,0);
  await p.eval(()=>start('a'));await logStraight(p,3,1,{w:'95',r:'12',rir:'2'});await finishUI(p);
  const t=await p.eval(()=>coachSummary()),b=await p.eval(()=>budgetData());
- assert(/Completed sessions: 1/.test(t));assert.strictEqual(b.Strength,1);
- assert(!/partial|incomplete|skipped|sets? (logged|done)/i.test(t),'summary now distinguishes partial work; update the report: '+t.slice(0,300));
- assert.strictEqual((await sessionsOf(p))[0].setCount,1,'the count exists in storage but is not shown');
+ assert(/Completed sessions: 1/.test(t));assert.strictEqual(b.Strength,1,'exposure counting is deliberately unchanged (decision D5)');
+ assert(/Completion: Full 0 • Partial 1/.test(t)&&/Partial: Giant A: 1 of \d+ sets/.test(t),t.slice(0,400));
+ const s=(await sessionsOf(p))[0];assert.strictEqual(s.setCount,1);assert.strictEqual(s.completion.prescription,'partial');assert.strictEqual(s.completion.performed,1);
 });
-test('G6.3','G6: distinguishing work (gap)','KNOWN GAP: there is no per-session history view; skipped exercises leave no visible trace after finishing (no record, no label)',async p=>{
+test('G6.3','G6: distinguishing work (gap)','KNOWN GAP (narrowed in Phase 2): there is still no per-session history view; skipped work is labelled only in the Finish notice and Coach Handoff, not on Progress, Home or the After-action page',async p=>{
  await p.eval(()=>start('a'));await logStraight(p,3,1,{w:'95',r:'12',rir:'2'});await finishUI(p);
  const screens=[];
  await p.eval(()=>show('progress'));screens.push(await p.eval(()=>document.getElementById('progress').innerText));
@@ -444,13 +444,15 @@ test('G7.3','G7: backup & restore','A tampered file changed after preview is re-
  assert(/Restore failed/.test(await notice(p)),await notice(p));sameStore(PA(await storage(p)),pre,'after refused restore (strict, vs state at preview)',true);sameStore(PA(await storage(p)),PA(before),'after refused restore vs start');
 });
 
-test('G7.4','G7: backup & restore','KNOWN DEFECT (characterization, unresolved decision): a cardio field typed with "<" or ">" saves normally, but the app\'s own export is then refused by its own import validator',async p=>{
+test('G7.4','G7: backup & restore','Cardio text with comparison signs ("<10:00") is saved, the app\'s own export validates and restores it, and HTML-like text ("<b>") is refused at logging (fix of the Phase 1 defect D1)',async p=>{
  await p.eval(()=>start('conditioning'));
  await p.eval(()=>{const i=document.querySelector('#exs [data-cardio] input[data-field]');i.value='<10:00'});
  await p.click('#exs button.save-cardio');
- assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'))).length,1,'cardio entry was not saved');
- const verdict=await p.eval(()=>{try{validateBackup(backupPayload());return 'accepted'}catch(e){return e.message}});
- assert.strictEqual(verdict,'Invalid text in pa_cardio_hist','behaviour changed; update the report: '+verdict);
+ assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'))).length,1,'cardio entry was not saved: '+await notice(p));
+ assert.strictEqual(await p.eval(()=>{try{validateBackup(backupPayload());return 'accepted'}catch(e){return e.message}}),'accepted');
+ await p.eval(()=>{localStorage.pa_cardio_hist='[]';const i=document.querySelector('#exs [data-cardio] input[data-field]');i.value='<b>bold</b>'});
+ await clearNotice(p);await p.click('#exs button.save-cardio');
+ assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'))).length,0,'HTML-like text was stored');assert(/comparison/i.test(await notice(p)),await notice(p));
 });
 
 // =====================================================================
@@ -500,7 +502,7 @@ async function swState(p){return p.eval(async()=>{const reg=await navigator.serv
 test('G9.1','G9: PWA / offline','The service worker installs, takes control after a reload, and caches the shell under the integration cache name',async p=>{
  await p.waitForFunction('navigator.serviceWorker&&navigator.serviceWorker.getRegistration().then(r=>!!r&&!!r.active)',15000).catch(()=>{});
  await p.reload();await sleep(500);const s=await swState(p);
- assert(s.active&&s.controller,JSON.stringify(s));assert(s.caches.some(c=>c==='project-america-shell-v2-3-integration-20261019'),JSON.stringify(s.caches));assert(/Ready offline/.test(s.status),s.status);
+ assert(s.active&&s.controller,JSON.stringify(s));assert(s.caches.some(c=>c==='project-america-shell-v2-3-phase2-20261019'),JSON.stringify(s.caches));assert(/Ready offline/.test(s.status),s.status);
 });
 test('G9.2','G9: PWA / offline','Offline: the app reloads from cache, a workout can be started, a set logged, saved and finished with the network disabled',async p=>{
  await p.reload();await sleep(800);assert((await swState(p)).controller);
@@ -540,7 +542,7 @@ test('G9.3','G9: PWA / offline','Cache update path: an installed OLD version sho
   await p.click('#n-home');
   const re=p.waitForLoad(20000).then(()=>true,()=>false);await p.click('#updateButton');assert(await re,'page did not reload after update');
   await p.waitForFunction('typeof readinessStatus==="function"',15000);await sleep(500);
-  const now=await swState(p);assert.deepStrictEqual(now.caches,['project-america-shell-v2-3-integration-20261019'],JSON.stringify(now.caches));
+  const now=await swState(p);assert.deepStrictEqual(now.caches,['project-america-shell-v2-3-phase2-20261019'],JSON.stringify(now.caches));
   const ss=await sessionsOf(p);assert.strictEqual(ss.length,1);assert.strictEqual(ss[0].id,draftBefore);assert.strictEqual((await hist(p)).length,1);
   await p.click('#homePlan button.secondary','RESUME Giant A');assert.strictEqual(await p.eval(()=>currentSession.id),draftBefore);
  }finally{await p.close();await s.close()}

@@ -405,7 +405,7 @@ function cardioPrevious(machine,mode){
  let a=cardioHistory().filter(x=>x.machine===machine&&x.mode===mode);
  if(!a.length)return "No previous session on this machine for this mode.";
  let x=a.at(-1), bits=[];
- Object.entries(x.data||{}).forEach(([k,v])=>{if(v!==""&&v!=null)bits.push(`${k}: ${v}`)});
+ Object.entries(x.data||{}).forEach(([k,v])=>{if(v!==""&&v!=null)bits.push(`${esc(k)}: ${esc(v)}`)});
  return bits.length?bits.join(" • "):"Previous session recorded.";
 }
 function setCardioMachine(m){cardioMachine=m;localStorage.pa_cardio_machine=m;render()}
@@ -1138,18 +1138,66 @@ saveCardio=function(mode){
  saveDraft();const box=document.querySelector(`[data-cardio="${mode}"]`),data={};if(!box)return;
  box.querySelectorAll('input[data-field]').forEach(i=>data[i.dataset.field]=i.value);
  if(!Object.values(data).some(v=>v!=='')){notice('Enter cardio details before saving.');return}
+ for(const [field,value] of Object.entries(data)){const problem=cardioTextProblem(value);if(problem){notice(`Cardio field "${field}" ${problem}.`);return}}
  upsertHistory('pa_cardio_hist',{id:currentSession.id+'|'+cardioMachine+'|'+mode,sessionId:currentSession.id,date:new Date().toISOString(),machine:cardioMachine,mode,data});notice('Cardio details saved.');
 };
-function openFinish(){saveDraft();$('finishPanel').classList.remove('hidden')}
+// Completion semantics (derived once at Finish; additive session field; never back-filled, never read by rotation, budget or evidence).
+const COMPLETION_PRESCRIPTION=['full','partial','none'],COMPLETION_SCOPE=['full','busy','compact'],COMPLETION_BASIS=['sets','items'],EXERCISE_STATUS=['performed','partial','skipped','not_reached'];
+function completionVerdict(prescribed,performed){return performed<=0?'none':performed>=prescribed&&performed>=2?'full':'partial'}
+function computeCompletion(){
+ const s=currentSession;if(!s)return null;
+ const scope=s.compact?'compact':s.weekMode==='busy'?'busy':'full';
+ if(slots[s.template]){
+  const logged={};
+  readJSON('pa_hist',[]).forEach(x=>{if(!x||x.sessionId!==s.id||typeof x.id!=='string')return;const part=x.id.split('|');if(part.length<5||part[0]!==s.id||!/^\d+$/.test(part[1])||!Number.isInteger(+x.setNumber))return;(logged[part[1]]??={sets:new Set(),name:x.name}).sets.add(+x.setNumber)});
+  const rows=[];let extra=0;
+  slots[s.template].forEach((sl,i)=>{
+   const shown=!s.compact||compactSlot(s.template,i),n=workSetCount(i),l=logged[i];
+   if(!shown){if(l)extra+=l.sets.size;return}
+   const done=l?[...l.sets].filter(j=>j>=1&&j<=n).length:0;if(l)extra+=l.sets.size-done;
+   rows.push({slot:i,name:l?.name||selected(s.template,i),prescribed:n,performed:done});
+  });
+  const last=rows.reduce((m,r)=>r.performed>0?r.slot:m,-1);
+  rows.forEach(r=>{
+   if(r.performed>0){r.status=r.performed>=r.prescribed?'performed':'partial';r.basis='logged'}
+   else if(r.slot<last){r.status='skipped';r.basis='later-work-logged'}
+   else{r.status='not_reached';r.basis='no-later-work'}
+  });
+  const prescribed=rows.reduce((a,r)=>a+r.prescribed,0),performed=rows.reduce((a,r)=>a+r.performed,0);
+  return {v:1,basis:'sets',scope,prescription:completionVerdict(prescribed,performed),prescribed,performed,extra,exercises:rows};
+ }
+ if(renderedSession!==s.id)return null;
+ const items=[...$('exs').querySelectorAll('button.check:not([data-record])')],performed=items.filter(b=>b.classList.contains('y')).length;
+ return {v:1,basis:'items',scope,prescription:completionVerdict(items.length,performed),prescribed:items.length,performed,extra:0,exercises:[]};
+}
+function completionOf(s){
+ if(s&&s.completion&&typeof s.completion==='object')return s.completion;
+ return {prescription:'unknown',reason:'Finished before completion was recorded; the prescription for that session cannot be reconstructed.'};
+}
+function completionLabel(c){
+ if(!c)return '';
+ const unit=c.basis==='items'?'checklist items ticked':'sets logged',scope=c.scope==='full'?'':' ('+c.scope+')';
+ let t=`Prescription ${c.prescription}${scope}: ${c.performed} of ${c.prescribed} ${unit}.`;
+ const missing=c.exercises.filter(e=>e.status==='skipped'||e.status==='not_reached'),partly=c.exercises.filter(e=>e.status==='partial');
+ if(missing.length)t+=' Not logged: '+missing.map(e=>`${e.name} (${e.status.replace('_',' ')})`).join(', ')+'.';
+ if(partly.length)t+=' Partly logged: '+partly.map(e=>`${e.name} (${e.performed} of ${e.prescribed})`).join(', ')+'.';
+ return t;
+}
+function openFinish(){
+ saveDraft();const panel=$('finishPanel');let line=$('finishCompletion');
+ if(!line){line=document.createElement('p');line.id='finishCompletion';line.className='tiny';panel.querySelector('h2').after(line)}
+ line.textContent=completionLabel(computeCompletion());panel.classList.remove('hidden');
+}
 function finishSession(){
  if(!currentSession||currentSession.status!=='draft')return;
  saveDraft();const records=readJSON('pa_hist',[]).filter(x=>x.sessionId===currentSession.id);
  const checks=Object.values(currentSession.checks).filter(Boolean).length;
  if(!records.length&&!checks&&!readJSON('pa_cardio_hist',[]).some(x=>x.sessionId===currentSession.id)&&!readJSON('pa_ls_hist',[]).some(x=>x.sessionId===currentSession.id)){notice('Log some work or mark a completed activity before finishing. EXIT keeps this workout as a draft.');return}
- currentSession.status='complete';currentSession.finishedAt=new Date().toISOString();currentSession.setCount=records.length;currentSession.checkCount=checks;
+ const completion=computeCompletion();
+ currentSession.status='complete';currentSession.finishedAt=new Date().toISOString();currentSession.setCount=records.length;currentSession.checkCount=checks;if(completion)currentSession.completion=completion;
  currentSession.recovery=$('finishRecovery').value;currentSession.notes=$('finishNotes').value.slice(0,1000);
- if(!persistSessions()){currentSession.status='draft';return}
- $('finishPanel').classList.add('hidden');$('finishNotes').value='';stopTimer();currentSession=null;renderedSession=null;localStorage.removeItem('pa_current_session');renderPlan();show('home');notice('Workout saved. Logged work and unfinished entries are retained in your session record.');
+ if(!persistSessions()){currentSession.status='draft';delete currentSession.completion;return}
+ $('finishPanel').classList.add('hidden');$('finishNotes').value='';stopTimer();currentSession=null;renderedSession=null;localStorage.removeItem('pa_current_session');renderPlan();show('home');notice('Workout saved. '+completionLabel(completion)+' Logged work and unfinished entries are retained in your session record.');
 }
 function resumeBanner(){const drafts=sessions.filter(x=>x.status==='draft');return drafts.length?`<div class="note"><b>Unfinished workouts</b>${drafts.map(s=>`<button class="secondary" onclick="resumeSession('${s.id}')">RESUME ${esc(T[s.template]?.[0]||s.template)}</button>`).join('')}</div>`:''}
 // Only keys this version can validate are exported or replaced; other localStorage keys are left untouched.
@@ -1216,6 +1264,33 @@ function validateOSState(raw){
  if(Object.hasOwn(d,'availability')){fields(d.availability,'availability',['0','1','2','3','4','5','6']);if(Object.values(d.availability).some(v=>!number(v)))fail('availability must be minutes')}
  return d;
 }
+// Cardio values are free text typed into machine fields. "<" and ">" are legitimate there ("<10:00", "HR >150"),
+// so they are allowed; only HTML-like text (a complete tag such as <b> or </i>, or "<!" / "<?") is refused, and every render of
+// cardio history is escaped. The same rule is applied when logging and when importing a backup.
+const CARDIO_KEY=/^[A-Za-z][A-Za-z0-9_]{0,31}$/;
+function cardioTextProblem(value){
+ if(typeof value==='number')return Number.isFinite(value)?null:'is not a finite number';
+ if(typeof value!=='string')return 'must be text or a number';
+ if(value.length>=2000||/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(value))return 'contains control characters or is too long';
+ if(/<\/?[A-Za-z][^<>]*>|<[!?]/.test(value))return 'looks like HTML. Use < and > only as comparison signs, for example <10:00';
+ return null;
+}
+function validateCompletion(c){
+ const bad=why=>{throw Error('Invalid completion record'+(why?' ('+why+')':'')+'.')};
+ const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),int=(x,max)=>Number.isInteger(x)&&x>=0&&x<=max;
+ const only=(o,keys)=>Object.keys(o).every(k=>keys.includes(k));
+ if(!object(c)||!only(c,['v','basis','scope','prescription','prescribed','performed','extra','exercises'])||c.v!==1)bad('shape');
+ if(!COMPLETION_BASIS.includes(c.basis)||!COMPLETION_SCOPE.includes(c.scope)||!COMPLETION_PRESCRIPTION.includes(c.prescription))bad('value');
+ if(!int(c.prescribed,500)||!int(c.performed,500)||!int(c.extra,500)||c.performed>c.prescribed)bad('count');
+ if(c.prescription!==completionVerdict(c.prescribed,c.performed))bad('prescription does not match counts');
+ if(!Array.isArray(c.exercises)||c.exercises.length>40||(c.basis==='items'&&c.exercises.length))bad('exercises');
+ for(const e of c.exercises){
+  if(!object(e)||!only(e,['slot','name','prescribed','performed','status','basis'])||!int(e.slot,39)||!int(e.prescribed,50)||!int(e.performed,50)||e.performed>e.prescribed)bad('exercise');
+  if(typeof e.name!=='string'||!L.some(x=>x.name===e.name)||!EXERCISE_STATUS.includes(e.status))bad('exercise');
+  const ok=e.status==='performed'?e.performed===e.prescribed&&e.prescribed>0&&e.basis==='logged':e.status==='partial'?e.performed>0&&e.performed<e.prescribed&&e.basis==='logged':e.performed===0&&e.basis===(e.status==='skipped'?'later-work-logged':'no-later-work');
+  if(!ok)bad('exercise status');
+ }
+}
 function validateBackup(obj){
  if(!obj||obj.format!=='project-america-full-backup'||obj.version!==1||!obj.data||typeof obj.data!=='object'||Array.isArray(obj.data))throw Error('Choose a full Project America backup. Old lifting-only exports cannot restore the full app.');
  for(const [k,v] of Object.entries(obj.data)){if(!BACKUP_KEY.test(k)||typeof v!=='string'||v.length>10000000)throw Error('Unrecognized or oversized backup entry: '+k);}
@@ -1228,6 +1303,7 @@ function validateBackup(obj){
  if(obj.data.pa_sessions_v2)for(const s of JSON.parse(obj.data.pa_sessions_v2)){
   if(typeof s.id!=='string'||!/^[a-zA-Z0-9-]{1,100}$/.test(s.id)||!Object.hasOwn(T,s.template)||!['draft','complete'].includes(s.status)||!['busy','normal','extra'].includes(s.weekMode)||!s.forms||!s.checks||!s.choices||!s.modes)throw Error('Invalid session record');
   if(!BLOCKS.some(b=>b.id===s.phase))throw Error('Invalid session block');
+  if(Object.hasOwn(s,'completion'))validateCompletion(s.completion);
  }
  const safeString=x=>typeof x==='string'&&x.length<2000&&!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(x);
  for(const [k,v] of Object.entries(obj.data)){
@@ -1235,9 +1311,18 @@ function validateBackup(obj){
   if((k.startsWith('pa_int_')||k.startsWith('pa_todayint_'))&&!INTENSIFIERS.includes(v))throw Error('Unknown intensifier');
   if(isStrengthPreference(k)&&!STRENGTH_METHODS.includes(v))throw Error('Unknown strength method');
  }
- for(const k of arrays)for(const record of JSON.parse(obj.data[k]||'[]')){
+ for(const k of arrays)for(const [recordIndex,record] of JSON.parse(obj.data[k]||'[]').entries()){
   // A lifting record's clusterSplit is a free-text note (e.g. "3+3 <20s>"); it is only ever rendered escaped.
-  const check=(value,depth=0,field)=>{if(depth>12)throw Error('Backup nesting too deep');if(typeof value==='string'&&(!safeString(value)||(['pa_hist','pa_ls_hist','pa_cardio_hist','pa_strength_hist','pa_activator_hist'].includes(k)&&!(k==='pa_hist'&&depth===1&&field==='clusterSplit')&&/[<>]/.test(value))))throw Error('Invalid text in '+k);if(typeof value==='number'&&!Number.isFinite(value))throw Error('Invalid number');if(value&&typeof value==='object')for(const [key,val] of Object.entries(value)){if(['__proto__','constructor','prototype'].includes(key)||!safeString(key))throw Error('Invalid field');check(val,depth+1,key)}};check(record);
+  const check=(value,depth=0,field)=>{if(depth>12)throw Error('Backup nesting too deep');if(typeof value==='string'&&(!safeString(value)||(['pa_hist','pa_ls_hist','pa_cardio_hist','pa_strength_hist','pa_activator_hist'].includes(k)&&!(k==='pa_hist'&&depth===1&&field==='clusterSplit')&&/[<>]/.test(value))))throw Error('Invalid text in '+k);if(typeof value==='number'&&!Number.isFinite(value))throw Error('Invalid number');if(value&&typeof value==='object')for(const [key,val] of Object.entries(value)){if(['__proto__','constructor','prototype'].includes(key)||!safeString(key))throw Error('Invalid field');check(val,depth+1,key)}};if(k==='pa_cardio_hist'){
+   if(Object.hasOwn(record,'data')){
+    if(!record.data||typeof record.data!=='object'||Array.isArray(record.data))throw Error(`Cardio entry ${recordIndex+1}: details must be a list of fields.`);
+    for(const [field,value] of Object.entries(record.data)){
+     if(!CARDIO_KEY.test(field)||['constructor','prototype'].includes(field))throw Error(`Cardio entry ${recordIndex+1}: invalid field name.`);
+     const problem=cardioTextProblem(value);if(problem)throw Error(`Cardio entry ${recordIndex+1}, field "${field}" ${problem}.`);
+    }
+   }
+   check({...record,data:{}});
+  }else check(record);
   if(k==='pa_hist'){
    if(!safeString(record.name)||!INTENSIFIERS.includes(record.intensifier||'Straight Sets'))throw Error('Invalid lifting record');
    for(const f of ['w','reps','rir','volume'])if(record[f]!=null&&(typeof record[f]!=='number'||record[f]<0))throw Error('Invalid lifting value');
@@ -1416,14 +1501,40 @@ function readinessDecision(r){r=r||{};let x=readinessScore(r),j=+r.joints||3,bas
  if(base==='GREEN')return {label:'GREEN',cls:'status-green',text:'Run as programmed. Optional methods remain optional.'};
  if(base==='YELLOW')return {label:'YELLOW',cls:'status-yellow',text:'Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off.'};
  return {label:'RED',cls:'status-red',text:'Protect the training floor: use COMPACT / MED, straight sets, and stop any movement that feels wrong.'}}
-const READINESS_STALE_HOURS=48;
-function readinessFreshness(r,now=Date.now()){
- const t=r&&r.date!=null&&r.date!==''?new Date(r.date).getTime():NaN;
- if(!Number.isFinite(t))return {state:'never',hours:null,days:null};
- const hours=(now-t)/3600000;
- if(hours<-5/60)return {state:'future',hours,days:null};
- return {state:hours>READINESS_STALE_HOURS?'stale':'fresh',hours,days:Math.floor(Math.max(0,hours)/24)};
+// A check-in is current only if it was saved on the same LOCAL calendar day as now, in the device's current time zone.
+// Older (or future-dated) check-ins stay readable but are never presented as today's status.
+function readinessSavedMs(value){
+ let ms=NaN;
+ if(typeof value==='number')ms=Number.isFinite(value)?value:NaN;
+ else if(typeof value==='string'){
+  const s=value.trim(),m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if(m){const d=new Date(+m[1],+m[2]-1,+m[3]);ms=d.getFullYear()===+m[1]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[3]?d.getTime():NaN}
+  else if(s)ms=new Date(s).getTime();
+ }
+ return Number.isFinite(ms)?ms:null;
 }
+function localDayNumber(ms){const d=new Date(ms);return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000}
+function readinessFreshness(r,now=Date.now()){
+ const t=readinessSavedMs(r&&r.date);
+ if(t===null)return {state:'never',hours:null,days:null};
+ const hours=(now-t)/3600000;
+ if(t-now>5*60000)return {state:'future',hours,days:null};
+ const days=localDayNumber(now)-localDayNumber(t);
+ return days<=0?{state:'fresh',hours,days:0}:{state:'stale',hours,days};
+}
+function refreshReadinessView(){
+ try{const home=document.getElementById('home');if(home&&!home.classList.contains('hidden'))updateOSHome()}catch(e){}
+ scheduleReadinessMidnightRefresh();
+}
+function scheduleReadinessMidnightRefresh(){
+ clearTimeout(window.__readinessMidnightTimer);
+ const n=new Date(),next=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1,0,0,0,0).getTime();
+ window.__readinessMidnightAt=next;
+ window.__readinessMidnightTimer=setTimeout(refreshReadinessView,Math.max(1000,next-Date.now()+1000));
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshReadinessView()});
+window.addEventListener('focus',refreshReadinessView);
+scheduleReadinessMidnightRefresh();
 function readinessStatus(r,now=Date.now()){
  r=r||{};const dec=readinessDecision(r),f=readinessFreshness(r,now),score=readinessScore(r);
  if(f.state==='fresh')return {...dec,fresh:f,stale:false,scoreText:`Check-in ${score} / 100`};
@@ -1434,7 +1545,22 @@ function readinessStatus(r,now=Date.now()){
  return {label:f.state==='never'?'NOT CHECKED IN':'STALE CHECK-IN',cls:f.state==='never'?'status-gray':'status-yellow',text:`${age}. Update your check-in before relying on this status. Nothing in the plan has changed.`,stale:true,fresh:f,scoreText,jointOverride:false,basedOn:dec.label};
 }
 function recentSessions(days=7){let cut=Date.now()-days*86400000,a=readJSON('pa_sessions_v2',[]);return (Array.isArray(a)?a:[]).filter(x=>x&&(x.status==='complete'||x.status==='completed')&&new Date(x.finishedAt||x.completedAt||x.updatedAt||x.startedAt).getTime()>=cut)}
-function budgetData(){let rs=recentSessions(7),b={Strength:0,Hypertrophy:0,Explosive:0,'High-intensity engine':0,'Low-intensity engine':0,Capability:0};rs.forEach(x=>{const t=String(x.template);if(/^(a|b[2-7]a)$/.test(t))b.Strength++;if(/^(b|bu|bl|b[2-7]b|b3c|bonusarms|bonusback)$/.test(t))b.Hypertrophy++;if(x.template==='athletic'){b.Explosive++;b.Capability++}if(x.template==='conditioning')b['High-intensity engine']++;if(x.template==='mobility')b['Low-intensity engine']++});return b}
+// Classification is by exact template key. Only mappings the source itself settles are listed: a template that is not listed
+// (Body Control, Athletic Development Practice, Coached Combat Fundamentals, Water Competence, Loaded Movement Practice,
+// Practical Capability Training) is deliberately unclassified and is disclosed as "not counted" instead of being forced into a bar.
+function budgetCategories(template){
+ const t=String(template);
+ if(/^(a|b[2-7]a)$/.test(t))return ['Strength'];
+ if(/^(b|bu|bl|b[2-7]b|b3c|bonusarms|bonusback)$/.test(t))return ['Hypertrophy'];
+ if(t==='athletic')return ['Explosive','Capability'];
+ if(t==='conditioning')return ['High-intensity engine'];
+ if(t==='mobility')return ['Low-intensity engine'];
+ if(t==='c')return ['Capability'];
+ return [];
+}
+function budgetData(){let rs=recentSessions(7),b={Strength:0,Hypertrophy:0,Explosive:0,'High-intensity engine':0,'Low-intensity engine':0,Capability:0};rs.forEach(x=>budgetCategories(x.template).forEach(c=>{b[c]++}));return b}
+function budgetUnclassified(){const byTemplate={};let total=0;recentSessions(7).forEach(x=>{if(!budgetCategories(x.template).length){total++;byTemplate[x.template]=(byTemplate[x.template]||0)+1}});return {total,byTemplate}}
+function budgetUnclassifiedList(u){return Object.entries(u.byTemplate).map(([k,v])=>`${(T[k]&&T[k][0])||k} ×${v}`).join(', ')}
 function histDate(x){return x.date||x.completedAt||''}
 function performanceValue(x){if(x.w&&x.reps)return +x.w*(1+(+x.reps||0)/30);if(x.w)return +x.w;if(x.reps)return +x.reps;return 0}
 function evidenceSeriesKey(x){return [x.intensifier||'Straight Sets',x.strengthMethod||'',(+x.reps||0)>12?'high-rep':'std-rep'].join('|')}
@@ -1480,7 +1606,7 @@ function renderCapabilityPage(){let d=osData();mpTitle.textContent='Capability /
 function shiftSkill(k,delta){let d=osData(),max=SKILLS[k].length-1;d.skill[k]=Math.max(0,Math.min(max,(d.skill[k]||0)+delta));saveOS(d);renderCapabilityPage()}
 function renderCombinePage(){let d=osData(),last=d.combine?.at(-1);mpTitle.textContent='Project America Combine';mpBody.innerHTML=`<div class="card"><small class="gold">STANDARDIZED SNAPSHOT</small><h2>Prove it. Don't estimate it.</h2><p>Run under repeatable conditions. The four North Stars remain the flagship goals; these are supporting diagnostics.</p>${last?`<p class="tiny muted">Last Combine: ${new Date(last.date).toLocaleDateString()}</p>`:''}</div><div class="card"><div class="combine-grid">${[['forty','40-yard (sec)'],['vertical','Vertical (in)'],['hang','Dead hang (sec)'],['carry','Carry benchmark'],['zone2','Aerobic benchmark'],['mobility','Mobility benchmark']].map(([k,l])=>`<label>${l}<input id="c_${k}" value="${esc(last?.[k]??'')}"></label>`).join('')}</div><label>NOTES<textarea id="c_notes" placeholder="Conditions, surface, equipment, anything that matters">${esc(last?.notes??'')}</textarea></label><button class="primary" onclick="saveCombine()">SAVE COMBINE</button></div>`}
 function saveCombine(){let d=osData(),x={date:new Date().toISOString()};['forty','vertical','hang','carry','zone2','mobility'].forEach(k=>x[k]=document.getElementById('c_'+k).value);x.notes=document.getElementById('c_notes').value;d.combine??=[];d.combine.push(x);if(x.forty)d.tests.forty={value:x.forty,date:x.date};if(x.vertical)d.tests.vertical={value:x.vertical,date:x.date};if(x.hang)d.tests.hang={value:x.hang,date:x.date};saveOS(d);renderCombinePage();notice('Combine snapshot saved.')}
-function renderBudgetPage(){let b=budgetData(),d=osData();mpTitle.textContent='Training Budget';mpBody.innerHTML=`<div class="card"><small class="gold">RECENT EXPOSURE • LAST 7 DAYS</small><h2>Adding training is not free.</h2><p class="tiny muted">These bars count recent completed exposure categories. They are not claimed to be physiological MRV.</p>${Object.entries(b).map(([k,v])=>`<div class="budget-row"><div class="budget-head"><b>${k}</b><span>${v} exposure${v===1?'':'s'}</span></div><div class="meter"><i style="width:${Math.min(100,v*25)}%"></i></div></div>`).join('')}</div><div class="card"><h3>Opportunity-cost doctrine</h3><p><b>${d.mode==='survival'?'SURVIVAL: protect floors.':d.mode==='expansion'?'EXPANSION: introduce only 1–2 capabilities at a time.':'STANDARD: preserve Giant A/B and cardio/abs before adding optional work.'}</b></p><p class="muted">If a new demand conflicts with high-intensity lower-body work, move or reduce the optional exposure before touching the anchors.</p></div>`}
+function renderBudgetPage(){let b=budgetData(),d=osData();mpTitle.textContent='Training Budget';mpBody.innerHTML=`<div class="card"><small class="gold">RECENT EXPOSURE • LAST 7 DAYS</small><h2>Adding training is not free.</h2><p class="tiny muted">These bars count recent completed exposure categories. They are not claimed to be physiological MRV.</p>${Object.entries(b).map(([k,v])=>`<div class="budget-row"><div class="budget-head"><b>${k}</b><span>${v} exposure${v===1?'':'s'}</span></div><div class="meter"><i style="width:${Math.min(100,v*25)}%"></i></div></div>`).join('')}</div>${(()=>{const u=budgetUnclassified();return u.total?`<div class="card"><small class="gold">NOT COUNTED IN ANY BAR</small><p class="tiny">${u.total} completed session${u.total===1?'':'s'} in the last 7 days ${u.total===1?'is':'are'} not counted in any bar above because no training category has been assigned: ${esc(budgetUnclassifiedList(u))}.</p></div>`:''})()}<div class="card"><h3>Opportunity-cost doctrine</h3><p><b>${d.mode==='survival'?'SURVIVAL: protect floors.':d.mode==='expansion'?'EXPANSION: introduce only 1–2 capabilities at a time.':'STANDARD: preserve Giant A/B and cardio/abs before adding optional work.'}</b></p><p class="muted">If a new demand conflicts with high-intensity lower-body work, move or reduce the optional exposure before touching the anchors.</p></div>`}
 function renderLabPage(){let d=osData();mpTitle.textContent='Experiment Lab';mpBody.innerHTML=`<div class="card"><small class="gold">N=1 SPORTS SCIENCE</small><h2>Test before adopting.</h2><input id="expQ" class="search" placeholder="Question: Does a heavy primer improve bench work sets?"><textarea id="expA" placeholder="Condition A"></textarea><textarea id="expB" placeholder="Condition B"></textarea><button class="primary" onclick="addExperiment()">CREATE EXPERIMENT</button></div>${(d.experiments||[]).slice().reverse().map((x,i)=>`<div class="card"><small class="gold">${esc(x.status||'OBSERVE')}</small><h3>${esc(x.q)}</h3><p><b>A:</b> ${esc(x.a)}</p><p><b>B:</b> ${esc(x.b)}</p><p class="tiny muted">Created ${new Date(x.date).toLocaleDateString()} • No automatic program change.</p></div>`).join('')}`}
 function addExperiment(){let d=osData(),q=document.getElementById('expQ').value.trim();if(!q)return;d.experiments??=[];d.experiments.push({q,a:document.getElementById('expA').value,b:document.getElementById('expB').value,date:new Date().toISOString(),status:'OBSERVE'});saveOS(d);renderLabPage()}
 function simText(goal){let d=osData(),base='Protect Giant A and Giant B. Do not convert optional work into mandatory adherence.';let map={swim:'Introduce 1 technical swim/week first. Best initial placement: a recovery/optional-capability day. Reassess after 3 exposures before adding a second.',run:'Start with one low-volume running or speed exposure. Avoid stacking maximal running next to heavy lower-body work. Preserve Saturday/Zone 2 by trading, not simply adding, high-intensity volume.',arms:'Use weak-link insertion: add a small biceps/triceps dose to an existing session before creating another full training day.',dunk:'Raise jump/speed work from maintenance toward development while preserving strength. Reduce optional lower-body fatigue before adding more jump contacts.',time:'Use SURVIVAL + COMPACT/MED. Preserve primary strength work, essential pulling/lower-body work, and minimum conditioning/mobility floors.',swim2:'Only add a second swim after the first exposure is tolerable and does not degrade Giant A/B or sleep/recovery.'};return `${map[goal]||'Make the smallest change that directly serves the new goal.'}\n\n${base}\n\nWHY: Project America changes one variable at a time so the result can be interpreted.`}
@@ -1511,7 +1637,13 @@ function saveLifeWin(){let el=document.getElementById('lifeWin'),t=el.value.trim
 function renderTechniquePage(){let d=ensurePA21(osData()),names=[...new Set(L.map(x=>x.name))].sort(),recent=d.technique.slice().reverse().slice(0,10);mpTitle.textContent='Technique Journal';mpBody.innerHTML=`<div class="card"><small class="gold">ONE CLEAR FOCUS AT A TIME</small><h2>Practice cue</h2><select id="techEx" class="chooser">${names.map(n=>`<option>${esc(n)}</option>`).join('')}</select><input id="techCue" class="search" placeholder="Cue: pause, brace, drive, keep elbows…"><select id="techAngle" class="chooser"><option>Self-observation only</option><option>Front angle</option><option>Side angle</option><option>Rear / 45° angle</option></select><textarea id="techNote" placeholder="What did you notice? Keep it specific."></textarea><button class="primary" onclick="saveTechnique()">SAVE PRACTICE NOTE</button><p class="tiny muted">This journal stores your observations and cues. It does not claim to analyze video or diagnose movement problems.</p></div>${recent.map(x=>`<div class="card"><small class="gold">${new Date(x.date).toLocaleDateString()} • ${esc(x.angle)}</small><h3>${esc(x.exercise)}</h3><p><b>CUE:</b> ${esc(x.cue)}</p>${x.note?`<p class="muted">${esc(x.note)}</p>`:''}</div>`).join('')}`}
 function saveTechnique(){let d=ensurePA21(osData()),cue=document.getElementById('techCue').value.trim();if(!cue)return;d.technique.push({exercise:document.getElementById('techEx').value,cue,angle:document.getElementById('techAngle').value,note:document.getElementById('techNote').value.trim(),date:new Date().toISOString()});saveOS(d);renderTechniquePage()}
 function coachReadiness(r){const st=readinessStatus(r),score=readinessScore(r||{}),f=st.fresh;if(!st.stale)return `${st.label} (${score}/100)`;const ago=f.state==='future'?'check-in date in the future':f.state==='never'?'never saved':`last saved ${f.days} day${f.days===1?'':'s'} ago`;return st.jointOverride?`${st.label} (joint flag still applies; ${ago}; ${score}/100)`:`${st.label} (${ago})`}
-function coachSummary(){let d=ensurePA21(osData()),ev=evidenceDecision(),rs=recentSessions(42),tests=Object.entries(d.tests||{}).map(([k,v])=>`${k}: ${v.value} (${confidence(v.date)[0]})`).join('\n')||'No verified tests';let fr={};d.friction.forEach(x=>fr[x.reason]=(fr[x.reason]||0)+1);return `PROJECT AMERICA // COACH HANDOFF\nGenerated: ${new Date().toLocaleString()}\n\nCURRENT MODE: ${(d.mode||'standard').toUpperCase()}\nBODYWEIGHT: ${d.bodyweight||'—'} lb\nREADINESS: ${coachReadiness(d.readiness)}\n\nLAST 6 WEEKS\nCompleted sessions: ${rs.length}\n${Object.entries(rs.reduce((a,x)=>(a[T[x.template]?.[0]||x.template]=(a[T[x.template]?.[0]||x.template]||0)+1,a),{})).map(([k,v])=>`${k}: ${v}`).join('\n')||'No completed sessions'}\n\nEVIDENCE FLAG\n${ev.state} — ${ev.name}\n${ev.why}\n\nVERIFIED / STORED TESTS\n${tests}\n\nFRICTION\n${Object.entries(fr).map(([k,v])=>`${k}: ${v}`).join('\n')||'None logged'}\n\nRECENT REAL-LIFE WINS\n${d.lifeWins.slice(-5).map(x=>'- '+x.text).join('\n')||'None logged'}\n\nDoctrine: Project America does not automatically change programming from one bad exposure.`}
+function completionSummary(rs){
+ if(!rs.length)return '';
+ const n={full:0,partial:0,none:0,unknown:0},partial=[];
+ rs.forEach(x=>{const c=completionOf(x);n[c.prescription]=(n[c.prescription]||0)+1;if(c.prescription==='partial')partial.push(`${T[x.template]?.[0]||x.template}: ${c.performed} of ${c.prescribed} ${c.basis==='items'?'items':'sets'}${c.scope==='full'?'':' ('+c.scope+')'}`)});
+ return `\nCompletion: Full ${n.full} • Partial ${n.partial} • None ${n.none} • Not recorded (earlier sessions) ${n.unknown}`+partial.slice(0,3).map(x=>`\nPartial: ${x}`).join('');
+}
+function coachSummary(){let d=ensurePA21(osData()),ev=evidenceDecision(),rs=recentSessions(42),tests=Object.entries(d.tests||{}).map(([k,v])=>`${k}: ${v.value} (${confidence(v.date)[0]})`).join('\n')||'No verified tests';let fr={};d.friction.forEach(x=>fr[x.reason]=(fr[x.reason]||0)+1);return `PROJECT AMERICA // COACH HANDOFF\nGenerated: ${new Date().toLocaleString()}\n\nCURRENT MODE: ${(d.mode||'standard').toUpperCase()}\nBODYWEIGHT: ${d.bodyweight||'—'} lb\nREADINESS: ${coachReadiness(d.readiness)}\n\nLAST 6 WEEKS\nCompleted sessions: ${rs.length}${completionSummary(rs)}\n${Object.entries(rs.reduce((a,x)=>(a[T[x.template]?.[0]||x.template]=(a[T[x.template]?.[0]||x.template]||0)+1,a),{})).map(([k,v])=>`${k}: ${v}`).join('\n')||'No completed sessions'}${(()=>{const u=budgetUnclassified();return u.total?`\nNote: ${u.total} session${u.total===1?'':'s'} in the last 7 days ${u.total===1?'is':'are'} not counted in the training budget (no category assigned): ${budgetUnclassifiedList(u)}.`:''})()}\n\nEVIDENCE FLAG\n${ev.state} — ${ev.name}\n${ev.why}\n\nVERIFIED / STORED TESTS\n${tests}\n\nFRICTION\n${Object.entries(fr).map(([k,v])=>`${k}: ${v}`).join('\n')||'None logged'}\n\nRECENT REAL-LIFE WINS\n${d.lifeWins.slice(-5).map(x=>'- '+x.text).join('\n')||'None logged'}\n\nDoctrine: Project America does not automatically change programming from one bad exposure.`}
 function renderCoachPage(){mpTitle.textContent='Coach Handoff';let txt=coachSummary();mpBody.innerHTML=`<div class="card"><small class="gold">SELECTIVE • COMPACT • EXPLAINABLE</small><h2>Training handoff</h2><p class="muted">A coach-ready summary of recent training context. Review it before sharing.</p><div id="coachText" class="coachbox">${esc(txt)}</div><div class="os-actions"><button class="primary" onclick="copyCoach()">COPY SUMMARY</button><button class="secondary" onclick="downloadCoach()">EXPORT .TXT</button></div></div>`}
 async function copyCoach(){let t=coachSummary();try{await navigator.clipboard.writeText(t);notice('Coach summary copied.')}catch(e){notice('Clipboard unavailable. Use Export .TXT instead.')}}
 function downloadCoach(){let blob=new Blob([coachSummary()],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Project_America_Coach_Handoff.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}

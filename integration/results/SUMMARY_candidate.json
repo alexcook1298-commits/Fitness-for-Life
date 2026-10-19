@@ -6,12 +6,10 @@
   "failedIds": []
  },
  "reliability": {
-  "passed": 34,
-  "failed": 1,
+  "passed": 35,
+  "failed": 0,
   "total": 35,
-  "failedIds": [
-   "S1.8"
-  ]
+  "failedIds": []
  },
  "integration": {
   "passed": 32,
@@ -25,14 +23,15 @@
   "total": 56,
   "failedIds": []
  },
- "raw": {
-  "passed": 152,
-  "total": 153,
-  "failed": 1
+ "phase2": {
+  "passed": 63,
+  "failed": 0,
+  "total": 63,
+  "failedIds": []
  },
- "adjusted_excluding_superseded_S1_8": {
-  "passed": 153,
-  "total": 153,
+ "raw": {
+  "passed": 216,
+  "total": 216,
   "failed": 0
  }
 }

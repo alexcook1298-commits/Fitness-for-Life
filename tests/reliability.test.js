@@ -16,7 +16,9 @@ const tests=[];
 const test=(id,group,title,fn)=>tests.push({id,group,title,fn});
 let ctx;
 const openApp=async()=>{const p=await ctx.browser.newPage(require('os').tmpdir());await p.goto(ctx.origin+'/');return p};
-const D=(daysAgo,extra='')=>new Date(Date.UTC(2026,9,19,12,0,0)-daysAgo*86400000).toISOString();
+// Anchored to the moment the suite starts: recentSessions() windows are measured against Date.now(), so a fixed calendar anchor would make S1.* fail once the real date passes it.
+const ANCHOR=Date.now();
+const D=(daysAgo,extra='')=>new Date(ANCHOR-daysAgo*86400000).toISOString();
 
 // ---------- page-side helpers (serialised into the page) ----------
 const seedHist=(p,rows)=>p.eval(r=>{localStorage.setItem('pa_hist',JSON.stringify(r))},rows);
@@ -74,12 +76,13 @@ test('S1.7','Fix 1: session status','The fix does not mutate stored sessions (re
  await p.eval(()=>{recentSessions(7);recentSessions(42);budgetData();coachSummary()});
  assert.strictEqual(await p.eval(()=>localStorage.getItem('pa_sessions_v2')),before);
 });
-test('S1.8','Fix 1: session status (unfixed, documented)','KNOWN LIMITATION (not changed in this phase): budgetData classifies templates by substring, so "athletic" and "mobility" also count as Strength/Hypertrophy',async p=>{
+test('S1.8','Fix 1: session status / Training Budget','Training Budget classification is exact: "athletic" counts only as Explosive + Capability and "mobility" only as Low-intensity engine, never as Strength or Hypertrophy (corrected assertion; the original defect assertion is preserved in tests/historical/)',async p=>{
  await seedSessions(p,[sess('m','complete','finishedAt',1,'mobility'),sess('t','complete','finishedAt',1,'athletic')]);
  const b=await p.eval(()=>budgetData());
- // Asserts the CURRENT (known-defective) behaviour so that any later change is deliberate; see report section "Unmasked issue".
- assert.strictEqual(b.Hypertrophy,1,'mobility counted as Hypertrophy (known)');
- assert.strictEqual(b.Strength,1,'athletic counted as Strength (known)');
+ assert.strictEqual(b.Hypertrophy,0,'mobility must not count as Hypertrophy');
+ assert.strictEqual(b.Strength,0,'athletic must not count as Strength');
+ assert.strictEqual(b['Low-intensity engine'],1,'mobility counts as Low-intensity engine');
+ assert.strictEqual(b.Explosive,1,'athletic counts as Explosive');assert.strictEqual(b.Capability,1,'athletic counts as Capability');
 });
 
 // =====================================================================

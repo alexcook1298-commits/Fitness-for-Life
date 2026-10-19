@@ -1,0 +1,80 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T17:38:29.621Z",
+ "passed": 2,
+ "failed": 7,
+ "results": [
+  {
+   "id": "BU1",
+   "group": "BU",
+   "title": "Every one of the 29 templates has an explicit, reviewed classification: the model table matches the app exactly",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetCategories is not defined |     at <anonymous>:1:48 |     at Array.map (<anonymous>) |     at <anonymous>:1:40",
+   "ms": 200
+  },
+  {
+   "id": "BU2",
+   "group": "BU",
+   "title": "Giant C (\"OPTIONAL • CAPABILITY\") counts as Capability only, and not as Strength or Hypertrophy",
+   "pass": false,
+   "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
+   "ms": 173
+  },
+  {
+   "id": "BU3",
+   "group": "BU",
+   "title": "The six templates whose purpose the source does not settle are not forced into any category: they add nothing to the six bars",
+   "pass": true,
+   "error": null,
+   "ms": 125
+  },
+  {
+   "id": "BU4",
+   "group": "BU",
+   "title": "Completed sessions that have no category are reported, not silently dropped: budgetUnclassified() lists them by template",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetUnclassified is not defined |     at <anonymous>:1:6 |     at <anonymous>:1:27",
+   "ms": 124
+  },
+  {
+   "id": "BU5",
+   "group": "BU",
+   "title": "Unclassified reporting follows the same rules as the budget: drafts, sessions older than 7 days and unknown templates are handled, legacy \"completed\" status counts",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetUnclassified is not defined |     at <anonymous>:1:6 |     at <anonymous>:1:27",
+   "ms": 129
+  },
+  {
+   "id": "BU6",
+   "group": "BU",
+   "title": "Training Budget page tells the athlete when sessions are not counted: it names them and says the bars exclude them; with none, no extra line appears",
+   "pass": false,
+   "error": "RECENT EXPOSURE • LAST 7 DAYSAdding training is not free.These bars count recent completed exposure categories. They are not claimed to be physiological MRV.Strength1 exposureHypertrophy0 exposuresExplosive0 exposuresHigh-intensity engine0 exposuresLow-intensity engine0 exposuresCapability0 exposuresOpportunity-cost doctrineSTANDARD: preserve Giant A/B and cardio/abs before adding optional work.If a new demand conflicts with high-intensity lower-body work, move or reduce the optional exposure before touching the an",
+   "ms": 162
+  },
+  {
+   "id": "BU7",
+   "group": "BU",
+   "title": "Coach Handoff carries the same disclosure so an exported summary never implies the bars are the whole week",
+   "pass": false,
+   "error": "PROJECT AMERICA // COACH HANDOFF | Generated: 10/19/2026, 5:38:29 PM |  | CURRENT MODE: STANDARD",
+   "ms": 180
+  },
+  {
+   "id": "BU8",
+   "group": "BU",
+   "title": "Classification is read-only and budgetData still returns exactly the six existing keys (no consumer sees a changed shape)",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetUnclassified is not defined |     at <anonymous>:1:7 |     at <anonymous>:1:81",
+   "ms": 176
+  },
+  {
+   "id": "BU9",
+   "group": "BU",
+   "title": "Source grounding is checkable: each reviewed template's own title/purpose line and block membership are what the model table was derived from",
+   "pass": true,
+   "error": null,
+   "ms": 128
+  }
+ ]
+}

@@ -7,6 +7,7 @@ const fs=require('fs'),os=require('os'),path=require('path'),assert=require('ass
 const {launch}=require('./lib/cdp');
 const {serve}=require('./lib/server');
 const {buildDataset}=require('./fixtures');
+const clock=require('./lib/clock');
 
 const args=process.argv.slice(2);
 const appDir=args.find(a=>!a.startsWith('--')&&args[args.indexOf(a)-1]!=='--json'&&args[args.indexOf(a)-1]!=='--only');
@@ -37,6 +38,8 @@ async function importViaUI(p,file){
 }
 async function restoreViaUI(p){
  const reloaded=p.waitForLoad(30000).then(()=>true,()=>false);
+ // A notice left over from an earlier failed restore on the same page must not be mistaken for this attempt's outcome.
+ await p.eval(()=>{const n=document.getElementById('appNotice');n.textContent='';n.classList.add('hidden')});
  await p.click('button','RESTORE THIS BACKUP');
  const outcome=await Promise.race([reloaded,p.waitForFunction('!document.getElementById("appNotice").classList.contains("hidden")&&/Restore failed|could not|rollback/i.test(document.getElementById("appNotice").textContent)',30000).then(()=>false,()=>null)]);
  if(outcome){await p.waitForFunction('typeof validateBackup==="function"&&document.readyState==="complete"');return {reloaded:true}}
@@ -62,8 +65,9 @@ test('B6','INT-B: budget classification','Block A variants (b2a…b7a) count as 
  expectBudget(await budgetOf(p,['b2b','b3b','b3c','b4b','b5b','b6b','b7b']),{Hypertrophy:7});
 });
 test('B7','INT-B: budget classification','Optional bonus sessions count as Hypertrophy only (previously also Strength)',async p=>expectBudget(await budgetOf(p,['bonusarms','bonusback']),{Hypertrophy:2}));
-test('B8','INT-B: budget classification','Templates that have no budget category (c, practice and skill sessions) are not counted anywhere (previously several were counted as Strength or Hypertrophy by accident)',async p=>{
- expectBudget(await budgetOf(p,['c','bodycontrol','athletepractice','carrypractice','combatintro','waterpractice','practicalskills']),{});
+test('B8','INT-B: budget classification','Practice and skill sessions whose purpose the source does not settle are not counted in any bar (Phase 2: Giant C now counts as Capability; see tests/phase2.test.js BU1-BU9 for the full model)',async p=>{
+ expectBudget(await budgetOf(p,['bodycontrol','athletepractice','carrypractice','combatintro','waterpractice','practicalskills']),{});
+ expectBudget(await budgetOf(p,['c']),{Capability:1});
 });
 test('B9','INT-B: budget classification','A mixed week totals correctly: A + B + athletic + conditioning + mobility',async p=>expectBudget(await budgetOf(p,['a','b','athletic','conditioning','mobility']),{Strength:1,Hypertrophy:1,Explosive:1,Capability:1,'High-intensity engine':1,'Low-intensity engine':1}));
 test('B10','INT-B: budget classification','Training Budget page shows the corrected counts',async p=>{
@@ -97,8 +101,8 @@ test('R1','INT-R: stale readiness','A check-in saved 1 hour ago is fresh: still 
  await setReadiness(p,ALL5,1);const h=await home(p);
  assert(/GREEN/.test(h.card),h.card);assert(!/STALE|NOT CHECKED IN/i.test(h.card+h.dir),h.card);
 });
-test('R2','INT-R: stale readiness','The freshness boundary: 47 hours is fresh, 49 hours is stale',async p=>{
- const r=await p.eval(()=>[47,49].map(h=>{const f=readinessFreshness({...{sleep:5,energy:5,soreness:5,joints:5,motivation:5},date:new Date(Date.now()-h*3600000).toISOString()});return f.state}));
+test('R2','INT-R: stale readiness','The freshness rule is the local calendar day (Phase 2 replaced the provisional 48-hour threshold): 2 h earlier the same day is fresh, 30 h earlier is stale',async p=>{
+ const r=await p.eval(()=>[2,30].map(h=>readinessFreshness({sleep:5,energy:5,soreness:5,joints:5,motivation:5,date:new Date(Date.now()-h*3600000).toISOString()}).state));
  assert.deepStrictEqual(r,['fresh','stale']);
 });
 test('R3','INT-R: stale readiness','A GREEN check-in from 6 days ago is NOT shown as GREEN on Home; a visible stale warning gives its age',async p=>{
@@ -222,7 +226,7 @@ test('K5','INT-K: restore-failure honesty','A normal successful restore is uncha
   for(const t of tests){
    if(only&&!only.includes(t.id))continue;
    let p,error=null;const start=Date.now();
-   try{p=await openApp();await t.fn(p)}catch(e){error=e.message.split('\n').slice(0,4).join(' | ').slice(0,420)}
+   try{p=await openApp();if(t.group==='INT-R'&&t.id!=='R15')await clock.freezeLocal(p,2026,10,19,12,0,0);await t.fn(p)}catch(e){error=e.message.split('\n').slice(0,4).join(' | ').slice(0,420)}
    finally{if(p)await p.close()}
    results.push({id:t.id,group:t.group,title:t.title,pass:!error,error,ms:Date.now()-start});if(error)failed++;
    console.log(`${error?'FAIL':'PASS'} ${t.id.padEnd(4)} ${t.title}${error?'\n      → '+error:''}`);
