@@ -1,0 +1,84 @@
+{
+ "app": "integration/app",
+ "date": "2026-10-19T20:53:36.362Z",
+ "rows": [
+  {
+   "id": "A1",
+   "verdict": "PRESERVED",
+   "title": "Back-off sets are written to training history like any set",
+   "detail": "method Primer + Paused Top/Back-Offs; 3 sets logged (200 top, 2 back-offs at 170): 3 records in pa_hist"
+  },
+  {
+   "id": "A2",
+   "verdict": "PRESERVED",
+   "title": "Evidence, target, coach summary and budget reads never delete or alter back-off records",
+   "detail": "pa_hist byte-identical after the reads"
+  },
+  {
+   "id": "A3",
+   "verdict": "PRESERVED",
+   "title": "Volume accounting counts back-offs: session.setCount and completion.performed include every logged set",
+   "detail": "setCount 3, completion performed 3 of 3 (partial)"
+  },
+  {
+   "id": "A4",
+   "verdict": "PRESERVED",
+   "title": "Training Budget sets-logged includes back-offs",
+   "detail": "{\"Strength\":3}"
+  },
+  {
+   "id": "A5",
+   "verdict": "PRESERVED",
+   "title": "History views still show every set: the PREVIOUS line lists top set and back-offs; chart data has all rows",
+   "detail": "PREVIOUS: 200 × 5 • 170 × 5 • 170 × 5; chart rows 3"
+  },
+  {
+   "id": "A6",
+   "verdict": "PRESERVED",
+   "title": "A full backup contains the back-off records and validates",
+   "detail": "3 records, 2 back-offs"
+  },
+  {
+   "id": "A7",
+   "verdict": "PRESERVED",
+   "title": "Back-off sets stay identifiable for future back-off analysis (method + set number + load + reps + session + date on every record)",
+   "detail": "2 back-off records identified by isBackoffRecord"
+  },
+  {
+   "id": "A8",
+   "verdict": "BY DESIGN",
+   "title": "Back-offs are absent from top-set comparisons",
+   "detail": "evidence series for the exercise: {\"name\":\"SYSTEM\",\"vals\":[]} (top set only: 200 x 5 = 233)"
+  },
+  {
+   "id": "G1",
+   "verdict": "NOTE",
+   "title": "A legacy record with no setNumber is treated as a top set, never as a back-off",
+   "detail": "isBackoffRecord(no setNumber) = false; the original 2.3 app already wrote setNumber, so every stored record has one"
+  },
+  {
+   "id": "B1",
+   "verdict": "PRESERVED",
+   "title": "An unfinished draft keeps every logged set: in pa_hist, in the session record, and in a full backup",
+   "detail": "records 1, in backup 1, status draft"
+  },
+  {
+   "id": "B2",
+   "verdict": "BY DESIGN",
+   "title": "The draft set is excluded from completed-session evidence",
+   "detail": "evidence values [] (a draft 100 x 5 would be 117)"
+  },
+  {
+   "id": "B3",
+   "verdict": "PRESERVED",
+   "title": "After a reload the draft resumes with its set; once finished all its sets are complete-session records and no longer excluded as a draft",
+   "detail": "sets 2, status complete, still treated as draft false; evidence values [] (the engine reports no series until an exercise has 2 or more dated exposures, so values may be empty here)"
+  },
+  {
+   "id": "G2",
+   "verdict": "GAP",
+   "title": "NEXT-target text is not covered by the draft exclusion: it reads the newest session of the series even if that session is an unfinished draft",
+   "detail": "NEXT shows \"60 lb • earn reps/quality before +5 lb\" while its newest session is an abandoned draft with one light set (evidence decision itself ignores that draft)"
+  }
+ ]
+}
