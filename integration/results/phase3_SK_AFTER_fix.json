@@ -1,0 +1,96 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T19:48:03.479Z",
+ "passed": 11,
+ "failed": 0,
+ "results": [
+  {
+   "id": "SK1",
+   "group": "SK",
+   "title": "One Skip control per displayed exercise of a lifting template (labelled), none on checklist templates; nothing else in the workout screen changes",
+   "pass": true,
+   "error": null,
+   "ms": 310
+  },
+  {
+   "id": "SK2",
+   "group": "SK",
+   "title": "Skipping records ONLY a flag on the draft session: no work-set, strength, activator, stretch or cardio record is created, and no set is checked",
+   "pass": true,
+   "error": null,
+   "ms": 231
+  },
+  {
+   "id": "SK3",
+   "group": "SK",
+   "title": "Skip is reversible while the session is a draft",
+   "pass": true,
+   "error": null,
+   "ms": 212
+  },
+  {
+   "id": "SK4",
+   "group": "SK",
+   "title": "An exercise with logged sets cannot be skipped (nothing is changed, the athlete is told); logging a set on a skipped exercise lifts the skip, so a record always wins",
+   "pass": true,
+   "error": null,
+   "ms": 280
+  },
+  {
+   "id": "SK5",
+   "group": "SK",
+   "title": "All four execution states in one session: performed, explicitly skipped, partially performed, unmarked gap (skipped, not marked) and not reached; no sets invented",
+   "pass": true,
+   "error": null,
+   "ms": 344
+  },
+  {
+   "id": "SK6",
+   "group": "SK",
+   "title": "Deliberate skip vs interruption: an explicitly skipped exercise AFTER the last logged one is \"skipped\", whereas the untouched ones after it are \"not reached\"",
+   "pass": true,
+   "error": null,
+   "ms": 286
+  },
+  {
+   "id": "SK7",
+   "group": "SK",
+   "title": "Skipping never makes a session full, never reduces what was prescribed and never fabricates performed sets; skipping everything with no logged work is \"none\"",
+   "pass": true,
+   "error": null,
+   "ms": 345
+  },
+  {
+   "id": "SK8",
+   "group": "SK",
+   "title": "Skipping the presented intensifier never credits or advances the Giant B rotation, and logs no intensifier record",
+   "pass": true,
+   "error": null,
+   "ms": 277
+  },
+  {
+   "id": "SK9",
+   "group": "SK",
+   "title": "A skip survives a reload and resume, and a backup round trip",
+   "pass": true,
+   "error": null,
+   "ms": 308
+  },
+  {
+   "id": "SK10",
+   "group": "SK",
+   "title": "Validator: skips must be {slot index: true} for slots that exist; anything else is refused with a specific message",
+   "pass": true,
+   "error": null,
+   "ms": 157
+  },
+  {
+   "id": "SK11",
+   "group": "SK",
+   "title": "A finished session cannot be re-skipped, and the Finish preview and notice name explicit skips as \"skipped\" (not \"not reached\")",
+   "pass": true,
+   "error": null,
+   "ms": 265
+  }
+ ]
+}

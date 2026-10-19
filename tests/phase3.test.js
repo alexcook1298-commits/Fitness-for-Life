@@ -211,12 +211,14 @@ test('SK6','Deliberate skip vs interruption: an explicitly skipped exercise AFTE
 });
 test('SK7','Skipping never makes a session full, never reduces what was prescribed and never fabricates performed sets; skipping everything with no logged work is "none"',async p=>{
  await skStart(p,'a');const total=(await skSets(p)).reduce((a,b)=>a+b,0);for(let i=0;i<7;i++)await skSkip(p,i);
+ await p.eval(()=>{openFinish();finishSession()});assert(/log some work/i.test(await notice(p)),'finishing with only skips must still be refused (nothing was done): '+await notice(p));
+ await p.eval(()=>document.querySelector('#exs button.check:not([data-record])').click());
  const c=(await skFinish(p)).completion;assert.strictEqual(c.prescribed,total);assert.strictEqual(c.performed,0);assert.strictEqual(c.prescription,'none');assert(c.exercises.every(e=>e.status==='skipped'&&e.basis==='explicit'));
 });
 test('SK8','Skipping the presented intensifier never credits or advances the Giant B rotation, and logs no intensifier record',async p=>{
  await seedS(p,[]);await skStart(p,'b');await p.eval(()=>{currentSession.modes['2:'+selected('b',2)]='Straight Sets'});
  await skSkip(p,3);await skSkip(p,4);await rtStraight(p,2);const s=await skFinish(p);
- assert.deepStrictEqual(s.completion.exercises.filter(e=>e.status==='skipped').map(e=>e.slot),[3,4]);
+ assert.deepStrictEqual(s.completion.exercises.filter(e=>e.status==='skipped'&&e.basis==='explicit').map(e=>e.slot),[3,4]);
  assert.strictEqual(await rtNext(p),0);assert(!(await p.eval(()=>JSON.parse(localStorage.pa_hist||'[]').some(x=>x.intensifier!=='Straight Sets'))));
  assert.strictEqual(await p.eval(()=>completedTemplateCount('b')),1,'the session still counts');
 });
@@ -234,8 +236,8 @@ test('SK10','Validator: skips must be {slot index: true} for slots that exist; a
 });
 test('SK11','A finished session cannot be re-skipped, and the Finish preview and notice name explicit skips as "skipped" (not "not reached")',async p=>{
  await skStart(p,'a');await skLog(p,0,1);await skSkip(p,6);await p.eval(()=>openFinish());
- const panel=await p.eval(()=>document.getElementById('finishPanel').innerText);assert(/Loaded Carry[^.]*\(skipped\)/.test(panel),panel);
- await p.eval(()=>finishSession());const n=await notice(p);assert(/Loaded Carry[^.]*\(skipped\)/.test(n),n);
+ const panel=await p.eval(()=>document.getElementById('finishPanel').innerText);assert(/Farmer Carry \(DB\) \(skipped\)/.test(panel),panel);
+ await p.eval(()=>finishSession());const n=await notice(p);assert(/Farmer Carry \(DB\) \(skipped\)/.test(n),n);
  await p.eval(()=>skipExercise(1));assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_sessions_v2).at(-1))).skips['1'],undefined);
 });
 

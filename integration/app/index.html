@@ -1085,7 +1085,7 @@ function applySessionSlots(s){
 }
 const legacyRender=render;
 render=function(){
- legacyRender();annotateAndRestore();
+ legacyRender();annotateAndRestore();decorateSkips();
  if(currentSession)$('sessionStatus').innerHTML=`<span class="gold">${esc(currentSession.weekMode.toUpperCase())} WEEK • ${esc(BLOCKS.find(b=>b.id===currentSession.phase)?.name||'Extra day')}</span><br><small>Session autosaves on this browser. Exit pauses it; Finish records it.</small><div class="compactbar"><small>${currentSession.compact?'COMPACT / MED • highest-value work only':'Full session'}</small>${currentSession.rotation?.repeat?'<br><small>Rotation: this group is offered again because the last Giant B did not perform its intensifier.</small>':''}${slots[active]?`<button class="secondary ${currentSession.compact?'compact-on':''}" onclick="toggleCompact()">${currentSession.compact?'EXIT COMPACT':'COMPACT / MED'}</button>`:''}</div>`;
 };
 start=function(k){
@@ -1178,6 +1178,30 @@ saveCardio=function(mode){
  for(const [field,value] of Object.entries(data)){const problem=cardioTextProblem(value);if(problem){notice(`Cardio field "${field}" ${problem}.`);return}}
  upsertHistory('pa_cardio_hist',{id:currentSession.id+'|'+cardioMachine+'|'+mode,sessionId:currentSession.id,date:new Date().toISOString(),machine:cardioMachine,mode,data});notice('Cardio details saved.');
 };
+// Explicit skip: a draft-only flag per slot. It never writes a set, a check or any history record.
+function slotLoggedSets(i){const id=currentSession.id;return readJSON('pa_hist',[]).filter(x=>x&&x.sessionId===id&&typeof x.id==='string'&&x.id.split('|')[1]===String(i)).length}
+function decorateSkips(){
+ if(!currentSession||currentSession.status!=='draft'||!slots[active])return;
+ const shown=slots[active].map((_,i)=>i).filter(i=>!(currentSession.compact&&!compactSlot(active,i)));
+ $('exs').querySelectorAll('.exercise').forEach((box,k)=>{
+  const i=shown[k],head=box.querySelector('.exhead');if(i===undefined||!head||head.querySelector('[data-skip]'))return;
+  const on=!!currentSession.skips?.[i],label=slots[active][i][0];
+  const b=document.createElement('button');b.className='secondary skip-btn';b.dataset.skip=String(i);
+  b.setAttribute('aria-label',(on?'Undo skip of ':'Skip ')+label);b.textContent=on?'SKIPPED • UNDO':'SKIP THIS EXERCISE';
+  b.onclick=()=>skipExercise(i);head.appendChild(b);
+  if(on){const n=document.createElement('div');n.className='note tiny';n.textContent='Skipped on purpose. Nothing is recorded for this exercise; log a set to bring it back.';head.appendChild(n)}
+ });
+}
+function skipExercise(i){
+ if(!currentSession||currentSession.status!=='draft'||!slots[active]||!slots[active][i])return;
+ saveDraft();const key=String(i);currentSession.skips??={};
+ if(currentSession.skips[key]){delete currentSession.skips[key];persistSessions();render();return}
+ if(slotLoggedSets(i)){notice('This exercise already has logged sets, so it cannot be skipped. Unlog them first.');return}
+ currentSession.skips[key]=true;if(persistSessions()){render();notice('Exercise skipped. Nothing is recorded for it.')}else delete currentSession.skips[key];
+}
+function liftSkipOnLog(i){if(currentSession?.skips?.[i]&&slotLoggedSets(i)){delete currentSession.skips[i];persistSessions();render()}}
+const logSetBeforeSkip=logSet;logSet=function(b,i,j){const r=logSetBeforeSkip.apply(this,arguments);liftSkipOnLog(i);return r};
+const saveClusterBeforeSkip=saveCluster;saveCluster=function(i,j){const r=saveClusterBeforeSkip.apply(this,arguments);liftSkipOnLog(i);return r};
 // Completion semantics (derived once at Finish; additive session field; never back-filled, never read by rotation, budget or evidence).
 const COMPLETION_PRESCRIPTION=['full','partial','none'],COMPLETION_SCOPE=['full','busy','compact'],COMPLETION_BASIS=['sets','items'],EXERCISE_STATUS=['performed','partial','skipped','not_reached'];
 function completionVerdict(prescribed,performed){return performed<=0?'none':performed>=prescribed&&performed>=2?'full':'partial'}
@@ -1197,6 +1221,7 @@ function computeCompletion(){
   const last=rows.reduce((m,r)=>r.performed>0?r.slot:m,-1);
   rows.forEach(r=>{
    if(r.performed>0){r.status=r.performed>=r.prescribed?'performed':'partial';r.basis='logged'}
+   else if(s.skips?.[r.slot]===true){r.status='skipped';r.basis='explicit'}
    else if(r.slot<last){r.status='skipped';r.basis='later-work-logged'}
    else{r.status='not_reached';r.basis='no-later-work'}
   });
@@ -1216,7 +1241,7 @@ function completionLabel(c){
  const unit=c.basis==='items'?'checklist items ticked':'sets logged',scope=c.scope==='full'?'':' ('+c.scope+')';
  let t=`Prescription ${c.prescription}${scope}: ${c.performed} of ${c.prescribed} ${unit}.`;
  const missing=c.exercises.filter(e=>e.status==='skipped'||e.status==='not_reached'),partly=c.exercises.filter(e=>e.status==='partial');
- if(missing.length)t+=' Not logged: '+missing.map(e=>`${e.name} (${e.status.replace('_',' ')})`).join(', ')+'.';
+ if(missing.length)t+=' Not logged: '+missing.map(e=>`${e.name} (${e.status==='skipped'&&e.basis!=='explicit'?'skipped, not marked':e.status.replace('_',' ')})`).join(', ')+'.';
  if(partly.length)t+=' Partly logged: '+partly.map(e=>`${e.name} (${e.performed} of ${e.prescribed})`).join(', ')+'.';
  return t;
 }
@@ -1312,6 +1337,11 @@ function cardioTextProblem(value){
  if(/<\/?[A-Za-z][^<>]*>|<[!?]/.test(value))return 'looks like HTML. Use < and > only as comparison signs, for example <10:00';
  return null;
 }
+function validateSkips(s){
+ const bad=()=>{throw Error('Invalid skip record.')},k=s.skips;
+ if(k===null||typeof k!=='object'||Array.isArray(k)||Object.keys(k).length>40)bad();
+ for(const [slot,v] of Object.entries(k))if(v!==true||!/^\d{1,2}$/.test(slot)||!baseSlots[s.template]?.[+slot])bad();
+}
 function validateRotation(s){
  const bad=why=>{throw Error('Invalid rotation record'+(why?' ('+why+')':'')+'.')},r=s.rotation;
  if(r===null||typeof r!=='object'||Array.isArray(r)||!Object.keys(r).every(k=>['v','group','slots','methods','basis','repeat'].includes(k))||r.v!==1||s.template!=='b')bad('shape');
@@ -1332,7 +1362,7 @@ function validateCompletion(c){
  for(const e of c.exercises){
   if(!object(e)||!only(e,['slot','name','prescribed','performed','status','basis'])||!int(e.slot,39)||!int(e.prescribed,50)||!int(e.performed,50)||e.performed>e.prescribed)bad('exercise');
   if(typeof e.name!=='string'||!L.some(x=>x.name===e.name)||!EXERCISE_STATUS.includes(e.status))bad('exercise');
-  const ok=e.status==='performed'?e.performed===e.prescribed&&e.prescribed>0&&e.basis==='logged':e.status==='partial'?e.performed>0&&e.performed<e.prescribed&&e.basis==='logged':e.performed===0&&e.basis===(e.status==='skipped'?'later-work-logged':'no-later-work');
+  const ok=e.status==='performed'?e.performed===e.prescribed&&e.prescribed>0&&e.basis==='logged':e.status==='partial'?e.performed>0&&e.performed<e.prescribed&&e.basis==='logged':e.performed===0&&(e.status==='skipped'?['later-work-logged','explicit'].includes(e.basis):e.basis==='no-later-work');
   if(!ok)bad('exercise status');
  }
 }
@@ -1350,6 +1380,7 @@ function validateBackup(obj){
   if(!BLOCKS.some(b=>b.id===s.phase))throw Error('Invalid session block');
   if(Object.hasOwn(s,'completion'))validateCompletion(s.completion);
   if(Object.hasOwn(s,'rotation'))validateRotation(s);
+  if(Object.hasOwn(s,'skips'))validateSkips(s);
  }
  const safeString=x=>typeof x==='string'&&x.length<2000&&!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(x);
  for(const [k,v] of Object.entries(obj.data)){
