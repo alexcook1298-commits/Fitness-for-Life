@@ -1,0 +1,88 @@
+{
+ "scenarios": [
+  {
+   "label": "A. 8-12 range, hit TOP of range (3 sets x12 @RIR1) - should advise load increase",
+   "history": [
+    "100x12@1 d-3  set1",
+    "100x12@1 d-3  set2"
+   ],
+   "previous": "100 × 12 @ 1",
+   "next": "100 lb • progress within Straight Sets"
+  },
+  {
+   "label": "B. 8-12 range, BOTTOM of range (8 @RIR0) - should advise hold/earn reps",
+   "history": [
+    "100x8@0 d-3  set1"
+   ],
+   "previous": "100 × 8 @ 0",
+   "next": "100 lb • progress within Straight Sets"
+  },
+  {
+   "label": "C. Missed range badly (100x5 vs 8-12)",
+   "history": [
+    "100x5@0 d-3  set1"
+   ],
+   "previous": "100 × 5 @ 0",
+   "next": "100 lb • progress within Straight Sets"
+  },
+  {
+   "label": "D. Two sets, last-logged set is the lighter one (105x10 then 100x8)",
+   "history": [
+    "105x10@1 d-3  set1",
+    "100x8@0 d-3  set2"
+   ],
+   "previous": "100 × 8 @ 0",
+   "next": "100 lb • progress within Straight Sets"
+  },
+  {
+   "label": "E. Last exposure 120 days ago",
+   "history": [
+    "100x10@1 d-120  set1"
+   ],
+   "previous": "100 × 10 @ 1",
+   "next": "100 lb • progress within Straight Sets"
+  },
+  {
+   "label": "F. Top Set + Back-Offs: 200x5 top, 170x8 back-off",
+   "history": [
+    "200x5@2 d-3 Top Set + Back-Offs set1",
+    "170x8@2 d-3 Top Set + Back-Offs set2"
+   ],
+   "previous": "200 × 5 • 170 × 8",
+   "next": "170 lb • earn reps/quality before +10 lb"
+  },
+  {
+   "label": "G. Top Set + Back-Offs: top set earned (200x10 on 6-10 range)",
+   "history": [
+    "200x10@1 d-3 Top Set + Back-Offs set1"
+   ],
+   "previous": "200 × 10",
+   "next": "200 lb • earn reps/quality before +10 lb"
+  },
+  {
+   "label": "H. History logged out of date order (insertion order != date order)",
+   "history": [
+    "110x10@1 d-1  set1",
+    "90x10@1 d-30  set1"
+   ],
+   "previous": "90 × 10 @ 1",
+   "next": "90 lb • progress within Straight Sets"
+  },
+  {
+   "label": "I. Pain/limited session recorded at RIR 4 (deliberately easy)",
+   "history": [
+    "100x10@1 d-10  set1",
+    "70x10@4 d-3  set1"
+   ],
+   "previous": "70 × 10 @ 4",
+   "next": "70 lb • progress within Straight Sets"
+  }
+ ],
+ "exerciseIncrementCounts": {
+  "0": 37,
+  "5": 176,
+  "10": 12
+ },
+ "lateralRaiseInc": 5,
+ "note": "targetMode ignores its range argument; recommendations never read reps/RIR against the range."
+}

@@ -1,0 +1,288 @@
+{
+ "app": "/tmp/pa-rel/cand",
+ "date": "2026-10-19T02:51:56.686Z",
+ "passed": 35,
+ "failed": 0,
+ "results": [
+  {
+   "id": "S1.1",
+   "group": "Fix 1: session status",
+   "title": "A session saved with status \"complete\" (what finishSession writes) is counted by recentSessions(7)",
+   "pass": true,
+   "error": null,
+   "ms": 201
+  },
+  {
+   "id": "S1.2",
+   "group": "Fix 1: session status",
+   "title": "Legacy status \"completed\" with completedAt remains counted (compatibility)",
+   "pass": true,
+   "error": null,
+   "ms": 161
+  },
+  {
+   "id": "S1.3",
+   "group": "Fix 1: session status",
+   "title": "Drafts are never counted; window boundaries respected (7 vs 42 days)",
+   "pass": true,
+   "error": null,
+   "ms": 139
+  },
+  {
+   "id": "S1.4",
+   "group": "Fix 1: session status",
+   "title": "Complete sessions with missing, invalid or future-garbage dates do not throw and are not miscounted",
+   "pass": true,
+   "error": null,
+   "ms": 187
+  },
+  {
+   "id": "S1.5",
+   "group": "Fix 1: session status",
+   "title": "Empty / malformed pa_sessions_v2 values return zero without throwing",
+   "pass": true,
+   "error": null,
+   "ms": 158
+  },
+  {
+   "id": "S1.6",
+   "group": "Fix 1: session status",
+   "title": "End-to-end: a session finished through the real finishSession() flows into Training Budget and Coach Handoff",
+   "pass": true,
+   "error": null,
+   "ms": 177
+  },
+  {
+   "id": "S1.7",
+   "group": "Fix 1: session status",
+   "title": "The fix does not mutate stored sessions (read-only compatibility)",
+   "pass": true,
+   "error": null,
+   "ms": 168
+  },
+  {
+   "id": "S1.8",
+   "group": "Fix 1: session status (unfixed, documented)",
+   "title": "KNOWN LIMITATION (not changed in this phase): budgetData classifies templates by substring, so \"athletic\" and \"mobility\" also count as Strength/Hypertrophy",
+   "pass": true,
+   "error": null,
+   "ms": 161
+  },
+  {
+   "id": "E1.1",
+   "group": "Fix 2: evidence engine",
+   "title": "Steady Leg Press 300x8 on 3 dates followed by one Widowmaker 200x20 is NOT flagged ACT/INVESTIGATE",
+   "pass": true,
+   "error": null,
+   "ms": 162
+  },
+  {
+   "id": "E1.2",
+   "group": "Fix 2: evidence engine",
+   "title": "Progressing leg curl followed by ONE light day is not flagged",
+   "pass": true,
+   "error": null,
+   "ms": 185
+  },
+  {
+   "id": "E1.3",
+   "group": "Fix 2: evidence engine",
+   "title": "Progressing paused-bench method followed by a single back-off-only day is not flagged",
+   "pass": true,
+   "error": null,
+   "ms": 146
+  },
+  {
+   "id": "E1.4",
+   "group": "Fix 2: evidence engine",
+   "title": "Records of different strength methods for the same exercise are never compared with each other",
+   "pass": true,
+   "error": null,
+   "ms": 160
+  },
+  {
+   "id": "E1.5",
+   "group": "Fix 2: evidence engine",
+   "title": "Heavy low-rep exposures are not compared with a later high-rep (>12) exposure of the same exercise",
+   "pass": true,
+   "error": null,
+   "ms": 151
+  },
+  {
+   "id": "E1.6",
+   "group": "Fix 2: evidence engine",
+   "title": "True positive preserved: four consecutive Straight Set exposures declining >5% still raise ACT",
+   "pass": true,
+   "error": null,
+   "ms": 146
+  },
+  {
+   "id": "E1.7",
+   "group": "Fix 2: evidence engine",
+   "title": "True positive preserved: three consecutive declining exposures raise INVESTIGATE",
+   "pass": true,
+   "error": null,
+   "ms": 139
+  },
+  {
+   "id": "E1.8",
+   "group": "Fix 2: evidence engine",
+   "title": "Legacy records with no intensifier/strengthMethod fields are still evaluated (as Straight Sets)",
+   "pass": true,
+   "error": null,
+   "ms": 144
+  },
+  {
+   "id": "E1.9",
+   "group": "Fix 2: evidence engine",
+   "title": "Mixed legacy and new-format records of the same exercise form one series",
+   "pass": true,
+   "error": null,
+   "ms": 148
+  },
+  {
+   "id": "E1.10",
+   "group": "Fix 2: evidence engine",
+   "title": "Top set + back-off on the same date: the top set represents the date, steady performance stays OBSERVE",
+   "pass": true,
+   "error": null,
+   "ms": 146
+  },
+  {
+   "id": "E1.11",
+   "group": "Fix 2: evidence engine",
+   "title": "Positive trend and insufficient data still return OBSERVE with unchanged messages",
+   "pass": true,
+   "error": null,
+   "ms": 141
+  },
+  {
+   "id": "E1.12",
+   "group": "Fix 2: evidence engine",
+   "title": "Structured intensifier records remain excluded from the engine",
+   "pass": true,
+   "error": null,
+   "ms": 161
+  },
+  {
+   "id": "E1.13",
+   "group": "Fix 2: evidence engine",
+   "title": "Several exercises: the most deteriorated comparable series is the one reported; a noisy one-off elsewhere is ignored",
+   "pass": true,
+   "error": null,
+   "ms": 157
+  },
+  {
+   "id": "E1.14",
+   "group": "Fix 2: evidence engine",
+   "title": "Zero/NaN/missing numeric fields and unknown shapes do not throw",
+   "pass": true,
+   "error": null,
+   "ms": 147
+  },
+  {
+   "id": "E1.15",
+   "group": "Fix 2: evidence engine (incidental hardening)",
+   "title": "Exercise names that collide with Object.prototype members do not throw",
+   "pass": true,
+   "error": null,
+   "ms": 183
+  },
+  {
+   "id": "E1.16",
+   "group": "Fix 2: evidence engine",
+   "title": "The engine is read-only: pa_hist is unchanged after evaluation",
+   "pass": true,
+   "error": null,
+   "ms": 192
+  },
+  {
+   "id": "R1.1",
+   "group": "Fix 3: readiness",
+   "title": "Joint status 1/5 with every other item 5/5 is not GREEN and says so",
+   "pass": true,
+   "error": null,
+   "ms": 175
+  },
+  {
+   "id": "R1.2",
+   "group": "Fix 3: readiness",
+   "title": "Joint status 2/5 with every other item 5/5 cannot be GREEN (capped at YELLOW, joint-qualified)",
+   "pass": true,
+   "error": null,
+   "ms": 157
+  },
+  {
+   "id": "R1.3",
+   "group": "Fix 3: readiness",
+   "title": "Joint status 3/4/5 with otherwise high scores remains GREEN with unchanged text",
+   "pass": true,
+   "error": null,
+   "ms": 143
+  },
+  {
+   "id": "R1.4",
+   "group": "Fix 3: readiness",
+   "title": "Numeric score is unchanged by the fix (override is classification-only)",
+   "pass": true,
+   "error": null,
+   "ms": 156
+  },
+  {
+   "id": "R1.5",
+   "group": "Fix 3: readiness",
+   "title": "Property check over all 3,125 inputs: label never improves, and is identical to the original rule whenever joints >= 3",
+   "pass": true,
+   "error": null,
+   "ms": 148
+  },
+  {
+   "id": "R1.6",
+   "group": "Fix 3: readiness",
+   "title": "Default (never checked-in) state is unchanged: 72, YELLOW",
+   "pass": true,
+   "error": null,
+   "ms": 145
+  },
+  {
+   "id": "R1.7",
+   "group": "Fix 3: readiness",
+   "title": "String, missing and garbage joint values follow the original defaults (unknown = 3, no override)",
+   "pass": true,
+   "error": null,
+   "ms": 159
+  },
+  {
+   "id": "R1.8",
+   "group": "Fix 3: readiness",
+   "title": "Other low readiness items alone do not trigger the joint override",
+   "pass": true,
+   "error": null,
+   "ms": 152
+  },
+  {
+   "id": "R1.9",
+   "group": "Fix 3: readiness",
+   "title": "UI: saving a check-in with Joint status 1/5 shows RED on the Readiness page and the Mission Status card",
+   "pass": true,
+   "error": null,
+   "ms": 144
+  },
+  {
+   "id": "R1.10",
+   "group": "Fix 3: readiness",
+   "title": "Coach Handoff reports the qualified label for a joint-flagged check-in",
+   "pass": true,
+   "error": null,
+   "ms": 194
+  },
+  {
+   "id": "R1.11",
+   "group": "Fix 3: readiness",
+   "title": "The override does not write or alter stored readiness data",
+   "pass": true,
+   "error": null,
+   "ms": 158
+  }
+ ]
+}
