@@ -1,0 +1,106 @@
+{
+ "a": {
+  "block": 1,
+  "optional": false
+ },
+ "b": {
+  "block": 1,
+  "optional": false
+ },
+ "bu": {
+  "block": 1,
+  "optional": true
+ },
+ "bl": {
+  "block": 1,
+  "optional": true
+ },
+ "c": {
+  "block": 1,
+  "optional": true
+ },
+ "b2a": {
+  "block": 2,
+  "optional": false
+ },
+ "b2b": {
+  "block": 2,
+  "optional": false
+ },
+ "b3a": {
+  "block": 3,
+  "optional": false
+ },
+ "b3b": {
+  "block": 3,
+  "optional": false
+ },
+ "b3c": {
+  "block": 3,
+  "optional": true
+ },
+ "b4a": {
+  "block": 4,
+  "optional": false
+ },
+ "b4b": {
+  "block": 4,
+  "optional": false
+ },
+ "b5a": {
+  "block": 5,
+  "optional": false
+ },
+ "b5b": {
+  "block": 5,
+  "optional": false
+ },
+ "b6a": {
+  "block": 6,
+  "optional": false
+ },
+ "b6b": {
+  "block": 6,
+  "optional": false
+ },
+ "b7a": {
+  "block": 7,
+  "optional": false
+ },
+ "b7b": {
+  "block": 7,
+  "optional": false
+ },
+ "bonusarms": {
+  "block": 0,
+  "optional": true
+ },
+ "bonusback": {
+  "block": 0,
+  "optional": true
+ },
+ "bodycontrol": {
+  "block": 0,
+  "optional": true
+ },
+ "athletepractice": {
+  "block": 0,
+  "optional": true
+ },
+ "combatintro": {
+  "block": 0,
+  "optional": true
+ },
+ "waterpractice": {
+  "block": 0,
+  "optional": true
+ },
+ "carrypractice": {
+  "block": 0,
+  "optional": true
+ },
+ "practicalskills": {
+  "block": 0,
+  "optional": true
+ }
+}

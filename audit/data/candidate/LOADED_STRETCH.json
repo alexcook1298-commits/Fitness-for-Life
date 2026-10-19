@@ -1,0 +1,162 @@
+{
+ "Bench Press (BB)": {
+  "name": "DB Pec Loaded Stretch",
+  "desc": "After pressing, use light-to-moderate dumbbells. Lower into a controlled fly/press-bottom position until the pecs are strongly lengthened, keep the shoulders packed, and hold without forcing extra depth.",
+  "hold": 20
+ },
+ "Reverse-Grip Bench Press (BB)": {
+  "name": "DB Pec Loaded Stretch",
+  "desc": "Use dumbbells after the work sets and settle into a controlled bottom pressing/fly position. Keep the shoulder blades stable and let the pecs take the stretch rather than the front of the shoulder.",
+  "hold": 20
+ },
+ "Incline Press (DB)": {
+  "name": "Incline DB Bottom-Position Hold",
+  "desc": "Stay on the incline bench with lighter dumbbells. Lower to the deep but controlled bottom position, keep forearms and shoulders stable, and hold the loaded pec stretch without relaxing into the joint.",
+  "hold": 20
+ },
+ "Incline Press (Machine)": {
+  "name": "Incline Press Loaded Stretch",
+  "desc": "With a reduced load, settle into the machine's deepest comfortable pressing position and hold tension through the upper pecs. Do not let the shoulders roll forward.",
+  "hold": 20
+ },
+ "Flat Press (DB)": {
+  "name": "Flat DB Bottom-Position Hold",
+  "desc": "With lighter dumbbells, lower into a controlled deep press position and hold the pecs under tension. Keep the shoulder blades set and stop before shoulder discomfort.",
+  "hold": 20
+ },
+ "Chest-Supported Row (DB)": {
+  "name": "Loaded Lat / Upper-Back Reach",
+  "desc": "Use a lighter load and allow the arms to reach long while the torso stays supported. Hold the shoulder blades protracted under control without letting the shoulder joint hang passively.",
+  "hold": 20
+ },
+ "Chest-Supported Row (Machine)": {
+  "name": "Machine Row Lengthened Hold",
+  "desc": "Reduce the load, let the handles travel forward under control, and hold the lats/upper back in the long position while keeping the torso supported.",
+  "hold": 20
+ },
+ "Seated Cable Row": {
+  "name": "Cable Lat Lengthened Hold",
+  "desc": "With a lighter cable load, reach forward under control and let the shoulder blades spread while keeping the spine stable. Hold tension in the lats rather than rounding aggressively.",
+  "hold": 20
+ },
+ "Pull-Up": {
+  "name": "Assisted Loaded Lat Hang",
+  "desc": "Use enough foot or machine assistance to make the hold controlled. Let the lats lengthen overhead while keeping active shoulder control instead of dropping into a painful passive hang.",
+  "hold": 20
+ },
+ "Lat Pulldown": {
+  "name": "Pulldown Overhead Loaded Stretch",
+  "desc": "Use a light cable load and allow the arms to rise overhead until the lats are long. Keep the ribs controlled and maintain a small amount of muscular tension.",
+  "hold": 20
+ },
+ "Assisted Pull-Up": {
+  "name": "Assisted Loaded Lat Hang",
+  "desc": "Use the assistance to control the bottom position. Hold with the arms overhead and lats lengthened while keeping the shoulders comfortable and slightly active.",
+  "hold": 20
+ },
+ "Weighted Pull-Up": {
+  "name": "Assisted Lat Hang",
+  "desc": "Do not use the heavy pull-up load for the stretch. Remove external weight, add assistance if needed, and hold a controlled overhead lat stretch.",
+  "hold": 20
+ },
+ "Hammer Squat Press": {
+  "name": "Loaded Deep-Squat Hold",
+  "desc": "Use a deliberately reduced load. Settle into the deepest pain-free squat position you can control and hold tension through the quads and hips without relaxing onto the stops.",
+  "hold": 20
+ },
+ "Leg Press": {
+  "name": "Leg Press Lengthened Hold",
+  "desc": "Use a substantially lighter load. Lower to a comfortable deep position and hold while keeping the pelvis stable and knees tracking normally. Never force depth.",
+  "hold": 20
+ },
+ "Belt Squat": {
+  "name": "Belt-Squat Bottom Hold",
+  "desc": "With a reduced load and support available, sit into a deep pain-free squat and hold tension through the quads and hips. Stay controlled rather than hanging on the joints.",
+  "hold": 20
+ },
+ "Seated Leg Curl": {
+  "name": "Loaded Hamstring Lengthened Hold",
+  "desc": "Use a lighter load and hold the knee near the machine's lengthened hamstring position while keeping the hips firmly planted. Avoid forcing knee or hamstring range.",
+  "hold": 20
+ },
+ "Lying Leg Curl": {
+  "name": "Loaded Hamstring Lengthened Hold",
+  "desc": "With a light load, control the leg toward the lengthened position and hold tension in the hamstrings without hyperextending or relaxing into the knee.",
+  "hold": 20
+ },
+ "Romanian Deadlift (BB)": {
+  "name": "Light RDL Lengthened Hold",
+  "desc": "Use a much lighter load than your work sets. Hinge until the hamstrings are strongly lengthened with a neutral spine, then hold the position under muscular control.",
+  "hold": 15
+ },
+ "Romanian Deadlift (DB)": {
+  "name": "DB RDL Lengthened Hold",
+  "desc": "Use lighter dumbbells, hinge back with a neutral spine until the hamstrings are strongly lengthened, and hold without chasing extra depth.",
+  "hold": 15
+ },
+ "Rear-Delt Fly (DB)": {
+  "name": "Loaded Rear-Delt Cross-Body Hold",
+  "desc": "Use a very light dumbbell and bring the arm across the body into a controlled rear-delt stretch. Keep the shoulder down and avoid yanking on the joint.",
+  "hold": 15
+ },
+ "Reverse Pec Deck": {
+  "name": "Rear-Delt Machine Lengthened Hold",
+  "desc": "With a light load, allow the handles toward the start position until the rear delts are lengthened, then hold without letting the shoulders collapse forward.",
+  "hold": 15
+ },
+ "Biceps Curl (DB)": {
+  "name": "Incline DB Biceps Loaded Stretch",
+  "desc": "Sit on an incline bench with very light dumbbells and let the arms hang slightly behind the torso. Keep the shoulders stable and elbows extended comfortably while the biceps stay loaded.",
+  "hold": 15
+ },
+ "Biceps Curl (BB)": {
+  "name": "DB Biceps Loaded Stretch",
+  "desc": "Switch to light dumbbells after curls. Let the arms hang slightly behind the torso with the elbows comfortably extended and shoulders stable.",
+  "hold": 15
+ },
+ "Cable Curl": {
+  "name": "Bayesian Cable Biceps Hold",
+  "desc": "Face away from a low cable with the arm slightly behind the torso. Use a light load and hold the biceps in the lengthened position without forcing the shoulder forward.",
+  "hold": 15
+ },
+ "Triceps Pressdown": {
+  "name": "Overhead Cable Triceps Loaded Stretch",
+  "desc": "Use a light cable load overhead and let the elbows flex until the long head of the triceps is strongly lengthened. Keep the upper arms controlled and ribs down.",
+  "hold": 15
+ },
+ "Cable Triceps Extension": {
+  "name": "Overhead Cable Triceps Loaded Stretch",
+  "desc": "With a light load, hold the cable in the deep elbow-flexed overhead position. Keep the upper arms stable and stop if the elbows complain.",
+  "hold": 15
+ },
+ "Lateral Raise (Cable)": {
+  "name": "Cable Delt Lengthened Hold",
+  "desc": "With a very light cable load, let the working arm cross slightly toward the body into the lengthened delt position. Keep the shoulder controlled rather than hanging on it.",
+  "hold": 15
+ },
+ "Lateral Raise (Machine)": {
+  "name": "Delt Lengthened Hold",
+  "desc": "Use a light load and allow the arm toward the machine's start position until the lateral delt is lengthened. Hold without forcing the shoulder joint.",
+  "hold": 15
+ },
+ "Standing Calf Raise": {
+  "name": "Loaded Calf Bottom Hold",
+  "desc": "With a manageable load, sink the heel into the bottom position and hold the calf under tension. Keep control instead of bouncing or hanging on the Achilles.",
+  "hold": 20
+ },
+ "Seated Calf Raise": {
+  "name": "Loaded Soleus Bottom Hold",
+  "desc": "With a manageable load, lower the heel fully and hold the bottom position while maintaining muscular control through the calf.",
+  "hold": 20
+ },
+ "Leg Press Calf Raise": {
+  "name": "Leg-Press Calf Bottom Hold",
+  "desc": "Use a controlled load, let the heels descend into a comfortable calf stretch, and hold without bouncing or forcing ankle range.",
+  "hold": 20
+ },
+ "Farmer Carry (DB)": {
+  "name": "Loaded Grip Hold",
+  "desc": "After the carries, stand tall with a reduced pair of dumbbells and hold them with long arms for a controlled grip/forearm stretch and isometric. Keep shoulders set.",
+  "hold": 20
+ }
+}

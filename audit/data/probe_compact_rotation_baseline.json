@@ -1,0 +1,27 @@
+{
+ "noSessions": [
+  "Rear Delts: Myo-Reps",
+  "Biceps: DC Rest-Pause",
+  "Vertical Pull: Straight Sets",
+  "Triceps: Straight Sets",
+  "Incline Press: Straight Sets",
+  "Widowmaker: Straight Sets"
+ ],
+ "afterOneCompactB": [
+  "Rear Delts: Straight Sets",
+  "Biceps: Straight Sets",
+  "Vertical Pull: Rest-Pause",
+  "Triceps: Myo-Reps",
+  "Incline Press: Straight Sets",
+  "Widowmaker: Straight Sets"
+ ],
+ "afterOneFullB": [
+  "Rear Delts: Straight Sets",
+  "Biceps: Straight Sets",
+  "Vertical Pull: Rest-Pause",
+  "Triceps: Myo-Reps",
+  "Incline Press: Straight Sets",
+  "Widowmaker: Straight Sets"
+ ],
+ "identical": true
+}

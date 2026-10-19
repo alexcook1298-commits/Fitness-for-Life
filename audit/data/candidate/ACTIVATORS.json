@@ -1,0 +1,30 @@
+{
+ "Incline Press": {
+  "options": [
+   "Cable Fly",
+   "Low-to-High Cable Fly"
+  ],
+  "cue": "Pec Fly → Incline Press"
+ },
+ "Vertical Pull": {
+  "options": [
+   "Straight-Arm Pulldown",
+   "Cable Pullover",
+   "Machine Pullover"
+  ],
+  "cue": "Pullover / Straight-Arm Pulldown → Pull"
+ },
+ "Hip Hinge": {
+  "options": [
+   "Seated Leg Curl",
+   "Lying Leg Curl"
+  ],
+  "cue": "Leg Curl → RDL"
+ },
+ "Widowmaker": {
+  "options": [
+   "Leg Extension"
+  ],
+  "cue": "Leg Extension → Leg Press / Belt Squat"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "SPEED": [
+  "Establish verified 40",
+  "Sub-6.00",
+  "5.50",
+  "5.25",
+  "Sub-5.00"
+ ],
+ "DUNK": [
+  "Landing mechanics",
+  "Jump tolerance",
+  "Touch rim",
+  "Grab rim",
+  "Wrist over rim",
+  "Controlled dunk"
+ ],
+ "ROPE": [
+  "30s dead hang",
+  "Towel hang",
+  "Strict pull-ups",
+  "5-ft rope",
+  "10-ft rope",
+  "15-ft arms-only"
+ ],
+ "PULL": [
+  "10 strict BW",
+  "+25 lb",
+  "+45 lb",
+  "+70 lb",
+  "+90 lb",
+  "300-lb system ×10"
+ ]
+}

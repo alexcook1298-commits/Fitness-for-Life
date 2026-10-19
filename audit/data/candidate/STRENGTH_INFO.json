@@ -1,0 +1,50 @@
+{
+ "Straight Heavy Sets": {
+  "scheme": "Programmed heavy sets with full normal rest.",
+  "why": "Best baseline when the goal is clean, repeatable force production without extra complexity."
+ },
+ "Top Set + Back-Offs": {
+  "scheme": "First work set = heaviest quality set; remaining sets = lighter back-off work.",
+  "why": "Combines a high-force exposure with useful volume while avoiding repeated all-out heavy sets."
+ },
+ "Cluster Sets": {
+  "scheme": "Break the prescribed reps into small clusters such as 2+2+2 with ~15–30 sec inside the set.",
+  "why": "Lets you accumulate more high-quality reps with a heavy load while protecting rep speed and technique."
+ },
+ "Heavy Primer + Work Sets": {
+  "scheme": "Optional crisp heavy single before the programmed work sets; keep ~2–3 RIR and never grind.",
+  "why": "Provides a heavier exposure without turning the session into max testing; the primer is logged separately from progression work."
+ },
+ "Primer + Paused Top/Back-Offs": {
+  "scheme": "One crisp heavy single @ ~2–3 RIR → full rest → paused top set → 1–2 lighter paused back-off sets.",
+  "why": "Separates exposure, performance and volume: the primer rehearses heavy load, the paused top set is the main performance set, and back-offs add quality volume."
+ },
+ "Paused Reps": {
+  "scheme": "Use a deliberate pause at the programmed weak/starting position, then accelerate with control.",
+  "why": "Removes momentum and develops force from a stable position while improving technique under load."
+ },
+ "Wave Loading": {
+  "scheme": "Build intensity across a small wave, reset, then repeat slightly heavier when the full template supports enough exposures.",
+  "why": "Repeated climbs can provide heavy practice without making every rep a maximal effort. Do not add sets automatically."
+ },
+ "Dead-Stop / Pin Work": {
+  "scheme": "Each rep begins from a true stop or pins; no bounce or stored momentum.",
+  "why": "Targets force production from a specific position and can address a known sticking point."
+ },
+ "Speed / Dynamic Work": {
+  "scheme": "Submaximal load, perfect positions, maximal safe intent to accelerate every rep.",
+  "why": "Trains rate of force development. Stop when speed or technique clearly deteriorates."
+ },
+ "Rep-PR Set": {
+  "scheme": "One designated set may pursue a clean rep best while preserving ~1 RIR; no ugly grinders.",
+  "why": "Creates a repeatable performance benchmark without requiring a 1RM test."
+ },
+ "Density Progression": {
+  "scheme": "Keep load/work stable and gradually complete the same quality work with less recovery.",
+  "why": "Builds repeatable strength and work capacity; useful when density itself is the goal."
+ },
+ "Load / Distance Progression": {
+  "scheme": "For carries: first increase clean load or distance/time, then use density only as an optional secondary challenge.",
+  "why": "Matches the real goal of loaded movement, grip and trunk strength better than chasing shorter rests as the primary progression."
+ }
+}

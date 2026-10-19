@@ -1,0 +1,50 @@
+{
+ "schedule": {
+  "0": [
+   "a",
+   "GIANT A",
+   "Strength-biased hypertrophy"
+  ],
+  "1": [
+   "conditioning",
+   "ZONE 2 + ABS A",
+   "Engine / recovery"
+  ],
+  "2": [
+   "b",
+   "GIANT B",
+   "Hypertrophy-biased strength"
+  ],
+  "3": [
+   "mobility",
+   "RECOVERY + MOBILITY",
+   "Restore"
+  ],
+  "4": [
+   "athletic",
+   "ATHLETIC / SPEED + POWER",
+   "Optional capability"
+  ],
+  "5": [
+   "mobility",
+   "RECOVERY + MOBILITY",
+   "Restore"
+  ],
+  "6": [
+   "conditioning",
+   "INTERVALS + ABS B",
+   "Engine"
+  ]
+ },
+ "domains": [
+  "Strength",
+  "Hypertrophy",
+  "Speed",
+  "Power",
+  "Aerobic",
+  "Work Capacity",
+  "Grip / Climbing",
+  "Mobility"
+ ],
+ "staleDays": 70
+}

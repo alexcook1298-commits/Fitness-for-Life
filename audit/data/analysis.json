@@ -1,0 +1,839 @@
+{
+ "perSession": {
+  "A": {
+   "Chest": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Triceps": {
+    "direct": 0,
+    "indirect": 1.5,
+    "extendedDirect": 0
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 1.5,
+    "extendedDirect": 0
+   },
+   "Upper back / mid back": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Biceps": {
+    "direct": 0,
+    "indirect": 2,
+    "extendedDirect": 0
+   },
+   "Rear delts": {
+    "direct": 0,
+    "indirect": 1,
+    "extendedDirect": 0
+   },
+   "Quads": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Glutes": {
+    "direct": 0,
+    "indirect": 1,
+    "extendedDirect": 0
+   },
+   "Hamstrings": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Side delts": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Lats": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Grip / trunk / traps": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   }
+  },
+  "B_cycle0": {
+   "Chest": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Triceps": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 2
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 1,
+    "extendedDirect": 0
+   },
+   "Lats": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Biceps": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 4
+   },
+   "Hamstrings": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Glutes": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Rear delts": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Quads": {
+    "direct": 1,
+    "indirect": 0,
+    "extendedDirect": 1
+   },
+   "Calves": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   }
+  },
+  "B_cycle1": {
+   "Chest": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Triceps": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 5
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 1,
+    "extendedDirect": 0
+   },
+   "Lats": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 4
+   },
+   "Biceps": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 2
+   },
+   "Hamstrings": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Glutes": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Rear delts": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Quads": {
+    "direct": 1,
+    "indirect": 0,
+    "extendedDirect": 1
+   },
+   "Calves": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   }
+  },
+  "B_cycle2": {
+   "Chest": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Triceps": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 2
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 1,
+    "extendedDirect": 0
+   },
+   "Lats": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Biceps": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 2
+   },
+   "Hamstrings": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Glutes": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Rear delts": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Quads": {
+    "direct": 1,
+    "indirect": 0,
+    "extendedDirect": 1
+   },
+   "Calves": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   }
+  },
+  "BU": {
+   "Chest": {
+    "direct": 6,
+    "indirect": 0,
+    "extendedDirect": 10
+   },
+   "Triceps": {
+    "direct": 3,
+    "indirect": 1.5,
+    "extendedDirect": 6
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 1.5,
+    "extendedDirect": 0
+   },
+   "Lats": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 8
+   },
+   "Biceps": {
+    "direct": 3,
+    "indirect": 3,
+    "extendedDirect": 5
+   },
+   "Upper back / mid back": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Rear delts": {
+    "direct": 3,
+    "indirect": 1.5,
+    "extendedDirect": 6
+   },
+   "Side delts": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 9
+   }
+  },
+  "BL": {
+   "Hamstrings": {
+    "direct": 6,
+    "indirect": 0,
+    "extendedDirect": 9
+   },
+   "Glutes": {
+    "direct": 3,
+    "indirect": 4,
+    "extendedDirect": 3
+   },
+   "Quads": {
+    "direct": 11,
+    "indirect": 0,
+    "extendedDirect": 17
+   },
+   "Adductors": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 4
+   },
+   "Calves": {
+    "direct": 4,
+    "indirect": 0,
+    "extendedDirect": 7
+   }
+  },
+  "C": {
+   "Lats": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Biceps": {
+    "direct": 0,
+    "indirect": 1.5,
+    "extendedDirect": 0
+   },
+   "Front delts": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Side delts": {
+    "direct": 0,
+    "indirect": 1.5,
+    "extendedDirect": 0
+   },
+   "Triceps": {
+    "direct": 0,
+    "indirect": 1.5,
+    "extendedDirect": 0
+   },
+   "Grip / trunk / traps": {
+    "direct": 6,
+    "indirect": 0,
+    "extendedDirect": 6
+   },
+   "Core": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   }
+  }
+ },
+ "weeks": {
+  "normal_A_plus_B": {
+   "Chest": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Triceps": {
+    "direct": 2,
+    "indirect": 2.5,
+    "extendedDirect": 3
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 2.5,
+    "extendedDirect": 0
+   },
+   "Upper back / mid back": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Biceps": {
+    "direct": 2,
+    "indirect": 3,
+    "extendedDirect": 2.7
+   },
+   "Rear delts": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 3
+   },
+   "Quads": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Glutes": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 2
+   },
+   "Hamstrings": {
+    "direct": 4,
+    "indirect": 0,
+    "extendedDirect": 7
+   },
+   "Side delts": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Lats": {
+    "direct": 4,
+    "indirect": 0,
+    "extendedDirect": 4.7
+   },
+   "Grip / trunk / traps": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Calves": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   }
+  },
+  "extra_with_Upper": {
+   "Chest": {
+    "direct": 11,
+    "indirect": 0,
+    "extendedDirect": 15
+   },
+   "Triceps": {
+    "direct": 5,
+    "indirect": 4,
+    "extendedDirect": 9
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 4,
+    "extendedDirect": 0
+   },
+   "Upper back / mid back": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 7
+   },
+   "Biceps": {
+    "direct": 5,
+    "indirect": 6,
+    "extendedDirect": 7.7
+   },
+   "Rear delts": {
+    "direct": 5,
+    "indirect": 2.5,
+    "extendedDirect": 9
+   },
+   "Quads": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Glutes": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 2
+   },
+   "Hamstrings": {
+    "direct": 4,
+    "indirect": 0,
+    "extendedDirect": 7
+   },
+   "Side delts": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 14
+   },
+   "Lats": {
+    "direct": 9,
+    "indirect": 0,
+    "extendedDirect": 12.7
+   },
+   "Grip / trunk / traps": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Calves": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   }
+  },
+  "extra_with_Lower": {
+   "Chest": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Triceps": {
+    "direct": 2,
+    "indirect": 2.5,
+    "extendedDirect": 3
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 2.5,
+    "extendedDirect": 0
+   },
+   "Upper back / mid back": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Biceps": {
+    "direct": 2,
+    "indirect": 3,
+    "extendedDirect": 2.7
+   },
+   "Rear delts": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 3
+   },
+   "Quads": {
+    "direct": 14,
+    "indirect": 0,
+    "extendedDirect": 20
+   },
+   "Glutes": {
+    "direct": 5,
+    "indirect": 5,
+    "extendedDirect": 5
+   },
+   "Hamstrings": {
+    "direct": 10,
+    "indirect": 0,
+    "extendedDirect": 16
+   },
+   "Side delts": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Lats": {
+    "direct": 4,
+    "indirect": 0,
+    "extendedDirect": 4.7
+   },
+   "Grip / trunk / traps": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Calves": {
+    "direct": 6,
+    "indirect": 0,
+    "extendedDirect": 9
+   },
+   "Adductors": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 4
+   }
+  },
+  "extra_with_both_B_splits": {
+   "Chest": {
+    "direct": 11,
+    "indirect": 0,
+    "extendedDirect": 15
+   },
+   "Triceps": {
+    "direct": 5,
+    "indirect": 4,
+    "extendedDirect": 9
+   },
+   "Front delts": {
+    "direct": 0,
+    "indirect": 4,
+    "extendedDirect": 0
+   },
+   "Upper back / mid back": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 7
+   },
+   "Biceps": {
+    "direct": 5,
+    "indirect": 6,
+    "extendedDirect": 7.7
+   },
+   "Rear delts": {
+    "direct": 5,
+    "indirect": 2.5,
+    "extendedDirect": 9
+   },
+   "Quads": {
+    "direct": 14,
+    "indirect": 0,
+    "extendedDirect": 20
+   },
+   "Glutes": {
+    "direct": 5,
+    "indirect": 5,
+    "extendedDirect": 5
+   },
+   "Hamstrings": {
+    "direct": 10,
+    "indirect": 0,
+    "extendedDirect": 16
+   },
+   "Side delts": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 14
+   },
+   "Lats": {
+    "direct": 9,
+    "indirect": 0,
+    "extendedDirect": 12.7
+   },
+   "Grip / trunk / traps": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Calves": {
+    "direct": 6,
+    "indirect": 0,
+    "extendedDirect": 9
+   },
+   "Adductors": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 4
+   }
+  },
+  "normal_plus_GiantC": {
+   "Chest": {
+    "direct": 5,
+    "indirect": 0,
+    "extendedDirect": 5
+   },
+   "Triceps": {
+    "direct": 2,
+    "indirect": 4,
+    "extendedDirect": 3
+   },
+   "Front delts": {
+    "direct": 3,
+    "indirect": 2.5,
+    "extendedDirect": 3
+   },
+   "Upper back / mid back": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Biceps": {
+    "direct": 2,
+    "indirect": 4.5,
+    "extendedDirect": 2.7
+   },
+   "Rear delts": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 3
+   },
+   "Quads": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   },
+   "Glutes": {
+    "direct": 2,
+    "indirect": 1,
+    "extendedDirect": 2
+   },
+   "Hamstrings": {
+    "direct": 4,
+    "indirect": 0,
+    "extendedDirect": 7
+   },
+   "Side delts": {
+    "direct": 2,
+    "indirect": 1.5,
+    "extendedDirect": 5
+   },
+   "Lats": {
+    "direct": 7,
+    "indirect": 0,
+    "extendedDirect": 7.7
+   },
+   "Grip / trunk / traps": {
+    "direct": 9,
+    "indirect": 0,
+    "extendedDirect": 9
+   },
+   "Calves": {
+    "direct": 2,
+    "indirect": 0,
+    "extendedDirect": 2
+   },
+   "Core": {
+    "direct": 3,
+    "indirect": 0,
+    "extendedDirect": 3
+   }
+  }
+ },
+ "durationModel": {
+  "assumptions": {
+   "workSecPerSet": 45,
+   "setupSecPerExercise": 60,
+   "loadedStretchSec": 65,
+   "warmupMin": {
+    "a": 12,
+    "b": 12,
+    "bu": 12,
+    "bl": 12,
+    "c": 12
+   },
+   "cooldownMin": 5,
+   "stageWorkSec": 25,
+   "primerExtraSecA": 240
+  },
+  "results": {
+   "a": {
+    "default": {
+     "coreMin": 70,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 87
+    },
+    "withoutLoadedStretches": {
+     "coreMin": 62,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 79
+    },
+    "withoutWarmupCooldown": {
+     "coreMin": 70,
+     "warmupMin": 0,
+     "cooldownMin": 0,
+     "totalMin": 70
+    }
+   },
+   "b#0": {
+    "default": {
+     "coreMin": 59,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 76
+    },
+    "withoutLoadedStretches": {
+     "coreMin": 50,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 67
+    },
+    "withoutWarmupCooldown": {
+     "coreMin": 59,
+     "warmupMin": 0,
+     "cooldownMin": 0,
+     "totalMin": 59
+    }
+   },
+   "b#1": {
+    "default": {
+     "coreMin": 57,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 74
+    },
+    "withoutLoadedStretches": {
+     "coreMin": 49,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 66
+    },
+    "withoutWarmupCooldown": {
+     "coreMin": 57,
+     "warmupMin": 0,
+     "cooldownMin": 0,
+     "totalMin": 57
+    }
+   },
+   "b#2": {
+    "default": {
+     "coreMin": 56,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 73
+    },
+    "withoutLoadedStretches": {
+     "coreMin": 47,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 64
+    },
+    "withoutWarmupCooldown": {
+     "coreMin": 56,
+     "warmupMin": 0,
+     "cooldownMin": 0,
+     "totalMin": 56
+    }
+   },
+   "bu": {
+    "default": {
+     "coreMin": 84,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 101
+    },
+    "withoutLoadedStretches": {
+     "coreMin": 74,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 91
+    },
+    "withoutWarmupCooldown": {
+     "coreMin": 84,
+     "warmupMin": 0,
+     "cooldownMin": 0,
+     "totalMin": 84
+    }
+   },
+   "bl": {
+    "default": {
+     "coreMin": 88,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 105
+    },
+    "withoutLoadedStretches": {
+     "coreMin": 80,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 97
+    },
+    "withoutWarmupCooldown": {
+     "coreMin": 88,
+     "warmupMin": 0,
+     "cooldownMin": 0,
+     "totalMin": 88
+    }
+   },
+   "c": {
+    "default": {
+     "coreMin": 48,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 65
+    },
+    "withoutLoadedStretches": {
+     "coreMin": 45,
+     "warmupMin": 12,
+     "cooldownMin": 5,
+     "totalMin": 62
+    },
+    "withoutWarmupCooldown": {
+     "coreMin": 48,
+     "warmupMin": 0,
+     "cooldownMin": 0,
+     "totalMin": 48
+    }
+   }
+  }
+ }
+}

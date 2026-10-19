@@ -1,0 +1,158 @@
+[
+ [
+  "Chest-Supported T-Bar Row",
+  "Chest-Supported Row (Machine)",
+  "Machine",
+  "Chest support with a fixed handle path."
+ ],
+ [
+  "Horizontal Leg Press",
+  "Leg Press",
+  "Machine",
+  "Seated, horizontal sled path rather than an angled sled."
+ ],
+ [
+  "Standing Leg Curl (Machine)",
+  "Seated Leg Curl",
+  "Machine",
+  "Standing support; train one leg at a time. Log reps per leg."
+ ],
+ [
+  "Seated Leg Curl (Single-Leg)",
+  "Seated Leg Curl",
+  "Machine",
+  "Same seated knee-flexion pattern, one leg at a time. Log reps per leg."
+ ],
+ [
+  "Lying Leg Curl (Single-Leg)",
+  "Lying Leg Curl",
+  "Machine",
+  "Same lying knee-flexion pattern, one leg at a time. Log reps per leg."
+ ],
+ [
+  "Seated Lateral Raise (DB)",
+  "Lateral Raise (DB)",
+  "DB",
+  "Seated position limits torso movement during the side raise."
+ ],
+ [
+  "Neutral-Grip Pull-Up",
+  "Pull-Up",
+  "Bodyweight",
+  "Palms face one another; keep the same controlled vertical pull."
+ ],
+ [
+  "Farmer Carry (KB)",
+  "Farmer Carry (DB)",
+  "KB",
+  "One kettlebell at each side; log ONE kettlebell’s weight."
+ ],
+ [
+  "Farmer Carry (Handles)",
+  "Farmer Carry (DB)",
+  "Carry Handles",
+  "Farmer handles held at each side; log ONE loaded handle."
+ ],
+ [
+  "Neutral-Grip Incline Press (DB)",
+  "Incline Press (DB)",
+  "DB",
+  "Same incline press with palms facing one another."
+ ],
+ [
+  "Romanian Deadlift (Smith)",
+  "Romanian Deadlift (BB)",
+  "Smith",
+  "Same bilateral hip hinge with a guided bar path."
+ ],
+ [
+  "Romanian Deadlift (KB)",
+  "Romanian Deadlift (DB)",
+  "KB",
+  "Two kettlebells held near the legs; log ONE kettlebell’s weight."
+ ],
+ [
+  "Chest-Supported Rear-Delt Fly (DB)",
+  "Rear-Delt Fly (DB)",
+  "DB",
+  "Chest on an incline bench; raise the arms outward with a soft elbow."
+ ],
+ [
+  "Seated Rear-Delt Fly (DB)",
+  "Rear-Delt Fly (DB)",
+  "DB",
+  "Seated and hinged forward; keep the torso still during the reverse fly."
+ ],
+ [
+  "Seated Curl (DB)",
+  "Biceps Curl (DB)",
+  "DB",
+  "Seated, upper arms at the sides, palms-up curl."
+ ],
+ [
+  "Straight-Bar Pressdown",
+  "Triceps Pressdown",
+  "Cable",
+  "Straight attachment and palms-down grip; upper arms stay at the sides."
+ ],
+ [
+  "Weighted Neutral-Grip Pull-Up",
+  "Weighted Pull-Up",
+  "Weighted BW",
+  "Palms facing; log added external weight using the existing weighted-pull-up convention."
+ ],
+ [
+  "Weighted Chin-Up",
+  "Weighted Pull-Up",
+  "Weighted BW",
+  "Palms toward you; elbow-flexor contribution differs from an overhand pull-up."
+ ],
+ [
+  "Seated Overhead Press (DB)",
+  "Overhead Press (DB)",
+  "DB",
+  "Seated strict press with back support; no leg drive."
+ ],
+ [
+  "Seated Overhead Press (BB)",
+  "Overhead Press (BB)",
+  "BB",
+  "Seated strict barbell press; no leg drive."
+ ],
+ [
+  "Smith Machine Shoulder Press",
+  "Shoulder Press (Machine)",
+  "Smith",
+  "Seated vertical press using the guided Smith bar."
+ ],
+ [
+  "Captain’s Chair Knee Raise",
+  "Hanging Knee Raise",
+  "Bodyweight",
+  "Forearms supported; curl the pelvis upward with bent knees."
+ ],
+ [
+  "Captain’s Chair Leg Raise",
+  "Hanging Leg Raise",
+  "Bodyweight",
+  "Forearms supported; longer leg lever than the knee raise."
+ ],
+ [
+  "Lying Reverse Crunch",
+  "Reverse Crunch",
+  "Bodyweight",
+  "Floor support removes the hanging demand; curl the pelvis toward the ribs."
+ ],
+ [
+  "Neutral-Grip Dead Hang",
+  "Dead Hang",
+  "Bodyweight",
+  "Palms-facing handles change the grip while retaining a two-arm hang."
+ ],
+ [
+  "Thick-Bar Dead Hang",
+  "Dead Hang",
+  "Bodyweight",
+  "Thicker bar increases grip demand; duration has its own history."
+ ]
+]

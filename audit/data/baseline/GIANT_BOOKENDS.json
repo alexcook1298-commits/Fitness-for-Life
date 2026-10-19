@@ -1,0 +1,930 @@
+{
+ "a": {
+  "warm": [
+   [
+    "Raise Temperature",
+    "3–5 min easy bike, treadmill, or brisk walk • finish warmer, not tired"
+   ],
+   [
+    "Knee-to-Wall Ankle Rocks",
+    "8/side • smooth ankle motion for the squat/leg-press pattern"
+   ],
+   [
+    "90/90 Hip Switches",
+    "6/side • controlled hip rotation"
+   ],
+   [
+    "Wall Slides",
+    "10 reps • ribs down, shoulder blades moving freely"
+   ],
+   [
+    "Scapular Push-Ups",
+    "8–10 reps • straight elbows, protract/retract the shoulder blades"
+   ],
+   [
+    "Bodyweight Squat → Controlled Depth",
+    "2 × 5 • pause briefly at your comfortable bottom position"
+   ],
+   [
+    "Bench-Specific Ramp",
+    "Empty bar × 10–15 → ~40–50% × 8 → ~60–70% × 4–5 → ~75–85% × 1–3 • none near failure"
+   ],
+   [
+    "Row / Squat-Press Primer",
+    "Before each first work set: 1–2 progressively heavier practice sets • crisp reps only"
+   ]
+  ],
+  "cool": [
+   [
+    "Easy Walk + Nasal Breathing",
+    "2 min • let heart rate and breathing settle"
+   ],
+   [
+    "Doorway Pec / Biceps Opening",
+    "30 sec/side • gentle after the day's pressing and loaded stretches"
+   ],
+   [
+    "Child’s-Pose Lat Reach",
+    "30–45 sec • long exhale, reach without forcing the shoulder"
+   ],
+   [
+    "Supported Deep-Squat Sit",
+    "30–45 sec • easy restorative hold, not another loaded stretch"
+   ],
+   [
+    "Calf / Ankle Stretch",
+    "30 sec/side • straight-knee then slight bend"
+   ],
+   [
+    "Downshift Breathing",
+    "5 slow breaths • ~4 sec in / 6–8 sec out"
+   ]
+  ]
+ },
+ "b": {
+  "warm": [
+   [
+    "Raise Temperature",
+    "3–5 min easy bike, treadmill, or brisk walk • finish warmer, not fatigued"
+   ],
+   [
+    "Cat-Camel",
+    "6–8 slow reps • move the spine gently before hinging"
+   ],
+   [
+    "90/90 Hip Switches",
+    "6/side • controlled hip rotation"
+   ],
+   [
+    "Dowel / Bodyweight Hip Hinge",
+    "8–10 reps • hips back, ribs stacked, hamstrings loading"
+   ],
+   [
+    "Glute Bridge",
+    "10 reps • 2-sec squeeze at the top"
+   ],
+   [
+    "Wall Slides",
+    "10 reps • prepare overhead shoulder motion and upper-back control"
+   ],
+   [
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "10 light reps • feel the lats depress the shoulder blades"
+   ],
+   [
+    "Incline-Press Ramp",
+    "Very light DBs × 10–12 → moderate DBs × 6–8 → heavier primer × 3–5 • all well shy of failure"
+   ],
+   [
+    "RDL Primer",
+    "Before RDL work: empty/light hinge × 8 → moderate × 5 → one heavier crisp set × 2–3"
+   ]
+  ],
+  "cool": [
+   [
+    "Easy Walk + Nasal Breathing",
+    "2 min • bring the system down gradually"
+   ],
+   [
+    "Gentle Pec / Front-Shoulder Opening",
+    "30 sec/side • easy range after incline pressing"
+   ],
+   [
+    "Lat Reach / Supported Hang",
+    "20–30 sec • use assistance if needed; this is recovery, not another hard loaded stretch"
+   ],
+   [
+    "Supine Hamstring Stretch",
+    "30 sec/side • gentle after RDLs and leg work"
+   ],
+   [
+    "Figure-Four Glute Stretch",
+    "30 sec/side • relaxed hip position"
+   ],
+   [
+    "Forearm + Arm Shakeout",
+    "30–45 sec • easy recovery after curls, triceps, and pulling"
+   ],
+   [
+    "Downshift Breathing",
+    "5 slow breaths • ~4 sec in / 6–8 sec out"
+   ]
+  ]
+ },
+ "c": {
+  "warm": [
+   [
+    "Raise Temperature",
+    "3–5 min easy bike, treadmill, or brisk walk"
+   ],
+   [
+    "Wrist Circles + Gentle Wrist Rocks",
+    "30 sec each • prepare hanging, pulling, carries, and pressing"
+   ],
+   [
+    "Wall Slides",
+    "10 reps • controlled shoulder flexion"
+   ],
+   [
+    "Scapular Pull-Ups",
+    "2 × 5 • small controlled shoulder-blade motion, no kipping"
+   ],
+   [
+    "Dead Hang / Assisted Hang",
+    "15–20 sec • comfortable active hang, not a max grip test"
+   ],
+   [
+    "Half-Kneeling Hip-Flexor Stretch",
+    "30 sec/side • ribs stacked, glute lightly engaged"
+   ],
+   [
+    "Dead Bug",
+    "6/side • brace before carries and hanging core work"
+   ],
+   [
+    "Weighted-Pull-Up Ramp",
+    "Bodyweight/assisted × 5 → light external load × 3 → moderate × 1–2 • stop far from failure"
+   ],
+   [
+    "OHP / Carry Primer",
+    "1–2 light press sets + one short light carry before work sets"
+   ]
+  ],
+  "cool": [
+   [
+    "Easy Walk + Nasal Breathing",
+    "2 min • unload and lower heart rate"
+   ],
+   [
+    "Supported Lat Stretch",
+    "30–45 sec • easy overhead reach after weighted pulling"
+   ],
+   [
+    "Cross-Body Shoulder Stretch",
+    "30 sec/side • gentle posterior-shoulder recovery"
+   ],
+   [
+    "Forearm / Wrist Opening",
+    "30 sec/side • relaxed after hangs and carries"
+   ],
+   [
+    "Half-Kneeling Hip-Flexor Stretch",
+    "30 sec/side • restore position after loaded carries"
+   ],
+   [
+    "Child’s Pose + Long Exhale",
+    "3–5 slow breaths • relax the trunk after core work"
+   ],
+   [
+    "Downshift Breathing",
+    "5 slow breaths • ~4 sec in / 6–8 sec out"
+   ]
+  ]
+ },
+ "bu": {
+  "warm": [
+   [
+    "Raise Temperature",
+    "3–5 min easy bike, treadmill, or brisk walk • finish warmer, not fatigued"
+   ],
+   [
+    "Cat-Camel",
+    "6–8 slow reps • move the spine gently before hinging"
+   ],
+   [
+    "90/90 Hip Switches",
+    "6/side • controlled hip rotation"
+   ],
+   [
+    "Dowel / Bodyweight Hip Hinge",
+    "8–10 reps • hips back, ribs stacked, hamstrings loading"
+   ],
+   [
+    "Glute Bridge",
+    "10 reps • 2-sec squeeze at the top"
+   ],
+   [
+    "Wall Slides",
+    "10 reps • prepare overhead shoulder motion and upper-back control"
+   ],
+   [
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "10 light reps • feel the lats depress the shoulder blades"
+   ],
+   [
+    "Incline-Press Ramp",
+    "Very light DBs × 10–12 → moderate DBs × 6–8 → heavier primer × 3–5 • all well shy of failure"
+   ],
+   [
+    "RDL Primer",
+    "Before RDL work: empty/light hinge × 8 → moderate × 5 → one heavier crisp set × 2–3"
+   ]
+  ],
+  "cool": [
+   [
+    "Easy Walk + Nasal Breathing",
+    "2 min • bring the system down gradually"
+   ],
+   [
+    "Gentle Pec / Front-Shoulder Opening",
+    "30 sec/side • easy range after incline pressing"
+   ],
+   [
+    "Lat Reach / Supported Hang",
+    "20–30 sec • use assistance if needed; this is recovery, not another hard loaded stretch"
+   ],
+   [
+    "Supine Hamstring Stretch",
+    "30 sec/side • gentle after RDLs and leg work"
+   ],
+   [
+    "Figure-Four Glute Stretch",
+    "30 sec/side • relaxed hip position"
+   ],
+   [
+    "Forearm + Arm Shakeout",
+    "30–45 sec • easy recovery after curls, triceps, and pulling"
+   ],
+   [
+    "Downshift Breathing",
+    "5 slow breaths • ~4 sec in / 6–8 sec out"
+   ]
+  ]
+ },
+ "bl": {
+  "warm": [
+   [
+    "Raise Temperature",
+    "3–5 min easy bike, treadmill, or brisk walk • finish warmer, not fatigued"
+   ],
+   [
+    "Cat-Camel",
+    "6–8 slow reps • move the spine gently before hinging"
+   ],
+   [
+    "90/90 Hip Switches",
+    "6/side • controlled hip rotation"
+   ],
+   [
+    "Dowel / Bodyweight Hip Hinge",
+    "8–10 reps • hips back, ribs stacked, hamstrings loading"
+   ],
+   [
+    "Glute Bridge",
+    "10 reps • 2-sec squeeze at the top"
+   ],
+   [
+    "Wall Slides",
+    "10 reps • prepare overhead shoulder motion and upper-back control"
+   ],
+   [
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "10 light reps • feel the lats depress the shoulder blades"
+   ],
+   [
+    "Incline-Press Ramp",
+    "Very light DBs × 10–12 → moderate DBs × 6–8 → heavier primer × 3–5 • all well shy of failure"
+   ],
+   [
+    "RDL Primer",
+    "Before RDL work: empty/light hinge × 8 → moderate × 5 → one heavier crisp set × 2–3"
+   ]
+  ],
+  "cool": [
+   [
+    "Easy Walk + Nasal Breathing",
+    "2 min • bring the system down gradually"
+   ],
+   [
+    "Gentle Pec / Front-Shoulder Opening",
+    "30 sec/side • easy range after incline pressing"
+   ],
+   [
+    "Lat Reach / Supported Hang",
+    "20–30 sec • use assistance if needed; this is recovery, not another hard loaded stretch"
+   ],
+   [
+    "Supine Hamstring Stretch",
+    "30 sec/side • gentle after RDLs and leg work"
+   ],
+   [
+    "Figure-Four Glute Stretch",
+    "30 sec/side • relaxed hip position"
+   ],
+   [
+    "Forearm + Arm Shakeout",
+    "30–45 sec • easy recovery after curls, triceps, and pulling"
+   ],
+   [
+    "Downshift Breathing",
+    "5 slow breaths • ~4 sec in / 6–8 sec out"
+   ]
+  ]
+ },
+ "b2a": {
+  "warm": [
+   [
+    "Raise Temperature",
+    "3–5 min easy bike, treadmill, or brisk walk • finish warmer, not tired"
+   ],
+   [
+    "Knee-to-Wall Ankle Rocks",
+    "8/side • smooth ankle motion for the squat/leg-press pattern"
+   ],
+   [
+    "90/90 Hip Switches",
+    "6/side • controlled hip rotation"
+   ],
+   [
+    "Wall Slides",
+    "10 reps • ribs down, shoulder blades moving freely"
+   ],
+   [
+    "Scapular Push-Ups",
+    "8–10 reps • straight elbows, protract/retract the shoulder blades"
+   ],
+   [
+    "Bodyweight Squat → Controlled Depth",
+    "2 × 5 • pause briefly at your comfortable bottom position"
+   ],
+   [
+    "Bench-Specific Ramp",
+    "Empty bar × 10–15 → ~40–50% × 8 → ~60–70% × 4–5 → ~75–85% × 1–3 • none near failure"
+   ],
+   [
+    "Row / Squat-Press Primer",
+    "Before each first work set: 1–2 progressively heavier practice sets • crisp reps only"
+   ]
+  ],
+  "cool": [
+   [
+    "Easy Walk + Nasal Breathing",
+    "2 min • let heart rate and breathing settle"
+   ],
+   [
+    "Doorway Pec / Biceps Opening",
+    "30 sec/side • gentle after the day's pressing and loaded stretches"
+   ],
+   [
+    "Child’s-Pose Lat Reach",
+    "30–45 sec • long exhale, reach without forcing the shoulder"
+   ],
+   [
+    "Supported Deep-Squat Sit",
+    "30–45 sec • easy restorative hold, not another loaded stretch"
+   ],
+   [
+    "Calf / Ankle Stretch",
+    "30 sec/side • straight-knee then slight bend"
+   ],
+   [
+    "Downshift Breathing",
+    "5 slow breaths • ~4 sec in / 6–8 sec out"
+   ]
+  ]
+ },
+ "b2b": {
+  "warm": [
+   [
+    "Raise Temperature",
+    "3–5 min easy bike, treadmill, or brisk walk • finish warmer, not fatigued"
+   ],
+   [
+    "Cat-Camel",
+    "6–8 slow reps • move the spine gently before hinging"
+   ],
+   [
+    "90/90 Hip Switches",
+    "6/side • controlled hip rotation"
+   ],
+   [
+    "Dowel / Bodyweight Hip Hinge",
+    "8–10 reps • hips back, ribs stacked, hamstrings loading"
+   ],
+   [
+    "Glute Bridge",
+    "10 reps • 2-sec squeeze at the top"
+   ],
+   [
+    "Wall Slides",
+    "10 reps • prepare overhead shoulder motion and upper-back control"
+   ],
+   [
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "10 light reps • feel the lats depress the shoulder blades"
+   ],
+   [
+    "Incline-Press Ramp",
+    "Very light DBs × 10–12 → moderate DBs × 6–8 → heavier primer × 3–5 • all well shy of failure"
+   ],
+   [
+    "RDL Primer",
+    "Before RDL work: empty/light hinge × 8 → moderate × 5 → one heavier crisp set × 2–3"
+   ]
+  ],
+  "cool": [
+   [
+    "Easy Walk + Nasal Breathing",
+    "2 min • bring the system down gradually"
+   ],
+   [
+    "Gentle Pec / Front-Shoulder Opening",
+    "30 sec/side • easy range after incline pressing"
+   ],
+   [
+    "Lat Reach / Supported Hang",
+    "20–30 sec • use assistance if needed; this is recovery, not another hard loaded stretch"
+   ],
+   [
+    "Supine Hamstring Stretch",
+    "30 sec/side • gentle after RDLs and leg work"
+   ],
+   [
+    "Figure-Four Glute Stretch",
+    "30 sec/side • relaxed hip position"
+   ],
+   [
+    "Forearm + Arm Shakeout",
+    "30–45 sec • easy recovery after curls, triceps, and pulling"
+   ],
+   [
+    "Downshift Breathing",
+    "5 slow breaths • ~4 sec in / 6–8 sec out"
+   ]
+  ]
+ },
+ "b3a": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b3b": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ],
+   [
+    "Hinge preparation",
+    "Practice a light hip hinge, then ramp the RDL separately."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b3c": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b4a": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b4b": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ],
+   [
+    "Hinge preparation",
+    "Practice a light hip hinge, then ramp the RDL separately."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b5a": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b5b": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ],
+   [
+    "Hinge preparation",
+    "Practice a light hip hinge, then ramp the RDL separately."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b6a": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b6b": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ],
+   [
+    "Hinge preparation",
+    "Practice a light hip hinge, then ramp the RDL separately."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b7a": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "b7b": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ],
+   [
+    "Press preparation",
+    "Light shoulder/scapular movement followed by specific pressing ramp sets."
+   ],
+   [
+    "Hinge preparation",
+    "Practice a light hip hinge, then ramp the RDL separately."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "bonusarms": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ },
+ "bonusback": {
+  "warm": [
+   [
+    "Easy movement",
+    "3–5 min comfortable walking or cycling."
+   ],
+   [
+    "Pattern preparation",
+    "Practice the day’s movements through a comfortable range with little or no load."
+   ],
+   [
+    "Ramp the first lifts",
+    "Before each loaded compound: 2–3 progressively heavier practice sets, well short of fatigue."
+   ]
+  ],
+  "cool": [
+   [
+    "Easy walk",
+    "2 min to bring breathing down."
+   ],
+   [
+    "Comfortable mobility",
+    "2–3 min easy range for the areas trained; do not force end range."
+   ],
+   [
+    "Downshift breathing",
+    "5 slow, comfortable breaths."
+   ]
+  ]
+ }
+}

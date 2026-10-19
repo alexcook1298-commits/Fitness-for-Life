@@ -1,0 +1,113 @@
+{
+ "Q1_weekmode_set_counts": {
+  "A_busy": "2,2,2,2,2,2,2",
+  "BL_busy": "2,2,2,2,2,2,2,2",
+  "A_normal": "3,2,2,2,2,2,3",
+  "BL_normal": "3,3,3,2,3,3,2,4",
+  "A_extra": "3,2,2,2,2,2,3",
+  "BL_extra": "3,3,3,2,3,3,2,4"
+ },
+ "Q2_compact_keeps_intensifiers": {
+  "b#0": {
+   "full": "Incline Press:Straight Sets | Vertical Pull:Straight Sets | Hip Hinge:Straight Sets | Rear Delts:Myo-Reps | Biceps:DC Rest-Pause | Triceps:Straight Sets | Widowmaker:Straight Sets | Calves:Straight Sets",
+   "compact": "Incline Press:2sets:Straight Sets | Vertical Pull:2sets:Straight Sets | Hip Hinge:2sets:Straight Sets | Biceps:2sets:Straight Sets",
+   "compactIntensifierCount": 0
+  },
+  "b#1": {
+   "full": "Incline Press:Straight Sets | Vertical Pull:Rest-Pause | Hip Hinge:Straight Sets | Rear Delts:Straight Sets | Biceps:Straight Sets | Triceps:Myo-Reps | Widowmaker:Straight Sets | Calves:Straight Sets",
+   "compact": "Incline Press:2sets:Straight Sets | Vertical Pull:2sets:Straight Sets | Hip Hinge:2sets:Straight Sets | Biceps:2sets:Straight Sets",
+   "compactIntensifierCount": 0
+  },
+  "bu#0": {
+   "full": "Incline Press:Myo-Reps | Chest Isolation:Lengthened Partials | Vertical Pull:Rest-Pause | Horizontal Row:Mechanical Drop Set | Lat Isolation:Lengthened Partials | Lateral Raise:FST-7 | Rear Delts:Myo-Reps | Biceps:DC Rest-Pause | Triceps:Myo-Reps",
+   "compact": "Incline Press:2sets:Straight Sets | Chest Isolation:2sets:Straight Sets | Vertical Pull:2sets:Straight Sets | Horizontal Row:2sets:Straight Sets",
+   "compactIntensifierCount": 0
+  },
+  "bl#0": {
+   "full": "Hip Hinge:Straight Sets | Squat Press:Straight Sets | Quad Press:Widowmaker | Unilateral Quads:Straight Sets | Leg Curl:Myo-Reps | Leg Extension:FST-7 | Adductors:Rest-Pause | Calves:Myo-Reps",
+   "compact": "Hip Hinge:2sets:Straight Sets | Squat Press:2sets:Straight Sets | Quad Press:2sets:Straight Sets | Unilateral Quads:2sets:Straight Sets",
+   "compactIntensifierCount": 0
+  }
+ },
+ "Q3_evidence_engine_mixed_rep_ranges": {
+  "steady8rep300_then_one_widowmaker_200x20": {
+   "state": "ACT",
+   "name": "Leg Press",
+   "deltaPct": -12.3,
+   "vals": [
+    380,
+    380,
+    380,
+    333
+   ],
+   "why": "Four-exposure pattern is deteriorating. Review fatigue, technique, load and exercise fit before the next prescription."
+  },
+  "legCurl_progressing_then_one_light_day": {
+   "state": "INVESTIGATE",
+   "deltaPct": -10
+  },
+  "bench_progressing_then_one_backoff_only_day": {
+   "state": "INVESTIGATE",
+   "deltaPct": -12.5
+  },
+  "note": "ACT requires >=4 dates, non-increasing values and delta<-5%"
+ },
+ "Q4_knee_relevant_text": {
+  "exerciseOnlyLoggedInSlots": true,
+  "guideLeg": "Supported squat path; knee and hip angles differ from a leg press.",
+  "guideBulgarian": "Brace the trunk, keep the whole foot connected, let the knee track naturally with the toes, descend under control, and drive up without collapsing inward.",
+  "guideLegExt": "Use a controlled range for this quads movement, keep the setup stable, and prioritize clean reps and target-muscle tension over momentum.",
+  "lsHack": {
+   "name": "Loaded Quad Bottom Hold",
+   "desc": "Use a substantially reduced load and hold a deep pain-free knee-flexed position under control. Keep the knees tracking naturally.",
+   "hold": 15
+  },
+  "lsLegExt": {
+   "name": "Loaded Quad Bottom Hold",
+   "desc": "Use a substantially reduced load and hold a deep pain-free knee-flexed position under control. Keep the knees tracking naturally.",
+   "hold": 15
+  },
+  "lsBulg": {
+   "name": "Loaded Quad Bottom Hold",
+   "desc": "Use a substantially reduced load and hold a deep pain-free knee-flexed position under control. Keep the knees tracking naturally.",
+   "hold": 15
+  },
+  "sideWordsInVisibleText": false,
+  "sideFieldInLogSetSource": false,
+  "perLegMentions": 3,
+  "painFieldInFinishPanel": "Finish & save sessionRecovery today GoodMixedPoorSession notesSAVE COMPLETED WORKOUTKEEP TRAINING"
+ },
+ "Q5_capability_coverage": {
+  "giantA_vertical_default": "Weighted Pull-Up",
+  "options": [
+   "Weighted Pull-Up",
+   "Pull-Up",
+   "Lat Pulldown",
+   "Assisted Pull-Up",
+   "Neutral-Grip Pulldown",
+   "Wide-Grip Pulldown",
+   "Neutral-Grip Pull-Up"
+  ],
+  "hasRopeExercise": [],
+  "jumpExercises": [
+   "Cable Wood Chop"
+  ],
+  "specialAthleticSteps": [
+   "Knee-to-wall (8/side, 1 sets)",
+   "Calf raises (12 reps, 1 sets)",
+   "90/90 switches (6/side, 1 sets)",
+   "Fast march (20 sec, 2 sets)",
+   "Snapdown (3 reps, 2 sets)",
+   "Pogos (10 sec, 2 sets)",
+   "10m acceleration (10 m, 3 sets)",
+   "15–20m acceleration (15–20 m, 2 sets)",
+   "Countermovement jump (3 reps, 3 sets)",
+   "Skater → stick (3/side, 2 sets)",
+   "Dead hang (20–40 sec, 2 sets)",
+   "Scapular pull-up (5–8 reps, 2 sets)"
+  ],
+  "hasSwimWorkout": [
+   "waterpractice"
+  ]
+ }
+}

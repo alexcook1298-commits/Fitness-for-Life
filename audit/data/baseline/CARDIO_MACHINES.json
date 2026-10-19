@@ -1,0 +1,218 @@
+{
+ "Peloton": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "distance",
+    "MILES"
+   ],
+   [
+    "resistance",
+    "AVG RESISTANCE"
+   ],
+   [
+    "cadence",
+    "AVG CADENCE"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ },
+ "Treadmill": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "distance",
+    "MILES"
+   ],
+   [
+    "speed",
+    "AVG SPEED"
+   ],
+   [
+    "incline",
+    "AVG INCLINE %"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ },
+ "Elliptical": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "distance",
+    "MILES"
+   ],
+   [
+    "level",
+    "LEVEL / RESISTANCE"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ },
+ "Stationary Bike": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "distance",
+    "MILES"
+   ],
+   [
+    "resistance",
+    "LEVEL / RESISTANCE"
+   ],
+   [
+    "cadence",
+    "AVG CADENCE"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ },
+ "Assault / Air Bike": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "distance",
+    "MILES"
+   ],
+   [
+    "watts",
+    "AVG WATTS"
+   ],
+   [
+    "rpm",
+    "AVG RPM"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ },
+ "Rower": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "distance",
+    "METERS"
+   ],
+   [
+    "pace",
+    "AVG /500M PACE"
+   ],
+   [
+    "spm",
+    "STROKES/MIN"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ },
+ "Stair Climber": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "floors",
+    "FLOORS"
+   ],
+   [
+    "level",
+    "LEVEL"
+   ],
+   [
+    "steps",
+    "STEPS"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ },
+ "Outdoor": {
+  "fields": [
+   [
+    "duration",
+    "MIN"
+   ],
+   [
+    "distance",
+    "MILES"
+   ],
+   [
+    "pace",
+    "AVG PACE"
+   ],
+   [
+    "hr",
+    "AVG HR"
+   ],
+   [
+    "calories",
+    "CALORIES"
+   ]
+  ]
+ }
+}

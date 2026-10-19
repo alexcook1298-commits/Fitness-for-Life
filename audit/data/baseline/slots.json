@@ -1,0 +1,1548 @@
+{
+ "a": [
+  [
+   "Horizontal Press",
+   [
+    "Bench Press (BB)",
+    "Reverse-Grip Bench Press (BB)",
+    "Flat Press (DB)",
+    "Chest Press (Machine)",
+    "Smith Machine Bench Press",
+    "Paused Bench Press (BB)"
+   ],
+   3,
+   "4–8",
+   "1–2"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   2,
+   "6–10",
+   "1–2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   2,
+   "6–10",
+   "1–2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Lateral Raise",
+   [
+    "Lateral Raise (Cable)",
+    "Lateral Raise (Machine)",
+    "Lateral Raise (DB)",
+    "Single-Arm Cable Lateral Raise",
+    "Lean-Away Cable Lateral Raise",
+    "Seated Lateral Raise (DB)"
+   ],
+   2,
+   "10–20",
+   "1"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Weighted Pull-Up",
+    "Pull-Up",
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   2,
+   "4–8",
+   "1–2"
+  ],
+  [
+   "Loaded Carry",
+   [
+    "Farmer Carry (DB)",
+    "Farmer Carry (KB)",
+    "Trap-Bar Carry",
+    "Farmer Carry (Handles)"
+   ],
+   3,
+   "30–60 sec",
+   "stable"
+  ]
+ ],
+ "b": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (DB)",
+    "Incline Press (Machine)",
+    "Incline Press (BB)",
+    "Smith Machine Incline Press",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–20",
+   "1"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "8–15",
+   "1"
+  ],
+  [
+   "Widowmaker",
+   [
+    "Leg Press",
+    "Belt Squat",
+    "Hack Squat",
+    "Horizontal Leg Press"
+   ],
+   1,
+   "15–20",
+   "hard"
+  ],
+  [
+   "Calves",
+   [
+    "Standing Calf Raise",
+    "Seated Calf Raise",
+    "Leg Press Calf Raise",
+    "Smith Machine Calf Raise",
+    "Standing Calf Raise (DB)",
+    "Donkey Calf Raise"
+   ],
+   2,
+   "8–15",
+   "1"
+  ]
+ ],
+ "bu": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (Machine)",
+    "Incline Press (DB)",
+    "Smith Machine Incline Press",
+    "Incline Press (BB)",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   3,
+   "6–10",
+   "1–2"
+  ],
+  [
+   "Chest Isolation",
+   [
+    "Cable Fly",
+    "Pec Deck",
+    "Low-to-High Cable Fly",
+    "High-to-Low Cable Fly"
+   ],
+   3,
+   "10–15",
+   "1"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Pull-Up",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   3,
+   "8–12",
+   "1"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (Machine)",
+    "Chest-Supported Row (DB)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   3,
+   "8–12",
+   "1"
+  ],
+  [
+   "Lat Isolation",
+   [
+    "Straight-Arm Pulldown",
+    "Cable Pullover",
+    "Machine Pullover"
+   ],
+   2,
+   "10–15",
+   "1"
+  ],
+  [
+   "Lateral Raise",
+   [
+    "Lateral Raise (Cable)",
+    "Lateral Raise (Machine)",
+    "Lateral Raise (DB)",
+    "Single-Arm Cable Lateral Raise",
+    "Lean-Away Cable Lateral Raise",
+    "Seated Lateral Raise (DB)"
+   ],
+   3,
+   "10–20",
+   "1"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Reverse Pec Deck",
+    "Rear-Delt Fly (DB)",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   3,
+   "12–20",
+   "1"
+  ],
+  [
+   "Biceps",
+   [
+    "Cable Curl",
+    "Biceps Curl (DB)",
+    "EZ-Bar Curl",
+    "Biceps Curl (BB)",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   3,
+   "8–12",
+   "1"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   3,
+   "8–15",
+   "1"
+  ]
+ ],
+ "bl": [
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   3,
+   "6–10",
+   "2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Belt Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   3,
+   "6–10",
+   "1–2"
+  ],
+  [
+   "Quad Press",
+   [
+    "Leg Press",
+    "Horizontal Leg Press"
+   ],
+   3,
+   "10–15",
+   "1"
+  ],
+  [
+   "Unilateral Quads",
+   [
+    "Bulgarian Split Squat (DB)",
+    "Front-Foot-Elevated Split Squat",
+    "Reverse Lunge (DB)"
+   ],
+   2,
+   "8–12",
+   "1–2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   3,
+   "8–15",
+   "1"
+  ],
+  [
+   "Leg Extension",
+   [
+    "Leg Extension"
+   ],
+   3,
+   "10–15",
+   "1"
+  ],
+  [
+   "Adductors",
+   [
+    "Hip Adduction Machine"
+   ],
+   2,
+   "10–15",
+   "1"
+  ],
+  [
+   "Calves",
+   [
+    "Standing Calf Raise",
+    "Seated Calf Raise",
+    "Leg Press Calf Raise",
+    "Smith Machine Calf Raise",
+    "Standing Calf Raise (DB)",
+    "Donkey Calf Raise"
+   ],
+   4,
+   "8–15",
+   "1"
+  ]
+ ],
+ "c": [
+  [
+   "Weighted Vertical Pull",
+   [
+    "Weighted Pull-Up",
+    "Weighted Neutral-Grip Pull-Up",
+    "Weighted Chin-Up"
+   ],
+   3,
+   "4–8",
+   "1"
+  ],
+  [
+   "Overhead Press",
+   [
+    "Overhead Press (DB)",
+    "Overhead Press (BB)",
+    "Shoulder Press (Machine)",
+    "Seated Overhead Press (DB)",
+    "Seated Overhead Press (BB)",
+    "Smith Machine Shoulder Press"
+   ],
+   3,
+   "6–10",
+   "1"
+  ],
+  [
+   "Loaded Carry",
+   [
+    "Farmer Carry (DB)",
+    "Farmer Carry (KB)",
+    "Trap-Bar Carry",
+    "Farmer Carry (Handles)"
+   ],
+   3,
+   "30–50 yd",
+   "stable"
+  ],
+  [
+   "Core",
+   [
+    "Hanging Knee Raise",
+    "Hanging Leg Raise",
+    "Captain’s Chair Knee Raise",
+    "Captain’s Chair Leg Raise",
+    "Lying Reverse Crunch"
+   ],
+   3,
+   "8–15",
+   "1"
+  ],
+  [
+   "Grip Hang",
+   [
+    "Dead Hang",
+    "Towel Hang",
+    "Neutral-Grip Dead Hang",
+    "Thick-Bar Dead Hang"
+   ],
+   3,
+   "20–40 sec",
+   "—"
+  ]
+ ],
+ "b2a": [
+  [
+   "Horizontal Press",
+   [
+    "Bench Press (BB)",
+    "Reverse-Grip Bench Press (BB)",
+    "Flat Press (DB)",
+    "Chest Press (Machine)",
+    "Smith Machine Bench Press",
+    "Paused Bench Press (BB)"
+   ],
+   3,
+   "4–8",
+   "1–2"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   2,
+   "6–10",
+   "1–2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   2,
+   "6–10",
+   "1–2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Lateral Raise",
+   [
+    "Lateral Raise (Cable)",
+    "Lateral Raise (Machine)",
+    "Lateral Raise (DB)",
+    "Single-Arm Cable Lateral Raise",
+    "Lean-Away Cable Lateral Raise",
+    "Seated Lateral Raise (DB)"
+   ],
+   2,
+   "10–20",
+   "1"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Weighted Pull-Up",
+    "Pull-Up",
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   2,
+   "4–8",
+   "1–2"
+  ],
+  [
+   "Loaded Carry",
+   [
+    "Farmer Carry (DB)",
+    "Farmer Carry (KB)",
+    "Trap-Bar Carry",
+    "Farmer Carry (Handles)"
+   ],
+   3,
+   "30–60 sec",
+   "stable"
+  ]
+ ],
+ "b2b": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (DB)",
+    "Incline Press (Machine)",
+    "Incline Press (BB)",
+    "Smith Machine Incline Press",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–20",
+   "1"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "8–12",
+   "1"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "8–15",
+   "1"
+  ],
+  [
+   "Widowmaker",
+   [
+    "Leg Press",
+    "Belt Squat",
+    "Hack Squat",
+    "Horizontal Leg Press"
+   ],
+   1,
+   "15–20",
+   "hard"
+  ],
+  [
+   "Calves",
+   [
+    "Standing Calf Raise",
+    "Seated Calf Raise",
+    "Leg Press Calf Raise",
+    "Smith Machine Calf Raise",
+    "Standing Calf Raise (DB)",
+    "Donkey Calf Raise"
+   ],
+   2,
+   "8–15",
+   "1"
+  ]
+ ],
+ "b3a": [
+  [
+   "Horizontal Press",
+   [
+    "Bench Press (BB)",
+    "Reverse-Grip Bench Press (BB)",
+    "Flat Press (DB)",
+    "Chest Press (Machine)",
+    "Smith Machine Bench Press",
+    "Paused Bench Press (BB)"
+   ],
+   3,
+   "6–10",
+   "2"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   3,
+   "8–12",
+   "2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   3,
+   "8–12",
+   "2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   2,
+   "10–15",
+   "2"
+  ],
+  [
+   "Lateral Raise",
+   [
+    "Lateral Raise (Cable)",
+    "Lateral Raise (Machine)",
+    "Lateral Raise (DB)",
+    "Single-Arm Cable Lateral Raise",
+    "Lean-Away Cable Lateral Raise",
+    "Seated Lateral Raise (DB)"
+   ],
+   2,
+   "12–20",
+   "2"
+  ]
+ ],
+ "b3b": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (DB)",
+    "Incline Press (Machine)",
+    "Incline Press (BB)",
+    "Smith Machine Incline Press",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   3,
+   "8–12",
+   "2"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   3,
+   "8–12",
+   "2"
+  ],
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   2,
+   "8–10",
+   "2"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–20",
+   "2"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "10–15",
+   "2"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "10–15",
+   "2"
+  ],
+  [
+   "Calves",
+   [
+    "Standing Calf Raise",
+    "Seated Calf Raise",
+    "Leg Press Calf Raise",
+    "Smith Machine Calf Raise",
+    "Standing Calf Raise (DB)",
+    "Donkey Calf Raise"
+   ],
+   2,
+   "10–15",
+   "2"
+  ]
+ ],
+ "b3c": [
+  [
+   "Weighted Vertical Pull",
+   [
+    "Weighted Pull-Up",
+    "Weighted Neutral-Grip Pull-Up",
+    "Weighted Chin-Up"
+   ],
+   2,
+   "6–8",
+   "2"
+  ],
+  [
+   "Overhead Press",
+   [
+    "Overhead Press (DB)",
+    "Overhead Press (BB)",
+    "Shoulder Press (Machine)",
+    "Seated Overhead Press (DB)",
+    "Seated Overhead Press (BB)",
+    "Smith Machine Shoulder Press"
+   ],
+   2,
+   "8–12",
+   "2"
+  ],
+  [
+   "Loaded Carry",
+   [
+    "Farmer Carry (DB)",
+    "Farmer Carry (KB)",
+    "Trap-Bar Carry",
+    "Farmer Carry (Handles)"
+   ],
+   2,
+   "30–40 yd",
+   "2"
+  ],
+  [
+   "Core",
+   [
+    "Hanging Knee Raise",
+    "Hanging Leg Raise",
+    "Captain’s Chair Knee Raise",
+    "Captain’s Chair Leg Raise",
+    "Lying Reverse Crunch"
+   ],
+   2,
+   "8–12",
+   "2"
+  ]
+ ],
+ "b4a": [
+  [
+   "Horizontal Press",
+   [
+    "Bench Press (BB)",
+    "Reverse-Grip Bench Press (BB)",
+    "Flat Press (DB)",
+    "Chest Press (Machine)",
+    "Smith Machine Bench Press",
+    "Paused Bench Press (BB)"
+   ],
+   3,
+   "4–6",
+   "2"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   3,
+   "6–8",
+   "2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   2,
+   "6–8",
+   "2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   2,
+   "8–12",
+   "2"
+  ]
+ ],
+ "b4b": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (DB)",
+    "Incline Press (Machine)",
+    "Incline Press (BB)",
+    "Smith Machine Incline Press",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   3,
+   "6–10",
+   "2"
+  ],
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   2,
+   "6–8",
+   "2"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–15",
+   "2"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "10–12",
+   "2"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "10–12",
+   "2"
+  ],
+  [
+   "Calves",
+   [
+    "Standing Calf Raise",
+    "Seated Calf Raise",
+    "Leg Press Calf Raise",
+    "Smith Machine Calf Raise",
+    "Standing Calf Raise (DB)",
+    "Donkey Calf Raise"
+   ],
+   2,
+   "10–15",
+   "2"
+  ]
+ ],
+ "b5a": [
+  [
+   "Horizontal Press",
+   [
+    "Bench Press (BB)",
+    "Reverse-Grip Bench Press (BB)",
+    "Flat Press (DB)",
+    "Chest Press (Machine)",
+    "Smith Machine Bench Press",
+    "Paused Bench Press (BB)"
+   ],
+   2,
+   "5–8",
+   "2"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   2,
+   "8–10",
+   "2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   2,
+   "8–10",
+   "2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   2,
+   "10–12",
+   "2"
+  ]
+ ],
+ "b5b": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (DB)",
+    "Incline Press (Machine)",
+    "Incline Press (BB)",
+    "Smith Machine Incline Press",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–15",
+   "2"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "10–12",
+   "2"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "10–12",
+   "2"
+  ]
+ ],
+ "b6a": [
+  [
+   "Horizontal Press",
+   [
+    "Bench Press (BB)",
+    "Reverse-Grip Bench Press (BB)",
+    "Flat Press (DB)",
+    "Chest Press (Machine)",
+    "Smith Machine Bench Press",
+    "Paused Bench Press (BB)"
+   ],
+   2,
+   "5–8",
+   "2"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   2,
+   "8–10",
+   "2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   2,
+   "8–10",
+   "2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   2,
+   "10–12",
+   "2"
+  ]
+ ],
+ "b6b": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (DB)",
+    "Incline Press (Machine)",
+    "Incline Press (BB)",
+    "Smith Machine Incline Press",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–15",
+   "2"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "10–12",
+   "2"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "10–12",
+   "2"
+  ]
+ ],
+ "b7a": [
+  [
+   "Horizontal Press",
+   [
+    "Bench Press (BB)",
+    "Reverse-Grip Bench Press (BB)",
+    "Flat Press (DB)",
+    "Chest Press (Machine)",
+    "Smith Machine Bench Press",
+    "Paused Bench Press (BB)"
+   ],
+   2,
+   "5–8",
+   "2"
+  ],
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   2,
+   "8–10",
+   "2"
+  ],
+  [
+   "Squat Press",
+   [
+    "Hack Squat",
+    "Hammer Squat Press",
+    "Leg Press",
+    "Pendulum Squat",
+    "Horizontal Leg Press"
+   ],
+   2,
+   "8–10",
+   "2"
+  ],
+  [
+   "Leg Curl",
+   [
+    "Seated Leg Curl",
+    "Lying Leg Curl",
+    "Standing Leg Curl (Machine)",
+    "Seated Leg Curl (Single-Leg)",
+    "Lying Leg Curl (Single-Leg)"
+   ],
+   2,
+   "10–12",
+   "2"
+  ]
+ ],
+ "b7b": [
+  [
+   "Incline Press",
+   [
+    "Incline Press (DB)",
+    "Incline Press (Machine)",
+    "Incline Press (BB)",
+    "Smith Machine Incline Press",
+    "Neutral-Grip Incline Press (DB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Vertical Pull",
+   [
+    "Lat Pulldown",
+    "Assisted Pull-Up",
+    "Pull-Up",
+    "Neutral-Grip Pulldown",
+    "Wide-Grip Pulldown",
+    "Neutral-Grip Pull-Up"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Hip Hinge",
+   [
+    "Romanian Deadlift (BB)",
+    "Romanian Deadlift (DB)",
+    "Romanian Deadlift (Smith)",
+    "Romanian Deadlift (KB)"
+   ],
+   2,
+   "6–10",
+   "2"
+  ],
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–15",
+   "2"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "10–12",
+   "2"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "10–12",
+   "2"
+  ]
+ ],
+ "bonusarms": [
+  [
+   "Rear Delts",
+   [
+    "Rear-Delt Fly (DB)",
+    "Reverse Pec Deck",
+    "Rear-Delt Cable Fly",
+    "Chest-Supported Rear-Delt Fly (DB)",
+    "Seated Rear-Delt Fly (DB)"
+   ],
+   2,
+   "12–15",
+   "2"
+  ],
+  [
+   "Biceps",
+   [
+    "Biceps Curl (DB)",
+    "Biceps Curl (BB)",
+    "Cable Curl",
+    "EZ-Bar Curl",
+    "Alternating Curl (DB)",
+    "Seated Curl (DB)"
+   ],
+   2,
+   "10–15",
+   "2"
+  ],
+  [
+   "Triceps",
+   [
+    "Triceps Pressdown",
+    "Cable Triceps Extension",
+    "Rope Pressdown",
+    "V-Bar Pressdown",
+    "Single-Arm Pressdown",
+    "Straight-Bar Pressdown"
+   ],
+   2,
+   "10–15",
+   "2"
+  ]
+ ],
+ "bonusback": [
+  [
+   "Horizontal Row",
+   [
+    "Chest-Supported Row (DB)",
+    "Chest-Supported Row (Machine)",
+    "Seated Cable Row",
+    "Seal Row (DB)",
+    "Seal Row (BB)",
+    "Chest-Supported T-Bar Row"
+   ],
+   2,
+   "10–12",
+   "2"
+  ],
+  [
+   "Lateral Raise",
+   [
+    "Lateral Raise (Cable)",
+    "Lateral Raise (Machine)",
+    "Lateral Raise (DB)",
+    "Single-Arm Cable Lateral Raise",
+    "Lean-Away Cable Lateral Raise",
+    "Seated Lateral Raise (DB)"
+   ],
+   2,
+   "12–20",
+   "2"
+  ]
+ ]
+}
