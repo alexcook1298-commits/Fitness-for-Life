@@ -1,0 +1,48 @@
+--- a/index.html
++++ b/index.html
+@@ -1416,14 +1416,40 @@
+  if(base==='GREEN')return {label:'GREEN',cls:'status-green',text:'Run as programmed. Optional methods remain optional.'};
+  if(base==='YELLOW')return {label:'YELLOW',cls:'status-yellow',text:'Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off.'};
+  return {label:'RED',cls:'status-red',text:'Protect the training floor: use COMPACT / MED, straight sets, and stop any movement that feels wrong.'}}
+-const READINESS_STALE_HOURS=48;
++// A check-in is current only if it was saved on the same LOCAL calendar day as now, in the device's current time zone.
++// Older (or future-dated) check-ins stay readable but are never presented as today's status.
++function readinessSavedMs(value){
++ let ms=NaN;
++ if(typeof value==='number')ms=Number.isFinite(value)?value:NaN;
++ else if(typeof value==='string'){
++  const s=value.trim(),m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
++  if(m){const d=new Date(+m[1],+m[2]-1,+m[3]);ms=d.getFullYear()===+m[1]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[3]?d.getTime():NaN}
++  else if(s)ms=new Date(s).getTime();
++ }
++ return Number.isFinite(ms)?ms:null;
++}
++function localDayNumber(ms){const d=new Date(ms);return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000}
+ function readinessFreshness(r,now=Date.now()){
+- const t=r&&r.date!=null&&r.date!==''?new Date(r.date).getTime():NaN;
+- if(!Number.isFinite(t))return {state:'never',hours:null,days:null};
++ const t=readinessSavedMs(r&&r.date);
++ if(t===null)return {state:'never',hours:null,days:null};
+  const hours=(now-t)/3600000;
+- if(hours<-5/60)return {state:'future',hours,days:null};
+- return {state:hours>READINESS_STALE_HOURS?'stale':'fresh',hours,days:Math.floor(Math.max(0,hours)/24)};
++ if(t-now>5*60000)return {state:'future',hours,days:null};
++ const days=localDayNumber(now)-localDayNumber(t);
++ return days<=0?{state:'fresh',hours,days:0}:{state:'stale',hours,days};
++}
++function refreshReadinessView(){
++ try{const home=document.getElementById('home');if(home&&!home.classList.contains('hidden'))updateOSHome()}catch(e){}
++ scheduleReadinessMidnightRefresh();
++}
++function scheduleReadinessMidnightRefresh(){
++ clearTimeout(window.__readinessMidnightTimer);
++ const n=new Date(),next=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1,0,0,0,0).getTime();
++ window.__readinessMidnightAt=next;
++ window.__readinessMidnightTimer=setTimeout(refreshReadinessView,Math.max(1000,next-Date.now()+1000));
+ }
++document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshReadinessView()});
++window.addEventListener('focus',refreshReadinessView);
++scheduleReadinessMidnightRefresh();
+ function readinessStatus(r,now=Date.now()){
+  r=r||{};const dec=readinessDecision(r),f=readinessFreshness(r,now),score=readinessScore(r);
+  if(f.state==='fresh')return {...dec,fresh:f,stale:false,scoreText:`Check-in ${score} / 100`};
