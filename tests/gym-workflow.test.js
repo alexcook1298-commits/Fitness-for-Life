@@ -444,6 +444,15 @@ test('G7.3','G7: backup & restore','A tampered file changed after preview is re-
  assert(/Restore failed/.test(await notice(p)),await notice(p));sameStore(PA(await storage(p)),pre,'after refused restore (strict, vs state at preview)',true);sameStore(PA(await storage(p)),PA(before),'after refused restore vs start');
 });
 
+test('G7.4','G7: backup & restore','KNOWN DEFECT (characterization, unresolved decision): a cardio field typed with "<" or ">" saves normally, but the app\'s own export is then refused by its own import validator',async p=>{
+ await p.eval(()=>start('conditioning'));
+ await p.eval(()=>{const i=document.querySelector('#exs [data-cardio] input[data-field]');i.value='<10:00'});
+ await p.click('#exs button.save-cardio');
+ assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'))).length,1,'cardio entry was not saved');
+ const verdict=await p.eval(()=>{try{validateBackup(backupPayload());return 'accepted'}catch(e){return e.message}});
+ assert.strictEqual(verdict,'Invalid text in pa_cardio_hist','behaviour changed; update the report: '+verdict);
+});
+
 // =====================================================================
 // G8  Storage-failure handling (real quota)
 // =====================================================================
@@ -513,11 +522,12 @@ function swapServer(initialDir){
  return new Promise(r=>srv.listen(0,'127.0.0.1',()=>r({origin:'http://127.0.0.1:'+srv.address().port,setRoot:d=>{root=path.resolve(d)},close:()=>new Promise(c=>srv.close(c))})));
 }
 test('G9.3','G9: PWA / offline','Cache update path: an installed OLD version shows an update prompt when the new version is deployed, does NOT replace itself mid-workout, keeps the draft, and after the tap runs the new code under the new cache name with the old cache deleted',async()=>{
- if(!oldApp)throw Error('skipped: pass --old-app <dir> (the PR #1 candidate, app/)');
+ if(!oldApp)throw Error('skipped: pass --old-app <dir> (a previously deployed tree: app/ for PR #1, baseline/hq-2.3 for the original)');
  const s=await swapServer(oldApp);const b=ctx.browser;const p=await b.newPage(dl);
  try{
   await p.goto(s.origin+'/');await p.waitForFunction('navigator.serviceWorker.getRegistration().then(r=>!!r&&!!r.active)',15000);await p.reload();await sleep(500);
-  const old=await swState(p);assert(old.controller&&old.caches.includes('project-america-shell-v2-3-backup-repair-20261018'),JSON.stringify(old));
+  const old=await swState(p);const oldCache=/const CACHE='([^']+)'/.exec(fs.readFileSync(path.join(oldApp,'sw.js'),'utf8'))[1];
+  assert(old.controller&&old.caches.includes(oldCache),JSON.stringify(old));
   assert.strictEqual(await p.eval(()=>typeof readinessStatus),'undefined','old app unexpectedly has new code');
   await p.eval(()=>start('a'));await logStraight(p,3,1,{w:'95',r:'12',rir:'2'});const draftBefore=(await sessionsOf(p))[0].id;
   s.setRoot(appDir);

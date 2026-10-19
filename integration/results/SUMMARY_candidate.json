@@ -1,0 +1,38 @@
+{
+ "backup/restore": {
+  "passed": 30,
+  "failed": 0,
+  "total": 30,
+  "failedIds": []
+ },
+ "reliability": {
+  "passed": 34,
+  "failed": 1,
+  "total": 35,
+  "failedIds": [
+   "S1.8"
+  ]
+ },
+ "integration": {
+  "passed": 32,
+  "failed": 0,
+  "total": 32,
+  "failedIds": []
+ },
+ "gym-workflow": {
+  "passed": 56,
+  "failed": 0,
+  "total": 56,
+  "failedIds": []
+ },
+ "raw": {
+  "passed": 152,
+  "total": 153,
+  "failed": 1
+ },
+ "adjusted_excluding_superseded_S1_8": {
+  "passed": 153,
+  "total": 153,
+  "failed": 0
+ }
+}
