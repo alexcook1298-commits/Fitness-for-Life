@@ -1,0 +1,25 @@
+--- a/index.html
++++ b/index.html
+@@ -1330,11 +1330,21 @@
+ // so they are allowed; only HTML-like text (a complete tag such as <b> or </i>, or "<!" / "<?") is refused, and every render of
+ // cardio history is escaped. The same rule is applied when logging and when importing a backup.
+ const CARDIO_KEY=/^[A-Za-z][A-Za-z0-9_]{0,31}$/;
++// Text that merely resembles a tag (<Z2>, <easy>) is plain text. It is refused only if the browser's inert HTML parser would build a real
++// element, an element with any attribute, a comment or a processing instruction from it. A template's content is never executed or loaded.
++function cardioLooksLikeHTML(value){
++ if(/<[!?]/.test(value))return true;
++ for(const m of value.matchAll(/<\/?([A-Za-z][^\s<>\/]*)[^<>]*>/g)){let el;try{el=document.createElement(m[1])}catch{return true}if(!(el instanceof HTMLUnknownElement))return true}
++ if(!/<\/?[A-Za-z][^<>]*>/.test(value))return false;
++ const t=document.createElement('template');t.innerHTML=value;
++ const bad=node=>[...node.childNodes].some(c=>c.nodeType===7||c.nodeType===8||(c.nodeType===1&&(!(c instanceof HTMLUnknownElement)||c.attributes.length>0||bad(c))));
++ return bad(t.content);
++}
+ function cardioTextProblem(value){
+  if(typeof value==='number')return Number.isFinite(value)?null:'is not a finite number';
+  if(typeof value!=='string')return 'must be text or a number';
+  if(value.length>=2000||/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(value))return 'contains control characters or is too long';
+- if(/<\/?[A-Za-z][^<>]*>|<[!?]/.test(value))return 'looks like HTML. Use < and > only as comparison signs, for example <10:00';
++ if(cardioLooksLikeHTML(value))return 'looks like HTML. Use < and > only as comparison signs, for example <10:00';
+  return null;
+ }
+ function validateSkips(s){
