@@ -359,6 +359,53 @@ test('HB9','Original data is preserved: refusing a file with real HTML changes n
  assert.strictEqual(JSON.parse(await p.eval(()=>localStorage.pa_cardio_hist))[0].data.hr,'<Z2>');
 });
 
+// =====================================================================
+// EV — evidence engine vs partial / skipped / omitted work (Priority 2: audit guards; no engine change)
+// Limitations the audit found (back-off-only partials, UTC-day exposure splitting, draft records, last-record targets) are NOT
+// asserted here as passes; they are reported by tests/audit/evidence_partial_audit.js and proposed in PHASE3_EVIDENCE_AUDIT_AND_DESIGN.md.
+// =====================================================================
+const evDay=n=>new Date(Date.now()-n*86400000).toISOString();
+const evRec=(id,sid,name,d,w,reps,x={})=>({id,sessionId:sid,name,intensifier:'Straight Sets',w,reps,rir:2,template:'a',block:1,setNumber:1,date:evDay(d),...x});
+const evSeed=(p,rows)=>p.eval(r=>{localStorage.pa_hist=JSON.stringify(r)},rows);
+
+test('EV1','An exercise omitted from the latest session (no records) leaves its series untouched and never reads as deterioration',async p=>{
+ await evSeed(p,[...[14,10,7,3].map((d,k)=>evRec('b'+k,'s'+k,'Bench Press (BB)',d,200,5)),...[14,10,7,3,0].map((d,k)=>evRec('r'+k,'t'+k,'Row (DB)',d,100,10))]);
+ const ev=await p.eval(()=>evidenceDecision());assert.strictEqual(ev.state,'OBSERVE');
+});
+test('EV2','A partial exposure with fewer sets at the same load carries the same evidence as a full one (best performed set per exposure)',async p=>{
+ const h=[];[14,10,7].forEach((d,k)=>{for(let s=1;s<=3;s++)h.push(evRec('f'+k+s,'s'+k,'Bench Press (BB)',d,200,5,{setNumber:s}))});h.push(evRec('p1','sp','Bench Press (BB)',0,200,5));
+ await evSeed(p,h);const ev=await p.eval(()=>evidenceDecision());assert.strictEqual(ev.state,'OBSERVE');assert.strictEqual(ev.vals.length,4);assert(ev.vals.every(v=>Math.abs(v-ev.vals[0])<1e-9),JSON.stringify(ev.vals));
+});
+test('EV3','Legitimate evidence from a partial workout is preserved: a real workout in which only ONE exercise was done (all its sets logged) adds that exercise\'s exposure to its series, and nothing else',async p=>{
+ await skStart(p,'a');const name=await p.eval(()=>selected('a',0));const n=await skSets(p);
+ for(let j=1;j<=n[0];j++)await skLog(p,0,j);const s=await skFinish(p);assert.strictEqual(s.completion.prescription,'partial');
+ const logged=await p.eval(()=>JSON.parse(localStorage.pa_hist).filter(x=>!x.structured));assert(logged.length>0&&logged.every(x=>x.name===name),'only the performed exercise may have records');
+ const top=logged.reduce((a,b)=>(b.w*(1+b.reps/30)>a.w*(1+a.reps/30)?b:a));
+ const olds=[[14,'old1'],[7,'old2']].map(([d,id])=>({...top,id,sessionId:id,date:evDay(d),w:top.w*0.9}));
+ await p.eval(o=>{localStorage.pa_hist=JSON.stringify([...o,...JSON.parse(localStorage.pa_hist)])},olds);
+ const ev=await p.eval(()=>evidenceDecision());assert.strictEqual(ev.name,name);assert.strictEqual(ev.vals.length,3,JSON.stringify(ev.vals));
+ assert(Math.abs(ev.vals[2]-top.w*(1+top.reps/30))<1e-9&&ev.vals[2]>ev.vals[1],JSON.stringify(ev.vals));
+});
+test('EV4','Skipped and not-reached exercises leave no record, so they cannot enter any series or be read as deterioration',async p=>{
+ await skStart(p,'a');const name=await p.eval(()=>selected('a',0));
+ await evSeed(p,[evRec('a1','old1',name,14,100,10),evRec('a2','old2',name,7,100,10)]);
+ const evBefore=await p.eval(()=>evidenceDecision());
+ await skSkip(p,0);await skLog(p,3,1);await skFinish(p);
+ const n=await p.eval(n=>JSON.parse(localStorage.pa_hist).filter(x=>x.name===n).length,name);assert.strictEqual(n,2,'a record was created for the skipped exercise');
+ const ev=await p.eval(()=>evidenceDecision());
+ assert.deepStrictEqual(ev.name===name?ev.vals:null,evBefore.name===name?evBefore.vals:null,'the skipped exercise series changed');
+ assert.notStrictEqual(ev.state,'ACT');
+});
+test('EV5','Structured intensifier blocks never enter the evidence series, so an incomplete or smaller cluster cannot read as decline',async p=>{
+ const r=(id,sid,d,reps)=>({id,sessionId:sid,name:'Rear-Delt Fly (DB)',intensifier:'Myo-Reps',structured:true,w:30,reps,efforts:[{stage:1,w:30,reps:10}],setNumber:2,date:evDay(d)});
+ await evSeed(p,[r('a','s0',20,30),r('b','s1',12,10),r('c','s2',4,5)]);const ev=await p.eval(()=>evidenceDecision());assert.strictEqual(ev.name,'SYSTEM');
+});
+test('EV6','Nothing in the engine raises a load automatically: the decision only reports OBSERVE / INVESTIGATE / ACT about a decline, and a single exposure never changes the program',async p=>{
+ await evSeed(p,[evRec('a','s0','Bench Press (BB)',3,200,5)]);const ev=await p.eval(()=>evidenceDecision());assert.strictEqual(ev.state,'OBSERVE');
+ assert(['OBSERVE','INVESTIGATE','ACT'].includes(ev.state));
+ const src=await p.eval(()=>[evidenceDecision,targetStrength,targetMode].map(f=>f.toString()).join('\n'));assert(!/inc\)?\s*[\+\*]|w\s*\+=|\.w\s*=\s*\(?[^=]*\+/.test(src.replace(/before \+\$\{e\?\.inc\|\|5\} lb/,'')),'a function appears to compute a heavier load');
+});
+
 // ---------- runner ----------
 (async()=>{
  const server=await serve(appDir),browser=await launch();ctx={browser,origin:server.origin};

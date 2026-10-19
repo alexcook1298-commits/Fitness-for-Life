@@ -1,0 +1,66 @@
+{
+ "app": "integration/app",
+ "date": "2026-10-19T19:52:42.405Z",
+ "findings": [
+  {
+   "id": "E1",
+   "title": "Exercise omitted from the latest session (no records at all)",
+   "finding": "SAFE",
+   "detail": "state OBSERVE; bench series untouched by omission (4 exposures, none today)"
+  },
+  {
+   "id": "E2",
+   "title": "Exercise present with FEWER sets than prescribed but the same load",
+   "finding": "SAFE",
+   "detail": "vals 233.3,233.3,233.3,233.3 (a one-set partial equals the full-session best)"
+  },
+  {
+   "id": "E3",
+   "title": "Partial session logs only the BACK-OFF set of Top Set + Back-Offs (top set unlogged), three sessions in a row",
+   "finding": "LIMITATION",
+   "detail": "state ACT: Four-exposure pattern is deteriorating. Review fatigue, technique, load and exercise fit before the next prescription. vals 233,215,215,215. Back-off sets (setNumber>1) are compared with top sets in the same series"
+  },
+  {
+   "id": "E4",
+   "title": "Same, but ALL sets of every session are logged (control)",
+   "finding": "SAFE",
+   "detail": "state OBSERVE"
+  },
+  {
+   "id": "E5",
+   "title": "One session whose sets straddle UTC midnight (evening workout) is counted as TWO exposures",
+   "finding": "LIMITATION",
+   "detail": "4 exposures from 3 sessions; vals 233,233,233,213; state OBSERVE"
+  },
+  {
+   "id": "E6",
+   "title": "Records of an unfinished (draft) session are read as evidence",
+   "finding": "LIMITATION",
+   "detail": "draft record counted: vals 233,233,175; state OBSERVE. Real performed sets in an interrupted session are legitimate data; the engine does not distinguish sessions"
+  },
+  {
+   "id": "E7",
+   "title": "Skipped exercise (explicit skip flag) in a finished session leaves the series untouched",
+   "finding": "SAFE",
+   "detail": "vals 2: a skip flag creates no record and cannot enter the series"
+  },
+  {
+   "id": "E8",
+   "title": "Structured intensifier blocks (Myo-Reps, Rest-Pause ...) are excluded from the series",
+   "finding": "SAFE",
+   "detail": "SYSTEM: OBSERVE. An incomplete or smaller cluster can never read as deterioration"
+  },
+  {
+   "id": "E9",
+   "title": "Next-target text after a partial session that logged only the lighter back-off set",
+   "finding": "LIMITATION",
+   "detail": "target shown: \"170 lb • earn reps/quality before +5 lb\". It anchors on the LAST logged record (a back-off set), not the top set"
+  },
+  {
+   "id": "E10",
+   "title": "Does any code recommend a load increase automatically?",
+   "finding": "INFO",
+   "detail": "evidenceDecision only returns OBSERVE / INVESTIGATE / ACT about decline; target text only says \"earn reps/quality before +N lb\". No function raises a load automatically (none)"
+  }
+ ]
+}
