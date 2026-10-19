@@ -306,6 +306,61 @@ test('CB15','A full real workflow with cardio containing < and > still passes ev
  const q=await openApp();try{const r=await importFile(q,writeFile(bk));assert(r.can,r.text);assert(await restoreUI(q));assert.deepStrictEqual(PA(await storage(q)),before)}finally{await q.close()}
 });
 
+// =====================================================================
+// BU — training-budget classification of previously unclassified templates
+// =====================================================================
+const bsess=(id,template,status='complete',daysAgo=1)=>({id,template,phase:1,weekMode:'normal',status,startedAt:new Date(Date.now()-daysAgo*86400000-3600000).toISOString(),...(status==='complete'?{finishedAt:new Date(Date.now()-daysAgo*86400000).toISOString()}:{}),forms:{},checks:{},choices:{},modes:{},clusters:{}});
+const seedS=(p,rows)=>p.eval(r=>{localStorage.setItem('pa_sessions_v2',JSON.stringify(r))},rows);
+const ZERO={Strength:0,Hypertrophy:0,Explosive:0,'High-intensity engine':0,'Low-intensity engine':0,Capability:0};
+// The classification model, stated once. Only mappings the source itself makes unambiguous are listed; [] means "deliberately not classified".
+const MODEL={a:['Strength'],b2a:['Strength'],b3a:['Strength'],b4a:['Strength'],b5a:['Strength'],b6a:['Strength'],b7a:['Strength'],
+ b:['Hypertrophy'],bu:['Hypertrophy'],bl:['Hypertrophy'],b2b:['Hypertrophy'],b3b:['Hypertrophy'],b3c:['Hypertrophy'],b4b:['Hypertrophy'],b5b:['Hypertrophy'],b6b:['Hypertrophy'],b7b:['Hypertrophy'],bonusarms:['Hypertrophy'],bonusback:['Hypertrophy'],
+ athletic:['Explosive','Capability'],conditioning:['High-intensity engine'],mobility:['Low-intensity engine'],
+ c:['Capability'],
+ bodycontrol:[],athletepractice:[],combatintro:[],waterpractice:[],carrypractice:[],practicalskills:[]};
+test('BU1','Every one of the 29 templates has an explicit, reviewed classification: the model table matches the app exactly',async p=>{
+ const got=await p.eval(()=>Object.fromEntries(Object.keys(T).map(k=>[k,budgetCategories(k)])));
+ assert.deepStrictEqual(Object.keys(got).sort(),Object.keys(MODEL).sort(),'template list differs');assert.deepStrictEqual(got,MODEL);
+});
+test('BU2','Giant C ("OPTIONAL • CAPABILITY") counts as Capability only, and not as Strength or Hypertrophy',async p=>{
+ await seedS(p,[bsess('c1','c')]);assert.deepStrictEqual(await p.eval(()=>budgetData()),{...ZERO,Capability:1});
+});
+test('BU3','The six templates whose purpose the source does not settle are not forced into any category: they add nothing to the six bars',async p=>{
+ await seedS(p,Object.keys(MODEL).filter(k=>MODEL[k].length===0).map((t,i)=>bsess('u'+i,t)));
+ assert.deepStrictEqual(await p.eval(()=>budgetData()),ZERO);
+});
+test('BU4','Completed sessions that have no category are reported, not silently dropped: budgetUnclassified() lists them by template',async p=>{
+ await seedS(p,[bsess('u1','bodycontrol'),bsess('u2','bodycontrol'),bsess('u3','waterpractice'),bsess('k1','a'),bsess('k2','c')]);
+ const u=await p.eval(()=>budgetUnclassified());
+ assert.strictEqual(u.total,3);assert.deepStrictEqual(u.byTemplate,{bodycontrol:2,waterpractice:1});
+});
+test('BU5','Unclassified reporting follows the same rules as the budget: drafts, sessions older than 7 days and unknown templates are handled, legacy "completed" status counts',async p=>{
+ await seedS(p,[bsess('d1','bodycontrol','draft'),bsess('o1','bodycontrol','complete',9),{...bsess('l1','carrypractice'),status:'completed',completedAt:new Date().toISOString()},bsess('x1','template-from-the-future')]);
+ const u=await p.eval(()=>budgetUnclassified());assert.strictEqual(u.total,2);assert.deepStrictEqual(u.byTemplate,{carrypractice:1,'template-from-the-future':1});
+});
+test('BU6','Training Budget page tells the athlete when sessions are not counted: it names them and says the bars exclude them; with none, no extra line appears',async p=>{
+ await seedS(p,[bsess('u1','bodycontrol'),bsess('u2','combatintro'),bsess('k1','a')]);
+ let t=await p.eval(()=>{renderBudgetPage();return document.getElementById('mpBody').innerText});
+ assert(/not counted/i.test(t)&&/Body Control/.test(t)&&/Coached Combat Fundamentals/.test(t),t);
+ assert(/Strength\s*\n?\s*1 exposure/.test(t),t);
+ await seedS(p,[bsess('k1','a')]);t=await p.eval(()=>{renderBudgetPage();return document.getElementById('mpBody').innerText});assert(!/not counted/i.test(t),t);
+});
+test('BU7','Coach Handoff carries the same disclosure so an exported summary never implies the bars are the whole week',async p=>{
+ await seedS(p,[bsess('u1','bodycontrol'),bsess('k1','a')]);const t=await p.eval(()=>coachSummary());
+ assert(/not counted in the training budget/i.test(t)&&/Body Control/.test(t),t.slice(0,600));
+ await seedS(p,[bsess('k1','a')]);assert(!/not counted in the training budget/i.test(await p.eval(()=>coachSummary())));
+});
+test('BU8','Classification is read-only and budgetData still returns exactly the six existing keys (no consumer sees a changed shape)',async p=>{
+ await seedS(p,[bsess('u1','bodycontrol'),bsess('k1','c')]);const before=await p.eval(()=>localStorage.getItem('pa_sessions_v2'));
+ const keys=await p.eval(()=>{budgetUnclassified();renderBudgetPage();return Object.keys(budgetData())});
+ assert.deepStrictEqual(keys,Object.keys(ZERO));assert.strictEqual(await p.eval(()=>localStorage.getItem('pa_sessions_v2')),before);
+});
+test('BU9','Source grounding is checkable: each reviewed template\'s own title/purpose line and block membership are what the model table was derived from',async p=>{
+ const r=await p.eval(()=>({c:T.c[1],bc:T.bodycontrol[1],ap:T.athletepractice[1],ci:T.combatintro[1],wp:T.waterpractice[1],cp:T.carrypractice[1],ps:T.practicalskills[1]}));
+ assert(/CAPABILITY/.test(r.c),'Giant C no longer self-labelled Capability: '+r.c);
+ assert(/RELATIVE STRENGTH/.test(r.bc)&&/QUALITY BEFORE FATIGUE/.test(r.ap)&&/COACH-LED/.test(r.ci)&&/INSTRUCTOR/.test(r.wp)&&/CARRY/.test(r.cp)&&/INSTRUCTOR/.test(r.ps),JSON.stringify(r));
+});
+
 // ---------- runner ----------
 (async()=>{
  const server=await serve(appDir),browser=await launch();ctx={browser,origin:server.origin};
