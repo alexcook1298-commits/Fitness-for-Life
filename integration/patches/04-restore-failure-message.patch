@@ -1,0 +1,20 @@
+--- a/index.html
++++ b/index.html
+@@ -1293,11 +1293,14 @@
+    try{localStorage.setItem(k,v)}catch(e){if(localStorage.getItem(ROLLBACK_KEYS[1])==null)throw e;localStorage.removeItem(ROLLBACK_KEYS[1]);localStorage.setItem(k,v)}
+   }
+  }catch(e){
+-  backupKeys().forEach(k=>localStorage.removeItem(k));Object.entries(old).forEach(([k,v])=>localStorage.setItem(k,v));restoreSnapshots(prev);
+-  throw Error(e&&e.name==='QuotaExceededError'?'The backup does not fit in this browser’s storage.':'Storage could not save the backup ('+(e&&e.message||e)+').');
++  let restored=true;
++  try{backupKeys().forEach(k=>localStorage.removeItem(k));Object.entries(old).forEach(([k,v])=>localStorage.setItem(k,v));restored=Object.entries(old).every(([k,v])=>localStorage.getItem(k)===v)&&backupKeys().length===keys.length&&backupKeys().every(k=>k in old);if(restored)restoreSnapshots(prev)}catch{restored=false}
++  const cause=e&&e.name==='QuotaExceededError'?'The backup does not fit in this browser’s storage.':'Storage could not save the backup ('+(e&&e.message||e)+').';
++  if(restored)throw Error(cause);
++  const lost=Error(cause+' Your previous data could NOT be fully put back automatically. A complete copy of it is in the pre-restore snapshot: open Backup & Restore, tap DOWNLOAD PRE-RESTORE SNAPSHOT to save it, free some browser storage, then import that file to recover.');lost.dataAtRisk=true;throw lost;
+  }
+ }
+-function restoreBackup(){if(!pendingImport)return;try{validateBackup(pendingImport);replacePAData(pendingImport.data);currentSession=null;renderedSession=null;location.reload()}catch(e){notice('Restore failed; original data was retained. '+e.message)}}
++function restoreBackup(){if(!pendingImport)return;try{validateBackup(pendingImport);replacePAData(pendingImport.data);currentSession=null;renderedSession=null;location.reload()}catch(e){notice(e&&e.dataAtRisk?'Restore failed. '+e.message:'Restore failed; original data was retained. '+(e&&e.message||e))}}
+ function downloadRollback(gen=1){const snap=readSnapshot(gen);if(!snap){notice('No rollback backup exists yet.');return}downloadChecked(snap,gen===1?'Project_America_Before_Restore.json':'Project_America_Before_Earlier_Restore.json')}
+ function snapshotSummary(){const when=s=>s?.createdAt?new Date(s.createdAt).toLocaleString():'date not recorded',a=readSnapshot(1),b=readSnapshot(2);return a?'Pre-restore snapshots on this device: latest '+when(a)+(b?'; older '+when(b):'')+'.':'No pre-restore snapshot yet.'}
+ function showData(){mpTitle.textContent='Full Backup & Restore';mpBody.innerHTML=`<div class="card"><p>Includes lifting, cardio, stretches, sessions, unfinished workouts, exercise preferences, block choice, week mode and reviews.</p><button class="primary" onclick="exportData()">EXPORT FULL BACKUP</button><label class="import-label">Import full backup<input type="file" accept="application/json,.json" onchange="previewImport(this.files[0])"></label><div id="importPreview"></div><button class="secondary" onclick="downloadRollback()">DOWNLOAD PRE-RESTORE SNAPSHOT</button>${localStorage.getItem(ROLLBACK_KEYS[1])!=null?'<button class="secondary" onclick="downloadRollback(2)">DOWNLOAD OLDER PRE-RESTORE SNAPSHOT</button>':''}<p class="tiny muted">${esc(snapshotSummary())}</p></div>`;show('morepage')}

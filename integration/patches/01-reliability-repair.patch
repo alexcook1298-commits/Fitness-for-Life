@@ -1,0 +1,43 @@
+--- a/index.html
++++ b/index.html
+@@ -1317,25 +1317,32 @@
+ function daysOld(date){if(!date)return Infinity;return Math.floor((Date.now()-new Date(date).getTime())/86400000)}
+ function confidence(date,estimated=false){if(!date)return ['UNKNOWN','status-gray'];let d=daysOld(date);if(estimated)return d>PA20.staleDays?['STALE','status-yellow']:['ESTIMATED','status-gray'];return d>PA20.staleDays?['STALE','status-yellow']:['VERIFIED','status-green']}
+ function readinessScore(r){return Math.round(((+r.sleep||3)+(+r.energy||3)+(+r.soreness||3)+(+r.joints||3)+(+r.motivation||3))/25*100)}
+-function readinessDecision(r){let x=readinessScore(r);if(x>=76)return {label:'GREEN',cls:'status-green',text:'Run as programmed. Optional methods remain optional.'};if(x>=58)return {label:'YELLOW',cls:'status-yellow',text:'Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off.'};return {label:'RED',cls:'status-red',text:'Protect the training floor: use COMPACT / MED, straight sets, and stop any movement that feels wrong.'}}
+-function recentSessions(days=7){let cut=Date.now()-days*86400000;return readJSON('pa_sessions_v2',[]).filter(x=>x.status==='completed'&&new Date(x.completedAt||x.updatedAt||x.startedAt).getTime()>=cut)}
++function readinessDecision(r){r=r||{};let x=readinessScore(r),j=+r.joints||3,base=x>=76?'GREEN':x>=58?'YELLOW':'RED';
++ if(j<=1)return {label:'RED',cls:'status-red',text:'Joint status is flagged 1 / 5, which overrides the overall score. Do not train through joint pain: keep to COMPACT / straight sets or rest, and get professional advice if it persists.',jointOverride:true};
++ if(j<=2&&base==='GREEN')return {label:'YELLOW',cls:'status-yellow',text:'Joint status is flagged 2 / 5, so this is not a clear green. Keep primary work only, cap optional intensity, and stop any movement that aggravates a joint.',jointOverride:true};
++ if(base==='GREEN')return {label:'GREEN',cls:'status-green',text:'Run as programmed. Optional methods remain optional.'};
++ if(base==='YELLOW')return {label:'YELLOW',cls:'status-yellow',text:'Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off.'};
++ return {label:'RED',cls:'status-red',text:'Protect the training floor: use COMPACT / MED, straight sets, and stop any movement that feels wrong.'}}
++function recentSessions(days=7){let cut=Date.now()-days*86400000,a=readJSON('pa_sessions_v2',[]);return (Array.isArray(a)?a:[]).filter(x=>x&&(x.status==='complete'||x.status==='completed')&&new Date(x.finishedAt||x.completedAt||x.updatedAt||x.startedAt).getTime()>=cut)}
+ function budgetData(){let rs=recentSessions(7),b={Strength:0,Hypertrophy:0,Explosive:0,'High-intensity engine':0,'Low-intensity engine':0,Capability:0};rs.forEach(x=>{if(String(x.template).includes('a'))b.Strength++;if(String(x.template).includes('b'))b.Hypertrophy++;if(x.template==='athletic'){b.Explosive++;b.Capability++}if(x.template==='conditioning')b['High-intensity engine']++;if(x.template==='mobility')b['Low-intensity engine']++});return b}
+ function histDate(x){return x.date||x.completedAt||''}
+ function performanceValue(x){if(x.w&&x.reps)return +x.w*(1+(+x.reps||0)/30);if(x.w)return +x.w;if(x.reps)return +x.reps;return 0}
++function evidenceSeriesKey(x){return [x.intensifier||'Straight Sets',x.strengthMethod||'',(+x.reps||0)>12?'high-rep':'std-rep'].join('|')}
+ function evidenceDecision(){
+- let h=readJSON('pa_hist',[]),by={};
+- h.filter(x=>!x.structured&&x.name).forEach(x=>(by[x.name]??=[]).push(x));
++ let h=readJSON('pa_hist',[]),by=new Map();
++ (Array.isArray(h)?h:[]).filter(x=>x&&!x.structured&&x.name).forEach(x=>{const k=x.name+'\u0000'+evidenceSeriesKey(x);if(!by.has(k))by.set(k,{name:x.name,rows:[]});by.get(k).rows.push(x)});
+  let candidates=[];
+- Object.entries(by).forEach(([name,a])=>{
+-  a=a.sort((x,y)=>new Date(histDate(x))-new Date(histDate(y)));
++ by.forEach(({name,rows})=>{
++  let a=rows.sort((x,y)=>new Date(histDate(x))-new Date(histDate(y)));
+   let dates=[...new Set(a.map(x=>String(histDate(x)).slice(0,10)))];
+   if(dates.length<2)return;
+   let lastDates=dates.slice(-4);
+   let vals=lastDates.map(d=>Math.max(...a.filter(x=>String(histDate(x)).slice(0,10)===d).map(performanceValue))).filter(Boolean);
+   if(vals.length<2)return;
+   let delta=(vals.at(-1)-vals[0])/(vals[0]||1),state='OBSERVE',why='Recent performance is being watched. One exposure never changes the program.';
+-  if(vals.length>=3&&delta<-.025){state='INVESTIGATE';why='Performance is down across multiple comparable exposures. Watch the next exposure before changing the program.'}
+-  if(vals.length>=4&&vals.slice(1).every((v,i)=>v<=vals[i])&&delta<-.05){state='ACT';why='Four-exposure pattern is deteriorating. Review fatigue, technique, load and exercise fit before the next prescription.'}
++  let ref=vals.length>2?Math.max(...vals.slice(0,-2)):vals[0],sustained=vals.length>2&&vals.slice(-2).every(v=>v<ref*.975);
++  if(vals.length>=3&&delta<-.025&&sustained){state='INVESTIGATE';why='Performance is down across multiple comparable exposures. Watch the next exposure before changing the program.'}
++  if(vals.length>=4&&sustained&&vals.slice(1).every((v,i)=>v<=vals[i])&&delta<-.05){state='ACT';why='Four-exposure pattern is deteriorating. Review fatigue, technique, load and exercise fit before the next prescription.'}
+   if(delta>.025){state='OBSERVE';why='Performance trend is positive. No change is justified.'}
+   candidates.push({name,state,why,delta,vals});
+  });

@@ -1,0 +1,11 @@
+--- a/index.html
++++ b/index.html
+@@ -1414,7 +1414,7 @@
+  if(base==='YELLOW')return {label:'YELLOW',cls:'status-yellow',text:'Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off.'};
+  return {label:'RED',cls:'status-red',text:'Protect the training floor: use COMPACT / MED, straight sets, and stop any movement that feels wrong.'}}
+ function recentSessions(days=7){let cut=Date.now()-days*86400000,a=readJSON('pa_sessions_v2',[]);return (Array.isArray(a)?a:[]).filter(x=>x&&(x.status==='complete'||x.status==='completed')&&new Date(x.finishedAt||x.completedAt||x.updatedAt||x.startedAt).getTime()>=cut)}
+-function budgetData(){let rs=recentSessions(7),b={Strength:0,Hypertrophy:0,Explosive:0,'High-intensity engine':0,'Low-intensity engine':0,Capability:0};rs.forEach(x=>{if(String(x.template).includes('a'))b.Strength++;if(String(x.template).includes('b'))b.Hypertrophy++;if(x.template==='athletic'){b.Explosive++;b.Capability++}if(x.template==='conditioning')b['High-intensity engine']++;if(x.template==='mobility')b['Low-intensity engine']++});return b}
++function budgetData(){let rs=recentSessions(7),b={Strength:0,Hypertrophy:0,Explosive:0,'High-intensity engine':0,'Low-intensity engine':0,Capability:0};rs.forEach(x=>{const t=String(x.template);if(/^(a|b[2-7]a)$/.test(t))b.Strength++;if(/^(b|bu|bl|b[2-7]b|b3c|bonusarms|bonusback)$/.test(t))b.Hypertrophy++;if(x.template==='athletic'){b.Explosive++;b.Capability++}if(x.template==='conditioning')b['High-intensity engine']++;if(x.template==='mobility')b['Low-intensity engine']++});return b}
+ function histDate(x){return x.date||x.completedAt||''}
+ function performanceValue(x){if(x.w&&x.reps)return +x.w*(1+(+x.reps||0)/30);if(x.w)return +x.w;if(x.reps)return +x.reps;return 0}
+ function evidenceSeriesKey(x){return [x.intensifier||'Straight Sets',x.strengthMethod||'',(+x.reps||0)>12?'high-rep':'std-rep'].join('|')}
