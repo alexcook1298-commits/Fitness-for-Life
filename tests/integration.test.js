@@ -63,8 +63,9 @@ test('B6','INT-B: budget classification','Block A variants (b2a…b7a) count as 
  expectBudget(await budgetOf(p,['b2b','b3b','b3c','b4b','b5b','b6b','b7b']),{Hypertrophy:7});
 });
 test('B7','INT-B: budget classification','Optional bonus sessions count as Hypertrophy only (previously also Strength)',async p=>expectBudget(await budgetOf(p,['bonusarms','bonusback']),{Hypertrophy:2}));
-test('B8','INT-B: budget classification','Templates that have no budget category (c, practice and skill sessions) are not counted anywhere (previously several were counted as Strength or Hypertrophy by accident)',async p=>{
- expectBudget(await budgetOf(p,['c','bodycontrol','athletepractice','carrypractice','combatintro','waterpractice','practicalskills']),{});
+test('B8','INT-B: budget classification','Practice and skill sessions whose purpose the source does not settle are not counted in any bar (Phase 2: Giant C now counts as Capability; see tests/phase2.test.js BU1-BU9 for the full model)',async p=>{
+ expectBudget(await budgetOf(p,['bodycontrol','athletepractice','carrypractice','combatintro','waterpractice','practicalskills']),{});
+ expectBudget(await budgetOf(p,['c']),{Capability:1});
 });
 test('B9','INT-B: budget classification','A mixed week totals correctly: A + B + athletic + conditioning + mobility',async p=>expectBudget(await budgetOf(p,['a','b','athletic','conditioning','mobility']),{Strength:1,Hypertrophy:1,Explosive:1,Capability:1,'High-intensity engine':1,'Low-intensity engine':1}));
 test('B10','INT-B: budget classification','Training Budget page shows the corrected counts',async p=>{
