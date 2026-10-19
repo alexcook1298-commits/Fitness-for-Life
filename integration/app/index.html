@@ -1141,16 +1141,63 @@ saveCardio=function(mode){
  for(const [field,value] of Object.entries(data)){const problem=cardioTextProblem(value);if(problem){notice(`Cardio field "${field}" ${problem}.`);return}}
  upsertHistory('pa_cardio_hist',{id:currentSession.id+'|'+cardioMachine+'|'+mode,sessionId:currentSession.id,date:new Date().toISOString(),machine:cardioMachine,mode,data});notice('Cardio details saved.');
 };
-function openFinish(){saveDraft();$('finishPanel').classList.remove('hidden')}
+// Completion semantics (derived once at Finish; additive session field; never back-filled, never read by rotation, budget or evidence).
+const COMPLETION_PRESCRIPTION=['full','partial','none'],COMPLETION_SCOPE=['full','busy','compact'],COMPLETION_BASIS=['sets','items'],EXERCISE_STATUS=['performed','partial','skipped','not_reached'];
+function completionVerdict(prescribed,performed){return performed<=0?'none':performed>=prescribed&&performed>=2?'full':'partial'}
+function computeCompletion(){
+ const s=currentSession;if(!s)return null;
+ const scope=s.compact?'compact':s.weekMode==='busy'?'busy':'full';
+ if(slots[s.template]){
+  const logged={};
+  readJSON('pa_hist',[]).forEach(x=>{if(!x||x.sessionId!==s.id||typeof x.id!=='string')return;const part=x.id.split('|');if(part.length<5||part[0]!==s.id||!/^\d+$/.test(part[1])||!Number.isInteger(+x.setNumber))return;(logged[part[1]]??={sets:new Set(),name:x.name}).sets.add(+x.setNumber)});
+  const rows=[];let extra=0;
+  slots[s.template].forEach((sl,i)=>{
+   const shown=!s.compact||compactSlot(s.template,i),n=workSetCount(i),l=logged[i];
+   if(!shown){if(l)extra+=l.sets.size;return}
+   const done=l?[...l.sets].filter(j=>j>=1&&j<=n).length:0;if(l)extra+=l.sets.size-done;
+   rows.push({slot:i,name:l?.name||selected(s.template,i),prescribed:n,performed:done});
+  });
+  const last=rows.reduce((m,r)=>r.performed>0?r.slot:m,-1);
+  rows.forEach(r=>{
+   if(r.performed>0){r.status=r.performed>=r.prescribed?'performed':'partial';r.basis='logged'}
+   else if(r.slot<last){r.status='skipped';r.basis='later-work-logged'}
+   else{r.status='not_reached';r.basis='no-later-work'}
+  });
+  const prescribed=rows.reduce((a,r)=>a+r.prescribed,0),performed=rows.reduce((a,r)=>a+r.performed,0);
+  return {v:1,basis:'sets',scope,prescription:completionVerdict(prescribed,performed),prescribed,performed,extra,exercises:rows};
+ }
+ if(renderedSession!==s.id)return null;
+ const items=[...$('exs').querySelectorAll('button.check:not([data-record])')],performed=items.filter(b=>b.classList.contains('y')).length;
+ return {v:1,basis:'items',scope,prescription:completionVerdict(items.length,performed),prescribed:items.length,performed,extra:0,exercises:[]};
+}
+function completionOf(s){
+ if(s&&s.completion&&typeof s.completion==='object')return s.completion;
+ return {prescription:'unknown',reason:'Finished before completion was recorded; the prescription for that session cannot be reconstructed.'};
+}
+function completionLabel(c){
+ if(!c)return '';
+ const unit=c.basis==='items'?'checklist items ticked':'sets logged',scope=c.scope==='full'?'':' ('+c.scope+')';
+ let t=`Prescription ${c.prescription}${scope}: ${c.performed} of ${c.prescribed} ${unit}.`;
+ const missing=c.exercises.filter(e=>e.status==='skipped'||e.status==='not_reached'),partly=c.exercises.filter(e=>e.status==='partial');
+ if(missing.length)t+=' Not logged: '+missing.map(e=>`${e.name} (${e.status.replace('_',' ')})`).join(', ')+'.';
+ if(partly.length)t+=' Partly logged: '+partly.map(e=>`${e.name} (${e.performed} of ${e.prescribed})`).join(', ')+'.';
+ return t;
+}
+function openFinish(){
+ saveDraft();const panel=$('finishPanel');let line=$('finishCompletion');
+ if(!line){line=document.createElement('p');line.id='finishCompletion';line.className='tiny';panel.querySelector('h2').after(line)}
+ line.textContent=completionLabel(computeCompletion());panel.classList.remove('hidden');
+}
 function finishSession(){
  if(!currentSession||currentSession.status!=='draft')return;
  saveDraft();const records=readJSON('pa_hist',[]).filter(x=>x.sessionId===currentSession.id);
  const checks=Object.values(currentSession.checks).filter(Boolean).length;
  if(!records.length&&!checks&&!readJSON('pa_cardio_hist',[]).some(x=>x.sessionId===currentSession.id)&&!readJSON('pa_ls_hist',[]).some(x=>x.sessionId===currentSession.id)){notice('Log some work or mark a completed activity before finishing. EXIT keeps this workout as a draft.');return}
- currentSession.status='complete';currentSession.finishedAt=new Date().toISOString();currentSession.setCount=records.length;currentSession.checkCount=checks;
+ const completion=computeCompletion();
+ currentSession.status='complete';currentSession.finishedAt=new Date().toISOString();currentSession.setCount=records.length;currentSession.checkCount=checks;if(completion)currentSession.completion=completion;
  currentSession.recovery=$('finishRecovery').value;currentSession.notes=$('finishNotes').value.slice(0,1000);
- if(!persistSessions()){currentSession.status='draft';return}
- $('finishPanel').classList.add('hidden');$('finishNotes').value='';stopTimer();currentSession=null;renderedSession=null;localStorage.removeItem('pa_current_session');renderPlan();show('home');notice('Workout saved. Logged work and unfinished entries are retained in your session record.');
+ if(!persistSessions()){currentSession.status='draft';delete currentSession.completion;return}
+ $('finishPanel').classList.add('hidden');$('finishNotes').value='';stopTimer();currentSession=null;renderedSession=null;localStorage.removeItem('pa_current_session');renderPlan();show('home');notice('Workout saved. '+completionLabel(completion)+' Logged work and unfinished entries are retained in your session record.');
 }
 function resumeBanner(){const drafts=sessions.filter(x=>x.status==='draft');return drafts.length?`<div class="note"><b>Unfinished workouts</b>${drafts.map(s=>`<button class="secondary" onclick="resumeSession('${s.id}')">RESUME ${esc(T[s.template]?.[0]||s.template)}</button>`).join('')}</div>`:''}
 // Only keys this version can validate are exported or replaced; other localStorage keys are left untouched.
@@ -1228,6 +1275,22 @@ function cardioTextProblem(value){
  if(/<\/?[A-Za-z][^<>]*>|<[!?]/.test(value))return 'looks like HTML. Use < and > only as comparison signs, for example <10:00';
  return null;
 }
+function validateCompletion(c){
+ const bad=why=>{throw Error('Invalid completion record'+(why?' ('+why+')':'')+'.')};
+ const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),int=(x,max)=>Number.isInteger(x)&&x>=0&&x<=max;
+ const only=(o,keys)=>Object.keys(o).every(k=>keys.includes(k));
+ if(!object(c)||!only(c,['v','basis','scope','prescription','prescribed','performed','extra','exercises'])||c.v!==1)bad('shape');
+ if(!COMPLETION_BASIS.includes(c.basis)||!COMPLETION_SCOPE.includes(c.scope)||!COMPLETION_PRESCRIPTION.includes(c.prescription))bad('value');
+ if(!int(c.prescribed,500)||!int(c.performed,500)||!int(c.extra,500)||c.performed>c.prescribed)bad('count');
+ if(c.prescription!==completionVerdict(c.prescribed,c.performed))bad('prescription does not match counts');
+ if(!Array.isArray(c.exercises)||c.exercises.length>40||(c.basis==='items'&&c.exercises.length))bad('exercises');
+ for(const e of c.exercises){
+  if(!object(e)||!only(e,['slot','name','prescribed','performed','status','basis'])||!int(e.slot,39)||!int(e.prescribed,50)||!int(e.performed,50)||e.performed>e.prescribed)bad('exercise');
+  if(typeof e.name!=='string'||!L.some(x=>x.name===e.name)||!EXERCISE_STATUS.includes(e.status))bad('exercise');
+  const ok=e.status==='performed'?e.performed===e.prescribed&&e.prescribed>0&&e.basis==='logged':e.status==='partial'?e.performed>0&&e.performed<e.prescribed&&e.basis==='logged':e.performed===0&&e.basis===(e.status==='skipped'?'later-work-logged':'no-later-work');
+  if(!ok)bad('exercise status');
+ }
+}
 function validateBackup(obj){
  if(!obj||obj.format!=='project-america-full-backup'||obj.version!==1||!obj.data||typeof obj.data!=='object'||Array.isArray(obj.data))throw Error('Choose a full Project America backup. Old lifting-only exports cannot restore the full app.');
  for(const [k,v] of Object.entries(obj.data)){if(!BACKUP_KEY.test(k)||typeof v!=='string'||v.length>10000000)throw Error('Unrecognized or oversized backup entry: '+k);}
@@ -1240,6 +1303,7 @@ function validateBackup(obj){
  if(obj.data.pa_sessions_v2)for(const s of JSON.parse(obj.data.pa_sessions_v2)){
   if(typeof s.id!=='string'||!/^[a-zA-Z0-9-]{1,100}$/.test(s.id)||!Object.hasOwn(T,s.template)||!['draft','complete'].includes(s.status)||!['busy','normal','extra'].includes(s.weekMode)||!s.forms||!s.checks||!s.choices||!s.modes)throw Error('Invalid session record');
   if(!BLOCKS.some(b=>b.id===s.phase))throw Error('Invalid session block');
+  if(Object.hasOwn(s,'completion'))validateCompletion(s.completion);
  }
  const safeString=x=>typeof x==='string'&&x.length<2000&&!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(x);
  for(const [k,v] of Object.entries(obj.data)){
@@ -1573,7 +1637,13 @@ function saveLifeWin(){let el=document.getElementById('lifeWin'),t=el.value.trim
 function renderTechniquePage(){let d=ensurePA21(osData()),names=[...new Set(L.map(x=>x.name))].sort(),recent=d.technique.slice().reverse().slice(0,10);mpTitle.textContent='Technique Journal';mpBody.innerHTML=`<div class="card"><small class="gold">ONE CLEAR FOCUS AT A TIME</small><h2>Practice cue</h2><select id="techEx" class="chooser">${names.map(n=>`<option>${esc(n)}</option>`).join('')}</select><input id="techCue" class="search" placeholder="Cue: pause, brace, drive, keep elbows…"><select id="techAngle" class="chooser"><option>Self-observation only</option><option>Front angle</option><option>Side angle</option><option>Rear / 45° angle</option></select><textarea id="techNote" placeholder="What did you notice? Keep it specific."></textarea><button class="primary" onclick="saveTechnique()">SAVE PRACTICE NOTE</button><p class="tiny muted">This journal stores your observations and cues. It does not claim to analyze video or diagnose movement problems.</p></div>${recent.map(x=>`<div class="card"><small class="gold">${new Date(x.date).toLocaleDateString()} • ${esc(x.angle)}</small><h3>${esc(x.exercise)}</h3><p><b>CUE:</b> ${esc(x.cue)}</p>${x.note?`<p class="muted">${esc(x.note)}</p>`:''}</div>`).join('')}`}
 function saveTechnique(){let d=ensurePA21(osData()),cue=document.getElementById('techCue').value.trim();if(!cue)return;d.technique.push({exercise:document.getElementById('techEx').value,cue,angle:document.getElementById('techAngle').value,note:document.getElementById('techNote').value.trim(),date:new Date().toISOString()});saveOS(d);renderTechniquePage()}
 function coachReadiness(r){const st=readinessStatus(r),score=readinessScore(r||{}),f=st.fresh;if(!st.stale)return `${st.label} (${score}/100)`;const ago=f.state==='future'?'check-in date in the future':f.state==='never'?'never saved':`last saved ${f.days} day${f.days===1?'':'s'} ago`;return st.jointOverride?`${st.label} (joint flag still applies; ${ago}; ${score}/100)`:`${st.label} (${ago})`}
-function coachSummary(){let d=ensurePA21(osData()),ev=evidenceDecision(),rs=recentSessions(42),tests=Object.entries(d.tests||{}).map(([k,v])=>`${k}: ${v.value} (${confidence(v.date)[0]})`).join('\n')||'No verified tests';let fr={};d.friction.forEach(x=>fr[x.reason]=(fr[x.reason]||0)+1);return `PROJECT AMERICA // COACH HANDOFF\nGenerated: ${new Date().toLocaleString()}\n\nCURRENT MODE: ${(d.mode||'standard').toUpperCase()}\nBODYWEIGHT: ${d.bodyweight||'—'} lb\nREADINESS: ${coachReadiness(d.readiness)}\n\nLAST 6 WEEKS\nCompleted sessions: ${rs.length}\n${Object.entries(rs.reduce((a,x)=>(a[T[x.template]?.[0]||x.template]=(a[T[x.template]?.[0]||x.template]||0)+1,a),{})).map(([k,v])=>`${k}: ${v}`).join('\n')||'No completed sessions'}${(()=>{const u=budgetUnclassified();return u.total?`\nNote: ${u.total} session${u.total===1?'':'s'} in the last 7 days ${u.total===1?'is':'are'} not counted in the training budget (no category assigned): ${budgetUnclassifiedList(u)}.`:''})()}\n\nEVIDENCE FLAG\n${ev.state} — ${ev.name}\n${ev.why}\n\nVERIFIED / STORED TESTS\n${tests}\n\nFRICTION\n${Object.entries(fr).map(([k,v])=>`${k}: ${v}`).join('\n')||'None logged'}\n\nRECENT REAL-LIFE WINS\n${d.lifeWins.slice(-5).map(x=>'- '+x.text).join('\n')||'None logged'}\n\nDoctrine: Project America does not automatically change programming from one bad exposure.`}
+function completionSummary(rs){
+ if(!rs.length)return '';
+ const n={full:0,partial:0,none:0,unknown:0},partial=[];
+ rs.forEach(x=>{const c=completionOf(x);n[c.prescription]=(n[c.prescription]||0)+1;if(c.prescription==='partial')partial.push(`${T[x.template]?.[0]||x.template}: ${c.performed} of ${c.prescribed} ${c.basis==='items'?'items':'sets'}${c.scope==='full'?'':' ('+c.scope+')'}`)});
+ return `\nCompletion: Full ${n.full} • Partial ${n.partial} • None ${n.none} • Not recorded (earlier sessions) ${n.unknown}`+partial.slice(0,3).map(x=>`\nPartial: ${x}`).join('');
+}
+function coachSummary(){let d=ensurePA21(osData()),ev=evidenceDecision(),rs=recentSessions(42),tests=Object.entries(d.tests||{}).map(([k,v])=>`${k}: ${v.value} (${confidence(v.date)[0]})`).join('\n')||'No verified tests';let fr={};d.friction.forEach(x=>fr[x.reason]=(fr[x.reason]||0)+1);return `PROJECT AMERICA // COACH HANDOFF\nGenerated: ${new Date().toLocaleString()}\n\nCURRENT MODE: ${(d.mode||'standard').toUpperCase()}\nBODYWEIGHT: ${d.bodyweight||'—'} lb\nREADINESS: ${coachReadiness(d.readiness)}\n\nLAST 6 WEEKS\nCompleted sessions: ${rs.length}${completionSummary(rs)}\n${Object.entries(rs.reduce((a,x)=>(a[T[x.template]?.[0]||x.template]=(a[T[x.template]?.[0]||x.template]||0)+1,a),{})).map(([k,v])=>`${k}: ${v}`).join('\n')||'No completed sessions'}${(()=>{const u=budgetUnclassified();return u.total?`\nNote: ${u.total} session${u.total===1?'':'s'} in the last 7 days ${u.total===1?'is':'are'} not counted in the training budget (no category assigned): ${budgetUnclassifiedList(u)}.`:''})()}\n\nEVIDENCE FLAG\n${ev.state} — ${ev.name}\n${ev.why}\n\nVERIFIED / STORED TESTS\n${tests}\n\nFRICTION\n${Object.entries(fr).map(([k,v])=>`${k}: ${v}`).join('\n')||'None logged'}\n\nRECENT REAL-LIFE WINS\n${d.lifeWins.slice(-5).map(x=>'- '+x.text).join('\n')||'None logged'}\n\nDoctrine: Project America does not automatically change programming from one bad exposure.`}
 function renderCoachPage(){mpTitle.textContent='Coach Handoff';let txt=coachSummary();mpBody.innerHTML=`<div class="card"><small class="gold">SELECTIVE • COMPACT • EXPLAINABLE</small><h2>Training handoff</h2><p class="muted">A coach-ready summary of recent training context. Review it before sharing.</p><div id="coachText" class="coachbox">${esc(txt)}</div><div class="os-actions"><button class="primary" onclick="copyCoach()">COPY SUMMARY</button><button class="secondary" onclick="downloadCoach()">EXPORT .TXT</button></div></div>`}
 async function copyCoach(){let t=coachSummary();try{await navigator.clipboard.writeText(t);notice('Coach summary copied.')}catch(e){notice('Clipboard unavailable. Use Export .TXT instead.')}}
 function downloadCoach(){let blob=new Blob([coachSummary()],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Project_America_Coach_Handoff.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}

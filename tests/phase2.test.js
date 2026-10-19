@@ -374,7 +374,7 @@ async function csLogAll(p,only){for(const x of await csShown(p)){if(only&&!only.
 const csFinish=async p=>{await p.eval(()=>{openFinish();finishSession()});return p.eval(()=>JSON.parse(localStorage.pa_sessions_v2).at(-1))};
 const csNotice=p=>p.eval(()=>document.getElementById('appNotice').textContent);
 const sess0=(id,over={})=>({...bsess(id,'a'),...over});
-const rejects=async(p,session)=>p.eval(s=>{const b=fullBackup({pa_sessions_v2:JSON.stringify([s])});try{validateBackup(b);return 'ACCEPTED'}catch(e){return e.message}},session);
+const rejects=async(p,session)=>p.eval(t=>{const s=JSON.parse(t);const b=fullBackup({pa_sessions_v2:JSON.stringify([s])});try{validateBackup(b);return 'ACCEPTED'}catch(e){return e.message}},typeof session==='string'?session:JSON.stringify(session));
 
 test('CS1','Legacy sessions (no completion field) read as "unknown: finished before completion was recorded"; reading never writes or back-fills',async p=>{
  await seedS(p,[sess0('old1')]);const before=await p.eval(()=>localStorage.getItem('pa_sessions_v2'));
@@ -442,7 +442,8 @@ test('CS11','Backup round trip: completion survives export, validation and resto
  assert.strictEqual(await rejects(p,sess0('legacy')),'ACCEPTED');
 });
 test('CS12','Validator bounds: malformed, oversized, contradictory or markup-bearing completion is refused with a specific message',async p=>{
- const ok={v:1,basis:'sets',scope:'full',prescription:'partial',prescribed:4,performed:1,extra:0,exercises:[{slot:0,name:'Horizontal Press',prescribed:4,performed:1,status:'partial',basis:'logged'}]};
+ const nm=await p.eval(()=>selected('a',0));
+ const ok={v:1,basis:'sets',scope:'full',prescription:'partial',prescribed:4,performed:1,extra:0,exercises:[{slot:0,name:nm,prescribed:4,performed:1,status:'partial',basis:'logged'}]};
  assert.strictEqual(await rejects(p,sess0('v1',{status:'complete',completion:ok})),'ACCEPTED');
  const bad={
   'not an object':'full','wrong version':{...ok,v:2},'unknown prescription':{...ok,prescription:'complete'},'stored unknown':{...ok,prescription:'unknown'},
@@ -450,9 +451,9 @@ test('CS12','Validator bounds: malformed, oversized, contradictory or markup-bea
   'full with one set':{...ok,prescription:'full',prescribed:1,performed:1},'full but short':{...ok,prescription:'full',performed:3},
   'too many exercises':{...ok,exercises:Array.from({length:41},(_,i)=>({...ok.exercises[0],slot:i}))},'bad status':{...ok,exercises:[{...ok.exercises[0],status:'abandoned'}]},
   'markup name':{...ok,exercises:[{...ok.exercises[0],name:'<img src=x onerror=alert(1)>'}]},'control char':{...ok,exercises:[{...ok.exercises[0],name:'a\u0001b'}]},
-  'proto key':JSON.parse('{"v":1,"basis":"sets","scope":"full","prescription":"partial","prescribed":4,"performed":1,"extra":0,"exercises":[],"__proto__":{"x":1}}'),'array':[ok]
+  'proto key':'__RAW__','array':[ok]
  };
- for(const [why,c] of Object.entries(bad)){const r=await rejects(p,sess0('b1',{status:'complete',completion:c}));assert(r!=='ACCEPTED'&&/completion/i.test(r),why+' -> '+r)}
+ for(const [why,c] of Object.entries(bad)){const r=await rejects(p,c==='__RAW__'?JSON.stringify(sess0('b1',{status:'complete',completion:0})).replace('"completion":0','"completion":{"v":1,"basis":"sets","scope":"full","prescription":"partial","prescribed":4,"performed":1,"extra":0,"exercises":[],"__proto__":{"x":1}}'):sess0('b1',{status:'complete',completion:c}));assert(r!=='ACCEPTED'&&/completion/i.test(r),why+' -> '+r)}
 });
 test('CS13','Labels: the Finish panel previews the result before saving, and the saved notice repeats it with the not-logged movements; nothing else on screen is redesigned',async p=>{
  await csStart(p,'a');await csLog(p,3,1);await p.eval(()=>openFinish());

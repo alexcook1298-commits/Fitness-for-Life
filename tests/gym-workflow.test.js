@@ -369,15 +369,15 @@ test('G6.1','G6: distinguishing work (gap)','RECORDED vs NOT RECORDED is visible
  await p.eval(()=>start('a'));await logStraight(p,0,1,{w:'95',r:'12',rir:'2'});
  const marks=await p.eval(()=>[...document.querySelectorAll('#exs .exercise')[0].querySelectorAll('.set button.check')].map(b=>b.textContent.trim()));assert.deepStrictEqual(marks,['✓','○','○']);
 });
-test('G6.2','G6: distinguishing work (gap)','KNOWN GAP: a workout finished with ONE logged set out of ~20 is counted exactly like a full workout in Training Budget, Coach Handoff and Home',async p=>{
+test('G6.2','G6: distinguishing work','FIXED IN PHASE 2 (labels only): a workout finished with ONE logged set out of ~20 still counts as one completed session and one budget exposure, but Coach Handoff and the Finish notice now label it Partial',async p=>{
  await seedBSessions(p,0);
  await p.eval(()=>start('a'));await logStraight(p,3,1,{w:'95',r:'12',rir:'2'});await finishUI(p);
  const t=await p.eval(()=>coachSummary()),b=await p.eval(()=>budgetData());
- assert(/Completed sessions: 1/.test(t));assert.strictEqual(b.Strength,1);
- assert(!/partial|incomplete|skipped|sets? (logged|done)/i.test(t),'summary now distinguishes partial work; update the report: '+t.slice(0,300));
- assert.strictEqual((await sessionsOf(p))[0].setCount,1,'the count exists in storage but is not shown');
+ assert(/Completed sessions: 1/.test(t));assert.strictEqual(b.Strength,1,'exposure counting is deliberately unchanged (decision D5)');
+ assert(/Completion: Full 0 • Partial 1/.test(t)&&/Partial: Giant A: 1 of \d+ sets/.test(t),t.slice(0,400));
+ const s=(await sessionsOf(p))[0];assert.strictEqual(s.setCount,1);assert.strictEqual(s.completion.prescription,'partial');assert.strictEqual(s.completion.performed,1);
 });
-test('G6.3','G6: distinguishing work (gap)','KNOWN GAP: there is no per-session history view; skipped exercises leave no visible trace after finishing (no record, no label)',async p=>{
+test('G6.3','G6: distinguishing work (gap)','KNOWN GAP (narrowed in Phase 2): there is still no per-session history view; skipped work is labelled only in the Finish notice and Coach Handoff, not on Progress, Home or the After-action page',async p=>{
  await p.eval(()=>start('a'));await logStraight(p,3,1,{w:'95',r:'12',rir:'2'});await finishUI(p);
  const screens=[];
  await p.eval(()=>show('progress'));screens.push(await p.eval(()=>document.getElementById('progress').innerText));

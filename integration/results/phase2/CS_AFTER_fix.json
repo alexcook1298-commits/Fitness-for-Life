@@ -1,0 +1,152 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T17:47:41.673Z",
+ "passed": 18,
+ "failed": 0,
+ "results": [
+  {
+   "id": "CS1",
+   "group": "CS",
+   "title": "Legacy sessions (no completion field) read as \"unknown: finished before completion was recorded\"; reading never writes or back-fills",
+   "pass": true,
+   "error": null,
+   "ms": 212
+  },
+  {
+   "id": "CS2",
+   "group": "CS",
+   "title": "Full Giant A (normal week): every shown set logged -> prescription full, all exercises performed, prescribed equals the unchanged Full Session set total",
+   "pass": true,
+   "error": null,
+   "ms": 463
+  },
+  {
+   "id": "CS3",
+   "group": "CS",
+   "title": "ONE logged set out of a full Giant A is partial, never full; earlier unlogged movements are skipped, later ones not reached; performed counts only the real record",
+   "pass": true,
+   "error": null,
+   "ms": 229
+  },
+  {
+   "id": "CS4",
+   "group": "CS",
+   "title": "Finished with a checked item but no lifting records: prescription none, session still completes and still counts",
+   "pass": true,
+   "error": null,
+   "ms": 224
+  },
+  {
+   "id": "CS5",
+   "group": "CS",
+   "title": "Deliberate gap vs interruption: movement 1 skipped between logged movements; movements after the last logged one are not reached",
+   "pass": true,
+   "error": null,
+   "ms": 303
+  },
+  {
+   "id": "CS6",
+   "group": "CS",
+   "title": "A one-set prescription is never full (synthetic: Giant B reduced to the single-set Widowmaker, its only set logged)",
+   "pass": true,
+   "error": null,
+   "ms": 222
+  },
+  {
+   "id": "CS7",
+   "group": "CS",
+   "title": "Busy week: scope \"busy\", prescription measured against the busy cap (<=2 sets per movement), full when all shown sets are logged",
+   "pass": true,
+   "error": null,
+   "ms": 407
+  },
+  {
+   "id": "CS8",
+   "group": "CS",
+   "title": "Compact: scope \"compact\", only the shown movements are judged, and a complete compact session is full-in-scope, labelled compact (never presented as a Full Session)",
+   "pass": true,
+   "error": null,
+   "ms": 299
+  },
+  {
+   "id": "CS9",
+   "group": "CS",
+   "title": "Sets logged outside the shown scope (movement hidden by switching to compact afterwards) are recorded as extra and never counted as performed",
+   "pass": true,
+   "error": null,
+   "ms": 253
+  },
+  {
+   "id": "CS10",
+   "group": "CS",
+   "title": "Checklist template (Mobility): units are the items shown at Finish, not every key ever rendered; 1 item = partial, all items = full",
+   "pass": true,
+   "error": null,
+   "ms": 239
+  },
+  {
+   "id": "CS11",
+   "group": "CS",
+   "title": "Backup round trip: completion survives export, validation and restore byte-for-byte; sessions without it still validate",
+   "pass": true,
+   "error": null,
+   "ms": 294
+  },
+  {
+   "id": "CS12",
+   "group": "CS",
+   "title": "Validator bounds: malformed, oversized, contradictory or markup-bearing completion is refused with a specific message",
+   "pass": true,
+   "error": null,
+   "ms": 185
+  },
+  {
+   "id": "CS13",
+   "group": "CS",
+   "title": "Labels: the Finish panel previews the result before saving, and the saved notice repeats it with the not-logged movements; nothing else on screen is redesigned",
+   "pass": true,
+   "error": null,
+   "ms": 237
+  },
+  {
+   "id": "CS14",
+   "group": "CS",
+   "title": "Coach Handoff: \"Completed sessions: N\" is unchanged; a completion line separates full / partial / none / not recorded (legacy)",
+   "pass": true,
+   "error": null,
+   "ms": 275
+  },
+  {
+   "id": "CS15",
+   "group": "CS",
+   "title": "Session counts, Giant B rotation and budget exposure are unchanged by completion (characterization; rotation/exposure gating awaits approval D1/D5)",
+   "pass": true,
+   "error": null,
+   "ms": 219
+  },
+  {
+   "id": "CS16",
+   "group": "CS",
+   "title": "Evidence engine unchanged: a one-set partial session still contributes to the exercise series (characterization; gating awaits approval D4)",
+   "pass": true,
+   "error": null,
+   "ms": 169
+  },
+  {
+   "id": "CS17",
+   "group": "CS",
+   "title": "Historical data is never altered: legacy sessions and all prior records are byte-identical after a new session is finished",
+   "pass": true,
+   "error": null,
+   "ms": 268
+  },
+  {
+   "id": "CS18",
+   "group": "CS",
+   "title": "Lifecycle stays two-valued: only draft and complete are ever written; \"abandoned\" is refused on restore (not supported)",
+   "pass": true,
+   "error": null,
+   "ms": 177
+  }
+ ]
+}
