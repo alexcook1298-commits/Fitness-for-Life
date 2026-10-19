@@ -30,7 +30,7 @@ T="$(mktemp -d)"; mkdir -p "$R/phase4"; P1=""; P2=""; P3=""
 if git rev-parse --verify -q origin/cursor/integration-candidate-75d6 >/dev/null; then mkdir -p "$T/p1" && git archive origin/cursor/integration-candidate-75d6 integration/app | tar -x -C "$T/p1" && P1="phase1=$T/p1/integration/app"; fi
 if git rev-parse --verify -q origin/cursor/phase2-data-integrity-75d6 >/dev/null; then mkdir -p "$T/p2" && git archive origin/cursor/phase2-data-integrity-75d6 integration/app | tar -x -C "$T/p2" && P2="phase2=$T/p2/integration/app"; fi
 if git rev-parse --verify -q origin/cursor/phase3-training-accuracy-75d6 >/dev/null; then mkdir -p "$T/p3" && git archive origin/cursor/phase3-training-accuracy-75d6 integration/app | tar -x -C "$T/p3" && P3="phase3=$T/p3/integration/app"; fi
-node integration/scripts/compat_phase3_probe.js $C baseline=baseline/hq-2.3 pr1=app $P1 $P2 $P3 > "$R/phase4/compat_probe.json"; cat "$R/phase4/compat_probe.json"; rm -rf "$T"
+node integration/scripts/compat_phase3_probe.js $C baseline=baseline/hq-2.3 pr1=app $P1 $P2 $P3 > "$R/phase4/compat_probe.json"; cat "$R/phase4/compat_probe.json"; [ -n "$P3" ] && node tests/audit/evidence_differential.js "$T/p3/integration/app" $C --n 300 --json "$R/phase4_evidence_differential.json" | cut -c1-400; rm -rf "$T"
 echo "== device-test rehearsal (desktop Chrome only; real-device testing is NOT performed here)"; node integration/device/rehearse.js --json "$R/phase4/device_rehearsal.json" 2>&1 | tail -2
 echo "== program identity"; integration/scripts/verify_program_identity.sh | tee "$R/program_identity_verification.txt"
 node -e '
