@@ -361,6 +361,136 @@ test('BU9','Source grounding is checkable: each reviewed template\'s own title/p
  assert(/RELATIVE STRENGTH/.test(r.bc)&&/QUALITY BEFORE FATIGUE/.test(r.ap)&&/COACH-LED/.test(r.ci)&&/INSTRUCTOR/.test(r.wp)&&/CARRY/.test(r.cp)&&/INSTRUCTOR/.test(r.ps),JSON.stringify(r));
 });
 
+// =====================================================================
+// CS — workout completion semantics (Priority 4; additive, derived, label-only layer)
+// =====================================================================
+const csStart=(p,k,o={})=>p.eval((k,o)=>{if(o.weekMode)weekMode=o.weekMode;start(k);if(o.compact)toggleCompact();
+ (slots[k]||[]).forEach((x,i)=>{currentSession.modes[i+':'+selected(k,i)]='Straight Sets'});render();return currentSession.id},k,o);
+const csLog=(p,i,j)=>p.eval((i,j)=>{const n=selected(active,i),mode=setMode(i,j,n),key=formKey(i,j,mode,'');
+ const put=(f,v)=>{const el=document.querySelector(`#exs input[data-save="${key}${f}"]`);if(!el)throw Error('no input '+key+f);el.value=v};
+ put('w','100');put('r','10');put('rir','2');logSet(null,i,j)},i,j);
+const csShown=p=>p.eval(()=>slots[active].map((x,i)=>({i,n:workSetCount(i),shown:!currentSession.compact||compactSlot(active,i)})).filter(x=>x.shown));
+async function csLogAll(p,only){for(const x of await csShown(p)){if(only&&!only.includes(x.i))continue;for(let j=1;j<=x.n;j++)await csLog(p,x.i,j)}}
+const csFinish=async p=>{await p.eval(()=>{openFinish();finishSession()});return p.eval(()=>JSON.parse(localStorage.pa_sessions_v2).at(-1))};
+const csNotice=p=>p.eval(()=>document.getElementById('appNotice').textContent);
+const sess0=(id,over={})=>({...bsess(id,'a'),...over});
+const rejects=async(p,session)=>p.eval(s=>{const b=fullBackup({pa_sessions_v2:JSON.stringify([s])});try{validateBackup(b);return 'ACCEPTED'}catch(e){return e.message}},session);
+
+test('CS1','Legacy sessions (no completion field) read as "unknown: finished before completion was recorded"; reading never writes or back-fills',async p=>{
+ await seedS(p,[sess0('old1')]);const before=await p.eval(()=>localStorage.getItem('pa_sessions_v2'));
+ const r=await p.eval(()=>completionOf(JSON.parse(localStorage.pa_sessions_v2)[0]));
+ assert.strictEqual(r.prescription,'unknown');assert(/before completion was recorded/i.test(r.reason),JSON.stringify(r));
+ assert.strictEqual(await p.eval(()=>localStorage.getItem('pa_sessions_v2')),before);
+});
+test('CS2','Full Giant A (normal week): every shown set logged -> prescription full, all exercises performed, prescribed equals the unchanged Full Session set total',async p=>{
+ await csStart(p,'a');const total=await p.eval(()=>baseSlots.a.reduce((n,x)=>n+x[2],0));await csLogAll(p);
+ const s=await csFinish(p),c=s.completion;assert(c,'no completion stored');
+ assert.strictEqual(c.prescription,'full');assert.strictEqual(c.scope,'full');assert.strictEqual(c.basis,'sets');
+ assert.strictEqual(c.prescribed,total);assert.strictEqual(c.performed,total);assert(c.exercises.every(e=>e.status==='performed'&&e.basis==='logged'),JSON.stringify(c.exercises));
+ assert.strictEqual(s.status,'complete');
+});
+test('CS3','ONE logged set out of a full Giant A is partial, never full; earlier unlogged movements are skipped, later ones not reached; performed counts only the real record',async p=>{
+ await csStart(p,'a');await csLog(p,3,1);const s=await csFinish(p),c=s.completion;
+ assert.strictEqual(c.prescription,'partial');assert.strictEqual(c.performed,1);assert.strictEqual(s.setCount,1);
+ const st=c.exercises.map(e=>e.status);
+ assert.deepStrictEqual(st,['skipped','skipped','skipped','partial','not_reached','not_reached','not_reached']);
+ assert.strictEqual(c.exercises[3].performed,1);assert.strictEqual(c.exercises[0].basis,'later-work-logged');assert.strictEqual(c.exercises[6].basis,'no-later-work');
+ assert.strictEqual(await p.eval(()=>JSON.parse(localStorage.pa_hist).filter(x=>x.sessionId===JSON.parse(localStorage.pa_sessions_v2).at(-1).id).length),1,'sets were invented or lost');
+});
+test('CS4','Finished with a checked item but no lifting records: prescription none, session still completes and still counts',async p=>{
+ await csStart(p,'a');await p.eval(()=>document.querySelector('#exs button.check:not([data-record])').click());
+ const s=await csFinish(p);assert.strictEqual(s.status,'complete');assert.strictEqual(s.completion.prescription,'none');assert.strictEqual(s.completion.performed,0);
+ assert(s.completion.exercises.every(e=>e.status==='not_reached'),JSON.stringify(s.completion.exercises.map(e=>e.status)));
+});
+test('CS5','Deliberate gap vs interruption: movement 1 skipped between logged movements; movements after the last logged one are not reached',async p=>{
+ await csStart(p,'a');await csLogAll(p,[0,2]);const c=(await csFinish(p)).completion;
+ assert.deepStrictEqual(c.exercises.map(e=>e.status),['performed','skipped','performed','not_reached','not_reached','not_reached','not_reached']);assert.strictEqual(c.prescription,'partial');
+});
+test('CS6','A one-set prescription is never full (synthetic: Giant B reduced to the single-set Widowmaker, its only set logged)',async p=>{
+ await csStart(p,'b');await p.eval(()=>{slots.b=[slots.b[6]];currentSession.modes['0:'+selected('b',0)]='Straight Sets';render()});
+ await csLog(p,0,1);const c=(await csFinish(p)).completion;assert.strictEqual(c.prescribed,1);assert.strictEqual(c.performed,1);assert.notStrictEqual(c.prescription,'full');assert.strictEqual(c.prescription,'partial');
+});
+test('CS7','Busy week: scope "busy", prescription measured against the busy cap (<=2 sets per movement), full when all shown sets are logged',async p=>{
+ await csStart(p,'a',{weekMode:'busy'});const cap=await p.eval(()=>baseSlots.a.reduce((n,x)=>n+Math.min(2,x[2]),0));await csLogAll(p);
+ const c=(await csFinish(p)).completion;assert.strictEqual(c.scope,'busy');assert.strictEqual(c.prescribed,cap);assert.strictEqual(c.prescription,'full');
+});
+test('CS8','Compact: scope "compact", only the shown movements are judged, and a complete compact session is full-in-scope, labelled compact (never presented as a Full Session)',async p=>{
+ await csStart(p,'a',{compact:true});await csLogAll(p);const s=await csFinish(p),c=s.completion;
+ assert.strictEqual(c.scope,'compact');assert.strictEqual(c.prescription,'full');assert.strictEqual(c.exercises.length,4);
+ assert(c.prescribed<await p.eval(()=>baseSlots.a.reduce((n,x)=>n+x[2],0)));
+ assert(/compact/i.test(await csNotice(p)),await csNotice(p));
+});
+test('CS9','Sets logged outside the shown scope (movement hidden by switching to compact afterwards) are recorded as extra and never counted as performed',async p=>{
+ await csStart(p,'a');await csLog(p,4,1);await p.eval(()=>toggleCompact());await csLog(p,0,1);
+ const c=(await csFinish(p)).completion;assert.strictEqual(c.extra,1);assert.strictEqual(c.performed,1);
+});
+test('CS10','Checklist template (Mobility): units are the items shown at Finish, not every key ever rendered; 1 item = partial, all items = full',async p=>{
+ await csStart(p,'mobility');const n=await p.eval(()=>document.querySelectorAll('#exs button.check:not([data-record])').length);
+ await p.eval(()=>document.querySelector('#exs button.check:not([data-record])').click());await p.eval(()=>changeMobility(5));
+ const shown=await p.eval(()=>document.querySelectorAll('#exs button.check:not([data-record])').length);
+ let c=(await csFinish(p)).completion;assert.strictEqual(c.basis,'items');assert.strictEqual(c.prescribed,shown);assert.strictEqual(c.prescription,'partial');assert(c.exercises.length===0);
+ await p.eval(()=>{const s=JSON.parse(localStorage.pa_sessions_v2);s.pop();localStorage.pa_sessions_v2=JSON.stringify(s);localStorage.removeItem('pa_current_session')});await p.goto(ctx.origin+'/');
+ await csStart(p,'mobility');await p.eval(()=>document.querySelectorAll('#exs button.check:not([data-record])').forEach(b=>b.click()));
+ c=(await csFinish(p)).completion;assert.strictEqual(c.prescription,'full');assert.strictEqual(c.performed,c.prescribed);assert(n>=2);
+});
+test('CS11','Backup round trip: completion survives export, validation and restore byte-for-byte; sessions without it still validate',async p=>{
+ await csStart(p,'a');await csLog(p,0,1);await csLog(p,0,2);const s=await csFinish(p);assert(s.completion&&s.completion.prescription==='partial','no completion to round-trip');
+ const payload=await p.eval(()=>{const b=backupPayload();validateBackup(b);return b});
+ await p.eval(()=>{localStorage.clear()});await p.goto(ctx.origin+'/');
+ const back=await p.eval(b=>{validateBackup(b);replacePAData(b.data);return JSON.parse(localStorage.pa_sessions_v2).at(-1)},payload);
+ assert.deepStrictEqual(back.completion,s.completion);
+ assert.strictEqual(await rejects(p,sess0('legacy')),'ACCEPTED');
+});
+test('CS12','Validator bounds: malformed, oversized, contradictory or markup-bearing completion is refused with a specific message',async p=>{
+ const ok={v:1,basis:'sets',scope:'full',prescription:'partial',prescribed:4,performed:1,extra:0,exercises:[{slot:0,name:'Horizontal Press',prescribed:4,performed:1,status:'partial',basis:'logged'}]};
+ assert.strictEqual(await rejects(p,sess0('v1',{status:'complete',completion:ok})),'ACCEPTED');
+ const bad={
+  'not an object':'full','wrong version':{...ok,v:2},'unknown prescription':{...ok,prescription:'complete'},'stored unknown':{...ok,prescription:'unknown'},
+  'unknown scope':{...ok,scope:'tcs'},'unknown basis':{...ok,basis:'minutes'},'negative':{...ok,performed:-1},'fraction':{...ok,prescribed:1.5},'huge':{...ok,prescribed:99999},
+  'full with one set':{...ok,prescription:'full',prescribed:1,performed:1},'full but short':{...ok,prescription:'full',performed:3},
+  'too many exercises':{...ok,exercises:Array.from({length:41},(_,i)=>({...ok.exercises[0],slot:i}))},'bad status':{...ok,exercises:[{...ok.exercises[0],status:'abandoned'}]},
+  'markup name':{...ok,exercises:[{...ok.exercises[0],name:'<img src=x onerror=alert(1)>'}]},'control char':{...ok,exercises:[{...ok.exercises[0],name:'a\u0001b'}]},
+  'proto key':JSON.parse('{"v":1,"basis":"sets","scope":"full","prescription":"partial","prescribed":4,"performed":1,"extra":0,"exercises":[],"__proto__":{"x":1}}'),'array':[ok]
+ };
+ for(const [why,c] of Object.entries(bad)){const r=await rejects(p,sess0('b1',{status:'complete',completion:c}));assert(r!=='ACCEPTED'&&/completion/i.test(r),why+' -> '+r)}
+});
+test('CS13','Labels: the Finish panel previews the result before saving, and the saved notice repeats it with the not-logged movements; nothing else on screen is redesigned',async p=>{
+ await csStart(p,'a');await csLog(p,3,1);await p.eval(()=>openFinish());
+ const panel=await p.eval(()=>document.getElementById('finishPanel').innerText);
+ assert(/partial/i.test(panel)&&/1 of \d+ sets/.test(panel)&&/skipped/i.test(panel)&&/not reached/i.test(panel),panel);
+ await p.eval(()=>finishSession());const n=await csNotice(p);assert(/partial/i.test(n)&&/1 of \d+ sets/.test(n)&&/Workout saved/.test(n),n);
+ const after=await p.eval(()=>JSON.parse(localStorage.pa_sessions_v2).at(-1).status);assert.strictEqual(after,'complete');
+});
+test('CS14','Coach Handoff: "Completed sessions: N" is unchanged; a completion line separates full / partial / none / not recorded (legacy)',async p=>{
+ await seedS(p,[sess0('l1'),sess0('l2')]);await p.goto(ctx.origin+'/');
+ await csStart(p,'a');await csLog(p,3,1);await csFinish(p);
+ const t=await p.eval(()=>coachSummary());
+ assert(/Completed sessions: 3/.test(t),t.slice(0,400));assert(/Completion: .*Partial 1/.test(t)&&/Not recorded \(earlier sessions\) 2/.test(t)&&/Full 0/.test(t),t.slice(0,500));
+});
+test('CS15','Session counts, Giant B rotation and budget exposure are unchanged by completion (characterization; rotation/exposure gating awaits approval D1/D5)',async p=>{
+ await seedS(p,[]);await csStart(p,'b');await csLog(p,0,1);await csFinish(p);
+ const r=await p.eval(()=>({b:completedTemplateCount('b'),recent:recentSessions(7).length,strength:budgetData().Hypertrophy+budgetData().Strength}));
+ assert.strictEqual(r.b,1,'a one-set Giant B no longer advances the rotation: that is the D1 decision, not part of this patch');assert.strictEqual(r.recent,1);assert(r.strength>=1);
+});
+test('CS16','Evidence engine unchanged: a one-set partial session still contributes to the exercise series (characterization; gating awaits approval D4)',async p=>{
+ const day=n=>new Date(Date.now()-n*86400000).toISOString(),rec=(d,w,id)=>({id,sessionId:id,name:'Bench Press (BB)',intensifier:'Straight Sets',w,reps:8,rir:2,date:day(d)});
+ await p.eval(r=>{localStorage.pa_hist=JSON.stringify(r)},[rec(5,100,'h1'),rec(3,100,'h2'),rec(0,40,'h3')]);
+ const ev=await p.eval(()=>evidenceDecision());assert.strictEqual(ev.vals.length,3);assert(ev.vals[2]<ev.vals[0]);
+});
+test('CS17','Historical data is never altered: legacy sessions and all prior records are byte-identical after a new session is finished',async p=>{
+ await p.eval(()=>{localStorage.pa_sessions_v2=JSON.stringify([{id:'old1',template:'a',phase:1,weekMode:'normal',status:'complete',startedAt:'2026-01-01T10:00:00.000Z',finishedAt:'2026-01-01T11:00:00.000Z',setCount:1,forms:{},checks:{},choices:{},modes:{},clusters:{}}]);
+  localStorage.pa_hist=JSON.stringify([{id:'old1|3|Leg Curl|1|Straight Sets',sessionId:'old1',name:'Leg Curl',intensifier:'Straight Sets',w:50,reps:10,rir:2,template:'a',block:1,setNumber:1,date:'2026-01-01T10:30:00.000Z'}])});
+ await p.goto(ctx.origin+'/');const before=await p.eval(()=>({s:JSON.parse(localStorage.pa_sessions_v2)[0],h:localStorage.pa_hist}));
+ await csStart(p,'a');await csLog(p,0,1);await csFinish(p);
+ const after=await p.eval(()=>({s:JSON.parse(localStorage.pa_sessions_v2)[0],h:JSON.parse(localStorage.pa_hist)[0]}));
+ assert.deepStrictEqual(after.s,before.s);assert.deepStrictEqual(after.h,JSON.parse(before.h)[0]);assert.strictEqual(after.s.completion,undefined);
+ assert.strictEqual((await p.eval(()=>completionOf(JSON.parse(localStorage.pa_sessions_v2)[0]))).prescription,'unknown');
+});
+test('CS18','Lifecycle stays two-valued: only draft and complete are ever written; "abandoned" is refused on restore (not supported)',async p=>{
+ assert.notStrictEqual(await rejects(p,sess0('ab',{status:'abandoned'})),'ACCEPTED');
+ await csStart(p,'a');assert.strictEqual(await p.eval(()=>currentSession.status),'draft');assert.strictEqual(await p.eval(()=>currentSession.completion),undefined,'a draft must carry no completion verdict');
+});
+
 // ---------- runner ----------
 (async()=>{
  const server=await serve(appDir),browser=await launch();ctx={browser,origin:server.origin};
