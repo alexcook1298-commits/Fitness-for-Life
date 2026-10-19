@@ -1,0 +1,216 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T20:16:24.995Z",
+ "passed": 14,
+ "failed": 12,
+ "results": [
+  {
+   "id": "EN1a",
+   "group": "EN1a",
+   "title": "Defect reproduced: three partial sessions that logged only the lighter BACK-OFF sets after a top-set session must not read as a four-exposure deterioration (ACT)",
+   "pass": false,
+   "error": "false ACT: {\"name\":\"Bench Press (BB)\",\"state\":\"ACT\",\"vals\":[233.3,198.3,198.3,198.3],\"why\":\"Four-exposure pattern is deteriorating. Review fatigue, technique, load and exercise fit before the next prescription.\"}",
+   "ms": 204
+  },
+  {
+   "id": "EN1b",
+   "group": "EN1b",
+   "title": "Back-off sets never enter the top-set series: a session with a top set and lighter back-offs contributes its TOP set (same value as before the change)",
+   "pass": true,
+   "error": null,
+   "ms": 176
+  },
+  {
+   "id": "EN1c",
+   "group": "EN1c",
+   "title": "A genuine decline of the TOP set is still detected: four exposures with a falling top set still reach ACT (valid evidence is preserved)",
+   "pass": true,
+   "error": null,
+   "ms": 141
+  },
+  {
+   "id": "EN1d",
+   "group": "EN1d",
+   "title": "Back-off sets of OTHER methods and straight sets are untouched: a straight-set series still compares every set (best per exposure)",
+   "pass": true,
+   "error": null,
+   "ms": 144
+  },
+  {
+   "id": "EN1e",
+   "group": "EN1e",
+   "title": "The same holds for the app's default bench method, Primer + Paused Top/Back-Offs (the method Bench Press (BB) actually uses): back-off-only partials never read as ACT, a real top-set decline still does",
+   "pass": false,
+   "error": "false decline: {\"name\":\"Bench Press (BB)\",\"state\":\"ACT\",\"vals\":[233.3,198.3,198.3,198.3],\"why\":\"Four-exposure pattern is deteriorating. Review fatigue, technique, load and exercise fit before the next prescription.\"}",
+   "ms": 142
+  },
+  {
+   "id": "EN1f",
+   "group": "EN1f",
+   "title": "Methods whose later sets are NOT lighter back-offs keep every set in the series: Heavy Primer + Work Sets, Straight Heavy Sets and Cluster Sets are untouched (set 2 can still be the best set)",
+   "pass": true,
+   "error": null,
+   "ms": 172
+  },
+  {
+   "id": "EN2a",
+   "group": "EN2a",
+   "title": "Defect reproduced: ONE session whose sets straddle UTC midnight is one exposure, not two",
+   "pass": false,
+   "error": "one evening session counted as 2 exposures: [133.3,133.3,133.3,120] |  | 4 !== 3 | ",
+   "ms": 178
+  },
+  {
+   "id": "EN2b",
+   "group": "EN2b",
+   "title": "Controls: two separate sessions on adjacent days stay two exposures; two sessions on the same UTC day still merge to the best set as before",
+   "pass": true,
+   "error": null,
+   "ms": 144
+  },
+  {
+   "id": "EN2c",
+   "group": "EN2c",
+   "title": "Legacy records without a session id keep the old day grouping (no data is dropped or re-dated)",
+   "pass": true,
+   "error": null,
+   "ms": 130
+  },
+  {
+   "id": "EN3a",
+   "group": "EN3a",
+   "title": "Defect reproduced: sets logged in an UNFINISHED draft do not enter the evidence of finished sessions",
+   "pass": false,
+   "error": "a draft set entered the series: {\"name\":\"Row (DB)\",\"state\":\"OBSERVE\",\"vals\":[133.3,133.3,133.3,80],\"why\":\"Recent performance is being watched. One exposure never changes the program.\"} | + actual - expected |  |   [",
+   "ms": 135
+  },
+  {
+   "id": "EN3b",
+   "group": "EN3b",
+   "title": "The same sets count as soon as the session is finished (nothing is lost, only deferred)",
+   "pass": true,
+   "error": null,
+   "ms": 153
+  },
+  {
+   "id": "EN3c",
+   "group": "EN3c",
+   "title": "A live workout does not move the evidence: logging a light set in the running (draft) session leaves the decision unchanged, and nothing is written",
+   "pass": false,
+   "error": "the running workout changed the evidence: {\"name\":\"Bench Press (BB)\",\"state\":\"OBSERVE\",\"vals\":[133.3,133.3,133.3,26.7],\"why\":\"Recent performance is being watched. One exposure never changes the program.\"} | + actual - expected |  |   {",
+   "ms": 268
+  },
+  {
+   "id": "EN3d",
+   "group": "EN3d",
+   "title": "Records with no matching session (legacy or older install) are NOT excluded: only records that belong to a DRAFT session are held back",
+   "pass": true,
+   "error": null,
+   "ms": 151
+  },
+  {
+   "id": "EN4a",
+   "group": "EN4a",
+   "title": "Defect reproduced: after a full Top Set + Back-Offs session the NEXT target is built from the TOP set, not from the last (lighter) back-off set",
+   "pass": false,
+   "error": "NEXT anchored on the last logged set: 170 lb • earn reps/quality before +5 lb",
+   "ms": 152
+  },
+  {
+   "id": "EN4b",
+   "group": "EN4b",
+   "title": "A back-off-only partial session does not lower the target: NEXT keeps the most recent TOP set (no performance is inferred from the omitted top set)",
+   "pass": false,
+   "error": "170 lb • earn reps/quality before +5 lb",
+   "ms": 168
+  },
+  {
+   "id": "EN4c",
+   "group": "EN4c",
+   "title": "Only back-offs ever logged: no top set exists, so no target weight is invented from a back-off (\"Establish ... baseline\")",
+   "pass": false,
+   "error": "170 lb • earn reps/quality before +5 lb",
+   "ms": 138
+  },
+  {
+   "id": "EN4d",
+   "group": "EN4d",
+   "title": "Straight Heavy Sets: the target anchors on the best set of the latest session even when the last set was lighter through fatigue; an earlier heavier session does not override the latest one",
+   "pass": false,
+   "error": "225 lb • earn reps/quality before +5 lb",
+   "ms": 160
+  },
+  {
+   "id": "EN4e",
+   "group": "EN4e",
+   "title": "targetMode (intensifier modes) also anchors on the best set of the latest session, not the last logged one; time/rep exercises keep their text",
+   "pass": false,
+   "error": "100 lb • progress within Straight Sets",
+   "ms": 153
+  },
+  {
+   "id": "EN4f",
+   "group": "EN4f",
+   "title": "Target text for the other strength methods is unchanged (no history -> establish baseline; method-specific guidance text identical)",
+   "pass": true,
+   "error": null,
+   "ms": 151
+  },
+  {
+   "id": "EN4g",
+   "group": "EN4g",
+   "title": "The workout screen shows the corrected NEXT target for the exercise (end to end), using the exercise's actual default strength method",
+   "pass": false,
+   "error": "PREVIOUS • THIS METHOD150 × 5 • 130 × 5 • 130 × 5NEXT • THIS METHOD130 lb • earn reps/quality before +5 lb",
+   "ms": 241
+  },
+  {
+   "id": "EN4h",
+   "group": "EN4h",
+   "title": "Same anchoring for Primer + Paused Top/Back-Offs: top set after a full session, and no weight invented from back-offs alone",
+   "pass": false,
+   "error": "false == true",
+   "ms": 162
+  },
+  {
+   "id": "EN5a",
+   "group": "EN5a",
+   "title": "Preserved: a finished partial session in which only one exercise was done still adds that exercise's exposure; omitted exercises do not read as decline",
+   "pass": true,
+   "error": null,
+   "ms": 150
+  },
+  {
+   "id": "EN5b",
+   "group": "EN5b",
+   "title": "Nothing raises a load automatically: the decision functions still only report OBSERVE / INVESTIGATE / ACT about a decline",
+   "pass": true,
+   "error": null,
+   "ms": 151
+  },
+  {
+   "id": "EN5c",
+   "group": "EN5c",
+   "title": "Reading evidence never writes: pa_hist and pa_sessions_v2 are byte-identical after every decision and target call",
+   "pass": true,
+   "error": null,
+   "ms": 162
+  },
+  {
+   "id": "EN5d",
+   "group": "EN5d",
+   "title": "Structured intensifier blocks still never enter the evidence series",
+   "pass": true,
+   "error": null,
+   "ms": 180
+  },
+  {
+   "id": "EN5e",
+   "group": "EN5e",
+   "title": "Full Session prescriptions are untouched: slot table and set counts are unchanged by the evidence code",
+   "pass": true,
+   "error": null,
+   "ms": 195
+  }
+ ]
+}
