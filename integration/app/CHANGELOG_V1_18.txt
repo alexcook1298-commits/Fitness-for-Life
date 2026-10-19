@@ -1,0 +1,34 @@
+PROJECT AMERICA HQ V1.18 — METHODS ARSENAL
+
+Built directly on the uploaded Project America HQ V1.17 source.
+
+ADDED
+- Giant A Strength Methods system, separate from hypertrophy intensifiers:
+  Straight Heavy Sets; Top Set + Back-Offs; Cluster Sets; Heavy Primer + Work Sets;
+  Paused Reps; Wave Loading; Dead-Stop / Pin Work; Speed / Dynamic Work;
+  Rep-PR Set; Density Progression.
+- Movement-specific Giant A defaults and method-specific previous/next displays.
+- Heavy Primer logging stored separately from progression work.
+- Cluster split notation (example: 2+2+2) on Cluster Sets.
+- Giant B optional Activator blocks:
+  Pec fly -> incline press; pullover/straight-arm pulldown -> vertical pull;
+  leg curl -> RDL; leg extension -> leg press/belt squat.
+- Activators log separately and do not affect main-lift progression.
+- Hypertrophy methods: Lengthened Partials and Mechanical Drop Set.
+- COMPACT / MED mode: today-only, highest-value movements, max two straight sets,
+  no hypertrophy intensifiers, master template unchanged.
+- Methods Arsenal education page for Strength, Hypertrophy, Power, Conditioning,
+  Capability/Durability, weak-link insertion, and MED/Compact concepts.
+- Full-backup support for strength-method and activator history/preferences.
+
+PRESERVED
+- Existing V1.17 multi-block plan, templates, session drafts/resume, week modes,
+  final-set-only intensifier architecture, structured DC/RP/Myo/FST-7/BFR logging,
+  loaded stretches, cardio machine tracking, mobility, progress, achievements,
+  Exercise Arsenal/Dossiers, PWA/offline install, and full backup/restore.
+- Loaded stretches remain separate from hypertrophy intensifiers.
+- Optional Giant C remains optional.
+
+VERSION NOTE
+The uploaded ZIP filename and the app's internal title/cache/backup metadata all identify
+that source as V1.17, so this build increments that exact source once to V1.18.
