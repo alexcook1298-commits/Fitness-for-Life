@@ -1,6 +1,6 @@
 {
  "app": "/workspace/baseline/hq-2.3",
- "date": "2026-10-19T17:52:31.128Z",
+ "date": "2026-10-19T18:10:04.164Z",
  "passed": 9,
  "failed": 21,
  "results": [
@@ -10,7 +10,7 @@
    "title": "Full backup containing saved OS state (pa_os_v2) exported from the UI is accepted and restored byte-identically",
    "pass": false,
    "error": "Backup rejected: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 431
+   "ms": 397
   },
   {
    "id": "D1.2",
@@ -18,7 +18,7 @@
    "title": "Older full backup without pa_os_v2 still restores and leaves no OS key behind",
    "pass": false,
    "error": "Valid backup was not accepted: Unknown strength method",
-   "ms": 348
+   "ms": 323
   },
   {
    "id": "D2.1",
@@ -26,7 +26,7 @@
    "title": "Heavy primer logged through the real Giant A UI produces a backup that validates and restores",
    "pass": false,
    "error": "Backup rejected: Unknown strength method",
-   "ms": 607
+   "ms": 604
   },
   {
    "id": "D2.2",
@@ -34,7 +34,7 @@
    "title": "Strength-method preference keys are still validated (unknown method rejected)",
    "pass": true,
    "error": null,
-   "ms": 231
+   "ms": 241
   },
   {
    "id": "D2.3",
@@ -42,7 +42,7 @@
    "title": "pa_strength_hist records still receive history-record validation (non-list rejected)",
    "pass": true,
    "error": null,
-   "ms": 234
+   "ms": 242
   },
   {
    "id": "D3.1",
@@ -50,7 +50,7 @@
    "title": "Cluster-split note with < and > logged through the real workout UI backs up and restores",
    "pass": false,
    "error": "Backup rejected: Invalid text in pa_hist",
-   "ms": 701
+   "ms": 622
   },
   {
    "id": "D3.2",
@@ -58,7 +58,7 @@
    "title": "Markup typed as a cluster-split note is shown as text and never rendered as HTML after reload/resume",
    "pass": true,
    "error": null,
-   "ms": 661
+   "ms": 668
   },
   {
    "id": "D3.3",
@@ -66,7 +66,7 @@
    "title": "Markup in other history text (exercise name) is still rejected",
    "pass": true,
    "error": null,
-   "ms": 236
+   "ms": 245
   },
   {
    "id": "D3.4",
@@ -74,7 +74,7 @@
    "title": "Cluster-split notes must be text without control characters",
    "pass": true,
    "error": null,
-   "ms": 308
+   "ms": 328
   },
   {
    "id": "D4.1",
@@ -82,7 +82,7 @@
    "title": "Pre-restore snapshot downloaded from the UI is itself a restorable backup that recovers the original data exactly",
    "pass": false,
    "error": "Snapshot rejected: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 576
+   "ms": 456
   },
   {
    "id": "D4.2",
@@ -90,7 +90,7 @@
    "title": "Two consecutive restores keep two recovery generations; the older one is downloadable from the UI",
    "pass": false,
    "error": "older generation was overwritten/lost",
-   "ms": 536
+   "ms": 490
   },
   {
    "id": "D4.3",
@@ -98,7 +98,7 @@
    "title": "Restore that fails mid-write (real browser storage quota) leaves data AND existing snapshots unchanged, with a clear error",
    "pass": false,
    "error": "storage changed after failed restore | + actual - expected |  |   { |     pa_hist: '[]', | +   pa_restore_rollback: '{\"pa_hist\":\"[]\",\"pa_week_mode\":\"busy\"}',",
-   "ms": 779
+   "ms": 758
   },
   {
    "id": "D4.4",
@@ -106,7 +106,7 @@
    "title": "When no rollback snapshot can be stored, restore is refused before anything changes, with a clear error",
    "pass": false,
    "error": "unclear error: Restore failed; original data was retained. Failed to execute 'setItem' on 'Storage': Setting the value of 'pa_restore_rollback' exceeded the quota.",
-   "ms": 671
+   "ms": 667
   },
   {
    "id": "D4.5",
@@ -114,7 +114,7 @@
    "title": "When space allows only one generation, the older generation is dropped (not the newest) and restore proceeds",
    "pass": false,
    "error": "Restore did not complete: Restore failed; original data was retained. Failed to execute 'setItem' on 'Storage': Setting the value of 'pa_restore_rollback' exceeded the quota.",
-   "ms": 478
+   "ms": 473
   },
   {
    "id": "D4.6",
@@ -122,7 +122,7 @@
    "title": "A snapshot left by HQ 2.3 (bare key map) is still downloadable as a restorable backup and is kept as the older generation",
    "pass": false,
    "error": "\"undefined\" is not valid JSON",
-   "ms": 536
+   "ms": 567
   },
   {
    "id": "D5.1",
@@ -130,15 +130,15 @@
    "title": "Backup containing a legacy draft without clusters validates and restores byte-identically",
    "pass": false,
    "error": "Rejected: Invalid session record",
-   "ms": 254
+   "ms": 233
   },
   {
    "id": "D5.2",
    "group": "Defect 5: legacy drafts",
    "title": "Legacy draft without clusters resumes in the real UI; Myo-Reps stages render and ADD MINI-SET works without errors",
    "pass": false,
-   "error": "page errors on resume | + actual - expected |  | + [ | +   \"TypeError: Cannot read properties of undefined (reading 'lift:3:Rear-Delt Fly (DB):2:Myo-Reps:')\\n\" + | +     '    at renderWorkSet (http://127.0.0.1:33339/:1091:39)\\n' +",
-   "ms": 406
+   "error": "page errors on resume | + actual - expected |  | + [ | +   \"TypeError: Cannot read properties of undefined (reading 'lift:3:Rear-Delt Fly (DB):2:Myo-Reps:')\\n\" + | +     '    at renderWorkSet (http://127.0.0.1:33679/:1091:39)\\n' +",
+   "ms": 418
   },
   {
    "id": "D5.3",
@@ -146,15 +146,15 @@
    "title": "Sessions with malformed clusters are still rejected",
    "pass": true,
    "error": null,
-   "ms": 401
+   "ms": 406
   },
   {
    "id": "D6.1",
    "group": "Defect 6: OS escaping",
    "title": "OS text already in storage (including values the validator would reject) is escaped on Home and all 15 OS screens",
    "pass": false,
-   "error": "markup executed/injected: {\"home\":{\"pwned\":[\"tests.forty\",\"tests.forty\"],\"injected\":2},\"athlete\":{\"pwned\":[\"tests.vertical\",\"tests.rope\",\"bodyweight\",\"tests.forty\",\"tests.hang\",\"tests.pullup\",\"tests.zone2\"],\"injected\":9},\"readiness\":{\"pwned\":[],\"injected\":2},\"capability\":{\"pwned\":[],\"injected\":2},\"combine\":{\"pwned\":[\"combine.carry\",\"combine.vertical\",\"combine.zone2\",\"combine.forty\",\"combine.hang\",\"combine.notes\",\"combine.mobility\"],\"injected\":9},\"budget\":{\"pwned\":[],\"injected\":2},\"lab\":{\"pwned\":[\"experiments.status\"],\"injected\":3},\"simulator\":{\"pwned\":[],\"injected\":2},\"aar\":{\"pwned\":[],\"injected\":2},\"adaptive\":{\"pwned\":[],\"injected\":2},\"schedule\":{\"pwned\":[\"availability.0\",\"tests.forty\"],\"injected\":3},\"gyms\":{\"pwned\":[],\"injected\":2},\"friction\":{\"pwned\":[],\"injected\":2},\"story\":{\"pwned\":[],\"injected\":2},\"technique\":{\"pwned\":[],\"injected\":2},\"coach\":{\"pwned\":[],\"injected\":2}} | + actual - expected |  | + { | +   aar: { | +     injected: 2,",
-   "ms": 4662
+   "error": "markup executed/injected: {\"home\":{\"pwned\":[\"tests.forty\",\"tests.forty\"],\"injected\":2},\"athlete\":{\"pwned\":[\"tests.forty\",\"tests.vertical\",\"bodyweight\",\"tests.zone2\",\"tests.hang\",\"tests.rope\",\"tests.pullup\"],\"injected\":9},\"readiness\":{\"pwned\":[],\"injected\":2},\"capability\":{\"pwned\":[],\"injected\":2},\"combine\":{\"pwned\":[\"combine.vertical\",\"combine.forty\",\"combine.notes\",\"combine.carry\",\"combine.mobility\",\"combine.zone2\",\"combine.hang\"],\"injected\":9},\"budget\":{\"pwned\":[],\"injected\":2},\"lab\":{\"pwned\":[\"experiments.status\"],\"injected\":3},\"simulator\":{\"pwned\":[],\"injected\":2},\"aar\":{\"pwned\":[],\"injected\":2},\"adaptive\":{\"pwned\":[],\"injected\":2},\"schedule\":{\"pwned\":[\"availability.0\",\"tests.forty\"],\"injected\":3},\"gyms\":{\"pwned\":[],\"injected\":2},\"friction\":{\"pwned\":[],\"injected\":2},\"story\":{\"pwned\":[],\"injected\":2},\"technique\":{\"pwned\":[],\"injected\":2},\"coach\":{\"pwned\":[],\"injected\":2}} | + actual - expected |  | + { | +   aar: { | +     injected: 2,",
+   "ms": 4572
   },
   {
    "id": "D6.2",
@@ -162,7 +162,7 @@
    "title": "Imported OS backup with markup in every text field restores, displays literally, and never executes",
    "pass": false,
    "error": "Rejected: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 240
+   "ms": 274
   },
   {
    "id": "N1",
@@ -170,7 +170,7 @@
    "title": "Full realistic dataset (all storage keys) round-trips byte-identically via UI export → import → restore; unrelated keys preserved",
    "pass": false,
    "error": "Rejected: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 417
+   "ms": 437
   },
   {
    "id": "N2",
@@ -178,7 +178,7 @@
    "title": "Specialized methods (Myo-Reps, DC Rest-Pause efforts, cluster sets, primer, activator, strength/intensifier preferences) survive restore and render",
    "pass": false,
    "error": "Valid backup was not accepted: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 224
+   "ms": 243
   },
   {
    "id": "N3",
@@ -186,7 +186,7 @@
    "title": "OS data: defaults, fully populated, and older/partial OS shapes all validate; OS screens render",
    "pass": false,
    "error": "def OS shape rejected: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 216
+   "ms": 241
   },
   {
    "id": "N4",
@@ -194,7 +194,7 @@
    "title": "Unfinished session restores and resumes in the real UI with its entered values",
    "pass": false,
    "error": "Valid backup was not accepted: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 215
+   "ms": 211
   },
   {
    "id": "N5",
@@ -202,7 +202,7 @@
    "title": "Unknown pa_ key in storage does not make the exported backup unrestorable, and restore leaves it untouched",
    "pass": false,
    "error": "Own export rejected: Unrecognized or oversized backup entry: pa_future_feature",
-   "ms": 363
+   "ms": 343
   },
   {
    "id": "N6",
@@ -210,7 +210,7 @@
    "title": "Export warns clearly when stored data cannot pass this version's restore validation (file is still downloaded)",
    "pass": false,
    "error": "no warning shown: ",
-   "ms": 292
+   "ms": 281
   },
   {
    "id": "N7",
@@ -218,7 +218,7 @@
    "title": "After restore, the app reloads offline from the service worker with restored data intact",
    "pass": false,
    "error": "Valid backup was not accepted: Unrecognized or oversized backup entry: pa_os_v2",
-   "ms": 243
+   "ms": 225
   },
   {
    "id": "N8",
@@ -226,7 +226,7 @@
    "title": "App starts without script errors and makes no external network requests",
    "pass": true,
    "error": null,
-   "ms": 4586
+   "ms": 4605
   },
   {
    "id": "M",
@@ -234,7 +234,7 @@
    "title": "Every malicious or malformed import is rejected in the UI (no RESTORE button) and storage stays byte-identical",
    "pass": true,
    "error": null,
-   "ms": 5145,
+   "ms": 5110,
    "cases": [
     {
      "id": "M01",
@@ -490,7 +490,7 @@
    "title": "A previewed backup that is modified before RESTORE is re-validated and refused; storage unchanged",
    "pass": true,
    "error": null,
-   "ms": 346
+   "ms": 340
   }
  ]
 }

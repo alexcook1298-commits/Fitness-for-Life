@@ -1,6 +1,6 @@
 {
  "app": "/workspace/app",
- "date": "2026-10-19T17:53:13.342Z",
+ "date": "2026-10-19T18:10:45.907Z",
  "passed": 8,
  "failed": 24,
  "results": [
@@ -10,7 +10,7 @@
    "title": "Giant A counts as Strength only",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 214
+   "ms": 201
   },
   {
    "id": "B2",
@@ -18,7 +18,7 @@
    "title": "Giant B, B-Upper and B-Lower count as Hypertrophy only",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 144
+   "ms": 138
   },
   {
    "id": "B3",
@@ -26,7 +26,7 @@
    "title": "Athletic counts as Explosive and Capability, and NOT as Strength",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 139
+   "ms": 158
   },
   {
    "id": "B4",
@@ -34,7 +34,7 @@
    "title": "Mobility counts as Low-intensity engine only, and NOT as Hypertrophy",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 134
+   "ms": 166
   },
   {
    "id": "B5",
@@ -42,7 +42,7 @@
    "title": "Conditioning counts as High-intensity engine only",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 133
+   "ms": 137
   },
   {
    "id": "B6",
@@ -50,7 +50,7 @@
    "title": "Block A variants (b2a…b7a) count as Strength only; block B variants (b2b…b7b, b3c) as Hypertrophy only",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 173
+   "ms": 155
   },
   {
    "id": "B7",
@@ -66,7 +66,7 @@
    "title": "Practice and skill sessions whose purpose the source does not settle are not counted in any bar (Phase 2: Giant C now counts as Capability; see tests/phase2.test.js BU1-BU9 for the full model)",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 139
+   "ms": 130
   },
   {
    "id": "B9",
@@ -74,7 +74,7 @@
    "title": "A mixed week totals correctly: A + B + athletic + conditioning + mobility",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 139
+   "ms": 137
   },
   {
    "id": "B10",
@@ -82,7 +82,7 @@
    "title": "Training Budget page shows the corrected counts",
    "pass": false,
    "error": "RECENT EXPOSURE • LAST 7 DAYSAdding training is not free.These bars count recent completed exposure categories. They are not claimed to be physiological MRV.Strength0 exposuresHypertrophy0 exposuresExplosive0 exposuresHigh-intensity engine0 exposuresLow-intensity engine0 exposuresCapability0 exposuresOpportunity-cost doctrineSTANDARD: preserve Giant A/B and cardio/abs before adding optional work.If a new demand confl",
-   "ms": 172
+   "ms": 187
   },
   {
    "id": "B11",
@@ -90,7 +90,7 @@
    "title": "Drafts and sessions older than 7 days are still excluded",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   {",
-   "ms": 132
+   "ms": 137
   },
   {
    "id": "B12",
@@ -98,7 +98,7 @@
    "title": "Budget classification is read-only: stored sessions are unchanged",
    "pass": true,
    "error": null,
-   "ms": 130
+   "ms": 131
   },
   {
    "id": "R1",
@@ -106,7 +106,7 @@
    "title": "A check-in saved 1 hour ago is fresh: still GREEN with no stale warning (current behaviour preserved)",
    "pass": true,
    "error": null,
-   "ms": 161
+   "ms": 191
   },
   {
    "id": "R2",
@@ -114,7 +114,7 @@
    "title": "The freshness rule is the local calendar day (Phase 2 replaced the provisional 48-hour threshold): 2 h earlier the same day is fresh, 30 h earlier is stale",
    "pass": false,
    "error": "Page evaluation failed: ReferenceError: readinessFreshness is not defined |     at <anonymous>:1:141 |     at Array.map (<anonymous>) |     at <anonymous>:1:13",
-   "ms": 140
+   "ms": 136
   },
   {
    "id": "R3",
@@ -122,7 +122,7 @@
    "title": "A GREEN check-in from 6 days ago is NOT shown as GREEN on Home; a visible stale warning gives its age",
    "pass": false,
    "error": "stale GREEN still shown: MISSION STATUS | STANDARD | GREEN | Check-in 100 / 100 • self-reported readiness, not a medical metric",
-   "ms": 185
+   "ms": 170
   },
   {
    "id": "R4",
@@ -130,7 +130,7 @@
    "title": "Never checked in (no saved date) shows NOT CHECKED IN instead of a YELLOW score",
    "pass": false,
    "error": "MISSION STATUS | STANDARD | YELLOW | Check-in 72 / 100 • self-reported readiness, not a medical metric",
-   "ms": 166
+   "ms": 134
   },
   {
    "id": "R5",
@@ -138,7 +138,7 @@
    "title": "A stored joint flag is never hidden by staleness: joints 1/5 from 10 days ago still shows RED, with the stale note",
    "pass": false,
    "error": "MISSION STATUS | STANDARD | GREEN | Check-in 84 / 100 • self-reported readiness, not a medical metric",
-   "ms": 130
+   "ms": 156
   },
   {
    "id": "R6",
@@ -146,7 +146,7 @@
    "title": "Joints 2/5 from 10 days ago still shows YELLOW (not GREEN), with the stale note",
    "pass": false,
    "error": "MISSION STATUS | STANDARD | GREEN | Check-in 88 / 100 • self-reported readiness, not a medical metric",
-   "ms": 145
+   "ms": 160
   },
   {
    "id": "R7",
@@ -154,7 +154,7 @@
    "title": "A missing, null or unreadable date is treated as never checked in (no exception)",
    "pass": false,
    "error": "Page evaluation failed: ReferenceError: readinessFreshness is not defined |     at <anonymous>:1:44 |     at <anonymous>:1:51",
-   "ms": 141
+   "ms": 136
   },
   {
    "id": "R8",
@@ -162,7 +162,7 @@
    "title": "A check-in dated in the future (clock or time-zone change) is flagged, not trusted as fresh",
    "pass": false,
    "error": "MISSION STATUS | STANDARD | GREEN | Check-in 100 / 100 • self-reported readiness, not a medical metric",
-   "ms": 129
+   "ms": 138
   },
   {
    "id": "R9",
@@ -170,15 +170,15 @@
    "title": "Readiness page: stale check-in shows the warning and the age, and still offers SAVE CHECK-IN",
    "pass": false,
    "error": "GOVERNOR • NOT AUTOPILOTGREEN • 100 / 100Run as programmed. Optional methods remain optional.This is a simple self-report check-in. It does not diagnose recovery, injury, or health.Sleep1 / 52 / 53 / 54 / 55 / 5Energy1 / 52 / 53 / 54 / 55 / 5Low soreness / freshness1 / 52 / 53 / 54 / 55 / 5Joint sta",
-   "ms": 148
+   "ms": 178
   },
   {
    "id": "R10",
    "group": "INT-R: stale readiness",
    "title": "Coach Handoff states the check-in is stale and how old it is, not an unqualified label",
    "pass": false,
-   "error": "PROJECT AMERICA // COACH HANDOFF | Generated: 10/19/2026, 5:53:10 PM |  | CURRENT MODE: STANDARD",
-   "ms": 167
+   "error": "PROJECT AMERICA // COACH HANDOFF | Generated: 10/19/2026, 6:10:42 PM |  | CURRENT MODE: STANDARD",
+   "ms": 180
   },
   {
    "id": "R11",
@@ -186,7 +186,7 @@
    "title": "Saving a new check-in makes the status current immediately",
    "pass": true,
    "error": null,
-   "ms": 188
+   "ms": 144
   },
   {
    "id": "R12",
@@ -194,7 +194,7 @@
    "title": "readinessDecision itself is unchanged by staleness (classification guard from the reliability patch)",
    "pass": false,
    "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   [",
-   "ms": 144
+   "ms": 123
   },
   {
    "id": "R13",
@@ -202,7 +202,7 @@
    "title": "Rendering and classifying readiness never writes or alters stored data",
    "pass": true,
    "error": null,
-   "ms": 192
+   "ms": 175
   },
   {
    "id": "R14",
@@ -210,7 +210,7 @@
    "title": "Fresh check-ins of every joint level are classified exactly as before (no stale text anywhere)",
    "pass": false,
    "error": "joints 1: MISSION STATUS | STANDARD | GREEN | Check-in 84 / 100 • self-reported readiness, not a medical metric",
-   "ms": 203
+   "ms": 131
   },
   {
    "id": "R15",
@@ -218,7 +218,7 @@
    "title": "Backup round trip preserves the saved readiness date, so staleness is the same after restore",
    "pass": false,
    "error": "Page evaluation failed: ReferenceError: readinessFreshness is not defined |     at <anonymous>:1:44 |     at <anonymous>:1:51",
-   "ms": 358
+   "ms": 308
   },
   {
    "id": "K1",
@@ -226,7 +226,7 @@
    "title": "When the restore fails AND putting the original data back also fails, the message does not claim the data was retained, and points to the snapshot",
    "pass": false,
    "error": "misleading: Restore failed; original data was retained. forced failure",
-   "ms": 331
+   "ms": 354
   },
   {
    "id": "K2",
@@ -234,7 +234,7 @@
    "title": "After that failure the pre-restore snapshot still holds ALL the original data and re-imports through the normal UI",
    "pass": true,
    "error": null,
-   "ms": 589
+   "ms": 593
   },
   {
    "id": "K3",
@@ -242,7 +242,7 @@
    "title": "When every write fails (not even a snapshot can be stored), restore is refused, nothing changes, and the message says so",
    "pass": true,
    "error": null,
-   "ms": 389
+   "ms": 375
   },
   {
    "id": "K4",
@@ -250,7 +250,7 @@
    "title": "A transient failure that the rollback survives still says the original data was retained, and storage is byte-identical",
    "pass": true,
    "error": null,
-   "ms": 363
+   "ms": 374
   },
   {
    "id": "K5",
@@ -258,7 +258,7 @@
    "title": "A normal successful restore is unchanged: reloads, replaces the data, keeps a snapshot",
    "pass": true,
    "error": null,
-   "ms": 341
+   "ms": 354
   }
  ]
 }

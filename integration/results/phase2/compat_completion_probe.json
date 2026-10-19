@@ -2,7 +2,8 @@
  "payloadHasCompletion": true,
  "versions": {
   "baseline": "accepted",
-  "pr1": "accepted"
+  "pr1": "accepted",
+  "phase1": "accepted"
  },
  "legacyShapeInPhase2": "accepted"
 }
