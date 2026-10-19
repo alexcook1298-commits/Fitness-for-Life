@@ -1,0 +1,128 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T17:34:41.378Z",
+ "passed": 6,
+ "failed": 9,
+ "results": [
+  {
+   "id": "CB1",
+   "group": "CB",
+   "title": "Legitimate comparison text (\"<10:00\", \">8:30/mi\", \"HR <140 bpm\", ...) typed into cardio fields through the UI is saved exactly as typed",
+   "pass": true,
+   "error": null,
+   "ms": 670
+  },
+  {
+   "id": "CB2",
+   "group": "CB",
+   "title": "Round trip: a cardio entry containing < and > exports, previews, restores into a clean profile and is byte-identical",
+   "pass": false,
+   "error": "restore refused: Invalid text in pa_cardio_hist",
+   "ms": 590
+  },
+  {
+   "id": "CB3",
+   "group": "CB",
+   "title": "Every LEGIT string passes backup validation as a cardio value, in every cardio field",
+   "pass": false,
+   "error": "\"<10:00\": Invalid text in pa_cardio_hist | + actual - expected |  | + 'Invalid text in pa_cardio_hist'",
+   "ms": 138
+  },
+  {
+   "id": "CB4",
+   "group": "CB",
+   "title": "HTML-like cardio text is refused when logging, with a message explaining that < and > are allowed as comparison signs, and nothing is stored",
+   "pass": false,
+   "error": "\"<b>\" was stored |  | 1 !== 0 | ",
+   "ms": 206
+  },
+  {
+   "id": "CB5",
+   "group": "CB",
+   "title": "Malicious cardio text in a backup file is refused at preview: restore is never offered, the reason names the cardio entry and field, and storage is untouched",
+   "pass": false,
+   "error": "unhelpful message: Invalid text in pa_cardio_hist",
+   "ms": 241
+  },
+  {
+   "id": "CB6",
+   "group": "CB",
+   "title": "Stored markup that predates this fix is never executed or turned into elements: the cardio \"PREVIOUS\" line shows it as literal text",
+   "pass": false,
+   "error": "script executed |  | 1 !== undefined | ",
+   "ms": 499
+  },
+  {
+   "id": "CB7",
+   "group": "CB",
+   "title": "Data keys in a cardio record must be plain identifiers: markup, control characters, __proto__ and over-long keys are refused on import",
+   "pass": false,
+   "error": "key \"<img src=x onerror=1>\" accepted",
+   "ms": 178
+  },
+  {
+   "id": "CB8",
+   "group": "CB",
+   "title": "Cardio values must be text or numbers: nested objects, arrays, booleans and non-finite numbers are refused; data must be an object",
+   "pass": false,
+   "error": "{\"pace\":{\"a\":1}} accepted",
+   "ms": 130
+  },
+  {
+   "id": "CB9",
+   "group": "CB",
+   "title": "Control characters and over-long text in cardio values are still refused",
+   "pass": true,
+   "error": null,
+   "ms": 130
+  },
+  {
+   "id": "CB10",
+   "group": "CB",
+   "title": "Import protection elsewhere is NOT weakened: < or > is still refused in work-set, stretch, strength and activator history and in record ids/names/machine fields",
+   "pass": true,
+   "error": null,
+   "ms": 147
+  },
+  {
+   "id": "CB11",
+   "group": "CB",
+   "title": "Historical cardio records (old shapes without id or sessionId, numeric-looking text, empty values, unknown keys) still import and round-trip byte-identically",
+   "pass": true,
+   "error": null,
+   "ms": 323
+  },
+  {
+   "id": "CB12",
+   "group": "CB",
+   "title": "Existing cardio records are never altered: loading, rendering, exporting and a refused import leave pa_cardio_hist byte-identical",
+   "pass": true,
+   "error": null,
+   "ms": 286
+  },
+  {
+   "id": "CB13",
+   "group": "CB",
+   "title": "A draft with a typed-but-unsaved cardio value containing < resumes with it after reload, and survives backup/restore",
+   "pass": true,
+   "error": null,
+   "ms": 419
+  },
+  {
+   "id": "CB14",
+   "group": "CB",
+   "title": "Every place that renders cardio history is escaped: static check that no cardio value reaches innerHTML unescaped",
+   "pass": false,
+   "error": "cardioPrevious does not escape keys and values: | function cardioPrevious(machine,mode){ |  let a=cardioHistory().filter(x=>x.machine===machine&&x.mode===mode); |  if(!a.length)return \"No previous session on this machine for this mode.\";",
+   "ms": 133
+  },
+  {
+   "id": "CB15",
+   "group": "CB",
+   "title": "A full real workflow with cardio containing < and > still passes every other backup property: draft, finished session, history all restore identically",
+   "pass": false,
+   "error": "Invalid text in pa_cardio_hist",
+   "ms": 495
+  }
+ ]
+}

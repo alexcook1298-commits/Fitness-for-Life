@@ -165,6 +165,140 @@ test('RD20','Freshness evaluation never writes or alters stored readiness data',
  assert.strictEqual(await p.eval(()=>localStorage.getItem('pa_os_v2')),before);
 });
 
+// =====================================================================
+// CB — cardio text and backup round trip
+// =====================================================================
+let fileCounter=0;
+const writeFile=obj=>{const f=path.join(work,`file-${++fileCounter}.json`);fs.writeFileSync(f,typeof obj==='string'?obj:JSON.stringify(obj,null,2));return f};
+const storage=p=>p.eval(()=>Object.fromEntries(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)])));
+const PA=s=>Object.fromEntries(Object.entries(s).filter(([k])=>k.startsWith('pa_')&&!k.startsWith('pa_restore_rollback')));
+const notice=p=>p.eval(()=>{const n=document.getElementById('appNotice');return n.classList.contains('hidden')?'':n.textContent});
+const clearNotice=p=>p.eval(()=>document.getElementById('appNotice').classList.add('hidden'));
+async function tagClick(p,finderSrc,...a){const ok=await p.eval(`(()=>{document.querySelectorAll('[data-tc]').forEach(e=>e.removeAttribute('data-tc'));const el=(${finderSrc})(...${JSON.stringify(a)});if(!el)return false;el.setAttribute('data-tc','1');return true})()`);if(!ok)throw Error('element not found');await p.click('[data-tc="1"]')}
+async function openCardio(p,machine='Outdoor'){
+ await p.eval(()=>start('conditioning'));
+ await p.click('#exs .machine-btn',machine);
+ return p.eval(()=>document.querySelector('#exs [data-cardio]').dataset.cardio);
+}
+async function typeCardio(p,field,value){await p.eval(f=>{const i=document.querySelector(`#exs [data-cardio] input[data-field="${f}"]`);i.scrollIntoView({block:'center'});i.focus();i.select()},field);await p.send('Input.insertText',{text:value});}
+async function saveCardioUI(p){await clearNotice(p);await p.click('#exs button.save-cardio')}
+const cardioHist=p=>p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'));
+async function openBackupPage(p){await p.click('#n-more');await p.click('button.moreitem[onclick="morePage(\'data\')"]');await p.waitForFunction('!!document.querySelector("#morepage input[type=file]")')}
+async function importFile(p,file){await openBackupPage(p);await p.eval('document.getElementById("importPreview").textContent=""');await p.setFile('#morepage input[type=file]',file);await p.waitForFunction('document.getElementById("importPreview").textContent.trim().length>0',20000);return p.eval(()=>({text:document.getElementById('importPreview').textContent,can:[...document.querySelectorAll('#importPreview button')].some(b=>b.textContent.trim()==='RESTORE THIS BACKUP')}))}
+async function restoreUI(p){const re=p.waitForLoad(30000).then(()=>true,()=>false);await p.click('button','RESTORE THIS BACKUP');const ok=await re;if(ok)await p.waitForFunction('typeof validateBackup==="function"&&document.readyState==="complete"');return ok}
+const bkWrap=data=>({format:'project-america-full-backup',version:1,appVersion:'2.3',createdAt:'2026-10-12T09:00:00.000Z',data});
+const cardioRec=(data,extra={})=>({id:'s1|Outdoor|conditioning',sessionId:'s1',date:'2026-10-10T12:00:00.000Z',machine:'Outdoor',mode:'conditioning',data,...extra});
+const backupWith=records=>bkWrap({pa_cardio_hist:JSON.stringify(records)});
+const LEGIT=['<10:00','>8:30/mi','8:30 > 9:00','HR <140 bpm','<=150','5 < 6','a<b','x>y','<','>','<<','>>','<3','>=4'];
+const TAGLIKE=['<b>','<img src=x onerror=window.__pwn=1>','</script>','<!-- x -->','<?php echo 1 ?>','<svg/onload=window.__pwn=1>','<a href="javascript:window.__pwn=1">x</a>','<script>window.__pwn=1</script>','<iframe src=javascript:1>','<B>x'];
+
+test('CB1','Legitimate comparison text ("<10:00", ">8:30/mi", "HR <140 bpm", ...) typed into cardio fields through the UI is saved exactly as typed',async p=>{
+ await openCardio(p,'Outdoor');
+ for(const v of LEGIT){
+  await p.eval(()=>{localStorage.pa_cardio_hist='[]'});await clearNotice(p);
+  await typeCardio(p,'pace',v);await saveCardioUI(p);
+  const h=await cardioHist(p);assert.strictEqual(h.length,1,JSON.stringify(v)+' not saved: '+await notice(p));assert.strictEqual(h[0].data.pace,v);
+ }
+});
+test('CB2','Round trip: a cardio entry containing < and > exports, previews, restores into a clean profile and is byte-identical',async p=>{
+ await openCardio(p,'Outdoor');await typeCardio(p,'pace','<10:00');await typeCardio(p,'hr','HR >150 <170');await saveCardioUI(p);
+ const before=PA(await storage(p));assert(before.pa_cardio_hist.includes('<10:00'));
+ await openBackupPage(p);const d=await p.download(()=>p.click('button','EXPORT FULL BACKUP'));
+ const q=await openApp();
+ try{const r=await importFile(q,d.file);assert(r.can,'restore refused: '+r.text);assert(await restoreUI(q));
+  const after=PA(await storage(q));assert.strictEqual(after.pa_cardio_hist,before.pa_cardio_hist,'cardio history changed');
+ }finally{await q.close()}
+});
+test('CB3','Every LEGIT string passes backup validation as a cardio value, in every cardio field',async p=>{
+ for(const v of LEGIT){const r=await p.eval(rec=>{try{validateBackup(rec);return 'ok'}catch(e){return e.message}},backupWith([cardioRec({pace:v,hr:v,duration:v,distance:v,calories:v})]));assert.strictEqual(r,'ok',JSON.stringify(v)+': '+r)}
+});
+test('CB4','HTML-like cardio text is refused when logging, with a message explaining that < and > are allowed as comparison signs, and nothing is stored',async p=>{
+ await openCardio(p,'Outdoor');
+ for(const v of TAGLIKE){await p.eval(()=>{localStorage.pa_cardio_hist='[]'});await typeCardio(p,'pace',v);await saveCardioUI(p);
+  assert.strictEqual((await cardioHist(p)).length,0,JSON.stringify(v)+' was stored');const n=await notice(p);assert(/comparison/i.test(n)&&/pace/i.test(n),JSON.stringify(v)+' -> '+n)}
+ assert.strictEqual(await p.eval(()=>window.__pwn),undefined);
+});
+test('CB5','Malicious cardio text in a backup file is refused at preview: restore is never offered, the reason names the cardio entry and field, and storage is untouched',async p=>{
+ await p.eval(()=>{localStorage.pa_cardio_hist='[{"id":"keep","sessionId":"k","date":"2026-10-01T00:00:00.000Z","machine":"Outdoor","mode":"conditioning","data":{"hr":"150"}}]'});
+ const before=await storage(p);
+ for(const v of TAGLIKE){
+  const r=await importFile(p,writeFile(backupWith([cardioRec({pace:v})])));assert(!r.can,'restore offered for '+JSON.stringify(v));
+  assert(/cardio/i.test(r.text)&&/pace/i.test(r.text),'unhelpful message: '+r.text);
+ }
+ assert.deepStrictEqual(PA(await storage(p)),PA(before));assert.strictEqual(await p.eval(()=>window.__pwn),undefined);
+});
+test('CB6','Stored markup that predates this fix is never executed or turned into elements: the cardio "PREVIOUS" line shows it as literal text',async p=>{
+ const mode=await openCardio(p,'Outdoor');
+ await p.eval(m=>{localStorage.pa_cardio_hist=JSON.stringify([{date:'2026-10-01T00:00:00.000Z',machine:'Outdoor',mode:m,data:{pace:'<img src=x onerror=window.__pwn=1>',hr:'<b id=pwnb>bold</b>'}}]);render()},mode);
+ await sleep(300);
+ const r=await p.eval(()=>{const prev=document.querySelector('#exs .cardio-prev');return {pwn:window.__pwn,kids:[...prev.children].map(c=>c.tagName),text:prev.textContent,pwnb:!!document.getElementById('pwnb')}});
+ assert.strictEqual(r.pwn,undefined,'script executed');assert.strictEqual(r.pwnb,false,'markup became an element');
+ assert.deepStrictEqual(r.kids.filter(k=>!['B','BR'].includes(k)),[],'unexpected elements: '+r.kids);assert(r.text.includes('<img src=x onerror=window.__pwn=1>'),'text not shown literally: '+r.text);
+});
+test('CB7','Data keys in a cardio record must be plain identifiers: markup, control characters, __proto__ and over-long keys are refused on import',async p=>{
+ for(const k of ['<img src=x onerror=1>','a b','__proto__','constructor','pace\u0001','x'.repeat(40),'']){
+  const rec=cardioRec({});Object.defineProperty(rec.data,k,{value:'1',enumerable:true,configurable:true,writable:true});
+  const r=await p.eval(rec=>{try{validateBackup(rec);return 'ok'}catch(e){return e.message}},backupWith([rec]));assert.notStrictEqual(r,'ok','key '+JSON.stringify(k)+' accepted');
+ }
+});
+test('CB8','Cardio values must be text or numbers: nested objects, arrays, booleans and non-finite numbers are refused; data must be an object',async p=>{
+ for(const data of [{pace:{a:1}},{pace:['1']},{pace:true},{pace:null,hr:{}},'30',[1,2],null]){
+  const r=await p.eval(rec=>{try{validateBackup(rec);return 'ok'}catch(e){return e.message}},backupWith([cardioRec(data)]));assert.notStrictEqual(r,'ok',JSON.stringify(data)+' accepted');
+ }
+ for(const data of [{pace:'8:30',hr:150},{pace:''},{}]){
+  const r=await p.eval(rec=>{try{validateBackup(rec);return 'ok'}catch(e){return e.message}},backupWith([cardioRec(data)]));assert.strictEqual(r,'ok',JSON.stringify(data)+': '+r);
+ }
+});
+test('CB9','Control characters and over-long text in cardio values are still refused',async p=>{
+ for(const v of ['a\u0000b','a\u0007b','x'.repeat(2000),'a\u001fb']){
+  const r=await p.eval(rec=>{try{validateBackup(rec);return 'ok'}catch(e){return e.message}},backupWith([cardioRec({pace:v})]));assert.notStrictEqual(r,'ok',JSON.stringify(v.slice(0,12))+' accepted');
+ }
+});
+test('CB10','Import protection elsewhere is NOT weakened: < or > is still refused in work-set, stretch, strength and activator history and in record ids/names/machine fields',async p=>{
+ const cases={
+  pa_hist:[{id:'x',name:'Bench <b>',w:1,reps:1,date:'2026-10-01T00:00:00.000Z'},{id:'x',name:'Bench',w:1,reps:1,date:'2026-10-01T00:00:00.000Z',clusterSplit:'3+3 <20s>'}],
+  pa_ls_hist:[{id:'x',exercise:'<i>',load:1,seconds:30,date:'2026-10-01T00:00:00.000Z'}],
+  pa_strength_hist:[{id:'x',name:'<i>',w:1,reps:1,date:'2026-10-01T00:00:00.000Z'}],
+  pa_activator_hist:[{id:'x',name:'<i>',reps:1,date:'2026-10-01T00:00:00.000Z'}],
+  pa_cardio_hist:[cardioRec({hr:'1'},{machine:'<b>'}),cardioRec({hr:'1'},{id:'<b>'}),cardioRec({hr:'1'},{mode:'a>b'}),cardioRec({hr:'1'},{sessionId:'<s>'})]};
+ const verdicts=[];
+ for(const [k,list] of Object.entries(cases))for(const rec of list){
+  const r=await p.eval((k,rec)=>{try{validateBackup({format:'project-america-full-backup',version:1,appVersion:'2.3',createdAt:'2026-10-12T09:00:00.000Z',data:{[k]:JSON.stringify([rec])}});return 'ok'}catch(e){return e.message}},k,rec);verdicts.push([k,JSON.stringify(rec),r]);
+ }
+ const ok=verdicts.filter(v=>v[2]==='ok');
+ // the only acceptable "ok" is the pre-existing clusterSplit exemption
+ assert.deepStrictEqual(ok.map(v=>v[0]+' '+v[1]).filter(x=>!/clusterSplit/.test(x)),[],'accepted: '+JSON.stringify(ok).slice(0,300));
+});
+test('CB11','Historical cardio records (old shapes without id or sessionId, numeric-looking text, empty values, unknown keys) still import and round-trip byte-identically',async p=>{
+ const old=[{date:'2025-01-02T10:00:00.000Z',machine:'Peloton',mode:'zone2',data:{duration:'30',distance:'',resistance:'45',cadence:'80',hr:'140',calories:'250'}},{date:'2025-02-02T10:00:00.000Z',machine:'Rower',mode:'intervals',data:{duration:'20',pace:'2:05',spm:'28',legacyField:'x'}},cardioRec({minutes:'30',output:'210'})];
+ const r=await importFile(p,writeFile(backupWith(old)));assert(r.can,r.text);assert(await restoreUI(p));
+ assert.deepStrictEqual(await cardioHist(p),old);
+});
+test('CB12','Existing cardio records are never altered: loading, rendering, exporting and a refused import leave pa_cardio_hist byte-identical',async p=>{
+ const legacy=JSON.stringify([{date:'2025-03-01T10:00:00.000Z',machine:'Outdoor',mode:'conditioning',data:{pace:'<10:00',hr:'<img src=x>'}},cardioRec({pace:'8:30'})]);
+ await p.eval(v=>{localStorage.pa_cardio_hist=v},legacy);await p.reload();
+ await openCardio(p,'Outdoor');await p.eval(()=>{render();backupPayload()});
+ await importFile(p,writeFile(backupWith([cardioRec({pace:'<b>'})])));
+ assert.strictEqual(await p.eval(()=>localStorage.pa_cardio_hist),legacy);
+});
+test('CB13','A draft with a typed-but-unsaved cardio value containing < resumes with it after reload, and survives backup/restore',async p=>{
+ await openCardio(p,'Outdoor');await typeCardio(p,'pace','<9:45');await p.eval(()=>saveDraft());
+ const bk=await p.eval(()=>backupPayload());const r=await importFile(p,writeFile(bk));assert(r.can,r.text);assert(await restoreUI(p));
+ await p.click('#homePlan button.secondary','RESUME Conditioning');
+ assert.strictEqual(await p.eval(()=>document.querySelector('#exs [data-cardio] input[data-field="pace"]').value),'<9:45');
+});
+test('CB14','Every place that renders cardio history is escaped: static check that no cardio value reaches innerHTML unescaped',async p=>{
+ const src=fs.readFileSync(path.join(appDir,'index.html'),'utf8');
+ const fn=/function cardioPrevious\([\s\S]*?\n\}/.exec(src);assert(fn,'cardioPrevious not found');
+ assert(/esc\(k\)/.test(fn[0])&&/esc\(v\)/.test(fn[0]),'cardioPrevious does not escape keys and values:\n'+fn[0]);
+});
+test('CB15','A full real workflow with cardio containing < and > still passes every other backup property: draft, finished session, history all restore identically',async p=>{
+ await openCardio(p,'Outdoor');await typeCardio(p,'pace','<10:00');await saveCardioUI(p);
+ await p.click('button','FINISH WORKOUT');await p.click('button','SAVE COMPLETED WORKOUT');
+ const before=PA(await storage(p));const bk=await p.eval(()=>backupPayload());
+ const q=await openApp();try{const r=await importFile(q,writeFile(bk));assert(r.can,r.text);assert(await restoreUI(q));assert.deepStrictEqual(PA(await storage(q)),before)}finally{await q.close()}
+});
+
 // ---------- runner ----------
 (async()=>{
  const server=await serve(appDir),browser=await launch();ctx={browser,origin:server.origin};
