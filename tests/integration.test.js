@@ -7,6 +7,7 @@ const fs=require('fs'),os=require('os'),path=require('path'),assert=require('ass
 const {launch}=require('./lib/cdp');
 const {serve}=require('./lib/server');
 const {buildDataset}=require('./fixtures');
+const clock=require('./lib/clock');
 
 const args=process.argv.slice(2);
 const appDir=args.find(a=>!a.startsWith('--')&&args[args.indexOf(a)-1]!=='--json'&&args[args.indexOf(a)-1]!=='--only');
@@ -97,8 +98,8 @@ test('R1','INT-R: stale readiness','A check-in saved 1 hour ago is fresh: still 
  await setReadiness(p,ALL5,1);const h=await home(p);
  assert(/GREEN/.test(h.card),h.card);assert(!/STALE|NOT CHECKED IN/i.test(h.card+h.dir),h.card);
 });
-test('R2','INT-R: stale readiness','The freshness boundary: 47 hours is fresh, 49 hours is stale',async p=>{
- const r=await p.eval(()=>[47,49].map(h=>{const f=readinessFreshness({...{sleep:5,energy:5,soreness:5,joints:5,motivation:5},date:new Date(Date.now()-h*3600000).toISOString()});return f.state}));
+test('R2','INT-R: stale readiness','The freshness rule is the local calendar day (Phase 2 replaced the provisional 48-hour threshold): 2 h earlier the same day is fresh, 30 h earlier is stale',async p=>{
+ const r=await p.eval(()=>[2,30].map(h=>readinessFreshness({sleep:5,energy:5,soreness:5,joints:5,motivation:5,date:new Date(Date.now()-h*3600000).toISOString()}).state));
  assert.deepStrictEqual(r,['fresh','stale']);
 });
 test('R3','INT-R: stale readiness','A GREEN check-in from 6 days ago is NOT shown as GREEN on Home; a visible stale warning gives its age',async p=>{
@@ -222,7 +223,7 @@ test('K5','INT-K: restore-failure honesty','A normal successful restore is uncha
   for(const t of tests){
    if(only&&!only.includes(t.id))continue;
    let p,error=null;const start=Date.now();
-   try{p=await openApp();await t.fn(p)}catch(e){error=e.message.split('\n').slice(0,4).join(' | ').slice(0,420)}
+   try{p=await openApp();if(t.group==='INT-R'&&t.id!=='R15')await clock.freezeLocal(p,2026,10,19,12,0,0);await t.fn(p)}catch(e){error=e.message.split('\n').slice(0,4).join(' | ').slice(0,420)}
    finally{if(p)await p.close()}
    results.push({id:t.id,group:t.group,title:t.title,pass:!error,error,ms:Date.now()-start});if(error)failed++;
    console.log(`${error?'FAIL':'PASS'} ${t.id.padEnd(4)} ${t.title}${error?'\n      → '+error:''}`);
