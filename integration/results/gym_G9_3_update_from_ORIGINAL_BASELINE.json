@@ -1,6 +1,6 @@
 {
  "app": "/workspace/integration/app",
- "date": "2026-10-19T17:16:22.558Z",
+ "date": "2026-10-19T17:52:05.552Z",
  "passed": 1,
  "failed": 0,
  "results": [
@@ -10,7 +10,7 @@
    "title": "Cache update path: an installed OLD version shows an update prompt when the new version is deployed, does NOT replace itself mid-workout, keeps the draft, and after the tap runs the new code under the new cache name with the old cache deleted",
    "pass": true,
    "error": null,
-   "ms": 3834
+   "ms": 3867
   }
  ]
 }

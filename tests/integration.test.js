@@ -38,6 +38,8 @@ async function importViaUI(p,file){
 }
 async function restoreViaUI(p){
  const reloaded=p.waitForLoad(30000).then(()=>true,()=>false);
+ // A notice left over from an earlier failed restore on the same page must not be mistaken for this attempt's outcome.
+ await p.eval(()=>{const n=document.getElementById('appNotice');n.textContent='';n.classList.add('hidden')});
  await p.click('button','RESTORE THIS BACKUP');
  const outcome=await Promise.race([reloaded,p.waitForFunction('!document.getElementById("appNotice").classList.contains("hidden")&&/Restore failed|could not|rollback/i.test(document.getElementById("appNotice").textContent)',30000).then(()=>false,()=>null)]);
  if(outcome){await p.waitForFunction('typeof validateBackup==="function"&&document.readyState==="complete"');return {reloaded:true}}

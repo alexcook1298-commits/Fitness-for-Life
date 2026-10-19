@@ -502,7 +502,7 @@ async function swState(p){return p.eval(async()=>{const reg=await navigator.serv
 test('G9.1','G9: PWA / offline','The service worker installs, takes control after a reload, and caches the shell under the integration cache name',async p=>{
  await p.waitForFunction('navigator.serviceWorker&&navigator.serviceWorker.getRegistration().then(r=>!!r&&!!r.active)',15000).catch(()=>{});
  await p.reload();await sleep(500);const s=await swState(p);
- assert(s.active&&s.controller,JSON.stringify(s));assert(s.caches.some(c=>c==='project-america-shell-v2-3-integration-20261019'),JSON.stringify(s.caches));assert(/Ready offline/.test(s.status),s.status);
+ assert(s.active&&s.controller,JSON.stringify(s));assert(s.caches.some(c=>c==='project-america-shell-v2-3-phase2-20261019'),JSON.stringify(s.caches));assert(/Ready offline/.test(s.status),s.status);
 });
 test('G9.2','G9: PWA / offline','Offline: the app reloads from cache, a workout can be started, a set logged, saved and finished with the network disabled',async p=>{
  await p.reload();await sleep(800);assert((await swState(p)).controller);
@@ -542,7 +542,7 @@ test('G9.3','G9: PWA / offline','Cache update path: an installed OLD version sho
   await p.click('#n-home');
   const re=p.waitForLoad(20000).then(()=>true,()=>false);await p.click('#updateButton');assert(await re,'page did not reload after update');
   await p.waitForFunction('typeof readinessStatus==="function"',15000);await sleep(500);
-  const now=await swState(p);assert.deepStrictEqual(now.caches,['project-america-shell-v2-3-integration-20261019'],JSON.stringify(now.caches));
+  const now=await swState(p);assert.deepStrictEqual(now.caches,['project-america-shell-v2-3-phase2-20261019'],JSON.stringify(now.caches));
   const ss=await sessionsOf(p);assert.strictEqual(ss.length,1);assert.strictEqual(ss[0].id,draftBefore);assert.strictEqual((await hist(p)).length,1);
   await p.click('#homePlan button.secondary','RESUME Giant A');assert.strictEqual(await p.eval(()=>currentSession.id),draftBefore);
  }finally{await p.close();await s.close()}

@@ -5,4 +5,4 @@ PASS baseline output matches committed audit/data/effective_prescription.json
 files differing from the baseline package (non-index.html):
   Files /workspace/baseline/hq-2.3/sw.js and /workspace/integration/app/sw.js differ
 sha256 baseline index.html:  93fc2f462bd2b78b999935765f5eea5d3a021a5e031c9414ebb961285c1455ec
-sha256 candidate index.html: 24c43b0602e3635e9be6eb5c9e998e4588d3903daae22350f3cd127575f736bd
+sha256 candidate index.html: f361ad23cb0d6b5d5997416770cbb0591aa2ce41e6ff0fe9802dc633e822e3cd

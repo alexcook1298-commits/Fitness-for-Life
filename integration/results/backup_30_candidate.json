@@ -1,6 +1,6 @@
 {
  "app": "/workspace/integration/app",
- "date": "2026-10-19T17:14:25.614Z",
+ "date": "2026-10-19T17:49:52.670Z",
  "passed": 30,
  "failed": 0,
  "results": [
@@ -10,7 +10,7 @@
    "title": "Full backup containing saved OS state (pa_os_v2) exported from the UI is accepted and restored byte-identically",
    "pass": true,
    "error": null,
-   "ms": 566
+   "ms": 514
   },
   {
    "id": "D1.2",
@@ -18,7 +18,7 @@
    "title": "Older full backup without pa_os_v2 still restores and leaves no OS key behind",
    "pass": true,
    "error": null,
-   "ms": 418
+   "ms": 465
   },
   {
    "id": "D2.1",
@@ -26,7 +26,7 @@
    "title": "Heavy primer logged through the real Giant A UI produces a backup that validates and restores",
    "pass": true,
    "error": null,
-   "ms": 672
+   "ms": 764
   },
   {
    "id": "D2.2",
@@ -34,7 +34,7 @@
    "title": "Strength-method preference keys are still validated (unknown method rejected)",
    "pass": true,
    "error": null,
-   "ms": 220
+   "ms": 245
   },
   {
    "id": "D2.3",
@@ -42,7 +42,7 @@
    "title": "pa_strength_hist records still receive history-record validation (non-list rejected)",
    "pass": true,
    "error": null,
-   "ms": 209
+   "ms": 233
   },
   {
    "id": "D3.1",
@@ -50,7 +50,7 @@
    "title": "Cluster-split note with < and > logged through the real workout UI backs up and restores",
    "pass": true,
    "error": null,
-   "ms": 772
+   "ms": 711
   },
   {
    "id": "D3.2",
@@ -58,7 +58,7 @@
    "title": "Markup typed as a cluster-split note is shown as text and never rendered as HTML after reload/resume",
    "pass": true,
    "error": null,
-   "ms": 704
+   "ms": 670
   },
   {
    "id": "D3.3",
@@ -66,7 +66,7 @@
    "title": "Markup in other history text (exercise name) is still rejected",
    "pass": true,
    "error": null,
-   "ms": 243
+   "ms": 229
   },
   {
    "id": "D3.4",
@@ -74,7 +74,7 @@
    "title": "Cluster-split notes must be text without control characters",
    "pass": true,
    "error": null,
-   "ms": 304
+   "ms": 372
   },
   {
    "id": "D4.1",
@@ -82,7 +82,7 @@
    "title": "Pre-restore snapshot downloaded from the UI is itself a restorable backup that recovers the original data exactly",
    "pass": true,
    "error": null,
-   "ms": 561
+   "ms": 607
   },
   {
    "id": "D4.2",
@@ -90,7 +90,7 @@
    "title": "Two consecutive restores keep two recovery generations; the older one is downloadable from the UI",
    "pass": true,
    "error": null,
-   "ms": 619
+   "ms": 651
   },
   {
    "id": "D4.3",
@@ -98,7 +98,7 @@
    "title": "Restore that fails mid-write (real browser storage quota) leaves data AND existing snapshots unchanged, with a clear error",
    "pass": true,
    "error": null,
-   "ms": 792
+   "ms": 766
   },
   {
    "id": "D4.4",
@@ -106,7 +106,7 @@
    "title": "When no rollback snapshot can be stored, restore is refused before anything changes, with a clear error",
    "pass": true,
    "error": null,
-   "ms": 776
+   "ms": 760
   },
   {
    "id": "D4.5",
@@ -114,7 +114,7 @@
    "title": "When space allows only one generation, the older generation is dropped (not the newest) and restore proceeds",
    "pass": true,
    "error": null,
-   "ms": 535
+   "ms": 524
   },
   {
    "id": "D4.6",
@@ -122,7 +122,7 @@
    "title": "A snapshot left by HQ 2.3 (bare key map) is still downloadable as a restorable backup and is kept as the older generation",
    "pass": true,
    "error": null,
-   "ms": 554
+   "ms": 578
   },
   {
    "id": "D5.1",
@@ -130,7 +130,7 @@
    "title": "Backup containing a legacy draft without clusters validates and restores byte-identically",
    "pass": true,
    "error": null,
-   "ms": 303
+   "ms": 306
   },
   {
    "id": "D5.2",
@@ -138,7 +138,7 @@
    "title": "Legacy draft without clusters resumes in the real UI; Myo-Reps stages render and ADD MINI-SET works without errors",
    "pass": true,
    "error": null,
-   "ms": 677
+   "ms": 647
   },
   {
    "id": "D5.3",
@@ -146,7 +146,7 @@
    "title": "Sessions with malformed clusters are still rejected",
    "pass": true,
    "error": null,
-   "ms": 347
+   "ms": 375
   },
   {
    "id": "D6.1",
@@ -154,7 +154,7 @@
    "title": "OS text already in storage (including values the validator would reject) is escaped on Home and all 15 OS screens",
    "pass": true,
    "error": null,
-   "ms": 4607
+   "ms": 4585
   },
   {
    "id": "D6.2",
@@ -162,7 +162,7 @@
    "title": "Imported OS backup with markup in every text field restores, displays literally, and never executes",
    "pass": true,
    "error": null,
-   "ms": 4747
+   "ms": 4728
   },
   {
    "id": "N1",
@@ -170,7 +170,7 @@
    "title": "Full realistic dataset (all storage keys) round-trips byte-identically via UI export → import → restore; unrelated keys preserved",
    "pass": true,
    "error": null,
-   "ms": 573
+   "ms": 483
   },
   {
    "id": "N2",
@@ -178,7 +178,7 @@
    "title": "Specialized methods (Myo-Reps, DC Rest-Pause efforts, cluster sets, primer, activator, strength/intensifier preferences) survive restore and render",
    "pass": true,
    "error": null,
-   "ms": 472
+   "ms": 436
   },
   {
    "id": "N3",
@@ -186,7 +186,7 @@
    "title": "OS data: defaults, fully populated, and older/partial OS shapes all validate; OS screens render",
    "pass": true,
    "error": null,
-   "ms": 5325
+   "ms": 5362
   },
   {
    "id": "N4",
@@ -194,7 +194,7 @@
    "title": "Unfinished session restores and resumes in the real UI with its entered values",
    "pass": true,
    "error": null,
-   "ms": 453
+   "ms": 404
   },
   {
    "id": "N5",
@@ -202,7 +202,7 @@
    "title": "Unknown pa_ key in storage does not make the exported backup unrestorable, and restore leaves it untouched",
    "pass": true,
    "error": null,
-   "ms": 453
+   "ms": 422
   },
   {
    "id": "N6",
@@ -210,7 +210,7 @@
    "title": "Export warns clearly when stored data cannot pass this version's restore validation (file is still downloaded)",
    "pass": true,
    "error": null,
-   "ms": 293
+   "ms": 296
   },
   {
    "id": "N7",
@@ -218,7 +218,7 @@
    "title": "After restore, the app reloads offline from the service worker with restored data intact",
    "pass": true,
    "error": null,
-   "ms": 400
+   "ms": 446
   },
   {
    "id": "N8",
@@ -226,7 +226,7 @@
    "title": "App starts without script errors and makes no external network requests",
    "pass": true,
    "error": null,
-   "ms": 4561
+   "ms": 4600
   },
   {
    "id": "M",
@@ -234,7 +234,7 @@
    "title": "Every malicious or malformed import is rejected in the UI (no RESTORE button) and storage stays byte-identical",
    "pass": true,
    "error": null,
-   "ms": 5348,
+   "ms": 5109,
    "cases": [
     {
      "id": "M01",
@@ -490,7 +490,7 @@
    "title": "A previewed backup that is modified before RESTORE is re-validated and refused; storage unchanged",
    "pass": true,
    "error": null,
-   "ms": 385
+   "ms": 463
   }
  ]
 }
