@@ -1,0 +1,42 @@
+{
+ "Chest": {
+  "name": "Loaded Pec Bottom Hold",
+  "desc": "Use a deliberately lighter load and hold a deep, comfortable pec position while keeping the shoulders packed. Stay muscularly active instead of relaxing into the joint.",
+  "hold": 15
+ },
+ "Back": {
+  "name": "Loaded Lat Lengthened Hold",
+  "desc": "Use a light load or assistance and reach into a long lat position while keeping active shoulder control. Avoid a painful passive hang.",
+  "hold": 15
+ },
+ "Shoulders": {
+  "name": "Light Delt Lengthened Hold",
+  "desc": "Use a very light load in a comfortable lengthened delt position while keeping the shoulder centered and controlled. Never force range.",
+  "hold": 15
+ },
+ "Biceps": {
+  "name": "Loaded Biceps Lengthened Hold",
+  "desc": "Use a very light load with the arm slightly behind the torso and elbow comfortably extended. Keep the shoulder stable and the biceps under tension.",
+  "hold": 15
+ },
+ "Triceps": {
+  "name": "Overhead Triceps Loaded Hold",
+  "desc": "Use a light overhead load, allow controlled elbow flexion, and hold the long head of the triceps in a comfortable stretched position.",
+  "hold": 15
+ },
+ "Quads": {
+  "name": "Loaded Quad Bottom Hold",
+  "desc": "Use a substantially reduced load and hold a deep pain-free knee-flexed position under control. Keep the knees tracking naturally.",
+  "hold": 15
+ },
+ "Hamstrings / Glutes": {
+  "name": "Loaded Hinge Stretch",
+  "desc": "Use a much lighter load, hinge with a stable spine until the hamstrings are strongly lengthened, and hold without chasing extra depth.",
+  "hold": 15
+ },
+ "Calves": {
+  "name": "Loaded Calf Bottom Hold",
+  "desc": "With a manageable load, lower the heel into a comfortable bottom position and hold under calf tension without bouncing or hanging on the Achilles.",
+  "hold": 20
+ }
+}

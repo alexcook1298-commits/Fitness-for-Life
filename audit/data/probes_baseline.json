@@ -1,0 +1,605 @@
+{
+ "P1_readiness": {
+  "neverCheckedIn_default": {
+   "score": 72,
+   "label": "YELLOW",
+   "text": "Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off."
+  },
+  "defaultDate": null,
+  "jointsWorst_othersBest": {
+   "score": 84,
+   "label": "GREEN",
+   "text": "Run as programmed. Optional methods remain optional."
+  },
+  "jointsAndSorenessWorst": {
+   "score": 68,
+   "label": "YELLOW",
+   "text": "Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off."
+  },
+  "sleepAndEnergyWorst": {
+   "score": 68,
+   "label": "YELLOW",
+   "text": "Keep the session and primary work. Cap optional intensity; leave ~2 RIR if performance is off."
+  },
+  "allOnes": {
+   "score": 20,
+   "label": "RED",
+   "text": "Protect the training floor: use COMPACT / MED, straight sets, and stop any movement that feels wrong."
+  },
+  "allFives": {
+   "score": 100,
+   "label": "GREEN",
+   "text": "Run as programmed. Optional methods remain optional."
+  },
+  "thresholds": ">=76 GREEN, >=58 YELLOW, else RED",
+  "fiveYearOldCheckinStillShows": "GREEN",
+  "prescriptionUnchangedByReadiness": {
+   "redEqualsGreenPrescription": true
+  },
+  "history": {
+   "readinessHistoryStored": [
+    "readiness"
+   ],
+   "entriesInReadinessObject": [
+    "sleep",
+    "energy",
+    "soreness",
+    "joints",
+    "motivation",
+    "date"
+   ]
+  }
+ },
+ "P2_status_string_mismatch": {
+  "completedSessionsInStorage": 2,
+  "recentSessions7": 0,
+  "recentSessions42": 0,
+  "budget": {
+   "Strength": 0,
+   "Hypertrophy": 0,
+   "Explosive": 0,
+   "High-intensity engine": 0,
+   "Low-intensity engine": 0,
+   "Capability": 0
+  },
+  "coachHasCompleted": true
+ },
+ "P3_record_shapes_and_progression_text": {
+  "legCurlFinalMode": "Myo-Reps",
+  "records": [
+   {
+    "name": "Bench Press (BB)",
+    "intensifier": "Straight Sets",
+    "strengthMethod": "Primer + Paused Top/Back-Offs",
+    "set": 1,
+    "final": false,
+    "w": 200,
+    "reps": 5,
+    "rir": 2,
+    "split": null,
+    "structured": false,
+    "efforts": null,
+    "hasRestSeconds": false,
+    "hasTempo": false,
+    "hasSide": false
+   },
+   {
+    "name": "Bench Press (BB)",
+    "intensifier": "Straight Sets",
+    "strengthMethod": "Primer + Paused Top/Back-Offs",
+    "set": 2,
+    "final": false,
+    "w": 170,
+    "reps": 8,
+    "rir": 2,
+    "split": null,
+    "structured": false,
+    "efforts": null,
+    "hasRestSeconds": false,
+    "hasTempo": false,
+    "hasSide": false
+   },
+   {
+    "name": "Chest-Supported Row (DB)",
+    "intensifier": "Straight Sets",
+    "strengthMethod": "Cluster Sets",
+    "set": 1,
+    "final": false,
+    "w": 60,
+    "reps": 6,
+    "rir": 2,
+    "split": "2+2+2",
+    "structured": false,
+    "efforts": null,
+    "hasRestSeconds": false,
+    "hasTempo": false,
+    "hasSide": false
+   },
+   {
+    "name": "Seated Leg Curl",
+    "intensifier": "Myo-Reps",
+    "strengthMethod": null,
+    "set": 2,
+    "final": true,
+    "w": 100,
+    "reps": 27,
+    "rir": null,
+    "split": null,
+    "structured": true,
+    "efforts": 4,
+    "hasRestSeconds": false,
+    "hasTempo": false,
+    "hasSide": false
+   }
+  ],
+  "targetAfterTopAndBackoff": "170 lb • earn reps/quality before +5 lb",
+  "prevAfterTopAndBackoff": "200 × 5 • 170 × 8",
+  "targetDoubleProgressionAtTopOfRange": "100 lb • progress within Straight Sets",
+  "targetAfterRepsBelowRange": "100 lb • progress within Straight Sets",
+  "maxE1_legPress_straight8x300_vs_widow20x200": "380 vs 380",
+  "performanceValue_epley_20rep": 333.3333333333333
+ },
+ "P4_session_size": [
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "straightSets": 14,
+   "stagedEffortsInFinalBlocks": 8,
+   "loadedStretches": 7,
+   "sessionInputRows": 86,
+   "exsHeightPx": 11825,
+   "viewportH": 844,
+   "viewportW": 390
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "straightSets": 13,
+   "stagedEffortsInFinalBlocks": 7,
+   "loadedStretches": 8,
+   "sessionInputRows": 85,
+   "exsHeightPx": 12734,
+   "viewportH": 844,
+   "viewportW": 390
+  },
+  {
+   "tpl": "b",
+   "cycle": 1,
+   "straightSets": 13,
+   "stagedEffortsInFinalBlocks": 7,
+   "loadedStretches": 8,
+   "sessionInputRows": 85,
+   "exsHeightPx": 12734,
+   "viewportH": 844,
+   "viewportW": 390
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "straightSets": 15,
+   "stagedEffortsInFinalBlocks": 0,
+   "loadedStretches": 8,
+   "sessionInputRows": 77,
+   "exsHeightPx": 11565,
+   "viewportH": 844,
+   "viewportW": 390
+  },
+  {
+   "tpl": "bu",
+   "cycle": 0,
+   "straightSets": 17,
+   "stagedEffortsInFinalBlocks": 32,
+   "loadedStretches": 9,
+   "sessionInputRows": 146,
+   "exsHeightPx": 19424,
+   "viewportH": 844,
+   "viewportW": 390
+  },
+  {
+   "tpl": "bl",
+   "cycle": 0,
+   "straightSets": 19,
+   "stagedEffortsInFinalBlocks": 18,
+   "loadedStretches": 7,
+   "sessionInputRows": 117,
+   "exsHeightPx": 14964,
+   "viewportH": 844,
+   "viewportW": 390
+  }
+ ],
+ "P5_schedule_negotiator": {
+  "default_sun90_mon40_tue90_wed10_thu30_fri10_sat40": [
+   "ANCHOR • GIANT A → Sun (90 min available)",
+   "ANCHOR • GIANT B → Tue (90 min available)",
+   "PRIORITY • ZONE 2 + ABS → Mon (40 min available)",
+   "PRIORITY • INTERVALS + ABS → Sat (40 min available)",
+   "OPTIONAL • ATHLETIC → Thu (30 min available)"
+  ],
+  "all_days_60": [
+   "ANCHOR • GIANT A → Sun (60 min available)",
+   "ANCHOR • GIANT B → Tue (60 min available)",
+   "PRIORITY • ZONE 2 + ABS → Mon (60 min available)",
+   "PRIORITY • INTERVALS + ABS → Sat (60 min available)",
+   "OPTIONAL • ATHLETIC → Thu (60 min available)"
+  ],
+  "only_sun_mon_available_90": [
+   "ANCHOR • GIANT A → Sun (90 min available)",
+   "ANCHOR • GIANT B → Mon (90 min available)",
+   "PRIORITY • ZONE 2 + ABS → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "PRIORITY • INTERVALS + ABS → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "OPTIONAL • ATHLETIC → NO CLEAN SLOT — use COMPACT/MED or skip optional work"
+  ],
+  "weekdays_only_45_no_weekend": [
+   "ANCHOR • GIANT A → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "ANCHOR • GIANT B → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "PRIORITY • ZONE 2 + ABS → Mon (45 min available)",
+   "PRIORITY • INTERVALS + ABS → Thu (45 min available)",
+   "OPTIONAL • ATHLETIC → Wed (45 min available)"
+  ],
+  "overtime_tue_wed_0_B_day_lost": [
+   "ANCHOR • GIANT A → Sun (90 min available)",
+   "ANCHOR • GIANT B → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "PRIORITY • ZONE 2 + ABS → Mon (40 min available)",
+   "PRIORITY • INTERVALS + ABS → Sat (40 min available)",
+   "OPTIONAL • ATHLETIC → Thu (30 min available)"
+  ],
+  "thirty_minutes_every_day": [
+   "ANCHOR • GIANT A → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "ANCHOR • GIANT B → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "PRIORITY • ZONE 2 + ABS → Mon (30 min available)",
+   "PRIORITY • INTERVALS + ABS → Sat (30 min available)",
+   "OPTIONAL • ATHLETIC → Thu (30 min available)"
+  ],
+  "weekend_only_120": [
+   "ANCHOR • GIANT A → Sun (120 min available)",
+   "ANCHOR • GIANT B → Sat (120 min available)",
+   "PRIORITY • ZONE 2 + ABS → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "PRIORITY • INTERVALS + ABS → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "OPTIONAL • ATHLETIC → NO CLEAN SLOT — use COMPACT/MED or skip optional work"
+  ],
+  "mon_tue_wed_90_rest_0": [
+   "ANCHOR • GIANT A → Mon (90 min available)",
+   "ANCHOR • GIANT B → Tue (90 min available)",
+   "PRIORITY • ZONE 2 + ABS → Wed (90 min available)",
+   "PRIORITY • INTERVALS + ABS → NO CLEAN SLOT — use COMPACT/MED or skip optional work",
+   "OPTIONAL • ATHLETIC → NO CLEAN SLOT — use COMPACT/MED or skip optional work"
+  ]
+ },
+ "P6_adaptive": {
+  "a": {
+   "fullGym60": {
+    "compact": false,
+    "keep": [
+     "Primary press",
+     "Primary row",
+     "Knee-dominant lower body",
+     "Vertical pull"
+    ],
+    "trade": [],
+    "cut": []
+   },
+   "tenMinutes": {
+    "compact": true,
+    "keep": [
+     "Primary press",
+     "Primary row",
+     "Knee-dominant lower body",
+     "Vertical pull"
+    ],
+    "trade": [
+     "Treat this as a minimum-useful-session exposure. Do not create make-up debt."
+    ],
+    "cut": [
+     "Optional intensifier volume",
+     "Lower-priority accessories"
+    ]
+   },
+   "dumbbells40": {
+    "compact": true,
+    "keep": [
+     "Primary press",
+     "Primary row",
+     "Knee-dominant lower body",
+     "Vertical pull"
+    ],
+    "trade": [
+     "Use dumbbell/bodyweight equivalents where the exact programmed station is unavailable. Preserve the slot purpose, not the exercise name."
+    ],
+    "cut": [
+     "Optional intensifier volume",
+     "Lower-priority accessories"
+    ]
+   },
+   "lowerIntensity": {
+    "compact": true,
+    "keep": [
+     "Primary press",
+     "Primary row",
+     "Knee-dominant lower body",
+     "Vertical pull"
+    ],
+    "trade": [
+     "Keep movement patterns; use straight sets, ~2–3 RIR, and remove optional advanced methods."
+    ],
+    "cut": [
+     "Optional intensifier volume",
+     "Lower-priority accessories"
+    ]
+   }
+  },
+  "b": {
+   "fullGym60": {
+    "compact": false,
+    "keep": [
+     "Incline press",
+     "Vertical pull",
+     "Hip hinge",
+     "One arm priority"
+    ],
+    "trade": [],
+    "cut": []
+   },
+   "tenMinutes": {
+    "compact": true,
+    "keep": [
+     "Incline press",
+     "Vertical pull",
+     "Hip hinge",
+     "One arm priority"
+    ],
+    "trade": [
+     "Treat this as a minimum-useful-session exposure. Do not create make-up debt."
+    ],
+    "cut": [
+     "Optional Widowmaker",
+     "Extra isolation / intensifiers"
+    ]
+   },
+   "dumbbells40": {
+    "compact": true,
+    "keep": [
+     "Incline press",
+     "Vertical pull",
+     "Hip hinge",
+     "One arm priority"
+    ],
+    "trade": [
+     "Use dumbbell/bodyweight equivalents where the exact programmed station is unavailable. Preserve the slot purpose, not the exercise name."
+    ],
+    "cut": [
+     "Optional Widowmaker",
+     "Extra isolation / intensifiers"
+    ]
+   },
+   "lowerIntensity": {
+    "compact": true,
+    "keep": [
+     "Incline press",
+     "Vertical pull",
+     "Hip hinge",
+     "One arm priority"
+    ],
+    "trade": [
+     "Keep movement patterns; use straight sets, ~2–3 RIR, and remove optional advanced methods."
+    ],
+    "cut": [
+     "Optional Widowmaker",
+     "Extra isolation / intensifiers"
+    ]
+   }
+  },
+  "conditioning": {
+   "fullGym60": {
+    "compact": false,
+    "keep": [
+     "Programmed engine work"
+    ],
+    "trade": [],
+    "cut": []
+   },
+   "tenMinutes": {
+    "compact": true,
+    "keep": [
+     "Minimum engine dose"
+    ],
+    "trade": [
+     "Treat this as a minimum-useful-session exposure. Do not create make-up debt."
+    ],
+    "cut": [
+     "Nonessential accessory work"
+    ]
+   },
+   "dumbbells40": {
+    "compact": true,
+    "keep": [
+     "Programmed engine work"
+    ],
+    "trade": [
+     "Use dumbbell/bodyweight equivalents where the exact programmed station is unavailable. Preserve the slot purpose, not the exercise name."
+    ],
+    "cut": []
+   },
+   "lowerIntensity": {
+    "compact": true,
+    "keep": [
+     "Programmed engine work"
+    ],
+    "trade": [
+     "Keep movement patterns; use straight sets, ~2–3 RIR, and remove optional advanced methods."
+    ],
+    "cut": []
+   }
+  },
+  "athletic": {
+   "fullGym60": {
+    "compact": false,
+    "keep": [
+     "Highest-quality speed / power exposure"
+    ],
+    "trade": [],
+    "cut": [
+     "Fatigue work that lowers movement quality"
+    ]
+   },
+   "tenMinutes": {
+    "compact": true,
+    "keep": [
+     "Highest-quality speed / power exposure"
+    ],
+    "trade": [
+     "Treat this as a minimum-useful-session exposure. Do not create make-up debt."
+    ],
+    "cut": [
+     "Fatigue work that lowers movement quality"
+    ]
+   },
+   "dumbbells40": {
+    "compact": true,
+    "keep": [
+     "Highest-quality speed / power exposure"
+    ],
+    "trade": [
+     "Use dumbbell/bodyweight equivalents where the exact programmed station is unavailable. Preserve the slot purpose, not the exercise name."
+    ],
+    "cut": [
+     "Fatigue work that lowers movement quality"
+    ]
+   },
+   "lowerIntensity": {
+    "compact": true,
+    "keep": [
+     "Highest-quality speed / power exposure"
+    ],
+    "trade": [
+     "Keep movement patterns; use straight sets, ~2–3 RIR, and remove optional advanced methods."
+    ],
+    "cut": [
+     "Fatigue work that lowers movement quality"
+    ]
+   }
+  },
+  "mobility": {
+   "fullGym60": {
+    "compact": false,
+    "keep": [
+     "Mobility floor"
+    ],
+    "trade": [],
+    "cut": []
+   },
+   "tenMinutes": {
+    "compact": true,
+    "keep": [
+     "Mobility floor"
+    ],
+    "trade": [
+     "Treat this as a minimum-useful-session exposure. Do not create make-up debt."
+    ],
+    "cut": []
+   },
+   "dumbbells40": {
+    "compact": true,
+    "keep": [
+     "Mobility floor"
+    ],
+    "trade": [
+     "Use dumbbell/bodyweight equivalents where the exact programmed station is unavailable. Preserve the slot purpose, not the exercise name."
+    ],
+    "cut": []
+   },
+   "lowerIntensity": {
+    "compact": true,
+    "keep": [
+     "Mobility floor"
+    ],
+    "trade": [
+     "Keep movement patterns; use straight sets, ~2–3 RIR, and remove optional advanced methods."
+    ],
+    "cut": []
+   }
+  }
+ },
+ "P6b_lower_intensity_effect": {
+  "adaptiveIntensityStored": "lower",
+  "renderedDiffers": true,
+  "compactFlag": true,
+  "rirPlaceholdersAfter": [
+   "lb",
+   "4–8",
+   "1–2",
+   "lb",
+   "4–8",
+   "1–2",
+   "lb",
+   "lb",
+   "6–10",
+   "1–2",
+   "e.g. 2+2+2",
+   "lb"
+  ]
+ },
+ "P7_giantA_mobile_metrics": {
+  "innerWidth": 390,
+  "innerHeight": 844,
+  "exsScrollHeight": 11825,
+  "screensOfScrolling": 14,
+  "inputs": 86,
+  "buttons": 50,
+  "selects": 14
+ },
+ "P7b_conditioning_session": {
+  "conditioningCards": [
+   "Zone 2",
+   "Intervals"
+  ],
+  "hasHRorRPEorCadenceTargets": true
+ },
+ "P8_schedule_and_weekmode": {
+  "schedule": {
+   "0": [
+    "a",
+    "GIANT A",
+    "Strength-biased hypertrophy"
+   ],
+   "1": [
+    "conditioning",
+    "ZONE 2 + ABS A",
+    "Engine / recovery"
+   ],
+   "2": [
+    "b",
+    "GIANT B",
+    "Hypertrophy-biased strength"
+   ],
+   "3": [
+    "mobility",
+    "RECOVERY + MOBILITY",
+    "Restore"
+   ],
+   "4": [
+    "athletic",
+    "ATHLETIC / SPEED + POWER",
+    "Optional capability"
+   ],
+   "5": [
+    "mobility",
+    "RECOVERY + MOBILITY",
+    "Restore"
+   ],
+   "6": [
+    "conditioning",
+    "INTERVALS + ABS B",
+    "Engine"
+   ]
+  },
+  "coreDaysBlock1": [
+   "a",
+   "b"
+  ],
+  "weekModeEffectOnSlots": {
+   "busy": "2,2,2,2,2,2,2",
+   "normal": "2,2,2,2,2,2,2",
+   "extra": "2,2,2,2,2,2,2"
+  }
+ }
+}

@@ -1,0 +1,265 @@
+{
+ "conditioning": [
+  {
+   "n": "Zone 2",
+   "detail": "25–40 min • conversational pace",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Intervals",
+   "detail": "15–20 sec hard • then recover",
+   "sets": 6,
+   "rest": 90
+  }
+ ],
+ "athletic": [
+  {
+   "n": "Knee-to-wall",
+   "detail": "8/side",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Calf raises",
+   "detail": "12 reps",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "90/90 switches",
+   "detail": "6/side",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Fast march",
+   "detail": "20 sec",
+   "sets": 2,
+   "rest": 30
+  },
+  {
+   "n": "Snapdown",
+   "detail": "3 reps",
+   "sets": 2,
+   "rest": 45
+  },
+  {
+   "n": "Pogos",
+   "detail": "10 sec",
+   "sets": 2,
+   "rest": 45
+  },
+  {
+   "n": "10m acceleration",
+   "detail": "10 m",
+   "sets": 3,
+   "rest": 90
+  },
+  {
+   "n": "15–20m acceleration",
+   "detail": "15–20 m",
+   "sets": 2,
+   "rest": 120
+  },
+  {
+   "n": "Countermovement jump",
+   "detail": "3 reps",
+   "sets": 3,
+   "rest": 90
+  },
+  {
+   "n": "Skater → stick",
+   "detail": "3/side",
+   "sets": 2,
+   "rest": 60
+  },
+  {
+   "n": "Dead hang",
+   "detail": "20–40 sec",
+   "sets": 2,
+   "rest": 60
+  },
+  {
+   "n": "Scapular pull-up",
+   "detail": "5–8 reps",
+   "sets": 2,
+   "rest": 60
+  }
+ ],
+ "mobility": [],
+ "bodycontrol": [
+  {
+   "n": "Warm up",
+   "detail": "3–5 min easy movement, wrist circles, wall slides and easy versions of today’s movements.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Pull-up / assisted pull-up",
+   "detail": "2 × 5–8 controlled reps; choose assistance that leaves 2–3 reps in reserve.",
+   "sets": 2,
+   "rest": 120
+  },
+  {
+   "n": "Push-up / incline push-up",
+   "detail": "2 × 6–12; adjust hand elevation for controlled reps with 2–3 in reserve.",
+   "sets": 2,
+   "rest": 90
+  },
+  {
+   "n": "Hanging knee raise / reverse crunch",
+   "detail": "2 × 6–10, no swinging.",
+   "sets": 2,
+   "rest": 60
+  },
+  {
+   "n": "Bear crawl",
+   "detail": "2 × 15–20 sec of controlled movement.",
+   "sets": 2,
+   "rest": 60
+  },
+  {
+   "n": "Downshift",
+   "detail": "2–3 min easy walking and comfortable mobility.",
+   "sets": 1,
+   "rest": 0
+  }
+ ],
+ "athletepractice": [
+  {
+   "n": "Readiness + warmup",
+   "detail": "Use only running and jumping levels already tolerated. 5–8 min easy movement, ankle rocks, marching and gradual practice reps. If pain changes your movement, stop that drill.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Snapdown + stick",
+   "detail": "2 × 3 controlled landings.",
+   "sets": 2,
+   "rest": 60
+  },
+  {
+   "n": "Low pogo",
+   "detail": "2 × 10 sec, low amplitude; omit if not tolerated.",
+   "sets": 2,
+   "rest": 60
+  },
+  {
+   "n": "Acceleration practice",
+   "detail": "4 × 10 m at a familiar submaximal effort; walk back, then recover fully. This starting template is not a prescription for maximal sprinting.",
+   "sets": 4,
+   "rest": 120
+  },
+  {
+   "n": "Controlled countermovement jump",
+   "detail": "2 × 3 at a familiar effort; stick the landing. Stop if quality drops.",
+   "sets": 2,
+   "rest": 90
+  },
+  {
+   "n": "Review progression",
+   "detail": "At review, progress one element: quality, reps, distance or intensity. Do not increase everything together.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Downshift",
+   "detail": "3–5 min walk and easy calf/hip mobility.",
+   "sets": 1,
+   "rest": 0
+  }
+ ],
+ "combatintro": [
+  {
+   "n": "Choose the class",
+   "detail": "Book a beginner session with a qualified BJJ, boxing or Muay Thai coach. Start with one discipline.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Tell the coach your starting point",
+   "detail": "Discuss experience, limitations and the rest of your weekly training.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Complete the coached session",
+   "detail": "Follow the coach’s warmup, technical practice and level-appropriate partner work. This template does not prescribe sparring.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Recovery check",
+   "detail": "Assess how the class affects the next lifting session before adding another class.",
+   "sets": 1,
+   "rest": 0
+  }
+ ],
+ "waterpractice": [
+  {
+   "n": "Establish the starting level",
+   "detail": "Arrange an instructor assessment; use an appropriate supervised setting.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Practice assigned skills",
+   "detail": "Follow the instructor’s plan for breathing, floating, stroke technique and safe entry/exit. No solo underwater or breath-hold drills.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Review competence",
+   "detail": "Let demonstrated skill determine distance and difficulty, not a preset calendar.",
+   "sets": 1,
+   "rest": 0
+  }
+ ],
+ "carrypractice": [
+  {
+   "n": "Warmup",
+   "detail": "5 min easy walking, comfortable shoulder and hip movement, then one light carry.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Farmer carry",
+   "detail": "3 × 20–30 m at a manageable load; stop before posture or grip breaks.",
+   "sets": 3,
+   "rest": 90
+  },
+  {
+   "n": "Easy walk",
+   "detail": "10–15 min at a conversational pace. Keep this unweighted initially; loaded hiking is a separate progression.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Downshift",
+   "detail": "2–3 min easy movement. Review grip, feet and recovery before progressing.",
+   "sets": 1,
+   "rest": 0
+  }
+ ],
+ "practicalskills": [
+  {
+   "n": "Choose one skill",
+   "detail": "CPR/AED, first aid, bleeding-control training or navigation.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Attend recognized instruction",
+   "detail": "Use the provider’s curriculum and practical assessment.",
+   "sets": 1,
+   "rest": 0
+  },
+  {
+   "n": "Keep it current",
+   "detail": "Retain your course record and renewal date outside the workout history.",
+   "sets": 1,
+   "rest": 0
+  }
+ ]
+}

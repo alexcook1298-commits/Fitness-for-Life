@@ -1,0 +1,80 @@
+{
+ "c": {
+  "minutes": "35–50",
+  "max": 50,
+  "fatigue": "Moderate–high",
+  "target": "Press, pull, legs and carries"
+ },
+ "b3c": {
+  "minutes": "30–45",
+  "max": 45,
+  "fatigue": "Moderate",
+  "target": "Press, pull and carries"
+ },
+ "bonusarms": {
+  "minutes": "20–30",
+  "max": 30,
+  "fatigue": "Moderate",
+  "target": "Biceps, triceps and rear delts"
+ },
+ "bonusback": {
+  "minutes": "15–25",
+  "max": 25,
+  "fatigue": "Moderate",
+  "target": "Upper back and side delts"
+ },
+ "bodycontrol": {
+  "minutes": "20–30",
+  "max": 30,
+  "fatigue": "Moderate",
+  "target": "Pulling, pushing and trunk control"
+ },
+ "athletepractice": {
+  "minutes": "20–30",
+  "max": 30,
+  "fatigue": "Moderate",
+  "target": "Legs, acceleration and landing skill"
+ },
+ "athletic": {
+  "minutes": "30–45",
+  "max": 45,
+  "fatigue": "Moderate–high",
+  "target": "Legs and athletic movement"
+ },
+ "conditioning": {
+  "minutes": "20–35",
+  "max": 35,
+  "fatigue": "Variable by effort",
+  "target": "Aerobic conditioning; legs"
+ },
+ "mobility": {
+  "minutes": "5–30",
+  "max": 5,
+  "fatigue": "Low",
+  "target": "Whole-body mobility"
+ },
+ "combatintro": {
+  "minutes": "45–75",
+  "max": 75,
+  "fatigue": "Variable by class",
+  "target": "Whole-body coached skill"
+ },
+ "waterpractice": {
+  "minutes": "30–60",
+  "max": 60,
+  "fatigue": "Variable by lesson",
+  "target": "Water skills and whole-body coordination"
+ },
+ "carrypractice": {
+  "minutes": "20–30",
+  "max": 30,
+  "fatigue": "Moderate",
+  "target": "Grip, trunk and loaded walking"
+ },
+ "practicalskills": {
+  "minutes": "Provider schedule",
+  "max": 999,
+  "fatigue": "Low physical / course dependent",
+  "target": "Practical knowledge and skill"
+ }
+}

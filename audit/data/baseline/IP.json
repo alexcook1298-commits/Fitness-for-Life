@@ -1,0 +1,47 @@
+{
+ "Straight Sets": {
+  "scheme": "Use the programmed sets × reps",
+  "rest": null,
+  "compare": "Baseline • easiest to compare session-to-session"
+ },
+ "Rest-Pause": {
+  "scheme": "Hard set in target range → 15–30 sec → extra reps → 15–30 sec → extra reps",
+  "rest": 20,
+  "compare": "More reps with the same load in less time • moderate-high fatigue"
+ },
+ "DC Rest-Pause": {
+  "scheme": "8–12 near failure → 10–15 deep breaths → 3–5 → breaths → 1–3",
+  "rest": 25,
+  "compare": "Very dense effort • aggressive fatigue • compare total RP reps"
+ },
+ "Myo-Reps": {
+  "scheme": "Activation 12–20 @ ~1–2 RIR → 10–20 sec → mini-sets of ~4 reps until quality drops",
+  "rest": 15,
+  "compare": "High effective-rep density • compare activation + mini-set total"
+ },
+ "FST-7": {
+  "scheme": "7 sets × 8–12 reps",
+  "rest": 40,
+  "compare": "Pump/density method • compare load + completed reps across all 7"
+ },
+ "Widowmaker": {
+  "scheme": "1 continuous set × 15–25 reps (classic target ~20)",
+  "rest": 180,
+  "compare": "Single high-rep continuous effort • compare load × reps"
+ },
+ "BFR": {
+  "scheme": "Light load • 30 reps, then 3 × 15 with short rests",
+  "rest": 30,
+  "compare": "Low-load metabolic work • do not compare load directly with straight sets"
+ },
+ "Lengthened Partials": {
+  "scheme": "Full-ROM reps near the target effort → 2–5 controlled partials in the lengthened range",
+  "rest": 60,
+  "compare": "Compare full-ROM reps and partials separately; do not call partials full reps"
+ },
+ "Mechanical Drop Set": {
+  "scheme": "Hard set → easier leverage/variation → optional final easier leverage, with minimal transition time",
+  "rest": 20,
+  "compare": "Compare the same mechanical sequence; do not treat stages as one continuous exercise record"
+ }
+}

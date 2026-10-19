@@ -1,0 +1,1802 @@
+[
+ {
+  "name": "Bench Press (BB)",
+  "muscle": "Chest",
+  "equip": "BB",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Reverse-Grip Bench Press (BB)",
+  "muscle": "Chest",
+  "equip": "BB",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Incline Press (DB)",
+  "muscle": "Chest",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Incline Press (BB)",
+  "muscle": "Chest",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Incline Press (Machine)",
+  "muscle": "Chest",
+  "equip": "Machine",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Chest Press (Machine)",
+  "muscle": "Chest",
+  "equip": "Machine",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Fly",
+  "muscle": "Chest",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Pec Deck",
+  "muscle": "Chest",
+  "equip": "Machine",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Push-Up",
+  "muscle": "Chest",
+  "equip": "Bodyweight",
+  "rest": 75,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Chest-Supported Row (DB)",
+  "muscle": "Back",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Chest-Supported Row (Machine)",
+  "muscle": "Back",
+  "equip": "Machine",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Cable Row",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Barbell Row (BB)",
+  "muscle": "Back",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lat Pulldown",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Pull-Up",
+  "muscle": "Back",
+  "equip": "Bodyweight",
+  "rest": 150,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Assisted Pull-Up",
+  "muscle": "Back",
+  "equip": "Assisted",
+  "rest": 120,
+  "inc": 5,
+  "type": "effective-load"
+ },
+ {
+  "name": "Weighted Pull-Up",
+  "muscle": "Back",
+  "equip": "Weighted BW",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Straight-Arm Pulldown",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Overhead Press (BB)",
+  "muscle": "Shoulders",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Overhead Press (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Shoulder Press (Machine)",
+  "muscle": "Shoulders",
+  "equip": "Machine",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lateral Raise (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lateral Raise (Cable)",
+  "muscle": "Shoulders",
+  "equip": "Cable",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lateral Raise (Machine)",
+  "muscle": "Shoulders",
+  "equip": "Machine",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Rear-Delt Fly (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Reverse Pec Deck",
+  "muscle": "Shoulders",
+  "equip": "Machine",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Face Pull",
+  "muscle": "Shoulders",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Biceps Curl (DB)",
+  "muscle": "Biceps",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Biceps Curl (BB)",
+  "muscle": "Biceps",
+  "equip": "BB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Curl",
+  "muscle": "Biceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Incline Curl (DB)",
+  "muscle": "Biceps",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Hammer Curl (DB)",
+  "muscle": "Biceps",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Preacher Curl",
+  "muscle": "Biceps",
+  "equip": "Machine/Curl Bar",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Triceps Pressdown",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Triceps Extension",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Overhead Triceps Extension (DB)",
+  "muscle": "Triceps",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Overhead Cable Triceps Extension",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Skull Crusher",
+  "muscle": "Triceps",
+  "equip": "Curl Bar/BB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Hammer Squat Press",
+  "muscle": "Quads",
+  "equip": "Machine",
+  "rest": 210,
+  "inc": 10,
+  "type": "load"
+ },
+ {
+  "name": "Leg Press",
+  "muscle": "Quads",
+  "equip": "Machine",
+  "rest": 210,
+  "inc": 10,
+  "type": "load"
+ },
+ {
+  "name": "Hack Squat",
+  "muscle": "Quads",
+  "equip": "Machine",
+  "rest": 210,
+  "inc": 10,
+  "type": "load"
+ },
+ {
+  "name": "Belt Squat",
+  "muscle": "Quads",
+  "equip": "Machine",
+  "rest": 180,
+  "inc": 10,
+  "type": "load"
+ },
+ {
+  "name": "Bulgarian Split Squat (DB)",
+  "muscle": "Quads",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Leg Extension",
+  "muscle": "Quads",
+  "equip": "Machine",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Romanian Deadlift (BB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Romanian Deadlift (DB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Leg Curl",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lying Leg Curl",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Hip Thrust (BB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Back Extension",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Bodyweight/Load",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Standing Calf Raise",
+  "muscle": "Calves",
+  "equip": "Machine",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Calf Raise",
+  "muscle": "Calves",
+  "equip": "Machine",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Leg Press Calf Raise",
+  "muscle": "Calves",
+  "equip": "Machine",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Ab Wheel Rollout",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 75,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Hanging Knee Raise",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Hanging Leg Raise",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 75,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Cable Crunch",
+  "muscle": "Core",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Reverse Crunch",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Side Plank",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Dead Bug",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 45,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Farmer Carry (DB)",
+  "muscle": "Grip / Forearms",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Dead Hang",
+  "muscle": "Grip / Forearms",
+  "equip": "Bodyweight",
+  "rest": 90,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Towel Hang",
+  "muscle": "Grip / Forearms",
+  "equip": "Bodyweight",
+  "rest": 90,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Wrist Curl (DB)",
+  "muscle": "Grip / Forearms",
+  "equip": "DB",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Reverse Curl",
+  "muscle": "Grip / Forearms",
+  "equip": "BB/Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Farmer Carry (DB)",
+  "muscle": "Full Body / Carry",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Bear Crawl",
+  "muscle": "Full Body / Carry",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "distance"
+ },
+ {
+  "name": "Sled Push",
+  "muscle": "Full Body / Carry",
+  "equip": "Sled",
+  "rest": 120,
+  "inc": 10,
+  "type": "load-distance"
+ },
+ {
+  "name": "Sled Drag",
+  "muscle": "Full Body / Carry",
+  "equip": "Sled",
+  "rest": 120,
+  "inc": 10,
+  "type": "load-distance"
+ },
+ {
+  "name": "Decline Press (BB)",
+  "muscle": "Chest",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Flat Press (DB)",
+  "muscle": "Chest",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Decline Press (DB)",
+  "muscle": "Chest",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Dips",
+  "muscle": "Chest",
+  "equip": "Bodyweight",
+  "rest": 150,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Weighted Dips",
+  "muscle": "Chest",
+  "equip": "Weighted BW",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Low-to-High Cable Fly",
+  "muscle": "Chest",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "High-to-Low Cable Fly",
+  "muscle": "Chest",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "T-Bar Row",
+  "muscle": "Back",
+  "equip": "Machine/BB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "One-Arm Row (DB)",
+  "muscle": "Back",
+  "equip": "DB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "One-Arm Cable Row",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Neutral-Grip Pulldown",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Underhand Pulldown",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Machine High Row",
+  "muscle": "Back",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Pullover",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Arnold Press (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Upright Row (Cable)",
+  "muscle": "Shoulders",
+  "equip": "Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Y-Raise (Cable)",
+  "muscle": "Shoulders",
+  "equip": "Cable",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Rear-Delt Cable Fly",
+  "muscle": "Shoulders",
+  "equip": "Cable",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "EZ-Bar Curl",
+  "muscle": "Biceps",
+  "equip": "Curl Bar",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Spider Curl",
+  "muscle": "Biceps",
+  "equip": "DB/Curl Bar",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Bayesian Cable Curl",
+  "muscle": "Biceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cross-Body Hammer Curl (DB)",
+  "muscle": "Biceps",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Close-Grip Bench Press (BB)",
+  "muscle": "Triceps",
+  "equip": "BB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "JM Press (BB)",
+  "muscle": "Triceps",
+  "equip": "BB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Single-Arm Pressdown",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cross-Body Cable Extension",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Front Squat (BB)",
+  "muscle": "Quads",
+  "equip": "BB",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "High-Bar Squat (BB)",
+  "muscle": "Quads",
+  "equip": "BB",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Goblet Squat (DB)",
+  "muscle": "Quads",
+  "equip": "DB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Walking Lunge (DB)",
+  "muscle": "Quads",
+  "equip": "DB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Step-Up (DB)",
+  "muscle": "Quads",
+  "equip": "DB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Sissy Squat",
+  "muscle": "Quads",
+  "equip": "Bodyweight/Load",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Good Morning (BB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Single-Leg RDL (DB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "DB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Glute Bridge (BB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "BB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Pull-Through",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Cable",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Nordic Curl",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Bodyweight",
+  "rest": 150,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Single-Leg Calf Raise",
+  "muscle": "Calves",
+  "equip": "Bodyweight/Load",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Donkey Calf Raise",
+  "muscle": "Calves",
+  "equip": "Machine/Load",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Tibialis Raise",
+  "muscle": "Calves",
+  "equip": "Bodyweight/Load",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Pallof Press",
+  "muscle": "Core",
+  "equip": "Cable",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Wood Chop",
+  "muscle": "Core",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Weighted Plank",
+  "muscle": "Core",
+  "equip": "Load",
+  "rest": 75,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Suitcase Carry",
+  "muscle": "Core",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Plate Pinch",
+  "muscle": "Grip / Forearms",
+  "equip": "Plate",
+  "rest": 75,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Hammer Lever",
+  "muscle": "Grip / Forearms",
+  "equip": "Load",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Wrist Roller",
+  "muscle": "Grip / Forearms",
+  "equip": "Load",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Fat-Grip Hold",
+  "muscle": "Grip / Forearms",
+  "equip": "Load",
+  "rest": 90,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Sandbag Carry",
+  "muscle": "Full Body / Carry",
+  "equip": "Sandbag",
+  "rest": 120,
+  "inc": 10,
+  "type": "load-distance"
+ },
+ {
+  "name": "Front-Rack Carry",
+  "muscle": "Full Body / Carry",
+  "equip": "DB/KB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Waiter Carry",
+  "muscle": "Full Body / Carry",
+  "equip": "DB/KB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Backward Sled Drag",
+  "muscle": "Full Body / Carry",
+  "equip": "Sled",
+  "rest": 120,
+  "inc": 10,
+  "type": "load-distance"
+ },
+ {
+  "name": "Paused Bench Press (BB)",
+  "muscle": "Chest",
+  "equip": "BB",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Spoto Press (BB)",
+  "muscle": "Chest",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Floor Press (BB)",
+  "muscle": "Chest",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Floor Press (DB)",
+  "muscle": "Chest",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Smith Machine Bench Press",
+  "muscle": "Chest",
+  "equip": "Smith",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Smith Machine Incline Press",
+  "muscle": "Chest",
+  "equip": "Smith",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Deficit Push-Up",
+  "muscle": "Chest",
+  "equip": "Bodyweight",
+  "rest": 75,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Ring Push-Up",
+  "muscle": "Chest",
+  "equip": "Rings",
+  "rest": 90,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Pendlay Row (BB)",
+  "muscle": "Back",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Meadows Row",
+  "muscle": "Back",
+  "equip": "Landmine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seal Row (BB)",
+  "muscle": "Back",
+  "equip": "BB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seal Row (DB)",
+  "muscle": "Back",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Wide-Grip Pulldown",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Single-Arm Pulldown",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Half-Kneeling Pulldown",
+  "muscle": "Back",
+  "equip": "Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Machine Pullover",
+  "muscle": "Back",
+  "equip": "Machine",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Inverted Row",
+  "muscle": "Back",
+  "equip": "Bodyweight",
+  "rest": 90,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Push Press (BB)",
+  "muscle": "Shoulders",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Z Press (BB)",
+  "muscle": "Shoulders",
+  "equip": "BB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Landmine Press",
+  "muscle": "Shoulders",
+  "equip": "Landmine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Single-Arm Cable Lateral Raise",
+  "muscle": "Shoulders",
+  "equip": "Cable",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lean-Away Cable Lateral Raise",
+  "muscle": "Shoulders",
+  "equip": "Cable",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lu Raise (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Rear-Delt Row",
+  "muscle": "Shoulders",
+  "equip": "DB/Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Alternating Curl (DB)",
+  "muscle": "Biceps",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Drag Curl (BB)",
+  "muscle": "Biceps",
+  "equip": "BB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Preacher Curl",
+  "muscle": "Biceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Machine Preacher Curl",
+  "muscle": "Biceps",
+  "equip": "Machine",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Reverse-Grip Cable Curl",
+  "muscle": "Biceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Rope Pressdown",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "V-Bar Pressdown",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "PJR Pullover (DB)",
+  "muscle": "Triceps",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Dip Machine",
+  "muscle": "Triceps",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Close-Grip Push-Up",
+  "muscle": "Triceps",
+  "equip": "Bodyweight",
+  "rest": 75,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Back Squat (BB)",
+  "muscle": "Quads",
+  "equip": "BB",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Safety-Bar Squat",
+  "muscle": "Quads",
+  "equip": "Safety Bar",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Smith Machine Squat",
+  "muscle": "Quads",
+  "equip": "Smith",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Pendulum Squat",
+  "muscle": "Quads",
+  "equip": "Machine",
+  "rest": 210,
+  "inc": 10,
+  "type": "load"
+ },
+ {
+  "name": "Reverse Lunge (DB)",
+  "muscle": "Quads",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Front-Foot-Elevated Split Squat",
+  "muscle": "Quads",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cyclist Squat",
+  "muscle": "Quads",
+  "equip": "DB/Plate",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Conventional Deadlift (BB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "BB",
+  "rest": 240,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Trap-Bar Deadlift",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Trap Bar",
+  "rest": 210,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Stiff-Leg Deadlift (BB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "45° Back Extension",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Bodyweight/Load",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Reverse Hyperextension",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Kickback",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Cable",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Glute-Ham Raise",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Bodyweight",
+  "rest": 150,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Frog Pump",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Bodyweight/Load",
+  "rest": 60,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Smith Machine Calf Raise",
+  "muscle": "Calves",
+  "equip": "Smith",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Standing Calf Raise (DB)",
+  "muscle": "Calves",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Tibialis Raise",
+  "muscle": "Calves",
+  "equip": "Bodyweight/Load",
+  "rest": 60,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Decline Sit-Up",
+  "muscle": "Core",
+  "equip": "Bodyweight/Load",
+  "rest": 75,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Weighted Decline Sit-Up",
+  "muscle": "Core",
+  "equip": "Plate/DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "GHD Sit-Up",
+  "muscle": "Core",
+  "equip": "GHD",
+  "rest": 90,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Toes-to-Bar",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 90,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Hollow-Body Hold",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Copenhagen Plank",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Landmine Rotation",
+  "muscle": "Core",
+  "equip": "Landmine",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Barbell Shrug",
+  "muscle": "Traps / Neck",
+  "equip": "BB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "DB Shrug",
+  "muscle": "Traps / Neck",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Machine Shrug",
+  "muscle": "Traps / Neck",
+  "equip": "Machine",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Neck Flexion",
+  "muscle": "Traps / Neck",
+  "equip": "Plate/Harness",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Neck Extension",
+  "muscle": "Traps / Neck",
+  "equip": "Plate/Harness",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cable Hip Abduction",
+  "muscle": "Hips / Adductors",
+  "equip": "Cable",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Hip Abduction Machine",
+  "muscle": "Hips / Adductors",
+  "equip": "Machine",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Hip Adduction Machine",
+  "muscle": "Hips / Adductors",
+  "equip": "Machine",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Cossack Squat",
+  "muscle": "Hips / Adductors",
+  "equip": "Bodyweight/Load",
+  "rest": 90,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Captains-of-Crush Gripper",
+  "muscle": "Grip / Forearms",
+  "equip": "Gripper",
+  "rest": 60,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Barbell Wrist Curl",
+  "muscle": "Grip / Forearms",
+  "equip": "BB",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Barbell Reverse Wrist Curl",
+  "muscle": "Grip / Forearms",
+  "equip": "BB",
+  "rest": 60,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Deadlift Hold (BB)",
+  "muscle": "Grip / Forearms",
+  "equip": "BB",
+  "rest": 120,
+  "inc": 5,
+  "type": "time"
+ },
+ {
+  "name": "Towel Pull-Up",
+  "muscle": "Grip / Forearms",
+  "equip": "Bodyweight",
+  "rest": 150,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Trap-Bar Carry",
+  "muscle": "Full Body / Carry",
+  "equip": "Trap Bar",
+  "rest": 120,
+  "inc": 10,
+  "type": "load-distance"
+ },
+ {
+  "name": "Zercher Carry",
+  "muscle": "Full Body / Carry",
+  "equip": "BB",
+  "rest": 120,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Bear-Hug Sandbag Carry",
+  "muscle": "Full Body / Carry",
+  "equip": "Sandbag",
+  "rest": 120,
+  "inc": 10,
+  "type": "load-distance"
+ },
+ {
+  "name": "Suitcase Carry (DB)",
+  "muscle": "Full Body / Carry",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Overhead Carry (DB)",
+  "muscle": "Full Body / Carry",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Chest-Supported T-Bar Row",
+  "muscle": "Back",
+  "equip": "Machine",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Horizontal Leg Press",
+  "muscle": "Quads",
+  "equip": "Machine",
+  "rest": 210,
+  "inc": 10,
+  "type": "load"
+ },
+ {
+  "name": "Standing Leg Curl (Machine)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Leg Curl (Single-Leg)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Lying Leg Curl (Single-Leg)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Machine",
+  "rest": 120,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Lateral Raise (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Neutral-Grip Pull-Up",
+  "muscle": "Back",
+  "equip": "Bodyweight",
+  "rest": 150,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Farmer Carry (KB)",
+  "muscle": "Grip / Forearms",
+  "equip": "KB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Farmer Carry (Handles)",
+  "muscle": "Grip / Forearms",
+  "equip": "Carry Handles",
+  "rest": 90,
+  "inc": 5,
+  "type": "load-distance"
+ },
+ {
+  "name": "Neutral-Grip Incline Press (DB)",
+  "muscle": "Chest",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Romanian Deadlift (Smith)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "Smith",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Romanian Deadlift (KB)",
+  "muscle": "Hamstrings / Glutes",
+  "equip": "KB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Chest-Supported Rear-Delt Fly (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Rear-Delt Fly (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 75,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Curl (DB)",
+  "muscle": "Biceps",
+  "equip": "DB",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Straight-Bar Pressdown",
+  "muscle": "Triceps",
+  "equip": "Cable",
+  "rest": 90,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Weighted Neutral-Grip Pull-Up",
+  "muscle": "Back",
+  "equip": "Weighted BW",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Weighted Chin-Up",
+  "muscle": "Back",
+  "equip": "Weighted BW",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Overhead Press (DB)",
+  "muscle": "Shoulders",
+  "equip": "DB",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Seated Overhead Press (BB)",
+  "muscle": "Shoulders",
+  "equip": "BB",
+  "rest": 180,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Smith Machine Shoulder Press",
+  "muscle": "Shoulders",
+  "equip": "Smith",
+  "rest": 150,
+  "inc": 5,
+  "type": "load"
+ },
+ {
+  "name": "Captain’s Chair Knee Raise",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Captain’s Chair Leg Raise",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 75,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Lying Reverse Crunch",
+  "muscle": "Core",
+  "equip": "Bodyweight",
+  "rest": 60,
+  "inc": 0,
+  "type": "reps"
+ },
+ {
+  "name": "Neutral-Grip Dead Hang",
+  "muscle": "Grip / Forearms",
+  "equip": "Bodyweight",
+  "rest": 90,
+  "inc": 0,
+  "type": "time"
+ },
+ {
+  "name": "Thick-Bar Dead Hang",
+  "muscle": "Grip / Forearms",
+  "equip": "Bodyweight",
+  "rest": 90,
+  "inc": 0,
+  "type": "time"
+ }
+]

@@ -1,0 +1,118 @@
+{
+ "a": [
+  "Giant A",
+  "FORCE • STRENGTH-BIASED HYPERTROPHY"
+ ],
+ "b": [
+  "Giant B",
+  "FULL-BODY HYPERTROPHY"
+ ],
+ "bu": [
+  "Giant B — Upper",
+  "EXTRA-TIME • UPPER HYPERTROPHY • INTENSIFIER-FORWARD"
+ ],
+ "bl": [
+  "Giant B — Lower",
+  "EXTRA-TIME • LOWER HYPERTROPHY • INTENSIFIER-FORWARD"
+ ],
+ "c": [
+  "Giant C",
+  "OPTIONAL • CAPABILITY"
+ ],
+ "conditioning": [
+  "Conditioning",
+  "ENGINE"
+ ],
+ "athletic": [
+  "Athletic",
+  "SPEED • POWER • CAPABILITY"
+ ],
+ "mobility": [
+  "Mobility",
+  "RESTORATION • FLEXIBILITY"
+ ],
+ "b2a": [
+  "Foundation Giant A",
+  "BLOCK 2 • CORE"
+ ],
+ "b2b": [
+  "Foundation Giant B",
+  "BLOCK 2 • CORE"
+ ],
+ "b3a": [
+  "Expansion A",
+  "BLOCK 3 • CORE"
+ ],
+ "b3b": [
+  "Expansion B",
+  "BLOCK 3 • CORE"
+ ],
+ "b3c": [
+  "Expansion C • Optional",
+  "BLOCK 3 • OPTIONAL"
+ ],
+ "b4a": [
+  "Athlete Strength A",
+  "BLOCK 4 • CORE"
+ ],
+ "b4b": [
+  "Athlete Strength B",
+  "BLOCK 4 • CORE"
+ ],
+ "b5a": [
+  "Combat Support A",
+  "BLOCK 5 • CORE"
+ ],
+ "b5b": [
+  "Combat Support B",
+  "BLOCK 5 • CORE"
+ ],
+ "b6a": [
+  "Capability Strength A",
+  "BLOCK 6 • CORE"
+ ],
+ "b6b": [
+  "Capability Strength B",
+  "BLOCK 6 • CORE"
+ ],
+ "b7a": [
+  "Giant Strength A",
+  "BLOCK 7 • CORE"
+ ],
+ "b7b": [
+  "Giant Strength B",
+  "BLOCK 7 • CORE"
+ ],
+ "bonusarms": [
+  "Arms + Rear Delts • Optional",
+  "BLOCK 0 • OPTIONAL"
+ ],
+ "bonusback": [
+  "Upper Back + Side Delts • Optional",
+  "BLOCK 0 • OPTIONAL"
+ ],
+ "bodycontrol": [
+  "Body Control",
+  "RELATIVE STRENGTH • 20–30 MIN"
+ ],
+ "athletepractice": [
+  "Athletic Development Practice",
+  "QUALITY BEFORE FATIGUE • 20–30 MIN"
+ ],
+ "combatintro": [
+  "Coached Combat Fundamentals",
+  "COACH-LED SKILL SESSION"
+ ],
+ "waterpractice": [
+  "Water Competence",
+  "INSTRUCTOR / LIFEGUARDED POOL"
+ ],
+ "carrypractice": [
+  "Loaded Movement Practice",
+  "CARRY + EASY WALK • 20–30 MIN"
+ ],
+ "practicalskills": [
+  "Practical Capability Training",
+  "CERTIFIED / INSTRUCTOR-LED"
+ ]
+}

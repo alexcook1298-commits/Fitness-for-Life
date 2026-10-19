@@ -1,0 +1,137 @@
+[
+ {
+  "id": 1,
+  "name": "Re-entry + Field Day",
+  "focus": "Rebuild consistency and movement tolerance.",
+  "days": [
+   "a",
+   "b",
+   "c",
+   "athletic",
+   "conditioning",
+   "mobility"
+  ],
+  "note": "Stay here as long as the goal remains useful. Review progress and recovery before advancing; no calendar automatically changes your block.",
+  "ready": "Review consistent training, recovery, and tolerance of running/landing before progressing. Do not use a date as proof of readiness.",
+  "keep": "Muscle, strength, aerobic work and mobility.",
+  "next": "Redirect event preparation toward lasting body control.",
+  "change": "Establish the starting baseline.",
+  "markers": "Repeat A/B with stable technique; record recovery and tolerated athletic practice."
+ },
+ {
+  "id": 2,
+  "name": "Foundation + Body Control",
+  "focus": "Develop relative strength alongside the lifting foundation.",
+  "days": [
+   "b2a",
+   "b2b",
+   "bodycontrol",
+   "conditioning",
+   "mobility"
+  ],
+  "note": "Stay here as long as the goal remains useful. Review progress and recovery before advancing; no calendar automatically changes your block.",
+  "ready": "Review A/B consistency, controlled bodyweight variations, recovery between sessions, and available time.",
+  "keep": "Giant lifting, conditioning, modest athletic exposure and mobility.",
+  "next": "Build the capacity to handle a deliberate increase in training opportunities.",
+  "change": "Body control becomes the supporting emphasis in place of event preparation.",
+  "markers": "Compare controlled pull-up/push-up variations and A/B performance at similar effort."
+ },
+ {
+  "id": 3,
+  "name": "Giant Expansion",
+  "focus": "Prioritize muscle development and address weak points.",
+  "days": [
+   "b3a",
+   "b3b",
+   "b3c",
+   "bodycontrol",
+   "conditioning",
+   "mobility"
+  ],
+  "note": "Stay here as long as the goal remains useful. Review progress and recovery before advancing; no calendar automatically changes your block.",
+  "ready": "Review whether the extra day is sustainable without declining main-lift performance or persistent fatigue.",
+  "keep": "Hypertrophy stays central; retain the engine, movement and relative strength.",
+  "next": "Support more purposeful speed, jumping and athletic development.",
+  "change": "Main sessions offer more volume; a third lifting day is an optional tool.",
+  "markers": "Look for repeatable rep/load progress without the optional day reducing A/B performance."
+ },
+ {
+  "id": 4,
+  "name": "Athlete Development",
+  "focus": "Develop acceleration, landing quality and body control.",
+  "days": [
+   "b4a",
+   "b4b",
+   "athletepractice",
+   "bodycontrol",
+   "conditioning",
+   "mobility"
+  ],
+  "note": "Stay here as long as the goal remains useful. Review progress and recovery before advancing; no calendar automatically changes your block.",
+  "ready": "Review repeatable controlled landings, tolerated running exposure, stable lifting performance and recovery. Faster or longer sprint work needs an individual progression.",
+  "keep": "At least the two core resistance sessions, aerobic work and mobility.",
+  "next": "Arrive at coached skill training with a more durable physical base.",
+  "change": "Athletic practice becomes the main supporting emphasis.",
+  "markers": "Track repeatable practice quality and coach feedback while maintaining lifting."
+ },
+ {
+  "id": 5,
+  "name": "Combat Foundations",
+  "focus": "Build a coached combat skill on the physical base.",
+  "days": [
+   "b5a",
+   "b5b",
+   "combatintro",
+   "conditioning",
+   "mobility"
+  ],
+  "note": "Stay here as long as the goal remains useful. Review progress and recovery before advancing; no calendar automatically changes your block.",
+  "ready": "Review coach feedback, class consistency, joint tolerance and recovery before adding more classes or another discipline.",
+  "keep": "Two resistance anchors and mobility; adjust accessory fatigue around classes.",
+  "next": "Combine skill with broader real-world physical capabilities.",
+  "change": "A beginner class replaces some accessory or conditioning time.",
+  "markers": "Review class attendance, coach feedback and recovery into your next lifting day."
+ },
+ {
+  "id": 6,
+  "name": "Broad Capability",
+  "focus": "Develop one additional practical capability at a time.",
+  "days": [
+   "b6a",
+   "b6b",
+   "combatintro",
+   "waterpractice",
+   "carrypractice",
+   "practicalskills",
+   "mobility"
+  ],
+  "note": "Stay here as long as the goal remains useful. Review progress and recovery before advancing; no calendar automatically changes your block.",
+  "ready": "Review coached competency, sustained training consistency and the ability to add a skill without losing the established base.",
+  "keep": "Muscle, strength, coached skills, aerobic work and small athletic exposures.",
+  "next": "Identify the weakest useful capability for the next specialization.",
+  "change": "Select supervised water skills, loaded movement or practical instruction.",
+  "markers": "Record demonstrated competency and whether your established training remains sustainable."
+ },
+ {
+  "id": 7,
+  "name": "Lifelong Giant",
+  "focus": "Maintain strengths while developing the weakest useful capability.",
+  "days": [
+   "b7a",
+   "b7b",
+   "athletepractice",
+   "bodycontrol",
+   "combatintro",
+   "waterpractice",
+   "carrypractice",
+   "conditioning",
+   "mobility"
+  ],
+  "note": "Stay here as long as the goal remains useful. Review progress and recovery before advancing; no calendar automatically changes your block.",
+  "ready": "There is no graduation date. Review progress, enjoyment, recovery and real-life demands; select the next emphasis deliberately.",
+  "keep": "The qualities you have earned, with ongoing muscle and strength development.",
+  "next": "Repeat the cycle: raise the weakest stat and maintain your strengths.",
+  "change": "Choose a focused emphasis at each review and revisit earlier phases as needed.",
+  "markers": "Compare progress in that emphasis, maintained strengths and fit with everyday life."
+ }
+]

@@ -1,0 +1,177 @@
+{
+ "Horizontal Press": [
+  "Flat chest press",
+  "Bench Press (BB)",
+  "Flat Press (DB)",
+  "Chest Press (Machine)",
+  "Smith Machine Bench Press",
+  "Paused Bench Press (BB)"
+ ],
+ "Horizontal Row": [
+  "Supported horizontal row",
+  "Chest-Supported Row (DB)",
+  "Chest-Supported Row (Machine)",
+  "Seated Cable Row",
+  "Seal Row (DB)",
+  "Seal Row (BB)",
+  "Chest-Supported T-Bar Row"
+ ],
+ "Squat Press": [
+  "Bilateral squat / leg press",
+  "Hammer Squat Press",
+  "Leg Press",
+  "Hack Squat",
+  "Pendulum Squat",
+  "Horizontal Leg Press"
+ ],
+ "Leg Curl": [
+  "Hamstring knee flexion",
+  "Seated Leg Curl",
+  "Lying Leg Curl",
+  "Standing Leg Curl (Machine)",
+  "Seated Leg Curl (Single-Leg)",
+  "Lying Leg Curl (Single-Leg)"
+ ],
+ "Lateral Raise": [
+  "Side-delt shoulder abduction",
+  "Lateral Raise (Cable)",
+  "Lateral Raise (Machine)",
+  "Lateral Raise (DB)",
+  "Single-Arm Cable Lateral Raise",
+  "Lean-Away Cable Lateral Raise",
+  "Seated Lateral Raise (DB)"
+ ],
+ "Vertical Pull": [
+  "Overhead vertical pull",
+  "Pull-Up",
+  "Lat Pulldown",
+  "Assisted Pull-Up",
+  "Neutral-Grip Pulldown",
+  "Wide-Grip Pulldown",
+  "Neutral-Grip Pull-Up"
+ ],
+ "Loaded Carry": [
+  "Bilateral farmer carry",
+  "Farmer Carry (DB)",
+  "Farmer Carry (KB)",
+  "Trap-Bar Carry",
+  "Farmer Carry (Handles)"
+ ],
+ "Incline Press": [
+  "Incline chest press",
+  "Incline Press (DB)",
+  "Incline Press (Machine)",
+  "Incline Press (BB)",
+  "Smith Machine Incline Press",
+  "Neutral-Grip Incline Press (DB)"
+ ],
+ "Hip Hinge": [
+  "Bilateral Romanian deadlift",
+  "Romanian Deadlift (BB)",
+  "Romanian Deadlift (DB)",
+  "Romanian Deadlift (Smith)",
+  "Romanian Deadlift (KB)"
+ ],
+ "Rear Delts": [
+  "Rear-delt horizontal abduction",
+  "Rear-Delt Fly (DB)",
+  "Reverse Pec Deck",
+  "Rear-Delt Cable Fly",
+  "Chest-Supported Rear-Delt Fly (DB)",
+  "Seated Rear-Delt Fly (DB)"
+ ],
+ "Biceps": [
+  "Supinated elbow curl",
+  "Biceps Curl (DB)",
+  "Biceps Curl (BB)",
+  "Cable Curl",
+  "EZ-Bar Curl",
+  "Alternating Curl (DB)",
+  "Seated Curl (DB)"
+ ],
+ "Triceps": [
+  "Arm-at-side triceps extension",
+  "Triceps Pressdown",
+  "Rope Pressdown",
+  "V-Bar Pressdown",
+  "Single-Arm Pressdown",
+  "Straight-Bar Pressdown"
+ ],
+ "Widowmaker": [
+  "Bilateral machine squat / press",
+  "Leg Press",
+  "Belt Squat",
+  "Hack Squat",
+  "Horizontal Leg Press"
+ ],
+ "Calves": [
+  "Calf plantar flexion",
+  "Standing Calf Raise",
+  "Leg Press Calf Raise",
+  "Smith Machine Calf Raise",
+  "Standing Calf Raise (DB)",
+  "Donkey Calf Raise"
+ ],
+ "Weighted Vertical Pull": [
+  "Weighted vertical pull",
+  "Weighted Pull-Up",
+  "Weighted Neutral-Grip Pull-Up",
+  "Weighted Chin-Up"
+ ],
+ "Overhead Press": [
+  "Strict overhead press",
+  "Overhead Press (DB)",
+  "Overhead Press (BB)",
+  "Shoulder Press (Machine)",
+  "Seated Overhead Press (DB)",
+  "Seated Overhead Press (BB)",
+  "Smith Machine Shoulder Press"
+ ],
+ "Core": [
+  "Knee / leg raise with pelvic curl",
+  "Hanging Knee Raise",
+  "Hanging Leg Raise",
+  "Captain’s Chair Knee Raise",
+  "Captain’s Chair Leg Raise",
+  "Lying Reverse Crunch"
+ ],
+ "Grip Hang": [
+  "Two-arm overhead grip hang",
+  "Dead Hang",
+  "Towel Hang",
+  "Neutral-Grip Dead Hang",
+  "Thick-Bar Dead Hang"
+ ],
+ "Chest Isolation": [
+  "Chest isolation / adduction",
+  "Cable Fly",
+  "Pec Deck",
+  "Low-to-High Cable Fly",
+  "High-to-Low Cable Fly"
+ ],
+ "Lat Isolation": [
+  "Straight-arm lat isolation",
+  "Straight-Arm Pulldown",
+  "Cable Pullover",
+  "Machine Pullover"
+ ],
+ "Quad Press": [
+  "High-rep bilateral leg press",
+  "Leg Press",
+  "Horizontal Leg Press"
+ ],
+ "Unilateral Quads": [
+  "Single-leg knee-dominant work",
+  "Bulgarian Split Squat (DB)",
+  "Front-Foot-Elevated Split Squat",
+  "Reverse Lunge (DB)"
+ ],
+ "Leg Extension": [
+  "Knee-extension isolation",
+  "Leg Extension"
+ ],
+ "Adductors": [
+  "Hip adduction isolation",
+  "Hip Adduction Machine"
+ ]
+}
