@@ -1,6 +1,6 @@
 {
  "app": "/workspace/integration/app",
- "date": "2026-10-19T20:06:03.839Z",
+ "date": "2026-10-19T20:25:44.595Z",
  "passed": 53,
  "failed": 0,
  "results": [
@@ -10,7 +10,7 @@
    "title": "Parity: with only pre-change history (no rotation snapshots) the next group equals the legacy counter for 0-8 completed Giant B, and drafts and other templates are ignored exactly as before",
    "pass": true,
    "error": null,
-   "ms": 601
+   "ms": 603
   },
   {
    "id": "RT2",
@@ -18,7 +18,7 @@
    "title": "Starting Giant B writes an additive rotation snapshot (group, slots, presented methods); other templates get none; the snapshot equals what is displayed",
    "pass": true,
    "error": null,
-   "ms": 430
+   "ms": 424
   },
   {
    "id": "RT3",
@@ -26,7 +26,7 @@
    "title": "A Giant B whose presented intensifiers were performed credits its group: the groups then rotate 0,1,2,0,1,2 exactly as before for an athlete who performs them",
    "pass": true,
    "error": null,
-   "ms": 1337
+   "ms": 1265
   },
   {
    "id": "RT4",
@@ -34,7 +34,7 @@
    "title": "A finished Giant B in which the presented intensifier was SKIPPED (straight work only) earns no credit: the same group is offered at the next Giant B, and the finished session still counts as a session",
    "pass": true,
    "error": null,
-   "ms": 426
+   "ms": 358
   },
   {
    "id": "RT5",
@@ -42,7 +42,7 @@
    "title": "A partially done intensifier earns nothing: Myo-Reps with one effort cannot be saved, and a session that finishes after that attempt does not credit the group",
    "pass": true,
    "error": null,
-   "ms": 424
+   "ms": 291
   },
   {
    "id": "RT6",
@@ -50,7 +50,7 @@
    "title": "Credit policy \"any\": if a group presents two intensifier slots and only one is performed, the group is credited (the other method waits for the group to come round again)",
    "pass": true,
    "error": null,
-   "ms": 301
+   "ms": 339
   },
   {
    "id": "RT7",
@@ -58,7 +58,7 @@
    "title": "Interrupted then resumed: a draft that performed the intensifier is credited ONCE; resuming (even after a reload) shows the same methods, and finishing does not credit again",
    "pass": true,
    "error": null,
-   "ms": 566
+   "ms": 592
   },
   {
    "id": "RT8",
@@ -66,7 +66,7 @@
    "title": "Interrupted before any intensifier: no credit, no lapse count; resuming keeps the same snapshot",
    "pass": true,
    "error": null,
-   "ms": 443
+   "ms": 502
   },
   {
    "id": "RT9",
@@ -74,7 +74,7 @@
    "title": "No duplicate credit: duplicated session objects and duplicated records (as from a merged restore) credit a group once",
    "pass": true,
    "error": null,
-   "ms": 359
+   "ms": 324
   },
   {
    "id": "RT10",
@@ -82,7 +82,7 @@
    "title": "Lapse (decision R4 = 2): a group that two consecutive finished sessions presented but nobody performed is moved back, so rotation can never be blocked and the same method is not offered forever",
    "pass": true,
    "error": null,
-   "ms": 536
+   "ms": 428
   },
   {
    "id": "RT11",
@@ -90,7 +90,7 @@
    "title": "Busy week and COMPACT hide or suppress the intensifier: the session finishes and counts, but the group is not credited",
    "pass": true,
    "error": null,
-   "ms": 348
+   "ms": 328
   },
   {
    "id": "RT12",
@@ -98,7 +98,7 @@
    "title": "Other templates never move the Giant B rotation, even when they perform intensifiers (Giant B Upper/Lower, Giant A)",
    "pass": true,
    "error": null,
-   "ms": 197
+   "ms": 185
   },
   {
    "id": "RT13",
@@ -106,7 +106,7 @@
    "title": "A manual intensifier on a slot OUTSIDE the presented group does not credit any group",
    "pass": true,
    "error": null,
-   "ms": 273
+   "ms": 339
   },
   {
    "id": "RT14",
@@ -114,7 +114,7 @@
    "title": "Legacy history then new sessions: pre-change completed Giant B keep their legacy meaning (no re-judging), and the new era continues from them",
    "pass": true,
    "error": null,
-   "ms": 337
+   "ms": 333
   },
   {
    "id": "RT15",
@@ -122,7 +122,7 @@
    "title": "Order and clock independence: the derived group does not depend on array order of sessions; every session is judged on its own snapshot",
    "pass": true,
    "error": null,
-   "ms": 636
+   "ms": 627
   },
   {
    "id": "RT16",
@@ -130,7 +130,7 @@
    "title": "Derivation is read-only and preserves history: calling it writes nothing; legacy sessions and every earlier record stay byte-identical after new sessions",
    "pass": true,
    "error": null,
-   "ms": 429
+   "ms": 455
   },
   {
    "id": "RT17",
@@ -138,7 +138,7 @@
    "title": "Backup round trip and validation: a session carrying a rotation snapshot restores identically; malformed snapshots (bad group, slots that do not match the group, unknown method, extra keys, markup) are refused",
    "pass": true,
    "error": null,
-   "ms": 461
+   "ms": 465
   },
   {
    "id": "RT18",
@@ -146,7 +146,7 @@
    "title": "A Giant B started on an older install (draft without a snapshot) resumes safely: no snapshot is invented, the legacy group is displayed, and finishing keeps the legacy credit",
    "pass": true,
    "error": null,
-   "ms": 332
+   "ms": 366
   },
   {
    "id": "RT19",
@@ -154,7 +154,7 @@
    "title": "Full Session prescriptions unchanged: Giant B set counts per slot and the base slot table are untouched by rotation",
    "pass": true,
    "error": null,
-   "ms": 465
+   "ms": 430
   },
   {
    "id": "SK1",
@@ -162,7 +162,7 @@
    "title": "One Skip control per displayed exercise of a lifting template (labelled), none on checklist templates; nothing else in the workout screen changes",
    "pass": true,
    "error": null,
-   "ms": 229
+   "ms": 225
   },
   {
    "id": "SK2",
@@ -170,7 +170,7 @@
    "title": "Skipping records ONLY a flag on the draft session: no work-set, strength, activator, stretch or cardio record is created, and no set is checked",
    "pass": true,
    "error": null,
-   "ms": 218
+   "ms": 221
   },
   {
    "id": "SK3",
@@ -178,7 +178,7 @@
    "title": "Skip is reversible while the session is a draft",
    "pass": true,
    "error": null,
-   "ms": 229
+   "ms": 228
   },
   {
    "id": "SK4",
@@ -186,7 +186,7 @@
    "title": "An exercise with logged sets cannot be skipped (nothing is changed, the athlete is told); logging a set on a skipped exercise lifts the skip, so a record always wins",
    "pass": true,
    "error": null,
-   "ms": 283
+   "ms": 259
   },
   {
    "id": "SK5",
@@ -194,7 +194,7 @@
    "title": "All four execution states in one session: performed, explicitly skipped, partially performed, unmarked gap (skipped, not marked) and not reached; no sets invented",
    "pass": true,
    "error": null,
-   "ms": 333
+   "ms": 290
   },
   {
    "id": "SK6",
@@ -202,7 +202,7 @@
    "title": "Deliberate skip vs interruption: an explicitly skipped exercise AFTER the last logged one is \"skipped\", whereas the untouched ones after it are \"not reached\"",
    "pass": true,
    "error": null,
-   "ms": 284
+   "ms": 268
   },
   {
    "id": "SK7",
@@ -210,7 +210,7 @@
    "title": "Skipping never makes a session full, never reduces what was prescribed and never fabricates performed sets; skipping everything with no logged work is \"none\"",
    "pass": true,
    "error": null,
-   "ms": 360
+   "ms": 349
   },
   {
    "id": "SK8",
@@ -218,7 +218,7 @@
    "title": "Skipping the presented intensifier never credits or advances the Giant B rotation, and logs no intensifier record",
    "pass": true,
    "error": null,
-   "ms": 285
+   "ms": 305
   },
   {
    "id": "SK9",
@@ -226,7 +226,7 @@
    "title": "A skip survives a reload and resume, and a backup round trip",
    "pass": true,
    "error": null,
-   "ms": 346
+   "ms": 300
   },
   {
    "id": "SK10",
@@ -234,7 +234,7 @@
    "title": "Validator: skips must be {slot index: true} for slots that exist; anything else is refused with a specific message",
    "pass": true,
    "error": null,
-   "ms": 168
+   "ms": 135
   },
   {
    "id": "SK11",
@@ -242,7 +242,7 @@
    "title": "A finished session cannot be re-skipped, and the Finish preview and notice name explicit skips as \"skipped\" (not \"not reached\")",
    "pass": true,
    "error": null,
-   "ms": 295
+   "ms": 238
   },
   {
    "id": "BX1",
@@ -250,7 +250,7 @@
    "title": "budgetExposure(): per bar, the sessions split into full / partial / none / not recorded, with sets logged and checklist items ticked kept as separate units",
    "pass": true,
    "error": null,
-   "ms": 231
+   "ms": 179
   },
   {
    "id": "BX2",
@@ -258,7 +258,7 @@
    "title": "The bars themselves are unchanged: budgetData() still counts every completed session once per category it belongs to, whatever its completion",
    "pass": true,
    "error": null,
-   "ms": 219
+   "ms": 180
   },
   {
    "id": "BX3",
@@ -266,7 +266,7 @@
    "title": "Budget page: a full and a partial Strength session are told apart under the bar; the line reports logged sets and flags earlier sessions as not recorded; no combined total is shown",
    "pass": true,
    "error": null,
-   "ms": 249
+   "ms": 149
   },
   {
    "id": "BX4",
@@ -274,7 +274,7 @@
    "title": "Units are never mixed: checklist sessions report checklist items, lifting sessions report sets, and neither is converted into the other",
    "pass": true,
    "error": null,
-   "ms": 185
+   "ms": 166
   },
   {
    "id": "BX5",
@@ -282,7 +282,7 @@
    "title": "Coach Handoff carries the same logged-exposure lines (sessions with their completion split, and the unit-specific work logged); no bar means no line",
    "pass": true,
    "error": null,
-   "ms": 223
+   "ms": 194
   },
   {
    "id": "BX6",
@@ -290,7 +290,7 @@
    "title": "Classification unchanged: Giant C stays Capability, the six ambiguous templates stay unclassified and are still disclosed as not counted; they never get a logged-exposure line",
    "pass": true,
    "error": null,
-   "ms": 209
+   "ms": 231
   },
   {
    "id": "BX7",
@@ -298,7 +298,7 @@
    "title": "Only completed sessions from the last 7 days count; drafts and old sessions are excluded from bars and from exposure alike",
    "pass": true,
    "error": null,
-   "ms": 206
+   "ms": 213
   },
   {
    "id": "BX8",
@@ -306,7 +306,7 @@
    "title": "Reporting is read-only and does not alter any record",
    "pass": true,
    "error": null,
-   "ms": 211
+   "ms": 203
   },
   {
    "id": "HB1",
@@ -314,7 +314,7 @@
    "title": "Tag-lookalike text that no HTML element could be built from (<Z2>, <easy>, \"HR <Z2> and <Z3>\") is accepted by backup validation in every cardio field, exactly as stored",
    "pass": true,
    "error": null,
-   "ms": 179
+   "ms": 134
   },
   {
    "id": "HB2",
@@ -322,7 +322,7 @@
    "title": "The same text can be logged through the cardio form and is stored exactly as typed (logging and import judge text identically)",
    "pass": true,
    "error": null,
-   "ms": 254
+   "ms": 256
   },
   {
    "id": "HB3",
@@ -330,7 +330,7 @@
    "title": "A historical cardio record containing such text restores from a backup file byte-for-byte, through the real preview and restore buttons",
    "pass": true,
    "error": null,
-   "ms": 309
+   "ms": 276
   },
   {
    "id": "HB4",
@@ -338,7 +338,7 @@
    "title": "Real HTML is still refused at import AND at logging: every real element name, comments, processing instructions, doctype, CDATA, and lookalikes that nest a real element",
    "pass": true,
    "error": null,
-   "ms": 304
+   "ms": 308
   },
   {
    "id": "HB5",
@@ -346,7 +346,7 @@
    "title": "A lookalike carrying ANY attribute or tag-syntax trick (event handlers, bare attributes, slash tricks, tab-separated attributes, custom-element names) is refused",
    "pass": true,
    "error": null,
-   "ms": 164
+   "ms": 146
   },
   {
    "id": "HB6",
@@ -354,7 +354,7 @@
    "title": "Stored lookalike text is inert wherever the app can show it: literal text in the cardio PREVIOUS line and no element anywhere in the document is ever created from it",
    "pass": true,
    "error": null,
-   "ms": 435
+   "ms": 439
   },
   {
    "id": "HB7",
@@ -362,7 +362,7 @@
    "title": "Judging text never executes or loads it: validating real-HTML payloads sets no flag and makes no network request",
    "pass": true,
    "error": null,
-   "ms": 488
+   "ms": 493
   },
   {
    "id": "HB8",
@@ -370,7 +370,7 @@
    "title": "Nothing else about import validation is relaxed: control characters, over-long text, bad keys and non-text values are still refused, and < or > is still refused in every other record type",
    "pass": true,
    "error": null,
-   "ms": 136
+   "ms": 173
   },
   {
    "id": "HB9",
@@ -378,7 +378,7 @@
    "title": "Original data is preserved: refusing a file with real HTML changes nothing; restoring a lookalike file does not rewrite or escape any value; existing cardio history is untouched by validation",
    "pass": true,
    "error": null,
-   "ms": 286
+   "ms": 200
   },
   {
    "id": "EV1",
@@ -386,7 +386,7 @@
    "title": "An exercise omitted from the latest session (no records) leaves its series untouched and never reads as deterioration",
    "pass": true,
    "error": null,
-   "ms": 163
+   "ms": 142
   },
   {
    "id": "EV2",
@@ -394,7 +394,7 @@
    "title": "A partial exposure with fewer sets at the same load carries the same evidence as a full one (best performed set per exposure)",
    "pass": true,
    "error": null,
-   "ms": 132
+   "ms": 164
   },
   {
    "id": "EV3",
@@ -402,7 +402,7 @@
    "title": "Legitimate evidence from a partial workout is preserved: a real workout in which only ONE exercise was done (all its sets logged) adds that exercise's exposure to its series, and nothing else",
    "pass": true,
    "error": null,
-   "ms": 265
+   "ms": 262
   },
   {
    "id": "EV4",
@@ -410,7 +410,7 @@
    "title": "Skipped and not-reached exercises leave no record, so they cannot enter any series or be read as deterioration",
    "pass": true,
    "error": null,
-   "ms": 224
+   "ms": 238
   },
   {
    "id": "EV5",
@@ -418,7 +418,7 @@
    "title": "Structured intensifier blocks never enter the evidence series, so an incomplete or smaller cluster cannot read as decline",
    "pass": true,
    "error": null,
-   "ms": 172
+   "ms": 140
   },
   {
    "id": "EV6",
@@ -426,7 +426,7 @@
    "title": "Nothing in the engine raises a load automatically: the decision only reports OBSERVE / INVESTIGATE / ACT about a decline, and a single exposure never changes the program",
    "pass": true,
    "error": null,
-   "ms": 179
+   "ms": 162
   }
  ]
 }

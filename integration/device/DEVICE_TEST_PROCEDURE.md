@@ -10,7 +10,7 @@ iPhone behaviour as unknown until the checklist is signed off.
 1. Use a **separate origin** that has never held your real training data (a new tunnel hostname, a new test site, or a separate browser profile on `localhost`). Browser storage is per origin, so a different hostname cannot see your real `pa_*` data.
 2. Use **only** the synthetic file `DISPOSABLE_TEST_BACKUP.json` (made by this procedure). Do **not** export from, import to, or restore against your real installed app.
 3. Do **not** deploy, merge, or push to your production host. Add that host to `--forbid` when building, so the test build refuses to run there.
-4. Use a clearly different Home Screen name: the test bundle installs as **PA TEST A / PA TEST B**, with a red banner "TEST BUILD ... DISPOSABLE DATA ONLY".
+4. Use a clearly different Home Screen name: the test bundle installs as **PA TEST A / PA TEST B**, with a red banner "TEST A • DISPOSABLE".
 5. If anything on the phone looks like your real data (your real workouts, real weights), stop, close it and do not tap RESTORE or any delete action.
 
 ## What the test bundle is
@@ -56,7 +56,7 @@ Record the iOS version, device model, and the tunnel hostname in the results tab
 
 | ID | Step | Expected |
 |---|---|---|
-| S1 | Open the tunnel URL in Safari | Red "TEST BUILD A" banner; the app loads; no blocked page |
+| S1 | Open the tunnel URL in Safari | Red "TEST A • DISPOSABLE" banner (with id, mode and status); the app loads; no blocked page |
 | S2 | Look at Home and the history | No workout history (empty state) |
 | S3 | More, Backup, import `DISPOSABLE_TEST_BACKUP.json`, tap RESTORE THIS BACKUP | Preview lists sessions; restore completes; the page reloads; Home shows RESUME Giant A (the unfinished draft) |
 | S4 | Close the Safari tab, reopen the URL | Same data present |
@@ -128,8 +128,8 @@ Record the iOS version, device model, and the tunnel hostname in the results tab
 |---|---|---|
 | U1 | With the installed build A, start a workout and log one set (leave it running) | |
 | U2 | On the computer: type `swap integration/device/dist/B` + Enter in the `serve_bundle.js` terminal | "now serving ...B" |
-| U3 | On the phone, open the app; wait up to a minute (or close and reopen it once) | An update prompt appears on Home only. The banner still says TEST BUILD A; the running workout is not disturbed |
-| U4 | Finish or leave the workout, return to Home, tap Update | The app reloads; banner says TEST BUILD B |
+| U3 | On the phone, open the app; wait up to a minute (or close and reopen it once) | An update prompt appears on Home only. The banner still says TEST A; the running workout is not disturbed |
+| U4 | Finish or leave the workout, return to Home, tap Update | The app reloads; banner says TEST B |
 | U5 | Check data and the unfinished workout | Everything from before is still present |
 | U6 | Open Airplane Mode and relaunch | B works offline |
 

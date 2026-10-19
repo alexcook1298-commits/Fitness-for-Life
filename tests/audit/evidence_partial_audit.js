@@ -26,23 +26,23 @@ if(!appDir){console.error('usage');process.exit(2)}
   const day=n=>new Date(Date.UTC(2026,9,19,12)-n*86400000).toISOString();const r=(id,sid,d,w,reps,sn)=>({id,sessionId:sid,name:'Bench Press (BB)',intensifier:'Straight Sets',strengthMethod:'Top Set + Back-Offs',w,reps,rir:2,setNumber:sn,date:day(d)});
   const h=[r('a1','s1',20,200,5,1),r('a2','s1',20,170,8,2),r('b1','s2',16,200,5,1),r('b2','s2',16,170,8,2),r('c2','s3',12,170,8,2),r('d2','s4',8,170,8,2),r('e2','s5',4,170,8,2)];
   localStorage.pa_hist=JSON.stringify(h);const ev=evidenceDecision();
-  return {finding:ev.state==='OBSERVE'?'SAFE':'LIMITATION',detail:`state ${ev.state}: ${ev.why} vals ${ev.vals.map(v=>v.toFixed(0))}. Back-off sets (setNumber>1) are compared with top sets in the same series`}});
+  return {finding:ev.state==='OBSERVE'?'SAFE':'LIMITATION',detail:`state ${ev.state}: ${ev.why} vals ${ev.vals.map(v=>v.toFixed(0))}. Back-off sets (setNumber>1) are only a problem if they appear in the series (vals above)`}});
  await run('E4','Same, but ALL sets of every session are logged (control)',()=>{
   const day=n=>new Date(Date.UTC(2026,9,19,12)-n*86400000).toISOString();const r=(id,sid,d,w,reps,sn)=>({id,sessionId:sid,name:'Bench Press (BB)',intensifier:'Straight Sets',strengthMethod:'Top Set + Back-Offs',w,reps,rir:2,setNumber:sn,date:day(d)});
   const h=[];[20,16,12,8,4].forEach((d,k)=>{h.push(r('t'+k,'s'+k,d,200,5,1),r('u'+k,'s'+k,d,170,8,2))});
   localStorage.pa_hist=JSON.stringify(h);const ev=evidenceDecision();return {finding:ev.state==='OBSERVE'?'SAFE':'DEFECT',detail:`state ${ev.state}`}});
- await run('E5','One session whose sets straddle UTC midnight (evening workout) is counted as TWO exposures',()=>{
+ await run('E5','One session whose sets straddle UTC midnight (evening workout): counted as one exposure or two?',()=>{
   const r=(id,sid,iso,w,reps,sn)=>({id,sessionId:sid,name:'Bench Press (BB)',intensifier:'Straight Sets',w,reps,rir:2,setNumber:sn,date:iso});
   const h=[r('a','s0','2026-10-01T22:00:00.000Z',200,5,1),r('b','s1','2026-10-08T22:00:00.000Z',200,5,1),
    r('c1','s2','2026-10-15T23:50:00.000Z',200,5,1),r('c2','s2','2026-10-16T00:10:00.000Z',200,2,2),r('c3','s2','2026-10-16T00:20:00.000Z',200,2,3)];
   localStorage.pa_hist=JSON.stringify(h);const ev=evidenceDecision();const sessions=3;
   return {finding:ev.vals.length===sessions?'SAFE':'LIMITATION',detail:`${ev.vals.length} exposures from ${sessions} sessions; vals ${ev.vals.map(v=>v.toFixed(0))}; state ${ev.state}`}});
- await run('E6','Records of an unfinished (draft) session are read as evidence',()=>{
+ await run('E6','Records of an unfinished (draft) session: do they enter the evidence?',()=>{
   const r=(id,sid,iso,w,reps)=>({id,sessionId:sid,name:'Bench Press (BB)',intensifier:'Straight Sets',w,reps,rir:2,setNumber:1,date:iso});
   const h=[r('a','s0','2026-10-01T12:00:00.000Z',200,5),r('b','s1','2026-10-08T12:00:00.000Z',200,5),r('c','sd','2026-10-15T12:00:00.000Z',150,5)];
   localStorage.pa_sessions_v2=JSON.stringify([{id:'sd',template:'a',phase:1,weekMode:'normal',status:'draft',startedAt:'2026-10-15T12:00:00.000Z',forms:{},checks:{},choices:{},modes:{}}]);
   localStorage.pa_hist=JSON.stringify(h);const ev=evidenceDecision();
-  return {finding:ev.vals.length===3?'LIMITATION':'SAFE',detail:`draft record counted: vals ${ev.vals.map(v=>v.toFixed(0))}; state ${ev.state}. Real performed sets in an interrupted session are legitimate data; the engine does not distinguish sessions`}});
+  return {finding:ev.vals.length===3?'LIMITATION':'SAFE',detail:`series after reading a draft session: vals ${ev.vals.map(v=>v.toFixed(0))}; state ${ev.state}. Real performed sets in an interrupted session are legitimate data`}});
  await run('E7','Skipped exercise (explicit skip flag) in a finished session leaves the series untouched',()=>{
   const r=(id,sid,iso,w,reps)=>({id,sessionId:sid,name:'Bench Press (BB)',intensifier:'Straight Sets',w,reps,rir:2,setNumber:1,date:iso});
   localStorage.pa_hist=JSON.stringify([r('a','s0','2026-10-01T12:00:00.000Z',200,5),r('b','s1','2026-10-08T12:00:00.000Z',200,5)]);
@@ -55,7 +55,7 @@ if(!appDir){console.error('usage');process.exit(2)}
  await run('E9','Next-target text after a partial session that logged only the lighter back-off set',()=>{
   const r=(id,sid,iso,w,reps,sn)=>({id,sessionId:sid,name:'Bench Press (BB)',intensifier:'Straight Sets',strengthMethod:'Top Set + Back-Offs',w,reps,rir:2,setNumber:sn,date:iso});
   localStorage.pa_hist=JSON.stringify([r('a','s0','2026-10-01T12:00:00.000Z',200,5,1),r('b','s0','2026-10-01T12:05:00.000Z',170,8,2),r('c','s1','2026-10-08T12:00:00.000Z',170,8,2)]);
-  const t=targetStrength('Bench Press (BB)','Top Set + Back-Offs');return {finding:/^200/.test(t)?'SAFE':'LIMITATION',detail:`target shown: "${t}". It anchors on the LAST logged record (a back-off set), not the top set`}});
+  const t=targetStrength('Bench Press (BB)','Top Set + Back-Offs');return {finding:/^200/.test(t)?'SAFE':'LIMITATION',detail:`target shown: "${t}". SAFE only if it anchors on the top set, not the last logged back-off set`}});
  await run('E10','Does any code recommend a load increase automatically?',()=>{
   const src=[evidenceDecision,targetStrength,targetMode].map(f=>f.toString()).join('\n');
   return {finding:'INFO',detail:'evidenceDecision only returns OBSERVE / INVESTIGATE / ACT about decline; target text only says "earn reps/quality before +N lb". No function raises a load automatically ('+(/\+\s*\(?\s*e\?\.inc/.test(src)?'text only':'none')+')'}});

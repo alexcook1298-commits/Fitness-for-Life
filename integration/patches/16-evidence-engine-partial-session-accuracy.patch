@@ -1,0 +1,50 @@
+--- a/index.html
++++ b/index.html
+@@ -580,7 +580,7 @@
+ function changeStrength(i,v,save){saveDraft();const n=selected(active,i);currentSession.strengthModes??={};currentSession.strengthModes[i+':'+n]=v;if(save)localStorage.setItem(strengthKey(active,i,n),v);persistSessions();render()}
+ function strengthSetLabel(method,j,count){if(method==='Top Set + Back-Offs')return j===1?'TOP SET':'BACK-OFF '+(j-1);if(method==='Cluster Sets')return 'CLUSTER SET '+j;if(method==='Paused Reps')return 'PAUSED SET '+j;if(method==='Wave Loading')return 'WAVE EXPOSURE '+j;if(method==='Dead-Stop / Pin Work')return 'DEAD-STOP SET '+j;if(method==='Speed / Dynamic Work')return 'SPEED SET '+j;if(method==='Rep-PR Set')return j===count?'REP-PR SET':'BUILD SET '+j;if(method==='Density Progression')return 'DENSITY SET '+j;if(method==='Heavy Primer + Work Sets')return 'WORK SET '+j;if(method==='Primer + Paused Top/Back-Offs')return j===1?'PAUSED TOP SET':'PAUSED BACK-OFF '+(j-1);if(method==='Load / Distance Progression')return 'CARRY SET '+j;return 'SET '+j}
+ function prevStrength(n,m){const h=histFor(n).filter(x=>(x.strengthMethod||'Straight Heavy Sets')===m&&(x.intensifier||'Straight Sets')==='Straight Sets');if(!h.length)return 'No history in this strength method';const same=h.filter(x=>x.sessionId===h.at(-1).sessionId),bits=same.map(x=>`${x.w??'BW'} × ${x.reps??'—'}`);return bits.join(' • ')+(h.at(-1).clusterSplit?` • split ${h.at(-1).clusterSplit}`:'')}
+-function targetStrength(n,m){const h=histFor(n).filter(x=>(x.strengthMethod||'Straight Heavy Sets')===m&&(x.intensifier||'Straight Sets')==='Straight Sets');if(!h.length)return `Establish ${m} baseline`;const e=getEx(n),x=h.at(-1);if(m==='Density Progression')return 'Match quality, then reduce recovery slightly';if(m==='Load / Distance Progression')return 'Beat clean load or distance/time before reducing rest';if(m==='Speed / Dynamic Work')return 'Keep load until every rep stays crisp and fast';if(m==='Rep-PR Set')return 'Beat clean reps at similar RIR before adding load';return `${x.w??'—'} lb • earn reps/quality before +${e?.inc||5} lb`}
++function targetStrength(n,m){const h=histFor(n).filter(x=>(x.strengthMethod||'Straight Heavy Sets')===m&&(x.intensifier||'Straight Sets')==='Straight Sets'),x=targetAnchor(h,m);if(!x)return `Establish ${m} baseline`;const e=getEx(n);if(m==='Density Progression')return 'Match quality, then reduce recovery slightly';if(m==='Load / Distance Progression')return 'Beat clean load or distance/time before reducing rest';if(m==='Speed / Dynamic Work')return 'Keep load until every rep stays crisp and fast';if(m==='Rep-PR Set')return 'Beat clean reps at similar RIR before adding load';return `${x.w??'—'} lb • earn reps/quality before +${e?.inc||5} lb`}
+ function strengthControls(i,sl,n,e){
+  const m=todayStrength(i,n),info=STRENGTH_INFO[m];
+  return `<div class="strengthinfo"><small class="gold">STRENGTH METHOD • INTENSIFY FORCE</small><div class="strengthrow"><select aria-label="Strength method" onchange="changeStrength(${i},this.value,this.parentElement.querySelector('input').checked)">${strengthOptions(m)}</select><label class="toggle"><input type="checkbox" onchange="if(this.checked){let sel=this.parentElement.parentElement.querySelector('select');changeStrength(${i},sel.value,true)}">UPDATE DEFAULT</label></div><p><b>${esc(m)}</b> • ${esc(info.scheme)}</p><div class="stat tiny"><div><span class="muted">PREVIOUS • THIS METHOD</span><br><b>${esc(prevStrength(n,m))}</b></div><div><span class="muted">NEXT • THIS METHOD</span><br><b>${esc(targetStrength(n,m))}</b></div></div><details class="why"><summary>WHY THIS METHOD?</summary><p>${esc(info.why)}</p><p class="tiny muted">Strength methods and hypertrophy intensifiers are separate systems. Primary Giant A strength slots do not stack a final-set hypertrophy intensifier on top of a strength method.</p></details>${(m==='Heavy Primer + Work Sets'||m==='Primer + Paused Top/Back-Offs')?renderPrimer(i,n,e):''}</div>`;
+@@ -716,7 +716,7 @@
+ 
+ function dominantStretch(m){return {"Chest":"Pec stretch • 30–45 sec/side","Back":"Lat / upper-back stretch • 30–45 sec","Shoulders":"Gentle shoulder / lat stretch • 30–45 sec","Biceps":"Gentle biceps wall stretch • 20–30 sec","Triceps":"Overhead triceps stretch • 20–30 sec","Quads":"Supported quad / hip-flexor stretch • 30–45 sec/side","Hamstrings / Glutes":"Hamstring / glute stretch • 30–45 sec/side","Calves":"Calf stretch • 30–45 sec","Core":"Gentle trunk extension / breathing • 20–30 sec","Grip / Forearms":"Forearm opening • 20–30 sec","Full Body / Carry":"Forearm + pec opening • 30–45 sec"}[m]||"Comfortable targeted stretch • 20–30 sec"}
+ function prevMode(n,iv){let h=histFor(n).filter(x=>(x.intensifier||"Straight Sets")===iv);if(!h.length)return "No history in this mode";let x=h.at(-1);return `${x.w??"—"} × ${x.reps??"—"} @ ${x.rir??"—"}`}
+-function targetMode(n,iv,range){let h=histFor(n).filter(x=>(x.intensifier||"Straight Sets")===iv),e=getEx(n);if(!h.length)return `Establish ${iv} baseline`;let x=h.at(-1);return e.type==="time"||e.type==="reps"?"Beat this mode's previous performance":`${x.w??"—"} lb • progress within ${iv}`}
++function targetMode(n,iv,range){let h=histFor(n).filter(x=>(x.intensifier||"Straight Sets")===iv),e=getEx(n),x=targetAnchor(h,null);if(!x)return `Establish ${iv} baseline`;return e.type==="time"||e.type==="reps"?"Beat this mode's previous performance":`${x.w??"—"} lb • progress within ${iv}`}
+ function choose(i,v){localStorage.setItem(`pa_sel_${active}_${i}`,v);localStorage.removeItem(`pa_todayint_${active}_${i}`);render()}
+ function rule(e){if(e.equip==="KB")return "Log ONE kettlebell’s weight (two equal kettlebells).";if(e.equip==="Carry Handles")return "Log ONE loaded farmer handle.";if(e.equip==="Trap Bar")return "Log TOTAL loaded trap-bar weight.";if(e.equip==="Smith")return "Log total resistance using the same Smith machine convention each session.";if(e.equip==="DB")return "Log ONE dumbbell's weight.";if(e.equip==="BB")return "Log TOTAL barbell weight including bar.";if(e.equip==="Assisted")return "Log EFFECTIVE bodyweight pulled (bodyweight − assistance). Higher = improvement.";return e.type==="time"?"Progress by duration.":"Log the displayed/used load."}
+ function histFor(n){return JSON.parse(localStorage.pa_hist||"[]").filter(x=>x.name===n)}
+@@ -1672,16 +1672,25 @@
+ function histDate(x){return x.date||x.completedAt||''}
+ function performanceValue(x){if(x.w&&x.reps)return +x.w*(1+(+x.reps||0)/30);if(x.w)return +x.w;if(x.reps)return +x.reps;return 0}
+ function evidenceSeriesKey(x){return [x.intensifier||'Straight Sets',x.strengthMethod||'',(+x.reps||0)>12?'high-rep':'std-rep'].join('|')}
++// Evidence rules (Phase 4). Back-off sets of the two top-set methods are lighter by design, so they are not comparable with top sets and are left out of the
++// series; records of an unfinished (draft) session are held back until it is finished; one session is one exposure even if its sets straddle UTC midnight.
++// Records are never changed. A record with no matching session (legacy) is judged exactly as before.
++const BACKOFF_METHODS=['Top Set + Back-Offs','Primer + Paused Top/Back-Offs'];
++function isBackoffRecord(x){return BACKOFF_METHODS.includes(x.strengthMethod)&&(+x.setNumber||1)>1}
++function draftSessionIds(){const s=readJSON('pa_sessions_v2',[]);return new Set((Array.isArray(s)?s:[]).filter(x=>x&&x.status==='draft'&&typeof x.id==='string').map(x=>x.id))}
++function evidenceDayOf(rows){const first=new Map();rows.forEach(x=>{if(!x.sessionId)return;const d=String(histDate(x));if(!first.has(x.sessionId)||d<first.get(x.sessionId))first.set(x.sessionId,d)});return x=>String(x.sessionId&&first.has(x.sessionId)?first.get(x.sessionId):histDate(x)).slice(0,10)}
++function targetAnchor(rows,method){let r=BACKOFF_METHODS.includes(method)?rows.filter(x=>!isBackoffRecord(x)):rows;if(!r.length)return null;const last=r.at(-1),day=x=>String(histDate(x)).slice(0,10);const same=r.filter(x=>last.sessionId?x.sessionId===last.sessionId:day(x)===day(last));return same.reduce((a,b)=>performanceValue(b)>=performanceValue(a)?b:a)}
+ function evidenceDecision(){
+- let h=readJSON('pa_hist',[]),by=new Map();
+- (Array.isArray(h)?h:[]).filter(x=>x&&!x.structured&&x.name).forEach(x=>{const k=x.name+'\u0000'+evidenceSeriesKey(x);if(!by.has(k))by.set(k,{name:x.name,rows:[]});by.get(k).rows.push(x)});
++ let h=readJSON('pa_hist',[]),by=new Map(),drafts=draftSessionIds();
++ h=(Array.isArray(h)?h:[]).filter(x=>x&&x.name&&!(x.sessionId&&drafts.has(x.sessionId)));const dayOf=evidenceDayOf(h);
++ h.filter(x=>!x.structured&&!isBackoffRecord(x)).forEach(x=>{const k=x.name+'\u0000'+evidenceSeriesKey(x);if(!by.has(k))by.set(k,{name:x.name,rows:[]});by.get(k).rows.push(x)});
+  let candidates=[];
+  by.forEach(({name,rows})=>{
+   let a=rows.sort((x,y)=>new Date(histDate(x))-new Date(histDate(y)));
+-  let dates=[...new Set(a.map(x=>String(histDate(x)).slice(0,10)))];
++  let dates=[...new Set(a.map(dayOf))].sort();
+   if(dates.length<2)return;
+   let lastDates=dates.slice(-4);
+-  let vals=lastDates.map(d=>Math.max(...a.filter(x=>String(histDate(x)).slice(0,10)===d).map(performanceValue))).filter(Boolean);
++  let vals=lastDates.map(d=>Math.max(...a.filter(x=>dayOf(x)===d).map(performanceValue))).filter(Boolean);
+   if(vals.length<2)return;
+   let delta=(vals.at(-1)-vals[0])/(vals[0]||1),state='OBSERVE',why='Recent performance is being watched. One exposure never changes the program.';
+   let ref=vals.length>2?Math.max(...vals.slice(0,-2)):vals[0],sustained=vals.length>2&&vals.slice(-2).every(v=>v<ref*.975);

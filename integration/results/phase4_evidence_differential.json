@@ -1,0 +1,400 @@
+{
+ "n": 300,
+ "A": {
+  "identical": 300,
+  "different": []
+ },
+ "B": {
+  "decisionChanged": 200,
+  "targetChanged": 296,
+  "total": 300,
+  "transitions": {
+   "OBSERVE->OBSERVE": 81,
+   "INVESTIGATE->INVESTIGATE": 38,
+   "INVESTIGATE->OBSERVE": 50,
+   "ACT->INVESTIGATE": 14,
+   "OBSERVE->INVESTIGATE": 9,
+   "INVESTIGATE->ACT": 3,
+   "ACT->ACT": 3,
+   "OBSERVE->ACT": 2
+  },
+  "raised": [
+   {
+    "i": 39,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      269.33,
+      241.8,
+      265.17,
+      224.4
+     ]
+    },
+    "p4": {
+     "name": "Squat (BB)",
+     "vals": [
+      342.67,
+      305.87,
+      296.4
+     ]
+    }
+   },
+   {
+    "i": 49,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Squat (BB)",
+     "vals": [
+      264.83,
+      279.5,
+      344.53,
+      262.2
+     ]
+    },
+    "p4": {
+     "name": "Squat (BB)",
+     "vals": [
+      354.9,
+      264.83,
+      344.53
+     ]
+    }
+   },
+   {
+    "i": 82,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Lat Pulldown",
+     "vals": [
+      134.43,
+      134.43,
+      134.87
+     ]
+    },
+    "p4": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      240.5,
+      226.73,
+      222.93
+     ]
+    }
+   },
+   {
+    "i": 98,
+    "from": "INVESTIGATE",
+    "to": "ACT",
+    "causes": [
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      254.8,
+      204,
+      241.8,
+      230.07
+     ]
+    },
+    "p4": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      282.67,
+      254.8,
+      241.8,
+      230.07
+     ]
+    }
+   },
+   {
+    "i": 111,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      217,
+      228,
+      218.3,
+      211.93
+     ]
+    },
+    "p4": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      262.7,
+      217,
+      228,
+      218.3
+     ]
+    }
+   },
+   {
+    "i": 166,
+    "from": "OBSERVE",
+    "to": "ACT",
+    "causes": [
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Squat (BB)",
+     "vals": [
+      276.9,
+      273.13,
+      294.67,
+      253.17
+     ]
+    },
+    "p4": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      286.67,
+      253.17,
+      250.8,
+      204
+     ]
+    }
+   },
+   {
+    "i": 203,
+    "from": "INVESTIGATE",
+    "to": "ACT",
+    "causes": [
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      294.67,
+      214.67,
+      232.7,
+      231.6
+     ]
+    },
+    "p4": {
+     "name": "Squat (BB)",
+     "vals": [
+      353.33,
+      319.43,
+      317.33,
+      273.8
+     ]
+    }
+   },
+   {
+    "i": 214,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Row (DB)",
+     "vals": [
+      103.13,
+      121.6,
+      107.33
+     ]
+    },
+    "p4": {
+     "name": "Squat (BB)",
+     "vals": [
+      340.6,
+      279.93,
+      325.2
+     ]
+    }
+   },
+   {
+    "i": 220,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Bench Press (BB)",
+     "vals": [
+      249.33,
+      236.4
+     ]
+    },
+    "p4": {
+     "name": "Squat (BB)",
+     "vals": [
+      296.33,
+      277.67,
+      287
+     ]
+    }
+   },
+   {
+    "i": 230,
+    "from": "INVESTIGATE",
+    "to": "ACT",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Lat Pulldown",
+     "vals": [
+      148.8,
+      136.8,
+      134.17,
+      144
+     ]
+    },
+    "p4": {
+     "name": "Lat Pulldown",
+     "vals": [
+      157.07,
+      148.8,
+      136.8,
+      134.17
+     ]
+    }
+   },
+   {
+    "i": 231,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Lat Pulldown",
+     "vals": [
+      160.33,
+      139.2,
+      138.83,
+      159.1
+     ]
+    },
+    "p4": {
+     "name": "Row (DB)",
+     "vals": [
+      117.8,
+      96.33,
+      92.17,
+      101.33
+     ]
+    }
+   },
+   {
+    "i": 272,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Row (DB)",
+     "vals": [
+      99.6,
+      115.5,
+      124,
+      102.6
+     ]
+    },
+    "p4": {
+     "name": "Squat (BB)",
+     "vals": [
+      309.4,
+      279.97,
+      301.47
+     ]
+    }
+   },
+   {
+    "i": 283,
+    "from": "OBSERVE",
+    "to": "ACT",
+    "causes": [
+     "draft",
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Squat (BB)",
+     "vals": [
+      310.33,
+      259.53,
+      352,
+      256.13
+     ]
+    },
+    "p4": {
+     "name": "Lat Pulldown",
+     "vals": [
+      165.33,
+      145.6,
+      141.17,
+      125.8
+     ]
+    }
+   },
+   {
+    "i": 291,
+    "from": "OBSERVE",
+    "to": "INVESTIGATE",
+    "causes": [
+     "back-off-only",
+     "straddle"
+    ],
+    "p3": {
+     "name": "Lat Pulldown",
+     "vals": [
+      153.27,
+      158.4,
+      138.13,
+      151.87
+     ]
+    },
+    "p4": {
+     "name": "Squat (BB)",
+     "vals": [
+      348.4,
+      265.2,
+      317.2,
+      302.67
+     ]
+    }
+   }
+  ]
+ }
+}

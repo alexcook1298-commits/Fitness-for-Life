@@ -19,9 +19,9 @@ const swState=p=>p.eval(async()=>{const reg=await navigator.serviceWorker.getReg
 
 (async()=>{
  const A=path.join(work,'A'),B=path.join(work,'B'),G=path.join(work,'G');
- build('A',A,DEFAULT_ALLOW,[]);build('B',B,DEFAULT_ALLOW,[]);build('G',G,DEFAULT_ALLOW,['127.0.0.1']);
+ build('A',A,DEFAULT_ALLOW,[]);build('B',B,DEFAULT_ALLOW,[]);build('G',G,DEFAULT_ALLOW,['127.0.0.1']);const N=path.join(work,'N');build('N',N,DEFAULT_ALLOW,['10.9.9.9'],true);
  const seed=path.join(work,'DISPOSABLE_TEST_BACKUP.json');
- await step('D1','Bundles build and differ from the source only by guard, label, title, cache name and manifest name/short_name/id',async()=>{for(const d of [A,B,G]){const pr=check(d);assert.deepStrictEqual(pr,[],pr.join('; '))}});
+ await step('D1','Bundles build and differ from the source only by guard, label, title, cache name and manifest name/short_name/id',async()=>{for(const d of [A,B,G,N]){const pr=check(d);assert.deepStrictEqual(pr,[],pr.join('; '))}});
  await step('D2','Origin guard (evaluated in an isolated JS context for 12 hostnames): real/unknown hosts blocked, localhost and tunnel hosts allowed, forbidden host blocked even if otherwise allowed',()=>{
   const g=/<script>\/\*PA-DEVICE-TEST-GUARD\*\/([\s\S]*?)<\/script>/.exec(fs.readFileSync(path.join(A,'index.html'),'utf8'))[1];
   const g2=/<script>\/\*PA-DEVICE-TEST-GUARD\*\/([\s\S]*?)<\/script>/.exec(fs.readFileSync(path.join(G,'index.html'),'utf8'))[1];
@@ -31,6 +31,13 @@ const swState=p=>p.eval(async()=>{const reg=await navigator.serviceWorker.getReg
   for(const [h,want] of cases)assert.strictEqual(run(g,h),want,'host '+JSON.stringify(h));
   assert.strictEqual(run(g2,'127.0.0.1'),true,'forbidden host must be blocked');assert.strictEqual(run(g2,'localhost'),false);
  });
+ await step('D2b','Private-network option (a phone on the same Wi-Fi): allows 10.x, 192.168.x, 172.16-31.x, 169.254.x and name.local; public addresses, 172.32.x and look-alike names stay blocked; --forbid still wins; the default build allows none of them',()=>{
+  const code=f=>/<script>\/\*PA-DEVICE-TEST-GUARD\*\/([\s\S]*?)<\/script>/.exec(fs.readFileSync(path.join(f,'index.html'),'utf8'))[1];
+  const run=(c,host)=>{let blocked=false;const sb={location:{hostname:host},navigator:{},document:{createElement:()=>({setAttribute(){},appendChild(){}}),documentElement:{appendChild(){blocked=true}}},window:{stop(){}}};try{vm.runInNewContext(c,sb)}catch(e){}return blocked||sb.window.__PA_TEST_BLOCKED===true};
+  const gN=code(N),gA=code(A);
+  for(const h of ['192.168.1.20','10.0.0.5','172.16.4.4','172.31.255.1','169.254.1.1','alexs-iphone.local','localhost'])assert.strictEqual(run(gN,h),false,'should allow '+h);
+  for(const h of ['8.8.8.8','172.32.0.1','172.15.0.1','192.169.1.1','11.0.0.1','192.168.1.20.evil.com','evil.local.com','example.com','10.9.9.9'])assert.strictEqual(run(gN,h),true,'should block '+h);
+  for(const h of ['192.168.1.20','10.0.0.5','phone.local'])assert.strictEqual(run(gA,h),true,'default build must block '+h)});
  const server=await swap(A);const browser=await launch();const dl=path.join(work,'dl');fs.mkdirSync(dl);
  try{
   await step('D3','A blocked page runs no app code, writes no storage and registers no service worker',async()=>{
@@ -43,8 +50,8 @@ const swState=p=>p.eval(async()=>{const reg=await navigator.serviceWorker.getReg
    assert(/<Z2>/.test(fs.readFileSync(seed,'utf8')))});
   const p=await browser.newPage(dl);
   await step('D5','Test build loads: TEST label and title visible, distinct manifest, empty storage',async()=>{
-   await p.goto(server.origin+'/');const r=await p.eval(async()=>({label:document.getElementById('paTestLabel')?.textContent,title:document.title,man:await (await fetch('./manifest.webmanifest')).json(),ls:localStorage.length}));
-   assert(/TEST BUILD A/.test(r.label)&&/^TEST A/.test(r.title));assert(/PA TEST A/.test(r.man.short_name)&&r.man.id==='/pa-device-test');assert.strictEqual(r.ls,0)});
+   await p.goto(server.origin+'/');const r=await p.eval(async()=>({label:document.getElementById('paTestLabel')?.textContent,title:document.title,man:await (await fetch('./manifest.webmanifest')).json(),pa:Object.keys(localStorage).filter(k=>k.startsWith('pa_')).length,id:localStorage.paTestStoreId}));
+   assert(/TEST A\b/.test(r.label)&&/^TEST A/.test(r.title));assert(/PA TEST A/.test(r.man.short_name)&&r.man.id==='/pa-device-test');assert.strictEqual(r.pa,0,'no pa_ data on a new origin');assert(/^[0-9a-f]{1,4}$/.test(r.id),'storage id');assert(/BROWSER/.test(r.label)&&/id [0-9a-f]+/.test(r.label)&&/https|NOT-SECURE/.test(r.label),r.label)});
   await step('D6','Service worker installs and the shell is cached under the device-test cache name',async()=>{
    await p.waitForFunction('navigator.serviceWorker.getRegistration().then(r=>!!r&&!!r.active)',15000);await p.reload();await sleep(500);const s=await swState(p);assert(s.controller&&s.caches.join()==='project-america-shell-devicetest-a',JSON.stringify(s))});
   await step('D7','Import the disposable backup through the real Import screen, then it persists across a refresh',async()=>{
@@ -79,9 +86,9 @@ const swState=p=>p.eval(async()=>{const reg=await navigator.serviceWorker.getReg
    const draft=await p.eval(()=>currentSession.id);const hist=await p.eval(()=>JSON.parse(localStorage.pa_hist).length);
    server.setRoot(B);await p.eval(async()=>{const r=await navigator.serviceWorker.getRegistration();await r.update()});
    await p.waitForFunction('document.getElementById("updateButton")&&!document.getElementById("updateButton").classList.contains("hidden")',15000);
-   assert(/TEST BUILD A/.test(await p.eval(()=>document.getElementById('paTestLabel').textContent)),'page changed before the tap');assert.strictEqual(await p.eval(()=>currentSession.id),draft);
+   assert(/TEST A\b/.test(await p.eval(()=>document.getElementById('paTestLabel').textContent)),'page changed before the tap');assert.strictEqual(await p.eval(()=>currentSession.id),draft);
    await p.click('#n-home');const re=p.waitForLoad(20000).then(()=>true,()=>false);await p.click('#updateButton');assert(await re);await ready(p);await sleep(500);
-   const s=await swState(p);assert.strictEqual(s.caches.join(),'project-america-shell-devicetest-b');assert(/TEST BUILD B/.test(await p.eval(()=>document.getElementById('paTestLabel').textContent)));
+   const s=await swState(p);assert.strictEqual(s.caches.join(),'project-america-shell-devicetest-b');assert(/TEST B\b/.test(await p.eval(()=>document.getElementById('paTestLabel').textContent)));
    assert.strictEqual(await p.eval(()=>JSON.parse(localStorage.pa_hist).length),hist);assert(await p.eval(d=>JSON.parse(localStorage.pa_sessions_v2).some(x=>x.id===d),draft))});
  }finally{await browser.close();await server.close()}
  const failed=results.filter(r=>!r.pass).length;console.log(`\n${results.length-failed} passed, ${failed} failed, ${results.length} total (desktop headless rehearsal; iPhone testing NOT done)`);

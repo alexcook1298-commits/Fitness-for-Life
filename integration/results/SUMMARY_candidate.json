@@ -34,6 +34,12 @@
   "total": 216,
   "failed": 0
  },
+ "phase4": {
+  "passed": 26,
+  "failed": 0,
+  "total": 26,
+  "failedIds": []
+ },
  "phase3": {
   "passed": 53,
   "failed": 0,
