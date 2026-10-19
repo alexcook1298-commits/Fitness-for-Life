@@ -1,0 +1,81 @@
+{
+ "date": "2026-10-19T20:07:55.040Z",
+ "src": "/workspace/integration/app",
+ "passed": 12,
+ "failed": 0,
+ "note": "headless desktop rehearsal only; real-device testing not performed",
+ "results": [
+  {
+   "id": "D1",
+   "title": "Bundles build and differ from the source only by guard, label, title, cache name and manifest name/short_name/id",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D2",
+   "title": "Origin guard (evaluated in an isolated JS context for 12 hostnames): real/unknown hosts blocked, localhost and tunnel hosts allowed, forbidden host blocked even if otherwise allowed",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D3",
+   "title": "A blocked page runs no app code, writes no storage and registers no service worker",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D4",
+   "title": "Seed generator makes a valid disposable backup from the app itself (partial, skipped, Giant B intensifier, tag-like cardio text, unfinished draft)",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D5",
+   "title": "Test build loads: TEST label and title visible, distinct manifest, empty storage",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D6",
+   "title": "Service worker installs and the shell is cached under the device-test cache name",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D7",
+   "title": "Import the disposable backup through the real Import screen, then it persists across a refresh",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D8",
+   "title": "Interrupted workout recovery: the unfinished draft is offered for resume after a reload and keeps its logged set",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D9",
+   "title": "Offline: with the network disabled the app reloads from the service worker cache, starts a workout and logs a set; data persists after going back online",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D10",
+   "title": "Backup round trip: export, wipe the disposable origin, import the export: every pa_ key is identical",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D11",
+   "title": "Specialized intensifier logging: a Giant B Myo-Reps cluster saves as one structured record with its efforts",
+   "pass": true,
+   "error": null
+  },
+  {
+   "id": "D12",
+   "title": "Service-worker update: build A is installed; build B is deployed; the update prompt appears without replacing the running workout; after the tap B runs, A's cache is deleted, and the draft and history survive",
+   "pass": true,
+   "error": null
+  }
+ ]
+}

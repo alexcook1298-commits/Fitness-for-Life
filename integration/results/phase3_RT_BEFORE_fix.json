@@ -1,0 +1,160 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T19:42:12.507Z",
+ "passed": 8,
+ "failed": 11,
+ "results": [
+  {
+   "id": "RT1",
+   "group": "RT",
+   "title": "Parity: with only pre-change history (no rotation snapshots) the next group equals the legacy counter for 0-8 completed Giant B, and drafts and other templates are ignored exactly as before",
+   "pass": true,
+   "error": null,
+   "ms": 567
+  },
+  {
+   "id": "RT2",
+   "group": "RT",
+   "title": "Starting Giant B writes an additive rotation snapshot (group, slots, presented methods); other templates get none; the snapshot equals what is displayed",
+   "pass": false,
+   "error": "no snapshot",
+   "ms": 232
+  },
+  {
+   "id": "RT3",
+   "group": "RT",
+   "title": "A Giant B whose presented intensifiers were performed credits its group: the groups then rotate 0,1,2,0,1,2 exactly as before for an athlete who performs them",
+   "pass": true,
+   "error": null,
+   "ms": 1465
+  },
+  {
+   "id": "RT4",
+   "group": "RT",
+   "title": "A finished Giant B in which the presented intensifier was SKIPPED (straight work only) earns no credit: the same group is offered at the next Giant B, and the finished session still counts as a session",
+   "pass": false,
+   "error": "group 0 must be offered again |  | 1 !== 0 | ",
+   "ms": 281
+  },
+  {
+   "id": "RT5",
+   "group": "RT",
+   "title": "A partially done intensifier earns nothing: Myo-Reps with one effort cannot be saved, and a session that finishes after that attempt does not credit the group",
+   "pass": false,
+   "error": "Expected values to be strictly equal: |  | 1 !== 0 | ",
+   "ms": 344
+  },
+  {
+   "id": "RT6",
+   "group": "RT",
+   "title": "Credit policy \"any\": if a group presents two intensifier slots and only one is performed, the group is credited (the other method waits for the group to come round again)",
+   "pass": true,
+   "error": null,
+   "ms": 292
+  },
+  {
+   "id": "RT7",
+   "group": "RT",
+   "title": "Interrupted then resumed: a draft that performed the intensifier is credited ONCE; resuming (even after a reload) shows the same methods, and finishing does not credit again",
+   "pass": false,
+   "error": "performed work must credit even while the session is still a draft |  | 0 !== 1 | ",
+   "ms": 243
+  },
+  {
+   "id": "RT8",
+   "group": "RT",
+   "title": "Interrupted before any intensifier: no credit, no lapse count; resuming keeps the same snapshot",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: rotationLedger is not defined |     at <anonymous>:1:6 |     at <anonymous>:1:23",
+   "ms": 239
+  },
+  {
+   "id": "RT9",
+   "group": "RT",
+   "title": "No duplicate credit: duplicated session objects and duplicated records (as from a merged restore) credit a group once",
+   "pass": false,
+   "error": "duplicates advanced the rotation more than once |  | 0 !== 1 | ",
+   "ms": 370
+  },
+  {
+   "id": "RT10",
+   "group": "RT",
+   "title": "Lapse (decision R4 = 2): a group that two consecutive finished sessions presented but nobody performed is moved back, so rotation can never be blocked and the same method is not offered forever",
+   "pass": false,
+   "error": "Expected values to be strictly deep-equal: | + actual - expected |  |   [",
+   "ms": 526
+  },
+  {
+   "id": "RT11",
+   "group": "RT",
+   "title": "Busy week and COMPACT hide or suppress the intensifier: the session finishes and counts, but the group is not credited",
+   "pass": false,
+   "error": "busy week credited an intensifier nobody performed |  | 1 !== 0 | ",
+   "ms": 238
+  },
+  {
+   "id": "RT12",
+   "group": "RT",
+   "title": "Other templates never move the Giant B rotation, even when they perform intensifiers (Giant B Upper/Lower, Giant A)",
+   "pass": true,
+   "error": null,
+   "ms": 195
+  },
+  {
+   "id": "RT13",
+   "group": "RT",
+   "title": "A manual intensifier on a slot OUTSIDE the presented group does not credit any group",
+   "pass": false,
+   "error": "Expected values to be strictly equal: |  | 1 !== 0 | ",
+   "ms": 251
+  },
+  {
+   "id": "RT14",
+   "group": "RT",
+   "title": "Legacy history then new sessions: pre-change completed Giant B keep their legacy meaning (no re-judging), and the new era continues from them",
+   "pass": true,
+   "error": null,
+   "ms": 332
+  },
+  {
+   "id": "RT15",
+   "group": "RT",
+   "title": "Order and clock independence: the derived group does not depend on array order of sessions; every session is judged on its own snapshot",
+   "pass": true,
+   "error": null,
+   "ms": 687
+  },
+  {
+   "id": "RT16",
+   "group": "RT",
+   "title": "Derivation is read-only and preserves history: calling it writes nothing; legacy sessions and every earlier record stay byte-identical after new sessions",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: rotationNextGroup is not defined |     at <anonymous>:1:7 |     at <anonymous>:1:45",
+   "ms": 229
+  },
+  {
+   "id": "RT17",
+   "group": "RT",
+   "title": "Backup round trip and validation: a session carrying a rotation snapshot restores identically; malformed snapshots (bad group, slots that do not match the group, unknown method, extra keys, markup) are refused",
+   "pass": false,
+   "error": "The expression evaluated to a falsy value: |  |   assert(s.rotation) | ",
+   "ms": 426
+  },
+  {
+   "id": "RT18",
+   "group": "RT",
+   "title": "A Giant B started on an older install (draft without a snapshot) resumes safely: no snapshot is invented, the legacy group is displayed, and finishing keeps the legacy credit",
+   "pass": true,
+   "error": null,
+   "ms": 390
+  },
+  {
+   "id": "RT19",
+   "group": "RT",
+   "title": "Full Session prescriptions unchanged: Giant B set counts per slot and the base slot table are untouched by rotation",
+   "pass": true,
+   "error": null,
+   "ms": 418
+  }
+ ]
+}

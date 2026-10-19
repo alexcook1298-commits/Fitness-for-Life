@@ -10,7 +10,10 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"; CAND="${1:-$ROOT/integration/app}";
 node "$ROOT/audit/scripts/extract.js" "$BASE" "$W/base" >/dev/null; node "$ROOT/audit/scripts/extract.js" "$CAND" "$W/cand" >/dev/null
 n=$(ls "$W/base" | wc -l); echo "structures extracted: $n (baseline) / $(ls "$W/cand" | wc -l) (candidate)"
 if diff -r "$W/base" "$W/cand" >/dev/null; then echo "PASS program structures byte-identical across all $n files"; else echo "FAIL program structures differ:"; diff -rq "$W/base" "$W/cand"; rc=1; fi
-node "$ROOT/audit/scripts/effective_prescription.js" "$BASE" "$W/eff_base.json" >/dev/null; node "$ROOT/audit/scripts/effective_prescription.js" "$CAND" "$W/eff_cand.json" >/dev/null
+# Phase 3: the Giant B cycle is forced by seeding finished Giant B sessions into history (works on both trees). The original audit script forced it by
+# overriding completedTemplateCount, which the Phase 3 rotation intentionally no longer reads; on the baseline both methods give identical output.
+node "$ROOT/integration/scripts/effective_prescription_by_history.js" "$BASE" "$W/eff_base.json" >/dev/null; node "$ROOT/integration/scripts/effective_prescription_by_history.js" "$CAND" "$W/eff_cand.json" >/dev/null
+node "$ROOT/audit/scripts/effective_prescription.js" "$BASE" "$W/eff_base_orig.json" >/dev/null; if cmp -s "$W/eff_base.json" "$W/eff_base_orig.json"; then echo "PASS both forcing methods agree on the baseline"; else echo "FAIL forcing methods disagree on the baseline"; rc=1; fi
 rows=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$W/eff_base.json','utf8')).length)")
 if cmp -s "$W/eff_base.json" "$W/eff_cand.json"; then echo "PASS effective prescription byte-identical baseline vs candidate ($rows rows)"; else echo "FAIL effective prescription differs"; rc=1; fi
 if cmp -s "$W/eff_base.json" "$ROOT/audit/data/effective_prescription.json"; then echo "PASS baseline output matches committed audit/data/effective_prescription.json"; else echo "FAIL baseline output differs from audit/data/effective_prescription.json"; rc=1; fi

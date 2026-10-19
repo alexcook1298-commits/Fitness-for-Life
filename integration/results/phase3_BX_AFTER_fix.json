@@ -1,0 +1,72 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T19:49:06.044Z",
+ "passed": 8,
+ "failed": 0,
+ "results": [
+  {
+   "id": "BX1",
+   "group": "BX",
+   "title": "budgetExposure(): per bar, the sessions split into full / partial / none / not recorded, with sets logged and checklist items ticked kept as separate units",
+   "pass": true,
+   "error": null,
+   "ms": 289
+  },
+  {
+   "id": "BX2",
+   "group": "BX",
+   "title": "The bars themselves are unchanged: budgetData() still counts every completed session once per category it belongs to, whatever its completion",
+   "pass": true,
+   "error": null,
+   "ms": 228
+  },
+  {
+   "id": "BX3",
+   "group": "BX",
+   "title": "Budget page: a full and a partial Strength session are told apart under the bar; the line reports logged sets and flags earlier sessions as not recorded; no combined total is shown",
+   "pass": true,
+   "error": null,
+   "ms": 195
+  },
+  {
+   "id": "BX4",
+   "group": "BX",
+   "title": "Units are never mixed: checklist sessions report checklist items, lifting sessions report sets, and neither is converted into the other",
+   "pass": true,
+   "error": null,
+   "ms": 206
+  },
+  {
+   "id": "BX5",
+   "group": "BX",
+   "title": "Coach Handoff carries the same logged-exposure lines (sessions with their completion split, and the unit-specific work logged); no bar means no line",
+   "pass": true,
+   "error": null,
+   "ms": 264
+  },
+  {
+   "id": "BX6",
+   "group": "BX",
+   "title": "Classification unchanged: Giant C stays Capability, the six ambiguous templates stay unclassified and are still disclosed as not counted; they never get a logged-exposure line",
+   "pass": true,
+   "error": null,
+   "ms": 224
+  },
+  {
+   "id": "BX7",
+   "group": "BX",
+   "title": "Only completed sessions from the last 7 days count; drafts and old sessions are excluded from bars and from exposure alike",
+   "pass": true,
+   "error": null,
+   "ms": 199
+  },
+  {
+   "id": "BX8",
+   "group": "BX",
+   "title": "Reporting is read-only and does not alter any record",
+   "pass": true,
+   "error": null,
+   "ms": 245
+  }
+ ]
+}

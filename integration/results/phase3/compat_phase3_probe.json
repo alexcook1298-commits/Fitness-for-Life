@@ -1,0 +1,40 @@
+{
+ "payload": {
+  "sessions": 4,
+  "withRotation": 1,
+  "withSkips": 1,
+  "withCompletion": 3,
+  "explicitSkipBasis": true,
+  "cardioWithTagLikeText": true
+ },
+ "newFieldsOnly": {
+  "current": "accepted",
+  "baseline": "accepted",
+  "pr1": "accepted",
+  "phase1": "accepted",
+  "phase2": "rejected: Invalid completion record (exercise status)."
+ },
+ "withTagLikeCardio": {
+  "current": "accepted",
+  "baseline": "rejected: Invalid text in pa_cardio_hist",
+  "pr1": "rejected: Invalid text in pa_cardio_hist",
+  "phase1": "rejected: Invalid text in pa_cardio_hist",
+  "phase2": "rejected: Invalid completion record (exercise status)."
+ },
+ "rotationAndSkipsWithoutExplicitBasis": {
+  "baseline": "accepted",
+  "pr1": "accepted",
+  "phase1": "accepted",
+  "phase2": "accepted"
+ },
+ "earlierShapeInCurrent": {
+  "noRotationNoSkips": "accepted",
+  "noCompletionNoRotationNoSkips": "accepted"
+ },
+ "malformedStillRefused": {
+  "rotationBadGroup": "rejected: Invalid rotation record (group).",
+  "rotationOnWrongTemplate": "rejected: Invalid rotation record (shape).",
+  "skipsBadValue": "rejected: Invalid skip record.",
+  "skipsUnknownSlot": "rejected: Invalid skip record."
+ }
+}

@@ -1,0 +1,56 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T19:54:51.169Z",
+ "passed": 6,
+ "failed": 0,
+ "results": [
+  {
+   "id": "EV1",
+   "group": "EV",
+   "title": "An exercise omitted from the latest session (no records) leaves its series untouched and never reads as deterioration",
+   "pass": true,
+   "error": null,
+   "ms": 192
+  },
+  {
+   "id": "EV2",
+   "group": "EV",
+   "title": "A partial exposure with fewer sets at the same load carries the same evidence as a full one (best performed set per exposure)",
+   "pass": true,
+   "error": null,
+   "ms": 171
+  },
+  {
+   "id": "EV3",
+   "group": "EV",
+   "title": "Legitimate evidence from a partial workout is preserved: a real workout in which only ONE exercise was done (all its sets logged) adds that exercise's exposure to its series, and nothing else",
+   "pass": true,
+   "error": null,
+   "ms": 282
+  },
+  {
+   "id": "EV4",
+   "group": "EV",
+   "title": "Skipped and not-reached exercises leave no record, so they cannot enter any series or be read as deterioration",
+   "pass": true,
+   "error": null,
+   "ms": 264
+  },
+  {
+   "id": "EV5",
+   "group": "EV",
+   "title": "Structured intensifier blocks never enter the evidence series, so an incomplete or smaller cluster cannot read as decline",
+   "pass": true,
+   "error": null,
+   "ms": 184
+  },
+  {
+   "id": "EV6",
+   "group": "EV",
+   "title": "Nothing in the engine raises a load automatically: the decision only reports OBSERVE / INVESTIGATE / ACT about a decline, and a single exposure never changes the program",
+   "pass": true,
+   "error": null,
+   "ms": 148
+  }
+ ]
+}

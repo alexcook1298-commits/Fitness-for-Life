@@ -1,8 +1,9 @@
 structures extracted: 32 (baseline) / 32 (candidate)
 PASS program structures byte-identical across all 32 files
+PASS both forcing methods agree on the baseline
 PASS effective prescription byte-identical baseline vs candidate (130 rows)
 PASS baseline output matches committed audit/data/effective_prescription.json
 files differing from the baseline package (non-index.html):
   Files /workspace/baseline/hq-2.3/sw.js and /workspace/integration/app/sw.js differ
 sha256 baseline index.html:  93fc2f462bd2b78b999935765f5eea5d3a021a5e031c9414ebb961285c1455ec
-sha256 candidate index.html: f361ad23cb0d6b5d5997416770cbb0591aa2ce41e6ff0fe9802dc633e822e3cd
+sha256 candidate index.html: 085864e10cb0bcd91cccc7c640d237ef4d7f1fce8430ddbe8c1c3f8241112bac

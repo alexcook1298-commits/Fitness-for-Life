@@ -1,0 +1,87 @@
+--- a/index.html
++++ b/index.html
+@@ -472,8 +472,45 @@
+ };
+ function preferredIntensifier(n){return DEFAULT_INT[n]||"Straight Sets"}
+ function completedTemplateCount(k){return sessions?.filter?.(x=>x.status==='complete'&&x.template===k).length||0}
++const ROTATION_GROUPS=[[3,4],[1,5],[0,6]],ROTATION_LAPSE_AFTER=2;
++// Giant B rotation is credited by what was performed, derived at read time from session snapshots and pa_hist (nothing is stored as a counter).
++// Sessions without a rotation snapshot are pre-change history: each finished one credits the next group in sequence, exactly as the old counter did.
++function rotationPerformed(x){return !!x&&x.intensifier&&x.intensifier!=='Straight Sets'&&(x.structured===true||!methodStages(x.intensifier))}
++function rotationLedger(){
++ const seen=new Set(),all=[];
++ (Array.isArray(sessions)?sessions:[]).forEach((s,k)=>{if(s&&s.template==='b'&&typeof s.id==='string'&&!seen.has(s.id)){seen.add(s.id);all.push({s,k})}});
++ const last=[-1,-1,-1],streak=[0,0,0],log=[];let seq=0,newEra=0,lastPresented=null;
++ all.filter(x=>!x.s.rotation&&x.s.status==='complete').forEach(x=>{last[seq%3]=seq;log.push({id:x.s.id,group:seq%3,kind:'legacy-credit'});seq++});
++ const era=all.filter(x=>x.s.rotation&&Number.isInteger(x.s.rotation.group)&&x.s.rotation.group>=0&&x.s.rotation.group<3).sort((a,b)=>(Date.parse(a.s.startedAt)||0)-(Date.parse(b.s.startedAt)||0)||a.k-b.k);
++ let hist=null;
++ era.forEach(({s})=>{
++  newEra++;hist??=rotationHistIndex();
++  const g=s.rotation.group,finished=s.status==='complete',need=(s.rotation.slots||[]).filter(i=>s.rotation.methods?.[i]&&s.rotation.methods[i]!=='Straight Sets');
++  const credited=need.length?need.some(i=>(hist.get(s.id)||[]).some(r=>r.slot===i)):finished;
++  if(credited){last[g]=seq;streak[g]=0;log.push({id:s.id,group:g,kind:'credit'});seq++;if(finished)lastPresented=null}
++  else if(finished){streak[g]++;if(streak[g]>=ROTATION_LAPSE_AFTER){last[g]=seq;streak[g]=0;log.push({id:s.id,group:g,kind:'lapse'});lastPresented=null}else{log.push({id:s.id,group:g,kind:'uncredited'});lastPresented=g}seq++}
++  else log.push({id:s.id,group:g,kind:'draft-uncredited'});
++ });
++ let next=0;for(let g=1;g<3;g++)if(last[g]<last[next])next=g;
++ return {next,last,streak,log,newEra,repeat:lastPresented===next};
++}
++let rotationHistCache={raw:null,idx:null};
++function rotationHistIndex(){
++ let raw=null;try{raw=localStorage.getItem('pa_hist')}catch{}
++ if(rotationHistCache.idx&&rotationHistCache.raw===raw)return rotationHistCache.idx;
++ const by=new Map();let rows=[];try{rows=JSON.parse(raw||'[]')}catch{}
++ (Array.isArray(rows)?rows:[]).forEach(x=>{if(!x||typeof x.id!=='string'||typeof x.sessionId!=='string'||!rotationPerformed(x))return;const part=x.id.split('|');if(part.length<5||part[0]!==x.sessionId||!/^\d+$/.test(part[1]))return;if(!by.has(x.sessionId))by.set(x.sessionId,[]);by.get(x.sessionId).push({slot:+part[1]})});
++ rotationHistCache={raw,idx:by};return by;
++}
++function rotationNextGroup(){return rotationLedger().next}
++function rotationSnapshot(){
++ const led=rotationLedger(),slotsG=ROTATION_GROUPS[led.next],methods={};
++ slotsG.forEach(i=>{methods[i]=preferredIntensifier(selected('b',i))});
++ const snap={v:1,group:led.next,slots:slotsG.slice(),methods,basis:led.newEra?'ledger':'legacy'};if(led.repeat)snap.repeat=true;return snap;
++}
++function giantBGroup(){return currentSession&&currentSession.template==='b'&&currentSession.rotation?currentSession.rotation.group:rotationNextGroup()}
+ function giantBRotation(i,n){
+- const cycle=completedTemplateCount('b')%3, activeSlots=[[3,4],[1,5],[0,6]][cycle];
++ const activeSlots=ROTATION_GROUPS[giantBGroup()];
+  if(!activeSlots.includes(i))return 'Straight Sets';
+  const preferred=preferredIntensifier(n);
+  // Dumbbell incline pressing remains straight by default even when its slot rotates in.
+@@ -1049,12 +1086,12 @@
+ const legacyRender=render;
+ render=function(){
+  legacyRender();annotateAndRestore();
+- if(currentSession)$('sessionStatus').innerHTML=`<span class="gold">${esc(currentSession.weekMode.toUpperCase())} WEEK • ${esc(BLOCKS.find(b=>b.id===currentSession.phase)?.name||'Extra day')}</span><br><small>Session autosaves on this browser. Exit pauses it; Finish records it.</small><div class="compactbar"><small>${currentSession.compact?'COMPACT / MED • highest-value work only':'Full session'}</small>${slots[active]?`<button class="secondary ${currentSession.compact?'compact-on':''}" onclick="toggleCompact()">${currentSession.compact?'EXIT COMPACT':'COMPACT / MED'}</button>`:''}</div>`;
++ if(currentSession)$('sessionStatus').innerHTML=`<span class="gold">${esc(currentSession.weekMode.toUpperCase())} WEEK • ${esc(BLOCKS.find(b=>b.id===currentSession.phase)?.name||'Extra day')}</span><br><small>Session autosaves on this browser. Exit pauses it; Finish records it.</small><div class="compactbar"><small>${currentSession.compact?'COMPACT / MED • highest-value work only':'Full session'}</small>${currentSession.rotation?.repeat?'<br><small>Rotation: this group is offered again because the last Giant B did not perform its intensifier.</small>':''}${slots[active]?`<button class="secondary ${currentSession.compact?'compact-on':''}" onclick="toggleCompact()">${currentSession.compact?'EXIT COMPACT':'COMPACT / MED'}</button>`:''}</div>`;
+ };
+ start=function(k){
+  if(!T[k])return;saveDraft();legacyStopTimer();
+  let s=sessions.find(x=>x.template===k&&x.status==='draft');
+- if(!s){s={id:uid(),template:k,phase:plan.active,weekMode,startedAt:new Date().toISOString(),status:'draft',forms:{},checks:{},choices:{},modes:{},clusters:{},strengthModes:{},activators:{},compact:false,mobTier:5,cardioMachine,oneOff:!activeBlock().days.includes(k)};sessions.push(s)}
++ if(!s){s={id:uid(),template:k,phase:plan.active,weekMode,startedAt:new Date().toISOString(),status:'draft',forms:{},checks:{},choices:{},modes:{},clusters:{},strengthModes:{},activators:{},compact:false,mobTier:5,cardioMachine,oneOff:!activeBlock().days.includes(k)};if(k==='b')s.rotation=rotationSnapshot();sessions.push(s)}
+  const resumeTimer=s.timerEnd||0;currentSession=s;localStorage.setItem('pa_current_session',s.id);active=k;renderedSession=null;timerEnd=resumeTimer;
+  applySessionSlots(s);mobTier=s.mobTier||5;cardioMachine=CARDIO_MACHINES[s.cardioMachine]?s.cardioMachine:cardioMachine;
+  $('finishPanel').classList.add('hidden');$('finishNotes').value=s.finishNotes||'';$('finishRecovery').value=s.finishRecovery||'good';
+@@ -1275,6 +1312,14 @@
+  if(/<\/?[A-Za-z][^<>]*>|<[!?]/.test(value))return 'looks like HTML. Use < and > only as comparison signs, for example <10:00';
+  return null;
+ }
++function validateRotation(s){
++ const bad=why=>{throw Error('Invalid rotation record'+(why?' ('+why+')':'')+'.')},r=s.rotation;
++ if(r===null||typeof r!=='object'||Array.isArray(r)||!Object.keys(r).every(k=>['v','group','slots','methods','basis','repeat'].includes(k))||r.v!==1||s.template!=='b')bad('shape');
++ if(!Number.isInteger(r.group)||r.group<0||r.group>2||!Array.isArray(r.slots)||JSON.stringify(r.slots)!==JSON.stringify(ROTATION_GROUPS[r.group]))bad('group');
++ if(!['ledger','legacy'].includes(r.basis)||(r.repeat!==undefined&&r.repeat!==true))bad('value');
++ if(r.methods===null||typeof r.methods!=='object'||Array.isArray(r.methods))bad('methods');
++ for(const [k,v] of Object.entries(r.methods))if(!r.slots.map(String).includes(k)||!INTENSIFIERS.includes(v))bad('methods');
++}
+ function validateCompletion(c){
+  const bad=why=>{throw Error('Invalid completion record'+(why?' ('+why+')':'')+'.')};
+  const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),int=(x,max)=>Number.isInteger(x)&&x>=0&&x<=max;
+@@ -1304,6 +1349,7 @@
+   if(typeof s.id!=='string'||!/^[a-zA-Z0-9-]{1,100}$/.test(s.id)||!Object.hasOwn(T,s.template)||!['draft','complete'].includes(s.status)||!['busy','normal','extra'].includes(s.weekMode)||!s.forms||!s.checks||!s.choices||!s.modes)throw Error('Invalid session record');
+   if(!BLOCKS.some(b=>b.id===s.phase))throw Error('Invalid session block');
+   if(Object.hasOwn(s,'completion'))validateCompletion(s.completion);
++  if(Object.hasOwn(s,'rotation'))validateRotation(s);
+  }
+  const safeString=x=>typeof x==='string'&&x.length<2000&&!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(x);
+  for(const [k,v] of Object.entries(obj.data)){
