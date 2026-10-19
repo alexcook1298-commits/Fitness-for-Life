@@ -1,0 +1,72 @@
+{
+ "model": "rotation_model",
+ "defaults": {
+  "creditPolicy": "any",
+  "lapseAfter": 2
+ },
+ "total": 15,
+ "passed": 15,
+ "failed": 0,
+ "results": [
+  {
+   "name": "ROT-PARITY-01 legacy history (no snapshots) reproduces the legacy counter for 0..40 complete B",
+   "pass": true
+  },
+  {
+   "name": "ROT-PARITY-02 legacy history ignores drafts and non-B like the legacy counter",
+   "pass": true
+  },
+  {
+   "name": "ROT-PARITY-03 fully performed new-era sessions follow the legacy sequence 0,1,2,0,1,2 (property, 200 random lengths and pre-era offsets)",
+   "pass": true
+  },
+  {
+   "name": "ROT-SKIP-01 a completed B that skipped the presented intensifiers does not advance rotation",
+   "pass": true
+  },
+  {
+   "name": "ROT-SKIP-02 skipping is not repeated forever: lapse advances the group after 2 finished uncredited presentations",
+   "pass": true
+  },
+  {
+   "name": "ROT-PART-01 a partially completed intensifier (incomplete record) earns no credit",
+   "pass": true
+  },
+  {
+   "name": "ROT-PART-02 credit policy: one of two slots performed credits under \"any\" and not under \"all\"",
+   "pass": true
+  },
+  {
+   "name": "ROT-COMPACT-01 compact/time-constrained B whose presented slots were hidden or run straight earns no credit",
+   "pass": true
+  },
+  {
+   "name": "ROT-DRAFT-01 an interrupted draft with performed intensifier earns credit once, and resuming does not double-count",
+   "pass": true
+  },
+  {
+   "name": "ROT-DRAFT-02 an abandoned draft without records neither credits nor counts toward lapse",
+   "pass": true
+  },
+  {
+   "name": "ROT-DUP-01 duplicate sessions or duplicate records (for example after a merged restore) do not double-credit",
+   "pass": true
+  },
+  {
+   "name": "ROT-HIST-01 derivation never mutates its inputs (history, records, sessions)",
+   "pass": true
+  },
+  {
+   "name": "ROT-NOMETHOD-01 a presented group with no non-straight method credits on completion (cannot stall)",
+   "pass": true
+  },
+  {
+   "name": "ROT-MANUAL-01 manual intensifier override on a slot outside the presented group earns no credit",
+   "pass": true
+  },
+  {
+   "name": "ROT-MIX-01 pre-era history followed by new-era sessions is seamless",
+   "pass": true
+  }
+ ]
+}

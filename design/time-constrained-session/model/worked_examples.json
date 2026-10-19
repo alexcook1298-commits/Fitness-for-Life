@@ -1,0 +1,4289 @@
+{
+ "model": {
+  "workSec": 45,
+  "setupSec": 60,
+  "stageSec": 25,
+  "widowmakerExtraSec": 90,
+  "loadedStretchSec": 65,
+  "buffer": 0.1,
+  "band": 0.15
+ },
+ "note": "Modelled estimates. Draft tier data. Illustrative only.",
+ "examples": [
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 12,
+   "budgetMin": 10.8,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 9.9,
+   "rangeMin": [
+    8,
+    11
+   ],
+   "breakdownMin": {
+    "core": 4.8,
+    "warm": 4.7,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 3,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 3,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides"
+   ],
+   "warmupDropped": [
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Scapular Push-Ups",
+    "Bodyweight Squat → Controlled Depth",
+    "Bench-Specific Ramp",
+    "Row / Squat-Press Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Lateral Raise",
+    "sets reduced to 1: Leg Curl",
+    "omitted (deferred): Lateral Raise",
+    "omitted (deferred): Leg Curl",
+    "sets reduced to 2: Loaded Carry",
+    "sets reduced to 1: Loaded Carry",
+    "sets reduced to 1: Horizontal Row",
+    "sets reduced to 1: Squat Press",
+    "sets reduced to 2: Horizontal Press",
+    "sets reduced to 1: Horizontal Press",
+    "sets reduced to 1: Vertical Pull",
+    "omitted (deferred): Loaded Carry",
+    "omitted (deferred): Horizontal Row",
+    "omitted (deferred): Squat Press",
+    "omitted (deferred): Horizontal Press"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 25,
+   "budgetMin": 22.5,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 21.2,
+   "rangeMin": [
+    18,
+    24
+   ],
+   "breakdownMin": {
+    "core": 10,
+    "warm": 10.7,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 1,
+     "changes": [
+      "sets 3→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 3,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bench-Specific Ramp"
+   ],
+   "warmupDropped": [
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Bodyweight Squat → Controlled Depth",
+    "Row / Squat-Press Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Lateral Raise",
+    "sets reduced to 1: Leg Curl",
+    "omitted (deferred): Lateral Raise",
+    "omitted (deferred): Leg Curl",
+    "sets reduced to 2: Loaded Carry",
+    "sets reduced to 1: Loaded Carry",
+    "sets reduced to 1: Horizontal Row",
+    "sets reduced to 1: Squat Press",
+    "sets reduced to 2: Horizontal Press",
+    "sets reduced to 1: Horizontal Press",
+    "sets reduced to 1: Vertical Pull",
+    "omitted (deferred): Loaded Carry",
+    "omitted (deferred): Horizontal Row",
+    "omitted (deferred): Squat Press"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 25,
+   "budgetMin": 22.5,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 21.2,
+   "rangeMin": [
+    18,
+    24
+   ],
+   "breakdownMin": {
+    "core": 10,
+    "warm": 10.7,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 1,
+     "changes": [
+      "sets 3→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 3,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bench-Specific Ramp"
+   ],
+   "warmupDropped": [
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Bodyweight Squat → Controlled Depth",
+    "Row / Squat-Press Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Lateral Raise",
+    "sets reduced to 1: Leg Curl",
+    "omitted (deferred): Lateral Raise",
+    "omitted (deferred): Leg Curl",
+    "omitted (deferred): Loaded Carry",
+    "omitted (deferred): Horizontal Row",
+    "omitted (deferred): Squat Press",
+    "sets reduced to 2: Horizontal Press",
+    "sets reduced to 1: Horizontal Press",
+    "sets reduced to 1: Vertical Pull"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 40,
+   "budgetMin": 36,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 31.6,
+   "rangeMin": [
+    27,
+    36
+   ],
+   "breakdownMin": {
+    "core": 15.3,
+    "warm": 15.8,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 1,
+     "changes": [
+      "sets 3→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 3,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bodyweight Squat → Controlled Depth",
+    "Bench-Specific Ramp",
+    "Row / Squat-Press Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Lateral Raise",
+    "sets reduced to 1: Leg Curl",
+    "omitted (deferred): Lateral Raise",
+    "omitted (deferred): Leg Curl",
+    "sets reduced to 2: Loaded Carry",
+    "sets reduced to 1: Loaded Carry",
+    "sets reduced to 1: Horizontal Row",
+    "sets reduced to 1: Squat Press",
+    "sets reduced to 2: Horizontal Press",
+    "sets reduced to 1: Horizontal Press",
+    "sets reduced to 1: Vertical Pull",
+    "omitted (deferred): Loaded Carry",
+    "omitted (deferred): Horizontal Row"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 40,
+   "budgetMin": 36,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 33.4,
+   "rangeMin": [
+    28,
+    38
+   ],
+   "breakdownMin": {
+    "core": 22.3,
+    "warm": 10.7,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 3,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 3,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bench-Specific Ramp"
+   ],
+   "warmupDropped": [
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Bodyweight Squat → Controlled Depth",
+    "Row / Squat-Press Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Lateral Raise",
+    "sets reduced to 1: Leg Curl",
+    "omitted (deferred): Lateral Raise",
+    "omitted (deferred): Leg Curl",
+    "omitted (deferred): Loaded Carry",
+    "omitted (deferred): Horizontal Row",
+    "omitted (deferred): Squat Press"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 60,
+   "budgetMin": 54,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 54,
+   "rangeMin": [
+    46,
+    62
+   ],
+   "breakdownMin": {
+    "core": 35,
+    "warm": 18.5,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 3,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 1,
+     "changes": [
+      "sets 3→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bodyweight Squat → Controlled Depth",
+    "Bench-Specific Ramp",
+    "Row / Squat-Press Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Lateral Raise",
+    "sets reduced to 1: Leg Curl",
+    "omitted (deferred): Lateral Raise",
+    "omitted (deferred): Leg Curl",
+    "sets reduced to 2: Loaded Carry",
+    "sets reduced to 1: Loaded Carry",
+    "sets reduced to 1: Horizontal Row",
+    "sets reduced to 1: Squat Press"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 60,
+   "budgetMin": 54,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 48.1,
+   "rangeMin": [
+    41,
+    55
+   ],
+   "breakdownMin": {
+    "core": 31.8,
+    "warm": 15.8,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 3,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 3,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bodyweight Squat → Controlled Depth",
+    "Bench-Specific Ramp",
+    "Row / Squat-Press Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Lateral Raise",
+    "sets reduced to 1: Leg Curl",
+    "omitted (deferred): Lateral Raise",
+    "omitted (deferred): Leg Curl",
+    "omitted (deferred): Loaded Carry",
+    "omitted (deferred): Horizontal Row"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 90,
+   "budgetMin": 81,
+   "fullSessionEstMin": 90.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 77,
+   "rangeMin": [
+    65,
+    89
+   ],
+   "breakdownMin": {
+    "core": 58,
+    "warm": 18.5,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 3,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no Myo-Reps efforts",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no Myo-Reps efforts",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 3,
+     "plannedSets": 3,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bodyweight Squat → Controlled Depth",
+    "Bench-Specific Ramp",
+    "Row / Squat-Press Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Lateral Raise",
+    "loaded stretch removed: Leg Curl",
+    "loaded stretch removed: Loaded Carry",
+    "loaded stretch removed: Horizontal Row",
+    "loaded stretch removed: Squat Press",
+    "loaded stretch removed: Horizontal Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Lateral Raise",
+    "intensifier efforts removed (final set kept as straight): Leg Curl",
+    "cool-down trimmed to downshift only"
+   ]
+  },
+  {
+   "tpl": "a",
+   "cycle": 0,
+   "availableMin": 110,
+   "budgetMin": 99,
+   "fullSessionEstMin": 90.4,
+   "fullFits": true,
+   "feasible": true,
+   "estMin": 90.4,
+   "rangeMin": [
+    77,
+    104
+   ],
+   "breakdownMin": {
+    "core": 65.9,
+    "warm": 18.5,
+    "cool": 6
+   },
+   "items": [
+    {
+     "slot": "Horizontal Press",
+     "exercise": "Bench Press (BB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 3,
+     "plannedSets": 3,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Horizontal Row",
+     "exercise": "Chest-Supported Row (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Squat Press",
+     "exercise": "Hack Squat",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Leg Curl",
+     "exercise": "Seated Leg Curl",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": "Myo-Reps",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Lateral Raise",
+     "exercise": "Lateral Raise (Cable)",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": "Myo-Reps",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Weighted Pull-Up",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Loaded Carry",
+     "exercise": "Farmer Carry (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 3,
+     "plannedSets": 3,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Knee-to-Wall Ankle Rocks",
+    "90/90 Hip Switches",
+    "Wall Slides",
+    "Scapular Push-Ups",
+    "Bodyweight Squat → Controlled Depth",
+    "Bench-Specific Ramp",
+    "Row / Squat-Press Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Easy Walk + Nasal Breathing",
+    "Doorway Pec / Biceps Opening",
+    "Child’s-Pose Lat Reach",
+    "Supported Deep-Squat Sit",
+    "Calf / Ankle Stretch",
+    "Downshift Breathing"
+   ],
+   "log": []
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 12,
+   "budgetMin": 10.8,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 10.1,
+   "rangeMin": [
+    9,
+    12
+   ],
+   "breakdownMin": {
+    "core": 4.3,
+    "warm": 5.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Rear Delts",
+    "intensifier efforts removed (final set kept as straight): Biceps",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "sets reduced to 1: Biceps",
+    "sets reduced to 1: Hip Hinge",
+    "sets reduced to 1: Incline Press",
+    "sets reduced to 1: Vertical Pull",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge",
+    "omitted (deferred): Incline Press"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 25,
+   "budgetMin": 22.5,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 18.3,
+   "rangeMin": [
+    16,
+    21
+   ],
+   "breakdownMin": {
+    "core": 8.5,
+    "warm": 9.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Rear Delts",
+    "intensifier efforts removed (final set kept as straight): Biceps",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "sets reduced to 1: Biceps",
+    "sets reduced to 1: Hip Hinge",
+    "sets reduced to 1: Incline Press",
+    "sets reduced to 1: Vertical Pull",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 25,
+   "budgetMin": 22.5,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 21.6,
+   "rangeMin": [
+    18,
+    25
+   ],
+   "breakdownMin": {
+    "core": 11.8,
+    "warm": 9.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Rear Delts",
+    "intensifier efforts removed (final set kept as straight): Biceps",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge",
+    "sets reduced to 1: Incline Press"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 40,
+   "budgetMin": 36,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 33.3,
+   "rangeMin": [
+    28,
+    38
+   ],
+   "breakdownMin": {
+    "core": 16.5,
+    "warm": 16.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no DC Rest-Pause efforts",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Rear Delts",
+    "intensifier efforts removed (final set kept as straight): Biceps",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "sets reduced to 1: Biceps",
+    "sets reduced to 1: Hip Hinge",
+    "sets reduced to 1: Incline Press",
+    "sets reduced to 1: Vertical Pull"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 40,
+   "budgetMin": 36,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 24.8,
+   "rangeMin": [
+    21,
+    29
+   ],
+   "breakdownMin": {
+    "core": 15,
+    "warm": 9.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Rear Delts",
+    "intensifier efforts removed (final set kept as straight): Biceps",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 60,
+   "budgetMin": 54,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 52.1,
+   "rangeMin": [
+    44,
+    60
+   ],
+   "breakdownMin": {
+    "core": 35.3,
+    "warm": 16.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no Myo-Reps efforts",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no DC Rest-Pause efforts",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Rear Delts",
+    "intensifier efforts removed (final set kept as straight): Biceps",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 60,
+   "budgetMin": 54,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 52.1,
+   "rangeMin": [
+    44,
+    60
+   ],
+   "breakdownMin": {
+    "core": 35.3,
+    "warm": 16.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no Myo-Reps efforts",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no DC Rest-Pause efforts",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Rear Delts",
+    "intensifier efforts removed (final set kept as straight): Biceps",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 90,
+   "budgetMin": 81,
+   "fullSessionEstMin": 82.4,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 80.3,
+   "rangeMin": [
+    68,
+    92
+   ],
+   "breakdownMin": {
+    "core": 56.5,
+    "warm": 16.3,
+    "cool": 7.4
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": "Myo-Reps",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": "DC Rest-Pause",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 1,
+     "plannedSets": 1,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Easy Walk + Nasal Breathing",
+    "Gentle Pec / Front-Shoulder Opening",
+    "Lat Reach / Supported Hang",
+    "Supine Hamstring Stretch",
+    "Figure-Four Glute Stretch",
+    "Forearm + Arm Shakeout",
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 0,
+   "availableMin": 110,
+   "budgetMin": 99,
+   "fullSessionEstMin": 82.4,
+   "fullFits": true,
+   "feasible": true,
+   "estMin": 82.4,
+   "rangeMin": [
+    70,
+    95
+   ],
+   "breakdownMin": {
+    "core": 58.7,
+    "warm": 16.3,
+    "cool": 7.4
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": "Myo-Reps",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": "DC Rest-Pause",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 1,
+     "plannedSets": 1,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Easy Walk + Nasal Breathing",
+    "Gentle Pec / Front-Shoulder Opening",
+    "Lat Reach / Supported Hang",
+    "Supine Hamstring Stretch",
+    "Figure-Four Glute Stretch",
+    "Forearm + Arm Shakeout",
+    "Downshift Breathing"
+   ],
+   "log": []
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 12,
+   "budgetMin": 10.8,
+   "fullSessionEstMin": 79.8,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 10.1,
+   "rangeMin": [
+    9,
+    12
+   ],
+   "breakdownMin": {
+    "core": 4.3,
+    "warm": 5.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Widowmaker",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "sets reduced to 1: Biceps",
+    "sets reduced to 1: Hip Hinge",
+    "sets reduced to 1: Incline Press",
+    "sets reduced to 1: Vertical Pull",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge",
+    "omitted (deferred): Incline Press"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 25,
+   "budgetMin": 22.5,
+   "fullSessionEstMin": 79.8,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 18.3,
+   "rangeMin": [
+    16,
+    21
+   ],
+   "breakdownMin": {
+    "core": 8.5,
+    "warm": 9.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Widowmaker",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "sets reduced to 1: Biceps",
+    "sets reduced to 1: Hip Hinge",
+    "sets reduced to 1: Incline Press",
+    "sets reduced to 1: Vertical Pull",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 25,
+   "budgetMin": 22.5,
+   "fullSessionEstMin": 79.8,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 21.6,
+   "rangeMin": [
+    18,
+    25
+   ],
+   "breakdownMin": {
+    "core": 11.8,
+    "warm": 9.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Widowmaker",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge",
+    "sets reduced to 1: Incline Press"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 40,
+   "budgetMin": 36,
+   "fullSessionEstMin": 79.8,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 33.3,
+   "rangeMin": [
+    28,
+    38
+   ],
+   "breakdownMin": {
+    "core": 16.5,
+    "warm": 16.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Widowmaker",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "sets reduced to 1: Biceps",
+    "sets reduced to 1: Hip Hinge",
+    "sets reduced to 1: Incline Press",
+    "sets reduced to 1: Vertical Pull"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 40,
+   "budgetMin": 36,
+   "fullSessionEstMin": 79.8,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 24.8,
+   "rangeMin": [
+    21,
+    29
+   ],
+   "breakdownMin": {
+    "core": 15,
+    "warm": 9.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp"
+   ],
+   "warmupDropped": [
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "RDL Primer"
+   ],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Widowmaker",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves",
+    "omitted (deferred): Rear Delts",
+    "omitted (deferred): Triceps",
+    "omitted (deferred): Biceps",
+    "omitted (deferred): Hip Hinge"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 60,
+   "budgetMin": 54,
+   "fullSessionEstMin": 79.8,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 52.1,
+   "rangeMin": [
+    44,
+    60
+   ],
+   "breakdownMin": {
+    "core": 35.3,
+    "warm": 16.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Widowmaker",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 60,
+   "budgetMin": 54,
+   "fullSessionEstMin": 79.8,
+   "fullFits": false,
+   "feasible": true,
+   "estMin": 52.1,
+   "rangeMin": [
+    44,
+    60
+   ],
+   "breakdownMin": {
+    "core": 35.3,
+    "warm": 16.3,
+    "cool": 0.5
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "REDUCED",
+     "fullSets": 2,
+     "plannedSets": 1,
+     "changes": [
+      "sets 2→1",
+      "no loaded stretch"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 1,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "OMITTED (NOT DONE)",
+     "fullSets": 2,
+     "plannedSets": 0,
+     "changes": [
+      "not done today; deferred"
+     ],
+     "method": null,
+     "loadedStretch": false
+    }
+   ],
+   "policy": "depth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Downshift Breathing"
+   ],
+   "log": [
+    "loaded stretch removed: Widowmaker",
+    "loaded stretch removed: Calves",
+    "loaded stretch removed: Rear Delts",
+    "loaded stretch removed: Triceps",
+    "loaded stretch removed: Biceps",
+    "loaded stretch removed: Hip Hinge",
+    "loaded stretch removed: Incline Press",
+    "loaded stretch removed: Vertical Pull",
+    "intensifier efforts removed (final set kept as straight): Widowmaker",
+    "cool-down trimmed to downshift only",
+    "sets reduced to 1: Calves",
+    "sets reduced to 1: Rear Delts",
+    "sets reduced to 1: Triceps",
+    "omitted (deferred): Widowmaker",
+    "omitted (deferred): Calves"
+   ]
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 90,
+   "budgetMin": 81,
+   "fullSessionEstMin": 79.8,
+   "fullFits": true,
+   "feasible": true,
+   "estMin": 79.8,
+   "rangeMin": [
+    68,
+    92
+   ],
+   "breakdownMin": {
+    "core": 56.1,
+    "warm": 16.3,
+    "cool": 7.4
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 1,
+     "plannedSets": 1,
+     "changes": [],
+     "method": "Widowmaker",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Easy Walk + Nasal Breathing",
+    "Gentle Pec / Front-Shoulder Opening",
+    "Lat Reach / Supported Hang",
+    "Supine Hamstring Stretch",
+    "Figure-Four Glute Stretch",
+    "Forearm + Arm Shakeout",
+    "Downshift Breathing"
+   ],
+   "log": []
+  },
+  {
+   "tpl": "b",
+   "cycle": 2,
+   "availableMin": 110,
+   "budgetMin": 99,
+   "fullSessionEstMin": 79.8,
+   "fullFits": true,
+   "feasible": true,
+   "estMin": 79.8,
+   "rangeMin": [
+    68,
+    92
+   ],
+   "breakdownMin": {
+    "core": 56.1,
+    "warm": 16.3,
+    "cool": 7.4
+   },
+   "items": [
+    {
+     "slot": "Incline Press",
+     "exercise": "Incline Press (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Vertical Pull",
+     "exercise": "Lat Pulldown",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Hip Hinge",
+     "exercise": "Romanian Deadlift (BB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Rear Delts",
+     "exercise": "Rear-Delt Fly (DB)",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Biceps",
+     "exercise": "Biceps Curl (DB)",
+     "role": "core",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Triceps",
+     "exercise": "Triceps Pressdown",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    },
+    {
+     "slot": "Widowmaker",
+     "exercise": "Leg Press",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 1,
+     "plannedSets": 1,
+     "changes": [],
+     "method": "Widowmaker",
+     "loadedStretch": true
+    },
+    {
+     "slot": "Calves",
+     "exercise": "Standing Calf Raise",
+     "role": "accessory",
+     "status": "INCLUDED",
+     "fullSets": 2,
+     "plannedSets": 2,
+     "changes": [],
+     "method": null,
+     "loadedStretch": true
+    }
+   ],
+   "policy": "breadth",
+   "warmupRetained": [
+    "Raise Temperature",
+    "Cat-Camel",
+    "90/90 Hip Switches",
+    "Dowel / Bodyweight Hip Hinge",
+    "Glute Bridge",
+    "Wall Slides",
+    "Scapular Pulldown / Straight-Arm Pulldown",
+    "Incline-Press Ramp",
+    "RDL Primer"
+   ],
+   "warmupDropped": [],
+   "cooldownRetained": [
+    "Easy Walk + Nasal Breathing",
+    "Gentle Pec / Front-Shoulder Opening",
+    "Lat Reach / Supported Hang",
+    "Supine Hamstring Stretch",
+    "Figure-Four Glute Stretch",
+    "Forearm + Arm Shakeout",
+    "Downshift Breathing"
+   ],
+   "log": []
+  }
+ ],
+ "sensitivityNoCoolDownTrim": [
+  {
+   "tpl": "a",
+   "T": 12,
+   "withTrim": "Vertical Pull:1",
+   "withoutTrim": "INFEASIBLE"
+  },
+  {
+   "tpl": "a",
+   "T": 15,
+   "withTrim": "Vertical Pull:1",
+   "withoutTrim": "Vertical Pull:1"
+  },
+  {
+   "tpl": "a",
+   "T": 20,
+   "withTrim": "Vertical Pull:1",
+   "withoutTrim": "Vertical Pull:1"
+  },
+  {
+   "tpl": "a",
+   "T": 25,
+   "withTrim": "Horizontal Press:1,Vertical Pull:1",
+   "withoutTrim": "Vertical Pull:1"
+  },
+  {
+   "tpl": "a",
+   "T": 30,
+   "withTrim": "Horizontal Press:1,Vertical Pull:1",
+   "withoutTrim": "Horizontal Press:1,Vertical Pull:1"
+  },
+  {
+   "tpl": "a",
+   "T": 40,
+   "withTrim": "Horizontal Press:1,Squat Press:1,Vertical Pull:1",
+   "withoutTrim": "Horizontal Press:1,Vertical Pull:1"
+  },
+  {
+   "tpl": "a",
+   "T": 60,
+   "withTrim": "Horizontal Press:3,Horizontal Row:1,Squat Press:1,Vertical Pull:2,Loaded Carry:1",
+   "withoutTrim": "Horizontal Press:1,Horizontal Row:1,Squat Press:1,Vertical Pull:2,Loaded Carry:1"
+  },
+  {
+   "tpl": "b",
+   "T": 12,
+   "withTrim": "Vertical Pull:1",
+   "withoutTrim": "INFEASIBLE"
+  },
+  {
+   "tpl": "b",
+   "T": 15,
+   "withTrim": "Vertical Pull:1",
+   "withoutTrim": "INFEASIBLE"
+  },
+  {
+   "tpl": "b",
+   "T": 20,
+   "withTrim": "Vertical Pull:1",
+   "withoutTrim": "Vertical Pull:1"
+  },
+  {
+   "tpl": "b",
+   "T": 25,
+   "withTrim": "Incline Press:1,Vertical Pull:1",
+   "withoutTrim": "Vertical Pull:1"
+  },
+  {
+   "tpl": "b",
+   "T": 30,
+   "withTrim": "Incline Press:1,Vertical Pull:1",
+   "withoutTrim": "Incline Press:1,Vertical Pull:1"
+  },
+  {
+   "tpl": "b",
+   "T": 40,
+   "withTrim": "Incline Press:1,Vertical Pull:1,Hip Hinge:1,Biceps:1",
+   "withoutTrim": "Incline Press:1,Vertical Pull:1"
+  },
+  {
+   "tpl": "b",
+   "T": 60,
+   "withTrim": "Incline Press:2,Vertical Pull:2,Hip Hinge:2,Rear Delts:1,Biceps:2,Triceps:1",
+   "withoutTrim": "Incline Press:2,Vertical Pull:2,Hip Hinge:2,Biceps:2"
+  }
+ ],
+ "invariants": {
+  "plansChecked": 1008,
+  "feasible": 952,
+  "infeasible": 56,
+  "fullFits": 304,
+  "violations": 0,
+  "monotonicityViolations": 0,
+  "firstViolations": [],
+  "smallestFeasibleMinutesDefaultModel": {
+   "a": 12,
+   "b": 12
+  }
+ }
+}

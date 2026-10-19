@@ -1,0 +1,37 @@
+{
+ "appDir": "baseline/hq-2.3",
+ "results": [
+  {
+   "name": "control: plain session",
+   "accepted": true
+  },
+  {
+   "name": "session with additive tcs + rotation fields",
+   "accepted": true
+  },
+  {
+   "name": "complete session with additive fields",
+   "accepted": true
+  },
+  {
+   "name": "session status \"completed\" (not an app-written value)",
+   "accepted": false,
+   "error": "Invalid session record"
+  },
+  {
+   "name": "new top-level key pa_tcs_v1",
+   "accepted": false,
+   "error": "Unrecognized or oversized backup entry: pa_tcs_v1"
+  },
+  {
+   "name": "tcs string containing a control character",
+   "accepted": false,
+   "error": "Invalid text in pa_sessions_v2"
+  },
+  {
+   "name": "tcs string over 2000 characters",
+   "accepted": false,
+   "error": "Invalid text in pa_sessions_v2"
+  }
+ ]
+}
