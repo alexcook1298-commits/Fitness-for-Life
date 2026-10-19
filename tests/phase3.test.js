@@ -241,6 +241,57 @@ test('SK11','A finished session cannot be re-skipped, and the Finish preview and
  await p.eval(()=>skipExercise(1));assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_sessions_v2).at(-1))).skips['1'],undefined);
 });
 
+// =====================================================================
+// BX — Training Budget: report logged exposure, never invent equivalence (Priority 4)
+// =====================================================================
+const comp=(prescription,performed,prescribed,basis='sets')=>({v:1,basis,scope:'full',prescription,prescribed,performed,extra:0,exercises:[]});
+const csess=(id,template,c,daysAgo=1)=>({...bsess(id,template,'complete',daysAgo),...(c?{completion:c}:{})});
+const budgetPage=p=>p.eval(()=>{renderBudgetPage();return document.getElementById('mpBody').innerText});
+
+test('BX1','budgetExposure(): per bar, the sessions split into full / partial / none / not recorded, with sets logged and checklist items ticked kept as separate units',async p=>{
+ await seedS(p,[csess('f','a',comp('full',16,16)),csess('p','a',comp('partial',1,16)),csess('l','a',null),csess('m','mobility',comp('partial',2,6,'items'))]);
+ const e=await p.eval(()=>budgetExposure());
+ assert.deepStrictEqual(e.Strength,{sessions:3,full:1,partial:1,none:0,notRecorded:1,setsLogged:17,itemsTicked:0});
+ assert.deepStrictEqual(e['Low-intensity engine'],{sessions:1,full:0,partial:1,none:0,notRecorded:0,setsLogged:0,itemsTicked:2});
+ assert.deepStrictEqual(Object.keys(e),['Strength','Hypertrophy','Explosive','High-intensity engine','Low-intensity engine','Capability']);
+});
+test('BX2','The bars themselves are unchanged: budgetData() still counts every completed session once per category it belongs to, whatever its completion',async p=>{
+ await seedS(p,[csess('f','a',comp('full',16,16)),csess('p','a',comp('partial',1,16)),csess('l','a',null),csess('n','a',comp('none',0,16)),csess('at','athletic',comp('partial',3,20,'items'))]);
+ const b=await p.eval(()=>budgetData());assert.deepStrictEqual(b,{Strength:4,Hypertrophy:0,Explosive:1,'High-intensity engine':0,'Low-intensity engine':0,Capability:1});
+});
+test('BX3','Budget page: a full and a partial Strength session are told apart under the bar; the line reports logged sets and flags earlier sessions as not recorded; no combined total is shown',async p=>{
+ await seedS(p,[csess('f','a',comp('full',16,16)),csess('p','a',comp('partial',1,16)),csess('l','a',null)]);
+ const t=await budgetPage(p);
+ assert(/3 exposures/.test(t)&&/1 full/.test(t)&&/1 partial/.test(t)&&/1 not recorded/.test(t)&&/17 sets logged/.test(t),t);
+ assert(!/\b(total sets|equivalent|equals|sets per exposure)\b/i.test(t),t);
+});
+test('BX4','Units are never mixed: checklist sessions report checklist items, lifting sessions report sets, and neither is converted into the other',async p=>{
+ await seedS(p,[csess('m','mobility',comp('full',6,6,'items')),csess('a1','a',comp('full',16,16))]);
+ const t=await budgetPage(p);assert(/6 checklist items ticked/.test(t)&&/16 sets logged/.test(t),t);
+ const rows=await p.eval(()=>[...document.querySelectorAll('#mpBody .budget-row')].map(r=>r.innerText));
+ const mob=rows.find(r=>/Low-intensity/.test(r)),str=rows.find(r=>/^Strength/.test(r));assert(!/sets logged/.test(mob)&&!/checklist items/.test(str),rows.join('\n'));
+});
+test('BX5','Coach Handoff carries the same logged-exposure lines (sessions with their completion split, and the unit-specific work logged); no bar means no line',async p=>{
+ await seedS(p,[csess('f','a',comp('full',16,16)),csess('p','a',comp('partial',1,16)),csess('l','a',null)]);
+ const t=await p.eval(()=>coachSummary());
+ assert(/LOGGED EXPOSURE \(last 7 days\)/.test(t)&&/Strength: 3 sessions \(1 full, 1 partial, 0 none, 1 not recorded\); 17 sets logged/.test(t),t.slice(0,700));
+ assert(!/Hypertrophy: \d/.test(t.split('EVIDENCE FLAG')[0].split('LOGGED EXPOSURE')[1]||''));
+});
+test('BX6','Classification unchanged: Giant C stays Capability, the six ambiguous templates stay unclassified and are still disclosed as not counted; they never get a logged-exposure line',async p=>{
+ assert.deepStrictEqual(await p.eval(()=>budgetCategories('c')),['Capability']);
+ for(const k of ['bodycontrol','athletepractice','combatintro','waterpractice','carrypractice','practicalskills'])assert.deepStrictEqual(await p.eval(k=>budgetCategories(k),k),[],k);
+ await seedS(p,[csess('u','bodycontrol',comp('full',5,5,'items')),csess('k','a',comp('full',16,16))]);
+ const t=await budgetPage(p);assert(/not counted/i.test(t)&&/Body Control/.test(t),t);const e=await p.eval(()=>budgetExposure());assert.strictEqual(Object.values(e).reduce((a,x)=>a+x.sessions,0),1);
+});
+test('BX7','Only completed sessions from the last 7 days count; drafts and old sessions are excluded from bars and from exposure alike',async p=>{
+ await seedS(p,[csess('old','a',comp('full',16,16),10),{...bsess('d','a','draft',0),completion:undefined},csess('new','a',comp('partial',2,16),2)]);
+ const e=await p.eval(()=>budgetExposure());assert.deepStrictEqual(e.Strength,{sessions:1,full:0,partial:1,none:0,notRecorded:0,setsLogged:2,itemsTicked:0});
+});
+test('BX8','Reporting is read-only and does not alter any record',async p=>{
+ await seedS(p,[csess('p','a',comp('partial',1,16)),csess('l','a',null)]);const before=await storage(p);
+ await p.eval(()=>{budgetExposure();renderBudgetPage();coachSummary()});assert.deepStrictEqual(await storage(p),before);
+});
+
 // ---------- runner ----------
 (async()=>{
  const server=await serve(appDir),browser=await launch();ctx={browser,origin:server.origin};

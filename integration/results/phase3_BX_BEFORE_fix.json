@@ -1,0 +1,72 @@
+{
+ "app": "/workspace/integration/app",
+ "date": "2026-10-19T19:48:50.922Z",
+ "passed": 1,
+ "failed": 7,
+ "results": [
+  {
+   "id": "BX1",
+   "group": "BX",
+   "title": "budgetExposure(): per bar, the sessions split into full / partial / none / not recorded, with sets logged and checklist items ticked kept as separate units",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetExposure is not defined |     at <anonymous>:1:6 |     at <anonymous>:1:23",
+   "ms": 310
+  },
+  {
+   "id": "BX2",
+   "group": "BX",
+   "title": "The bars themselves are unchanged: budgetData() still counts every completed session once per category it belongs to, whatever its completion",
+   "pass": true,
+   "error": null,
+   "ms": 241
+  },
+  {
+   "id": "BX3",
+   "group": "BX",
+   "title": "Budget page: a full and a partial Strength session are told apart under the bar; the line reports logged sets and flags earlier sessions as not recorded; no combined total is shown",
+   "pass": false,
+   "error": "RECENT EXPOSURE • LAST 7 DAYSAdding training is not free.These bars count recent completed exposure categories. They are not claimed to be physiological MRV.Strength3 exposuresHypertrophy0 exposuresExplosive0 exposuresHigh-intensity engine0 exposuresLow-intensity engine0 exposuresCapability0 exposuresOpportunity-cost doctrineSTANDARD: preserve Giant A/B and cardio/abs before adding optional work.If a new demand conflicts with high-intensity lower-body work, move or reduce the optional exposure before touching the a",
+   "ms": 225
+  },
+  {
+   "id": "BX4",
+   "group": "BX",
+   "title": "Units are never mixed: checklist sessions report checklist items, lifting sessions report sets, and neither is converted into the other",
+   "pass": false,
+   "error": "RECENT EXPOSURE • LAST 7 DAYSAdding training is not free.These bars count recent completed exposure categories. They are not claimed to be physiological MRV.Strength1 exposureHypertrophy0 exposuresExplosive0 exposuresHigh-intensity engine0 exposuresLow-intensity engine1 exposureCapability0 exposuresOpportunity-cost doctrineSTANDARD: preserve Giant A/B and cardio/abs before adding optional work.If a new demand conflicts with high-intensity lower-body work, move or reduce the optional exposure before touching the anc",
+   "ms": 230
+  },
+  {
+   "id": "BX5",
+   "group": "BX",
+   "title": "Coach Handoff carries the same logged-exposure lines (sessions with their completion split, and the unit-specific work logged); no bar means no line",
+   "pass": false,
+   "error": "PROJECT AMERICA // COACH HANDOFF | Generated: 10/19/2026, 7:48:50 PM |  | CURRENT MODE: STANDARD",
+   "ms": 215
+  },
+  {
+   "id": "BX6",
+   "group": "BX",
+   "title": "Classification unchanged: Giant C stays Capability, the six ambiguous templates stay unclassified and are still disclosed as not counted; they never get a logged-exposure line",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetExposure is not defined |     at <anonymous>:1:6 |     at <anonymous>:1:23",
+   "ms": 242
+  },
+  {
+   "id": "BX7",
+   "group": "BX",
+   "title": "Only completed sessions from the last 7 days count; drafts and old sessions are excluded from bars and from exposure alike",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetExposure is not defined |     at <anonymous>:1:6 |     at <anonymous>:1:23",
+   "ms": 212
+  },
+  {
+   "id": "BX8",
+   "group": "BX",
+   "title": "Reporting is read-only and does not alter any record",
+   "pass": false,
+   "error": "Page evaluation failed: ReferenceError: budgetExposure is not defined |     at <anonymous>:1:7 |     at <anonymous>:1:59",
+   "ms": 220
+  }
+ ]
+}
