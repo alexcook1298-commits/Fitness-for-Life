@@ -444,13 +444,15 @@ test('G7.3','G7: backup & restore','A tampered file changed after preview is re-
  assert(/Restore failed/.test(await notice(p)),await notice(p));sameStore(PA(await storage(p)),pre,'after refused restore (strict, vs state at preview)',true);sameStore(PA(await storage(p)),PA(before),'after refused restore vs start');
 });
 
-test('G7.4','G7: backup & restore','KNOWN DEFECT (characterization, unresolved decision): a cardio field typed with "<" or ">" saves normally, but the app\'s own export is then refused by its own import validator',async p=>{
+test('G7.4','G7: backup & restore','Cardio text with comparison signs ("<10:00") is saved, the app\'s own export validates and restores it, and HTML-like text ("<b>") is refused at logging (fix of the Phase 1 defect D1)',async p=>{
  await p.eval(()=>start('conditioning'));
  await p.eval(()=>{const i=document.querySelector('#exs [data-cardio] input[data-field]');i.value='<10:00'});
  await p.click('#exs button.save-cardio');
- assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'))).length,1,'cardio entry was not saved');
- const verdict=await p.eval(()=>{try{validateBackup(backupPayload());return 'accepted'}catch(e){return e.message}});
- assert.strictEqual(verdict,'Invalid text in pa_cardio_hist','behaviour changed; update the report: '+verdict);
+ assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'))).length,1,'cardio entry was not saved: '+await notice(p));
+ assert.strictEqual(await p.eval(()=>{try{validateBackup(backupPayload());return 'accepted'}catch(e){return e.message}}),'accepted');
+ await p.eval(()=>{localStorage.pa_cardio_hist='[]';const i=document.querySelector('#exs [data-cardio] input[data-field]');i.value='<b>bold</b>'});
+ await clearNotice(p);await p.click('#exs button.save-cardio');
+ assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_cardio_hist||'[]'))).length,0,'HTML-like text was stored');assert(/comparison/i.test(await notice(p)),await notice(p));
 });
 
 // =====================================================================

@@ -405,7 +405,7 @@ function cardioPrevious(machine,mode){
  let a=cardioHistory().filter(x=>x.machine===machine&&x.mode===mode);
  if(!a.length)return "No previous session on this machine for this mode.";
  let x=a.at(-1), bits=[];
- Object.entries(x.data||{}).forEach(([k,v])=>{if(v!==""&&v!=null)bits.push(`${k}: ${v}`)});
+ Object.entries(x.data||{}).forEach(([k,v])=>{if(v!==""&&v!=null)bits.push(`${esc(k)}: ${esc(v)}`)});
  return bits.length?bits.join(" • "):"Previous session recorded.";
 }
 function setCardioMachine(m){cardioMachine=m;localStorage.pa_cardio_machine=m;render()}
@@ -1138,6 +1138,7 @@ saveCardio=function(mode){
  saveDraft();const box=document.querySelector(`[data-cardio="${mode}"]`),data={};if(!box)return;
  box.querySelectorAll('input[data-field]').forEach(i=>data[i.dataset.field]=i.value);
  if(!Object.values(data).some(v=>v!=='')){notice('Enter cardio details before saving.');return}
+ for(const [field,value] of Object.entries(data)){const problem=cardioTextProblem(value);if(problem){notice(`Cardio field "${field}" ${problem}.`);return}}
  upsertHistory('pa_cardio_hist',{id:currentSession.id+'|'+cardioMachine+'|'+mode,sessionId:currentSession.id,date:new Date().toISOString(),machine:cardioMachine,mode,data});notice('Cardio details saved.');
 };
 function openFinish(){saveDraft();$('finishPanel').classList.remove('hidden')}
@@ -1216,6 +1217,17 @@ function validateOSState(raw){
  if(Object.hasOwn(d,'availability')){fields(d.availability,'availability',['0','1','2','3','4','5','6']);if(Object.values(d.availability).some(v=>!number(v)))fail('availability must be minutes')}
  return d;
 }
+// Cardio values are free text typed into machine fields. "<" and ">" are legitimate there ("<10:00", "HR >150"),
+// so they are allowed; only HTML-like text (a complete tag such as <b> or </i>, or "<!" / "<?") is refused, and every render of
+// cardio history is escaped. The same rule is applied when logging and when importing a backup.
+const CARDIO_KEY=/^[A-Za-z][A-Za-z0-9_]{0,31}$/;
+function cardioTextProblem(value){
+ if(typeof value==='number')return Number.isFinite(value)?null:'is not a finite number';
+ if(typeof value!=='string')return 'must be text or a number';
+ if(value.length>=2000||/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(value))return 'contains control characters or is too long';
+ if(/<\/?[A-Za-z][^<>]*>|<[!?]/.test(value))return 'looks like HTML. Use < and > only as comparison signs, for example <10:00';
+ return null;
+}
 function validateBackup(obj){
  if(!obj||obj.format!=='project-america-full-backup'||obj.version!==1||!obj.data||typeof obj.data!=='object'||Array.isArray(obj.data))throw Error('Choose a full Project America backup. Old lifting-only exports cannot restore the full app.');
  for(const [k,v] of Object.entries(obj.data)){if(!BACKUP_KEY.test(k)||typeof v!=='string'||v.length>10000000)throw Error('Unrecognized or oversized backup entry: '+k);}
@@ -1235,9 +1247,18 @@ function validateBackup(obj){
   if((k.startsWith('pa_int_')||k.startsWith('pa_todayint_'))&&!INTENSIFIERS.includes(v))throw Error('Unknown intensifier');
   if(isStrengthPreference(k)&&!STRENGTH_METHODS.includes(v))throw Error('Unknown strength method');
  }
- for(const k of arrays)for(const record of JSON.parse(obj.data[k]||'[]')){
+ for(const k of arrays)for(const [recordIndex,record] of JSON.parse(obj.data[k]||'[]').entries()){
   // A lifting record's clusterSplit is a free-text note (e.g. "3+3 <20s>"); it is only ever rendered escaped.
-  const check=(value,depth=0,field)=>{if(depth>12)throw Error('Backup nesting too deep');if(typeof value==='string'&&(!safeString(value)||(['pa_hist','pa_ls_hist','pa_cardio_hist','pa_strength_hist','pa_activator_hist'].includes(k)&&!(k==='pa_hist'&&depth===1&&field==='clusterSplit')&&/[<>]/.test(value))))throw Error('Invalid text in '+k);if(typeof value==='number'&&!Number.isFinite(value))throw Error('Invalid number');if(value&&typeof value==='object')for(const [key,val] of Object.entries(value)){if(['__proto__','constructor','prototype'].includes(key)||!safeString(key))throw Error('Invalid field');check(val,depth+1,key)}};check(record);
+  const check=(value,depth=0,field)=>{if(depth>12)throw Error('Backup nesting too deep');if(typeof value==='string'&&(!safeString(value)||(['pa_hist','pa_ls_hist','pa_cardio_hist','pa_strength_hist','pa_activator_hist'].includes(k)&&!(k==='pa_hist'&&depth===1&&field==='clusterSplit')&&/[<>]/.test(value))))throw Error('Invalid text in '+k);if(typeof value==='number'&&!Number.isFinite(value))throw Error('Invalid number');if(value&&typeof value==='object')for(const [key,val] of Object.entries(value)){if(['__proto__','constructor','prototype'].includes(key)||!safeString(key))throw Error('Invalid field');check(val,depth+1,key)}};if(k==='pa_cardio_hist'){
+   if(Object.hasOwn(record,'data')){
+    if(!record.data||typeof record.data!=='object'||Array.isArray(record.data))throw Error(`Cardio entry ${recordIndex+1}: details must be a list of fields.`);
+    for(const [field,value] of Object.entries(record.data)){
+     if(!CARDIO_KEY.test(field)||['constructor','prototype'].includes(field))throw Error(`Cardio entry ${recordIndex+1}: invalid field name.`);
+     const problem=cardioTextProblem(value);if(problem)throw Error(`Cardio entry ${recordIndex+1}, field "${field}" ${problem}.`);
+    }
+   }
+   check({...record,data:{}});
+  }else check(record);
   if(k==='pa_hist'){
    if(!safeString(record.name)||!INTENSIFIERS.includes(record.intensifier||'Straight Sets'))throw Error('Invalid lifting record');
    for(const f of ['w','reps','rir','volume'])if(record[f]!=null&&(typeof record[f]!=='number'||record[f]<0))throw Error('Invalid lifting value');

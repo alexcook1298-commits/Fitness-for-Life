@@ -189,7 +189,7 @@ async function restoreUI(p){const re=p.waitForLoad(30000).then(()=>true,()=>fals
 const bkWrap=data=>({format:'project-america-full-backup',version:1,appVersion:'2.3',createdAt:'2026-10-12T09:00:00.000Z',data});
 const cardioRec=(data,extra={})=>({id:'s1|Outdoor|conditioning',sessionId:'s1',date:'2026-10-10T12:00:00.000Z',machine:'Outdoor',mode:'conditioning',data,...extra});
 const backupWith=records=>bkWrap({pa_cardio_hist:JSON.stringify(records)});
-const LEGIT=['<10:00','>8:30/mi','8:30 > 9:00','HR <140 bpm','<=150','5 < 6','a<b','x>y','<','>','<<','>>','<3','>=4'];
+const LEGIT=['HR<max','<img src=x onerror=window.__pwn=1','<10:00','>8:30/mi','8:30 > 9:00','HR <140 bpm','<=150','5 < 6','a<b','x>y','<','>','<<','>>','<3','>=4'];
 const TAGLIKE=['<b>','<img src=x onerror=window.__pwn=1>','</script>','<!-- x -->','<?php echo 1 ?>','<svg/onload=window.__pwn=1>','<a href="javascript:window.__pwn=1">x</a>','<script>window.__pwn=1</script>','<iframe src=javascript:1>','<B>x'];
 
 test('CB1','Legitimate comparison text ("<10:00", ">8:30/mi", "HR <140 bpm", ...) typed into cardio fields through the UI is saved exactly as typed',async p=>{
@@ -291,6 +291,13 @@ test('CB14','Every place that renders cardio history is escaped: static check th
  const src=fs.readFileSync(path.join(appDir,'index.html'),'utf8');
  const fn=/function cardioPrevious\([\s\S]*?\n\}/.exec(src);assert(fn,'cardioPrevious not found');
  assert(/esc\(k\)/.test(fn[0])&&/esc\(v\)/.test(fn[0]),'cardioPrevious does not escape keys and values:\n'+fn[0]);
+});
+test('CB16','Unfinished markup with no closing ">" is plain text: accepted, stored as typed and rendered literally and inertly',async p=>{
+ const mode=await openCardio(p,'Outdoor');await typeCardio(p,'pace','<img src=x onerror=window.__pwn=1');await saveCardioUI(p);
+ assert.strictEqual((await cardioHist(p)).length,1,await notice(p));
+ await p.eval(()=>render());await sleep(300);
+ const r=await p.eval(()=>({pwn:window.__pwn,imgs:document.querySelectorAll('#exs .cardio-prev img').length,text:document.querySelector('#exs .cardio-prev').textContent}));
+ assert.strictEqual(r.pwn,undefined);assert.strictEqual(r.imgs,0);assert(r.text.includes('<img src=x onerror=window.__pwn=1'),r.text);
 });
 test('CB15','A full real workflow with cardio containing < and > still passes every other backup property: draft, finished session, history all restore identically',async p=>{
  await openCardio(p,'Outdoor');await typeCardio(p,'pace','<10:00');await saveCardioUI(p);
