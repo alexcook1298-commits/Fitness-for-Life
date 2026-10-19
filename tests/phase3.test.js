@@ -160,6 +160,85 @@ test('RT19','Full Session prescriptions unchanged: Giant B set counts per slot a
  await seedS(p,[]);await rtFullB(p);assert.deepStrictEqual(await p.eval(()=>baseSlots.b.map(x=>x[2])),[2,2,2,2,2,2,1,2]);
 });
 
+// =====================================================================
+// SK — explicit exercise skip (Priority 3)
+// =====================================================================
+const skStart=(p,k,o={})=>p.eval((k,o)=>{if(o.weekMode)weekMode=o.weekMode;start(k);if(o.compact)toggleCompact();
+ (slots[k]||[]).forEach((x,i)=>{currentSession.modes[i+':'+selected(k,i)]='Straight Sets'});render();return currentSession.id},k,o);
+const skSkip=(p,i)=>p.eval(i=>{document.querySelector(`#exs button[data-skip="${i}"]`).click()},i);
+const skLog=(p,i,j)=>p.eval((i,j)=>{const n=selected(active,i),mode=setMode(i,j,n),key=formKey(i,j,mode,'');
+ const put=(f,v)=>{const el=document.querySelector(`#exs input[data-save="${key}${f}"]`);if(!el)throw Error('no input '+key+f);el.value=v};put('w','100');put('r','10');put('rir','2');logSet(null,i,j)},i,j);
+const skFinish=async p=>{await p.eval(()=>{openFinish();finishSession()});return p.eval(()=>JSON.parse(localStorage.pa_sessions_v2).at(-1))};
+const skSets=p=>p.eval(()=>slots[active].map((x,i)=>workSetCount(i)));
+
+test('SK1','One Skip control per displayed exercise of a lifting template (labelled), none on checklist templates; nothing else in the workout screen changes',async p=>{
+ await skStart(p,'a');const r=await p.eval(()=>({ex:document.querySelectorAll('#exs .exercise').length,skip:[...document.querySelectorAll('#exs button[data-skip]')].map(b=>b.getAttribute('aria-label'))}));
+ assert.strictEqual(r.ex,7);assert.strictEqual(r.skip.length,7);assert(r.skip.every(l=>/skip/i.test(l)),JSON.stringify(r.skip));
+ await skStart(p,'a').catch(()=>{});await p.eval(()=>{currentSession=null;show('home');start('a');toggleCompact()});
+ assert.strictEqual(await p.eval(()=>document.querySelectorAll('#exs button[data-skip]').length),await p.eval(()=>document.querySelectorAll('#exs .exercise').length),'compact: one control per displayed exercise');
+ await p.eval(()=>{show('home');start('mobility')});assert.strictEqual(await p.eval(()=>document.querySelectorAll('#exs button[data-skip]').length),0);
+});
+test('SK2','Skipping records ONLY a flag on the draft session: no work-set, strength, activator, stretch or cardio record is created, and no set is checked',async p=>{
+ await skStart(p,'a');const before=PA(await storage(p));await skSkip(p,3);const after=PA(await storage(p));
+ const changed=Object.keys(after).filter(k=>after[k]!==before[k]);assert.deepStrictEqual(changed.sort(),['pa_sessions_v2'],'unexpected storage writes: '+changed);
+ const s=(await p.eval(()=>JSON.parse(localStorage.pa_sessions_v2)))[0];assert.deepStrictEqual(s.skips,{'3':true});
+ assert.strictEqual(await p.eval(()=>[...document.querySelectorAll('#exs .exercise')[3].querySelectorAll('.set button.check')].filter(b=>b.textContent.trim()==='✓').length),0);
+ assert(/undo/i.test(await p.eval(()=>document.querySelector('#exs button[data-skip="3"]').textContent)),'no visible skipped state');
+});
+test('SK3','Skip is reversible while the session is a draft',async p=>{
+ await skStart(p,'a');await skSkip(p,3);await skSkip(p,3);
+ assert.deepStrictEqual((await p.eval(()=>currentSession.skips))||{},{});assert(!/undo/i.test(await p.eval(()=>document.querySelector('#exs button[data-skip="3"]').textContent)));
+});
+test('SK4','An exercise with logged sets cannot be skipped (nothing is changed, the athlete is told); logging a set on a skipped exercise lifts the skip, so a record always wins',async p=>{
+ await skStart(p,'a');await skLog(p,3,1);await clearNotice(p);await skSkip(p,3);
+ assert.strictEqual((await p.eval(()=>currentSession.skips))?.['3'],undefined);assert(/logged/i.test(await notice(p)),await notice(p));
+ await skSkip(p,1);assert.strictEqual(await p.eval(()=>currentSession.skips['1']),true);await skLog(p,1,1);
+ assert.strictEqual((await p.eval(()=>currentSession.skips))?.['1'],undefined,'skip not lifted by a logged set');
+});
+test('SK5','All four execution states in one session: performed, explicitly skipped, partially performed, unmarked gap (skipped, not marked) and not reached; no sets invented',async p=>{
+ await skStart(p,'a');const n=await skSets(p);
+ for(let j=1;j<=n[0];j++)await skLog(p,0,j);await skSkip(p,1);await skLog(p,2,1);for(let j=1;j<=n[4];j++)await skLog(p,4,j);
+ const s=await skFinish(p),c=s.completion;
+ assert.deepStrictEqual(c.exercises.map(e=>e.status),['performed','skipped','partial','skipped','performed','not_reached','not_reached']);
+ assert.deepStrictEqual(c.exercises.map(e=>e.basis),['logged','explicit','logged','later-work-logged','logged','no-later-work','no-later-work']);
+ assert.strictEqual(c.performed,n[0]+1+n[4]);assert.strictEqual(c.prescription,'partial');
+ assert.strictEqual(await p.eval(id=>JSON.parse(localStorage.pa_hist).filter(x=>x.sessionId===id).length,s.id),n[0]+1+n[4],'records were invented or lost');
+});
+test('SK6','Deliberate skip vs interruption: an explicitly skipped exercise AFTER the last logged one is "skipped", whereas the untouched ones after it are "not reached"',async p=>{
+ await skStart(p,'a');const n=await skSets(p);for(let j=1;j<=n[0];j++)await skLog(p,0,j);await skSkip(p,3);
+ const c=(await skFinish(p)).completion;
+ assert.deepStrictEqual(c.exercises.map(e=>e.status),['performed','not_reached','not_reached','skipped','not_reached','not_reached','not_reached']);assert.strictEqual(c.exercises[3].basis,'explicit');
+});
+test('SK7','Skipping never makes a session full, never reduces what was prescribed and never fabricates performed sets; skipping everything with no logged work is "none"',async p=>{
+ await skStart(p,'a');const total=(await skSets(p)).reduce((a,b)=>a+b,0);for(let i=0;i<7;i++)await skSkip(p,i);
+ const c=(await skFinish(p)).completion;assert.strictEqual(c.prescribed,total);assert.strictEqual(c.performed,0);assert.strictEqual(c.prescription,'none');assert(c.exercises.every(e=>e.status==='skipped'&&e.basis==='explicit'));
+});
+test('SK8','Skipping the presented intensifier never credits or advances the Giant B rotation, and logs no intensifier record',async p=>{
+ await seedS(p,[]);await skStart(p,'b');await p.eval(()=>{currentSession.modes['2:'+selected('b',2)]='Straight Sets'});
+ await skSkip(p,3);await skSkip(p,4);await rtStraight(p,2);const s=await skFinish(p);
+ assert.deepStrictEqual(s.completion.exercises.filter(e=>e.status==='skipped').map(e=>e.slot),[3,4]);
+ assert.strictEqual(await rtNext(p),0);assert(!(await p.eval(()=>JSON.parse(localStorage.pa_hist||'[]').some(x=>x.intensifier!=='Straight Sets'))));
+ assert.strictEqual(await p.eval(()=>completedTemplateCount('b')),1,'the session still counts');
+});
+test('SK9','A skip survives a reload and resume, and a backup round trip',async p=>{
+ await skStart(p,'a');await skSkip(p,2);await p.eval(()=>show('home'));await p.goto(ctx.origin+'/');
+ await p.eval(()=>start('a'));assert.strictEqual(await p.eval(()=>currentSession.skips['2']),true);assert(/undo/i.test(await p.eval(()=>document.querySelector('#exs button[data-skip="2"]').textContent)));
+ const payload=await p.eval(()=>{const b=backupPayload();validateBackup(b);return b});await p.eval(()=>localStorage.clear());await p.goto(ctx.origin+'/');
+ const back=await p.eval(b=>{validateBackup(b);replacePAData(b.data);return JSON.parse(localStorage.pa_sessions_v2)[0].skips},payload);assert.deepStrictEqual(back,{'2':true});
+});
+test('SK10','Validator: skips must be {slot index: true} for slots that exist; anything else is refused with a specific message',async p=>{
+ const base=bsess('s1','a','draft');const rej=async skips=>p.eval(t=>{const o=JSON.parse(t);const b=fullBackup({pa_sessions_v2:JSON.stringify([o])});try{validateBackup(b);return 'ACCEPTED'}catch(e){return e.message}},JSON.stringify({...base,skips}));
+ assert.strictEqual(await rej({'3':true}),'ACCEPTED');assert.strictEqual(await rej({}),'ACCEPTED');
+ const bad={'false value':{'3':false},'text key':{x:true},'slot beyond template':{'9':true},'array':[true],'string value':{'3':'yes'},'markup key':{'<b>':true},'too many':Object.fromEntries(Array.from({length:41},(_,i)=>[String(i),true])),'null':null};
+ for(const [why,v] of Object.entries(bad)){const m=await rej(v);assert(m!=='ACCEPTED'&&/skip/i.test(m),why+' -> '+m)}
+});
+test('SK11','A finished session cannot be re-skipped, and the Finish preview and notice name explicit skips as "skipped" (not "not reached")',async p=>{
+ await skStart(p,'a');await skLog(p,0,1);await skSkip(p,6);await p.eval(()=>openFinish());
+ const panel=await p.eval(()=>document.getElementById('finishPanel').innerText);assert(/Loaded Carry[^.]*\(skipped\)/.test(panel),panel);
+ await p.eval(()=>finishSession());const n=await notice(p);assert(/Loaded Carry[^.]*\(skipped\)/.test(n),n);
+ await p.eval(()=>skipExercise(1));assert.strictEqual((await p.eval(()=>JSON.parse(localStorage.pa_sessions_v2).at(-1))).skips['1'],undefined);
+});
+
 // ---------- runner ----------
 (async()=>{
  const server=await serve(appDir),browser=await launch();ctx={browser,origin:server.origin};
