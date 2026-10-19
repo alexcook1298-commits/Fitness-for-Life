@@ -1,6 +1,6 @@
 {
  "app": "/workspace/integration/app",
- "date": "2026-10-19T18:08:10.717Z",
+ "date": "2026-10-19T20:04:22.857Z",
  "passed": 32,
  "failed": 0,
  "results": [
@@ -10,7 +10,7 @@
    "title": "Giant A counts as Strength only",
    "pass": true,
    "error": null,
-   "ms": 198
+   "ms": 206
   },
   {
    "id": "B2",
@@ -18,7 +18,7 @@
    "title": "Giant B, B-Upper and B-Lower count as Hypertrophy only",
    "pass": true,
    "error": null,
-   "ms": 138
+   "ms": 146
   },
   {
    "id": "B3",
@@ -26,7 +26,7 @@
    "title": "Athletic counts as Explosive and Capability, and NOT as Strength",
    "pass": true,
    "error": null,
-   "ms": 137
+   "ms": 129
   },
   {
    "id": "B4",
@@ -34,7 +34,7 @@
    "title": "Mobility counts as Low-intensity engine only, and NOT as Hypertrophy",
    "pass": true,
    "error": null,
-   "ms": 133
+   "ms": 121
   },
   {
    "id": "B5",
@@ -42,7 +42,7 @@
    "title": "Conditioning counts as High-intensity engine only",
    "pass": true,
    "error": null,
-   "ms": 129
+   "ms": 126
   },
   {
    "id": "B6",
@@ -50,7 +50,7 @@
    "title": "Block A variants (b2a…b7a) count as Strength only; block B variants (b2b…b7b, b3c) as Hypertrophy only",
    "pass": true,
    "error": null,
-   "ms": 165
+   "ms": 196
   },
   {
    "id": "B7",
@@ -58,7 +58,7 @@
    "title": "Optional bonus sessions count as Hypertrophy only (previously also Strength)",
    "pass": true,
    "error": null,
-   "ms": 134
+   "ms": 159
   },
   {
    "id": "B8",
@@ -66,7 +66,7 @@
    "title": "Practice and skill sessions whose purpose the source does not settle are not counted in any bar (Phase 2: Giant C now counts as Capability; see tests/phase2.test.js BU1-BU9 for the full model)",
    "pass": true,
    "error": null,
-   "ms": 139
+   "ms": 162
   },
   {
    "id": "B9",
@@ -74,7 +74,7 @@
    "title": "A mixed week totals correctly: A + B + athletic + conditioning + mobility",
    "pass": true,
    "error": null,
-   "ms": 131
+   "ms": 159
   },
   {
    "id": "B10",
@@ -82,7 +82,7 @@
    "title": "Training Budget page shows the corrected counts",
    "pass": true,
    "error": null,
-   "ms": 154
+   "ms": 130
   },
   {
    "id": "B11",
@@ -90,7 +90,7 @@
    "title": "Drafts and sessions older than 7 days are still excluded",
    "pass": true,
    "error": null,
-   "ms": 131
+   "ms": 129
   },
   {
    "id": "B12",
@@ -98,7 +98,7 @@
    "title": "Budget classification is read-only: stored sessions are unchanged",
    "pass": true,
    "error": null,
-   "ms": 129
+   "ms": 184
   },
   {
    "id": "R1",
@@ -106,7 +106,7 @@
    "title": "A check-in saved 1 hour ago is fresh: still GREEN with no stale warning (current behaviour preserved)",
    "pass": true,
    "error": null,
-   "ms": 169
+   "ms": 148
   },
   {
    "id": "R2",
@@ -114,7 +114,7 @@
    "title": "The freshness rule is the local calendar day (Phase 2 replaced the provisional 48-hour threshold): 2 h earlier the same day is fresh, 30 h earlier is stale",
    "pass": true,
    "error": null,
-   "ms": 128
+   "ms": 139
   },
   {
    "id": "R3",
@@ -122,7 +122,7 @@
    "title": "A GREEN check-in from 6 days ago is NOT shown as GREEN on Home; a visible stale warning gives its age",
    "pass": true,
    "error": null,
-   "ms": 142
+   "ms": 146
   },
   {
    "id": "R4",
@@ -130,7 +130,7 @@
    "title": "Never checked in (no saved date) shows NOT CHECKED IN instead of a YELLOW score",
    "pass": true,
    "error": null,
-   "ms": 152
+   "ms": 149
   },
   {
    "id": "R5",
@@ -138,7 +138,7 @@
    "title": "A stored joint flag is never hidden by staleness: joints 1/5 from 10 days ago still shows RED, with the stale note",
    "pass": true,
    "error": null,
-   "ms": 137
+   "ms": 189
   },
   {
    "id": "R6",
@@ -146,7 +146,7 @@
    "title": "Joints 2/5 from 10 days ago still shows YELLOW (not GREEN), with the stale note",
    "pass": true,
    "error": null,
-   "ms": 131
+   "ms": 194
   },
   {
    "id": "R7",
@@ -154,7 +154,7 @@
    "title": "A missing, null or unreadable date is treated as never checked in (no exception)",
    "pass": true,
    "error": null,
-   "ms": 175
+   "ms": 200
   },
   {
    "id": "R8",
@@ -162,7 +162,7 @@
    "title": "A check-in dated in the future (clock or time-zone change) is flagged, not trusted as fresh",
    "pass": true,
    "error": null,
-   "ms": 162
+   "ms": 187
   },
   {
    "id": "R9",
@@ -170,7 +170,7 @@
    "title": "Readiness page: stale check-in shows the warning and the age, and still offers SAVE CHECK-IN",
    "pass": true,
    "error": null,
-   "ms": 152
+   "ms": 197
   },
   {
    "id": "R10",
@@ -178,7 +178,7 @@
    "title": "Coach Handoff states the check-in is stale and how old it is, not an unqualified label",
    "pass": true,
    "error": null,
-   "ms": 169
+   "ms": 141
   },
   {
    "id": "R11",
@@ -186,7 +186,7 @@
    "title": "Saving a new check-in makes the status current immediately",
    "pass": true,
    "error": null,
-   "ms": 161
+   "ms": 168
   },
   {
    "id": "R12",
@@ -194,7 +194,7 @@
    "title": "readinessDecision itself is unchanged by staleness (classification guard from the reliability patch)",
    "pass": true,
    "error": null,
-   "ms": 125
+   "ms": 166
   },
   {
    "id": "R13",
@@ -202,7 +202,7 @@
    "title": "Rendering and classifying readiness never writes or alters stored data",
    "pass": true,
    "error": null,
-   "ms": 191
+   "ms": 182
   },
   {
    "id": "R14",
@@ -210,7 +210,7 @@
    "title": "Fresh check-ins of every joint level are classified exactly as before (no stale text anywhere)",
    "pass": true,
    "error": null,
-   "ms": 189
+   "ms": 213
   },
   {
    "id": "R15",
@@ -218,7 +218,7 @@
    "title": "Backup round trip preserves the saved readiness date, so staleness is the same after restore",
    "pass": true,
    "error": null,
-   "ms": 324
+   "ms": 281
   },
   {
    "id": "K1",
@@ -234,7 +234,7 @@
    "title": "After that failure the pre-restore snapshot still holds ALL the original data and re-imports through the normal UI",
    "pass": true,
    "error": null,
-   "ms": 524
+   "ms": 618
   },
   {
    "id": "K3",
@@ -242,7 +242,7 @@
    "title": "When every write fails (not even a snapshot can be stored), restore is refused, nothing changes, and the message says so",
    "pass": true,
    "error": null,
-   "ms": 364
+   "ms": 373
   },
   {
    "id": "K4",
@@ -250,7 +250,7 @@
    "title": "A transient failure that the rollback survives still says the original data was retained, and storage is byte-identical",
    "pass": true,
    "error": null,
-   "ms": 398
+   "ms": 360
   },
   {
    "id": "K5",
@@ -258,7 +258,7 @@
    "title": "A normal successful restore is unchanged: reloads, replaces the data, keeps a snapshot",
    "pass": true,
    "error": null,
-   "ms": 397
+   "ms": 338
   }
  ]
 }
