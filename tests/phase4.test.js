@@ -196,6 +196,92 @@ test('EN5e','Full Session prescriptions are untouched: slot table and set counts
  const r=await p.eval(()=>{start('a');return Object.fromEntries(Object.keys(slots).map(k=>[k,slots[k].map(s=>s.slice(0,5).join('|'))]))});
  const sum=JSON.stringify(r);assert(sum.length>200);assert.strictEqual(Object.keys(r).length>=3,true);
 });
+test('EN4i','A finished 200 lb session stays the NEXT anchor when a later 60 lb set is only an unfinished draft; PREVIOUS still shows that 60 lb set',async p=>{
+ const rows=[...tsb('s0',9,{top:200,back:[170,170]}),...tsb('s2',3,{top:200,back:[170,170]}),{id:'draft60',sessionId:'s1',name:BENCH,intensifier:'Straight Sets',strengthMethod:TSB,template:'a',block:1,setNumber:1,w:60,reps:5,rir:2,date:evDay(0)}];
+ const sessions=[sess('s0','complete',9),sess('s2','complete',3),sess('s1','draft',0)];
+ await evSeed(p,rows,sessions);
+ const before=await p.eval(()=>[localStorage.pa_hist,localStorage.pa_sessions_v2]);
+ const t=await target(p,BENCH,TSB);
+ assert(/^200 lb/.test(t),'NEXT used the draft: '+t);
+ const d=await decision(p);
+ assert(Array.isArray(d.vals)&&d.vals.length===2&&!d.vals.some(v=>v<100),'draft entered evidence: '+JSON.stringify(d));
+ const prev=await p.eval((n,m)=>prevStrength(n,m),BENCH,TSB);
+ assert(/60 ×/.test(prev),'PREVIOUS hid the draft set: '+prev);
+ assert.deepStrictEqual(await p.eval(()=>[localStorage.pa_hist,localStorage.pa_sessions_v2]),before);
+});
+test('EN4j','Straight-set NEXT ignores an unfinished draft and PREVIOUS still shows its latest set',async p=>{
+ const mk=(id,sid,w,days)=>({id,sessionId:sid,name:'Lat Pulldown',intensifier:'Straight Sets',template:'b',block:1,setNumber:1,w,reps:10,rir:2,date:evDay(days)});
+ await evSeed(p,[mk('a','s0',120,3),mk('b','s1',60,0)],[sess('s0','complete',3),sess('s1','draft',0)]);
+ assert(/^120 lb/.test(await p.eval(()=>targetMode('Lat Pulldown','Straight Sets'))));
+ assert(/60 ×/.test(await p.eval(()=>prevMode('Lat Pulldown','Straight Sets'))));
+});
+test('EN4k','The same 60 lb set becomes the NEXT anchor once its session is finished; a row with no session id stays eligible',async p=>{
+ const mk=(id,sid,w)=>({id,sessionId:sid,name:'Lat Pulldown',intensifier:'Straight Sets',template:'b',block:1,setNumber:1,w,reps:10,rir:2,date:evDay(0)});
+ await evSeed(p,[mk('a','s0',120),mk('b','s1',60)],[sess('s0','complete',1),sess('s1','complete',0)]);
+ assert(/^60 lb/.test(await p.eval(()=>targetMode('Lat Pulldown','Straight Sets'))));
+ await evSeed(p,[{id:'legacy',name:'Lat Pulldown',intensifier:'Straight Sets',template:'b',block:1,setNumber:1,w:95,reps:10,rir:2,date:evDay(1)}],[]);
+ assert(/^95 lb/.test(await p.eval(()=>targetMode('Lat Pulldown','Straight Sets'))));
+ await evSeed(p,[mk('only','s1',60)],[sess('s1','draft',0)]);
+ assert(/^Establish/.test(await p.eval(()=>targetMode('Lat Pulldown','Straight Sets'))));
+});
+
+const baseSlots=JSON.parse(fs.readFileSync(path.join(__dirname,'../audit/data/baseline/slots.json'),'utf8'));
+const slotSig=rows=>rows.map(s=>s.slice(0,5).join('|')).join('||');
+const headings=p=>p.eval(()=>[...document.querySelectorAll('#exs h3, #exs .exhead > small')].map(el=>el.textContent.trim()));
+test('EVO1','3.0 Evolution keeps Giant A prescriptions and inserts the approved optional items in order',async p=>{
+ await p.eval(()=>localStorage.setItem('pa_program_v1','evo30'));await p.goto(ctx.origin+'/');
+ const seq=await p.eval(()=>{start('a');return [...document.querySelectorAll('#exs h3, #exs .exhead > small')].map(el=>el.textContent.trim())});
+ const at=s=>seq.indexOf(s);
+ assert(at('Giant A WARM-UP')<at('Power Primer — Medicine-Ball Chest Pass')&&at('Power Primer — Medicine-Ball Chest Pass')<at('Horizontal Press'),seq.join(' | '));
+ assert(at('Loaded Carry')<at('Trunk Control — Dead Bug')&&at('Trunk Control — Dead Bug')<at('Giant A COOLDOWN'),seq.join(' | '));
+ const text=await p.eval(()=>document.getElementById('exs').textContent);
+ assert(/3 sets × 3 explosive reps/.test(text)&&/2 sets × 8 controlled reps per side/.test(text));
+ const live=await p.eval(()=>['a','b','c'].map(k=>slots[k].map(s=>s.slice(0,5).join('|')).join('||')).join('\n'));
+ assert.strictEqual(live,['a','b','c'].map(k=>slotSig(baseSlots[k])).join('\n'));
+ const hist=await p.eval(()=>{document.querySelector('[data-check="evo:mb:0"]').click();return localStorage.pa_hist||''});
+ assert(!/Medicine-Ball|Dead Bug/.test(hist));
+ const kept=await p.eval(()=>{const id=currentSession.id;render();return currentSession.checks['evo:mb:0']===true&&document.querySelector('[data-check="evo:mb:0"]').classList.contains('y')&&sessions.find(s=>s.id===id).status==='draft'});
+ assert.strictEqual(kept,true);
+ await p.eval(()=>finishSession());
+ const done=await p.eval(()=>sessions.some(s=>s.template==='a'&&s.status==='complete'&&s.checks['evo:mb:0']===true));
+ assert.strictEqual(done,true);
+ const resumed=await p.eval(()=>{start('a');document.querySelector('[data-check="evo:dba:0"]').click();const id=currentSession.id;show('home');resumeSession(id);return document.querySelector('[data-check="evo:dba:0"]').classList.contains('y')&&document.getElementById('exs').textContent.includes('Horizontal Press')});
+ assert.strictEqual(resumed,true);
+});
+test('EVO2','HQ 2.3 hides the 3.0 checklists and still opens Giant A and Giant B',async p=>{
+ await p.eval(()=>setProgramEdition('hq23'));
+ const a=await p.eval(()=>{start('a');return document.getElementById('exs').textContent});
+ assert(!a.includes('Medicine-Ball Chest Pass')&&!a.includes('Dead Bug')&&a.includes('Horizontal Press'));
+ const b=await p.eval(()=>{start('b');return document.getElementById('exs').textContent});
+ assert(!b.includes('Controlled Push-Up')&&b.includes('Hip Hinge'));
+});
+test('EVO3','Giant B 3.0 adds the push-up after the primary pull and the dead bug at the end',async p=>{
+ await p.eval(()=>localStorage.setItem('pa_program_v1','evo30'));await p.goto(ctx.origin+'/');
+ const seq=await p.eval(()=>{start('b');return [...document.querySelectorAll('#exs h3, #exs .exhead > small')].map(el=>el.textContent.trim())});
+ const at=s=>seq.indexOf(s);
+ assert(at('Vertical Pull')<at('Calisthenics — Controlled Push-Up')&&at('Calisthenics — Controlled Push-Up')<at('Hip Hinge'),seq.join(' | '));
+ assert(at('Calves')<at('Trunk Control — Dead Bug')&&at('Trunk Control — Dead Bug')<at('Giant B COOLDOWN'),seq.join(' | '));
+ const text=await p.eval(()=>document.getElementById('exs').textContent);
+ assert(/2 sets × 6–12 reps/.test(text)&&/Do not add weight automatically/.test(text));
+ const saved=await p.eval(()=>{document.querySelector('[data-save="evo:pu:var"]').value='Incline';document.querySelector('[data-save="evo:pu:r0"]').value='8';saveDraft();return currentSession.forms['evo:pu:var']+' '+currentSession.forms['evo:pu:r0']+' '+(localStorage.pa_hist||'')});
+ assert(saved.startsWith('Incline 8 ')&&!/Push-Up/.test(saved));
+});
+test('EVO4','Optional plyometric and capability modules are separate, skippable, and do not duplicate Giant C inside the capability session',async p=>{
+ await p.eval(()=>localStorage.setItem('pa_program_v1','evo30'));await p.goto(ctx.origin+'/');
+ const plyo=await p.eval(()=>{start('evo-plyo');return document.getElementById('exs').textContent});
+ assert(/Defer this module/.test(plyo)&&/knee symptoms/.test(plyo)&&plyo.includes('Snap-Down to Stable Landing')&&plyo.includes('Low-Amplitude Pogo Hops'));
+ assert(/does not include depth jumps/.test(plyo));
+ const cap=await p.eval(()=>{start('evo-cap');return document.getElementById('exs').textContent});
+ assert(cap.includes('Strict Pull-Up Practice')&&cap.includes('Suitcase Carry')&&cap.includes('Dead Hang'));
+ assert(!cap.includes('Weighted Pull-Up')&&!cap.includes('Hanging Knee Raise'));
+ const c=await p.eval(()=>{start('c');return document.getElementById('exs').textContent});
+ assert(c.includes('Weighted Pull-Up')&&!c.includes('Medicine-Ball Chest Pass'));
+ const payload=await p.eval(()=>backupPayload());
+ await p.eval(b=>{validateBackup(b);localStorage.clear();replacePAData(b.data)},payload);
+ await p.goto(ctx.origin+'/');
+ const again=await p.eval(()=>{const s=JSON.parse(localStorage.pa_sessions_v2).find(x=>x.template==='c');return s&&s.template});
+ assert.strictEqual(again,'c');
+});
 
 // ---------- runner ----------
 (async()=>{
